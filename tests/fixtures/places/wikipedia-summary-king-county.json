@@ -1,0 +1,53 @@
+{
+  "type": "standard",
+  "title": "King County, Washington",
+  "displaytitle": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">King County, Washington</span></span>",
+  "namespace": {
+    "id": 0,
+    "text": ""
+  },
+  "wikibase_item": "Q108861",
+  "titles": {
+    "canonical": "King_County,_Washington",
+    "normalized": "King County, Washington",
+    "display": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">King County, Washington</span></span>"
+  },
+  "pageid": 91203,
+  "thumbnail": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg/330px-Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 330,
+    "height": 219
+  },
+  "originalimage": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg/3840px-Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 4288,
+    "height": 2848
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "revision": "1375494573",
+  "tid": "2d3c3f2e-b30f-11f1-8e9a-1c5d9a2dbd53",
+  "timestamp": "2026-09-18T03:15:19Z",
+  "description": "County in Washington, United States",
+  "description_source": "local",
+  "coordinates": {
+    "lat": 47.46666667,
+    "lon": -121.83333333
+  },
+  "content_urls": {
+    "desktop": {
+      "page": "https://en.wikipedia.org/wiki/King_County%2C_Washington",
+      "revisions": "https://en.wikipedia.org/wiki/King_County%2C_Washington?action=history",
+      "edit": "https://en.wikipedia.org/wiki/King_County%2C_Washington?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:King_County%2C_Washington"
+    },
+    "mobile": {
+      "page": "https://en.wikipedia.org/wiki/King_County%2C_Washington",
+      "revisions": "https://en.wikipedia.org/wiki/Special:History/King_County%2C_Washington",
+      "edit": "https://en.wikipedia.org/wiki/King_County%2C_Washington?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:King_County%2C_Washington"
+    }
+  },
+  "extract": "King County is a county located in the U.S. state of Washington. The population was 2,269,675 in the 2020 census, making it the most populous county in Washington, and the 13th-most populous in the United States. The county seat is Seattle, also the state's most populous city.",
+  "extract_html": "<p><b>King County</b> is a county located in the U.S. state of Washington. The population was 2,269,675 in the 2020 census, making it the most populous county in Washington, and the 13th-most populous in the United States. The county seat is Seattle, also the state's most populous city.</p>"
+}

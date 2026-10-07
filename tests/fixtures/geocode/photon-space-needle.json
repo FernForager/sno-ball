@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3492774, 47.6205063]
+      },
+      "properties": {
+        "osm_id": 12903132,
+        "osm_type": "W",
+        "osm_key": "tourism",
+        "osm_value": "attraction",
+        "type": "house",
+        "name": "Space Needle",
+        "housenumber": "400",
+        "street": "Broad Street",
+        "district": "Uptown",
+        "locality": "Belltown",
+        "city": "Seattle",
+        "county": "King County",
+        "state": "Washington",
+        "postcode": "98109",
+        "country": "United States",
+        "countrycode": "US",
+        "extent": [-122.3495515, 47.6206949, -122.3490033, 47.6203177]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.6741949, 45.5202471]
+      },
+      "properties": {
+        "osm_id": 186579,
+        "osm_type": "R",
+        "osm_key": "place",
+        "osm_value": "city",
+        "type": "city",
+        "name": "Portland",
+        "county": "Multnomah County",
+        "state": "Oregon",
+        "country": "United States",
+        "countrycode": "US"
+      }
+    }
+  ]
+}

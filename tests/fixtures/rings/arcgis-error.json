@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": 400,
+    "message": "Invalid query parameters",
+    "details": ["'geometry' parameter is invalid"]
+  }
+}

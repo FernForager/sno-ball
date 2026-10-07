@@ -1,0 +1,616 @@
+[
+  {
+    "qid": "Q156273",
+    "name": "Adams County",
+    "inception": "1883-01-01",
+    "seat": "Ritzville",
+    "areaKm2": 4998.0,
+    "population": 20613,
+    "populationYear": 2020,
+    "lat": 46.99,
+    "lon": -118.56,
+    "wikipedia": "Adams County, Washington",
+    "fips": "53001",
+    "namedAfter": [
+      "John Adams"
+    ]
+  },
+  {
+    "qid": "Q156295",
+    "name": "Asotin County",
+    "inception": "1883-01-01",
+    "seat": "Asotin",
+    "areaKm2": 1659.0,
+    "population": 22285,
+    "populationYear": 2020,
+    "lat": 46.18,
+    "lon": -117.19,
+    "wikipedia": "Asotin County, Washington",
+    "fips": "53003",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q156216",
+    "name": "Benton County",
+    "inception": "1905-01-01",
+    "seat": "Prosser",
+    "areaKm2": 4558.0,
+    "population": 206873,
+    "populationYear": 2020,
+    "lat": 46.25,
+    "lon": -119.5,
+    "wikipedia": "Benton County, Washington",
+    "fips": "53005",
+    "namedAfter": [
+      "Thomas Hart Benton"
+    ]
+  },
+  {
+    "qid": "Q493236",
+    "name": "Chelan County",
+    "inception": "1899-01-01",
+    "seat": "Wenatchee",
+    "areaKm2": 7754.0,
+    "population": 79074,
+    "populationYear": 2020,
+    "lat": 47.88,
+    "lon": -120.64,
+    "wikipedia": "Chelan County, Washington",
+    "fips": "53007",
+    "namedAfter": [
+      "Chelan people"
+    ]
+  },
+  {
+    "qid": "Q156306",
+    "name": "Clallam County",
+    "inception": "1854-01-01",
+    "seat": "Port Angeles",
+    "areaKm2": 6917.0,
+    "population": 77155,
+    "populationYear": 2020,
+    "lat": 48.1125,
+    "lon": -123.440833333,
+    "wikipedia": "Clallam County, Washington",
+    "fips": "53009",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q156287",
+    "name": "Clark County",
+    "inception": "1845-01-01",
+    "seat": "Vancouver",
+    "areaKm2": 1700.0,
+    "population": 503311,
+    "populationYear": 2020,
+    "lat": 45.77,
+    "lon": -122.48,
+    "wikipedia": "Clark County, Washington",
+    "fips": "53011",
+    "namedAfter": [
+      "William Clark"
+    ]
+  },
+  {
+    "qid": "Q156253",
+    "name": "Columbia County",
+    "inception": "1875-01-01",
+    "seat": "Dayton",
+    "areaKm2": 2262.0,
+    "population": 3952,
+    "populationYear": 2020,
+    "lat": 46.3,
+    "lon": -117.92,
+    "wikipedia": "Columbia County, Washington",
+    "fips": "53013",
+    "namedAfter": [
+      "Columbia River"
+    ]
+  },
+  {
+    "qid": "Q156276",
+    "name": "Cowlitz County",
+    "inception": "1854-01-01",
+    "seat": "Kelso",
+    "areaKm2": 3021.0,
+    "population": 110730,
+    "populationYear": 2020,
+    "lat": 46.19,
+    "lon": -122.68,
+    "wikipedia": "Cowlitz County, Washington",
+    "fips": "53015",
+    "namedAfter": [
+      "Cowlitz people"
+    ]
+  },
+  {
+    "qid": "Q156220",
+    "name": "Douglas County",
+    "inception": "1883-01-01",
+    "seat": "Waterville",
+    "areaKm2": 4788.0,
+    "population": 42938,
+    "populationYear": 2020,
+    "lat": 47.74,
+    "lon": -119.69,
+    "wikipedia": "Douglas County, Washington",
+    "fips": "53017",
+    "namedAfter": [
+      "Stephen A. Douglas"
+    ]
+  },
+  {
+    "qid": "Q493228",
+    "name": "Ferry County",
+    "inception": "1899-01-01",
+    "seat": "Republic",
+    "areaKm2": 5847.0,
+    "population": 7178,
+    "populationYear": 2020,
+    "lat": 48.47,
+    "lon": -118.51,
+    "wikipedia": "Ferry County, Washington",
+    "fips": "53019",
+    "namedAfter": [
+      "Elisha P. Ferry"
+    ]
+  },
+  {
+    "qid": "Q118716",
+    "name": "Franklin County",
+    "inception": "1883-01-01",
+    "seat": "Pasco",
+    "areaKm2": 3277.0,
+    "population": 96749,
+    "populationYear": 2020,
+    "lat": 46.54,
+    "lon": -118.9,
+    "wikipedia": "Franklin County, Washington",
+    "fips": "53021",
+    "namedAfter": [
+      "Benjamin Franklin"
+    ]
+  },
+  {
+    "qid": "Q695782",
+    "name": "Garfield County",
+    "inception": "1881-01-01",
+    "seat": "Pomeroy",
+    "areaKm2": 1860.0,
+    "population": 2286,
+    "populationYear": 2020,
+    "lat": 46.43,
+    "lon": -117.53,
+    "wikipedia": "Garfield County, Washington",
+    "fips": "53023",
+    "namedAfter": [
+      "James A. Garfield"
+    ]
+  },
+  {
+    "qid": "Q281681",
+    "name": "Grant County",
+    "inception": "1909-01-01",
+    "seat": "Ephrata",
+    "areaKm2": 7229.0,
+    "population": 99123,
+    "populationYear": 2020,
+    "lat": 47.21,
+    "lon": -119.47,
+    "wikipedia": "Grant County, Washington",
+    "fips": "53025",
+    "namedAfter": [
+      "Ulysses S. Grant"
+    ]
+  },
+  {
+    "qid": "Q493222",
+    "name": "Grays Harbor County",
+    "inception": "1854-04-14",
+    "seat": "Montesano",
+    "areaKm2": 5761.0,
+    "population": 75636,
+    "populationYear": 2020,
+    "lat": 47.15,
+    "lon": -123.83,
+    "wikipedia": "Grays Harbor County, Washington",
+    "fips": "53027",
+    "namedAfter": [
+      "Grays Harbor"
+    ]
+  },
+  {
+    "qid": "Q493243",
+    "name": "Island County",
+    "inception": "1853-01-01",
+    "seat": "Coupeville",
+    "areaKm2": 1340.0,
+    "population": 86857,
+    "populationYear": 2020,
+    "lat": 48.15,
+    "lon": -122.58,
+    "wikipedia": "Island County, Washington",
+    "fips": "53029",
+    "namedAfter": [
+      "Whidbey Island"
+    ]
+  },
+  {
+    "qid": "Q384737",
+    "name": "Jefferson County",
+    "inception": "1852-01-01",
+    "seat": "Port Townsend",
+    "areaKm2": 5655.0,
+    "population": 32977,
+    "populationYear": 2020,
+    "lat": 47.84,
+    "lon": -123.58,
+    "wikipedia": "Jefferson County, Washington",
+    "fips": "53031",
+    "namedAfter": [
+      "Thomas Jefferson"
+    ]
+  },
+  {
+    "qid": "Q108861",
+    "name": "King County",
+    "inception": "1852-12-22",
+    "seat": "Seattle",
+    "areaKm2": 5974.0,
+    "population": 2269675,
+    "populationYear": 2020,
+    "lat": 47.47,
+    "lon": -121.84,
+    "wikipedia": "King County, Washington",
+    "fips": "53033",
+    "namedAfter": [
+      "Martin Luther King Jr."
+    ]
+  },
+  {
+    "qid": "Q484159",
+    "name": "Kitsap County",
+    "inception": "1857-01-01",
+    "seat": "Port Orchard",
+    "areaKm2": 1466.0,
+    "population": 275611,
+    "populationYear": 2020,
+    "lat": 47.64,
+    "lon": -122.65,
+    "wikipedia": "Kitsap County, Washington",
+    "fips": "53035",
+    "namedAfter": [
+      "Chief Kitsap"
+    ]
+  },
+  {
+    "qid": "Q111540",
+    "name": "Kittitas County",
+    "inception": "1883-01-01",
+    "seat": "Ellensburg",
+    "areaKm2": 6043.0,
+    "population": 44337,
+    "populationYear": 2020,
+    "lat": 47.12,
+    "lon": -120.68,
+    "wikipedia": "Kittitas County, Washington",
+    "fips": "53037",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q820502",
+    "name": "Klickitat County",
+    "inception": "1859-01-01",
+    "seat": "Goldendale",
+    "areaKm2": 4932.0,
+    "population": 22735,
+    "populationYear": 2020,
+    "lat": 45.87,
+    "lon": -120.79,
+    "wikipedia": "Klickitat County, Washington",
+    "fips": "53039",
+    "namedAfter": [
+      "Klickitat"
+    ]
+  },
+  {
+    "qid": "Q483950",
+    "name": "Lewis County",
+    "inception": "1845-12-19",
+    "seat": "Chehalis",
+    "areaKm2": 6310.0,
+    "population": 82149,
+    "populationYear": 2020,
+    "lat": 46.58,
+    "lon": -122.4,
+    "wikipedia": "Lewis County, Washington",
+    "fips": "53041",
+    "namedAfter": [
+      "Meriwether Lewis"
+    ]
+  },
+  {
+    "qid": "Q484150",
+    "name": "Lincoln County",
+    "inception": "1883-11-24",
+    "seat": "Davenport",
+    "areaKm2": 6060.0,
+    "population": 10876,
+    "populationYear": 2020,
+    "lat": 47.57,
+    "lon": -118.41,
+    "wikipedia": "Lincoln County, Washington",
+    "fips": "53043",
+    "namedAfter": [
+      "Abraham Lincoln"
+    ]
+  },
+  {
+    "qid": "Q111904",
+    "name": "Mason County",
+    "inception": "1854-03-13",
+    "seat": "Shelton",
+    "areaKm2": 2722.0,
+    "population": 65726,
+    "populationYear": 2020,
+    "lat": 47.35,
+    "lon": -123.18,
+    "wikipedia": "Mason County, Washington",
+    "fips": "53045",
+    "namedAfter": [
+      "Charles H. Mason"
+    ]
+  },
+  {
+    "qid": "Q483958",
+    "name": "Okanogan County",
+    "inception": "1888-01-01",
+    "seat": "Okanogan",
+    "areaKm2": 13766.0,
+    "population": 42104,
+    "populationYear": 2020,
+    "lat": 48.55,
+    "lon": -119.75,
+    "wikipedia": "Okanogan County, Washington",
+    "fips": "53047",
+    "namedAfter": [
+      "Okanagan people"
+    ]
+  },
+  {
+    "qid": "Q483990",
+    "name": "Pacific County",
+    "inception": "1851-01-01",
+    "seat": "South Bend",
+    "areaKm2": 3169.0,
+    "population": 23365,
+    "populationYear": 2020,
+    "lat": 46.56,
+    "lon": -123.78,
+    "wikipedia": "Pacific County, Washington",
+    "fips": "53049",
+    "namedAfter": [
+      "Pacific Ocean"
+    ]
+  },
+  {
+    "qid": "Q156459",
+    "name": "Pierce County",
+    "inception": "1852-12-22",
+    "seat": "Tacoma",
+    "areaKm2": 4679.0,
+    "population": 921130,
+    "populationYear": 2020,
+    "lat": 47.05,
+    "lon": -122.11,
+    "wikipedia": "Pierce County, Washington",
+    "fips": "53053",
+    "namedAfter": [
+      "Franklin Pierce"
+    ]
+  },
+  {
+    "qid": "Q485301",
+    "name": "Pend Oreille County",
+    "inception": "1911-01-01",
+    "seat": "Newport",
+    "areaKm2": 3692.0,
+    "population": 13401,
+    "populationYear": 2020,
+    "lat": 48.53,
+    "lon": -117.28,
+    "wikipedia": "Pend Oreille County, Washington",
+    "fips": "53051",
+    "namedAfter": [
+      "Kalispel"
+    ]
+  },
+  {
+    "qid": "Q484146",
+    "name": "San Juan County",
+    "inception": "1873-01-01",
+    "seat": "Friday Harbor",
+    "areaKm2": 1609.0,
+    "population": 17788,
+    "populationYear": 2020,
+    "lat": 48.57,
+    "lon": -122.97,
+    "wikipedia": "San Juan County, Washington",
+    "fips": "53055",
+    "namedAfter": [
+      "San Juan Islands"
+    ]
+  },
+  {
+    "qid": "Q113892",
+    "name": "Skagit County",
+    "inception": "1883-01-01",
+    "seat": "Mount Vernon",
+    "areaKm2": 4974.0,
+    "population": 129523,
+    "populationYear": 2020,
+    "lat": 48.48,
+    "lon": -121.78,
+    "wikipedia": "Skagit County, Washington",
+    "fips": "53057",
+    "namedAfter": [
+      "Skagit"
+    ]
+  },
+  {
+    "qid": "Q304791",
+    "name": "Skamania County",
+    "inception": "1854-03-09",
+    "seat": "Stevenson",
+    "areaKm2": 4361.0,
+    "population": 12036,
+    "populationYear": 2020,
+    "lat": 46.03,
+    "lon": -121.91,
+    "wikipedia": "Skamania County, Washington",
+    "fips": "53059",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q110403",
+    "name": "Snohomish County",
+    "inception": "1861-01-14",
+    "seat": "Everett",
+    "areaKm2": 5689.0,
+    "population": 827957,
+    "populationYear": 2020,
+    "lat": 48.04,
+    "lon": -121.71,
+    "wikipedia": "Snohomish County, Washington",
+    "fips": "53061",
+    "namedAfter": [
+      "Snohomish tribe"
+    ]
+  },
+  {
+    "qid": "Q485276",
+    "name": "Spokane County",
+    "inception": "1858-01-01",
+    "seat": "Spokane",
+    "areaKm2": 4612.0,
+    "population": 539339,
+    "populationYear": 2020,
+    "lat": 47.62,
+    "lon": -117.4,
+    "wikipedia": "Spokane County, Washington",
+    "fips": "53063",
+    "namedAfter": [
+      "Spokane"
+    ]
+  },
+  {
+    "qid": "Q483954",
+    "name": "Stevens County",
+    "inception": "1863-01-20",
+    "seat": "Colville",
+    "areaKm2": 6580.0,
+    "population": 46445,
+    "populationYear": 2020,
+    "lat": 48.4,
+    "lon": -117.85,
+    "wikipedia": "Stevens County, Washington",
+    "fips": "53065",
+    "namedAfter": [
+      "Isaac Stevens"
+    ]
+  },
+  {
+    "qid": "Q113773",
+    "name": "Thurston County",
+    "inception": "1852-01-01",
+    "seat": "Olympia",
+    "areaKm2": 2004.0,
+    "population": 294793,
+    "populationYear": 2020,
+    "lat": 46.93,
+    "lon": -122.83,
+    "wikipedia": "Thurston County, Washington",
+    "fips": "53067",
+    "namedAfter": [
+      "Samuel Thurston"
+    ]
+  },
+  {
+    "qid": "Q484015",
+    "name": "Wahkiakum County",
+    "inception": "1854-01-01",
+    "seat": "Cathlamet",
+    "areaKm2": 743.0,
+    "population": 4422,
+    "populationYear": 2020,
+    "lat": 46.29,
+    "lon": -123.43,
+    "wikipedia": "Wahkiakum County, Washington",
+    "fips": "53069",
+    "namedAfter": [
+      "Wahkiakum"
+    ]
+  },
+  {
+    "qid": "Q485305",
+    "name": "Walla Walla County",
+    "inception": "1854-01-01",
+    "seat": "Walla Walla",
+    "areaKm2": 3364.0,
+    "population": 62584,
+    "populationYear": 2020,
+    "lat": 46.23,
+    "lon": -118.48,
+    "wikipedia": "Walla Walla County, Washington",
+    "fips": "53071",
+    "namedAfter": [
+      "Walla Walla people"
+    ]
+  },
+  {
+    "qid": "Q156623",
+    "name": "Whatcom County",
+    "inception": "1854-01-01",
+    "seat": "Bellingham",
+    "areaKm2": 6485.0,
+    "population": 226847,
+    "populationYear": 2020,
+    "lat": 48.83,
+    "lon": -121.9,
+    "wikipedia": "Whatcom County, Washington",
+    "fips": "53073",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q484153",
+    "name": "Whitman County",
+    "inception": "1871-01-01",
+    "seat": "Colfax",
+    "areaKm2": 5641.0,
+    "population": 47973,
+    "populationYear": 2020,
+    "lat": 46.89,
+    "lon": -117.52,
+    "wikipedia": "Whitman County, Washington",
+    "fips": "53075",
+    "namedAfter": [
+      "Marcus Whitman"
+    ]
+  },
+  {
+    "qid": "Q156629",
+    "name": "Yakima County",
+    "inception": "1865-01-01",
+    "seat": "Yakima",
+    "areaKm2": 11168.0,
+    "population": 256728,
+    "populationYear": 2020,
+    "lat": 46.46,
+    "lon": -120.74,
+    "wikipedia": "Yakima County, Washington",
+    "fips": "53077",
+    "namedAfter": [
+      "Yakama"
+    ]
+  }
+]

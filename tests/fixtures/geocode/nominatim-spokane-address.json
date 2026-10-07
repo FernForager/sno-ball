@@ -1,0 +1,64 @@
+[
+  {
+    "place_id": 211857310,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 2884761823,
+    "lat": "47.6588411",
+    "lon": "-117.4260466",
+    "category": "place",
+    "type": "house",
+    "place_rank": 30,
+    "importance": 0.00001,
+    "addresstype": "place",
+    "name": "",
+    "display_name": "808, West Spokane Falls Boulevard, Riverside, Spokane, Spokane County, Washington, 99201, United States",
+    "address": {
+      "house_number": "808",
+      "road": "West Spokane Falls Boulevard",
+      "neighbourhood": "Riverside",
+      "city": "Spokane",
+      "county": "Spokane County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "99201",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {},
+    "namedetails": {},
+    "boundingbox": ["47.6587911", "47.6588911", "-117.4260966", "-117.4259966"]
+  },
+  {
+    "place_id": 297844129,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 237916,
+    "lat": "47.6571934",
+    "lon": "-117.4235106",
+    "category": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.6811,
+    "addresstype": "city",
+    "name": "Spokane",
+    "display_name": "Spokane, Spokane County, Washington, United States",
+    "address": {
+      "city": "Spokane",
+      "county": "Spokane County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {
+      "wikidata": "Q187091",
+      "wikipedia": "en:Spokane, Washington",
+      "population": "228989"
+    },
+    "namedetails": {
+      "name": "Spokane"
+    },
+    "boundingbox": ["47.5872131", "47.7595112", "-117.5343102", "-117.2847602"]
+  }
+]

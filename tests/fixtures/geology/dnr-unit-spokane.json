@@ -1,0 +1,114 @@
+{
+  "displayFieldName": "MAP_UNIT_100K_LABEL",
+  "fieldAliases": {
+    "OBJECTID": "OBJECTID",
+    "SHAPE.LEN": "SHAPE.LEN",
+    "SHAPE.AREA": "SHAPE.AREA",
+    "MAP_UNIT_100K": "Map Unit",
+    "MAP_UNIT_100K_ID_CONFIDENCE": "Identity Confidence",
+    "MAP_UNIT_100K_LABEL": "Label",
+    "MAP_UNIT_100K_SYMBOL": "Symbol",
+    "MAP_UNIT_100K_NOTES": "Notes",
+    "MAP_UNIT_ORIGINAL": "Original Unit",
+    "MAP_UNIT_100K_ID": "Map Unit ID",
+    "MAP_UNIT_100K_QUAD_NAME": "Quad Name",
+    "MAP_UNIT_100K_QUAD_UNIT": "Quad and Unit",
+    "GLOBALID": "GLOBALID"
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "SHAPE.LEN",
+      "type": "esriFieldTypeDouble",
+      "alias": "SHAPE.LEN"
+    },
+    {
+      "name": "SHAPE.AREA",
+      "type": "esriFieldTypeDouble",
+      "alias": "SHAPE.AREA"
+    },
+    {
+      "name": "MAP_UNIT_100K",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit",
+      "length": 20
+    },
+    {
+      "name": "MAP_UNIT_100K_ID_CONFIDENCE",
+      "type": "esriFieldTypeString",
+      "alias": "Identity Confidence",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_LABEL",
+      "type": "esriFieldTypeString",
+      "alias": "Label",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_SYMBOL",
+      "type": "esriFieldTypeString",
+      "alias": "Symbol",
+      "length": 255
+    },
+    {
+      "name": "MAP_UNIT_100K_NOTES",
+      "type": "esriFieldTypeString",
+      "alias": "Notes",
+      "length": 255
+    },
+    {
+      "name": "MAP_UNIT_ORIGINAL",
+      "type": "esriFieldTypeString",
+      "alias": "Original Unit",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_ID",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit ID",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_QUAD_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Quad Name",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_QUAD_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Quad and Unit",
+      "length": 255
+    },
+    {
+      "name": "GLOBALID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GLOBALID",
+      "length": 38
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 39088,
+        "SHAPE.LEN": 1751958.66676835,
+        "SHAPE.AREA": 4163044772.40605,
+        "MAP_UNIT_100K": "Qfg",
+        "MAP_UNIT_100K_ID_CONFIDENCE": "certain",
+        "MAP_UNIT_100K_LABEL": "Qfg",
+        "MAP_UNIT_100K_SYMBOL": "Pleistocene outburst flood deposits",
+        "MAP_UNIT_100K_NOTES": null,
+        "MAP_UNIT_ORIGINAL": null,
+        "MAP_UNIT_100K_ID": "MUP_39228",
+        "MAP_UNIT_100K_QUAD_NAME": "Compiled",
+        "MAP_UNIT_100K_QUAD_UNIT": "Compiled | Qfg",
+        "GLOBALID": "{8ABD6EEB-B26E-4F39-AF04-722C33344751}"
+      }
+    }
+  ]
+}
