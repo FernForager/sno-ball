@@ -1,0 +1,44 @@
+{
+  "place_id": 327538485,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 3359850618,
+  "lat": "47.6205152",
+  "lon": "-122.3493623",
+  "category": "amenity",
+  "type": "bar",
+  "place_rank": 30,
+  "importance": 7.72983901731444e-05,
+  "addresstype": "amenity",
+  "name": "The Loupe Lounge",
+  "display_name": "The Loupe Lounge, 400, Broad Street, South Lake Union, Cascade, Belltown, Seattle, King County, Washington, 98109, United States",
+  "address": {
+    "amenity": "The Loupe Lounge",
+    "house_number": "400",
+    "road": "Broad Street",
+    "neighbourhood": "South Lake Union",
+    "quarter": "Cascade",
+    "suburb": "Belltown",
+    "city": "Seattle",
+    "county": "King County",
+    "state": "Washington",
+    "ISO3166-2-lvl4": "US-WA",
+    "postcode": "98109",
+    "country": "United States",
+    "country_code": "us"
+  },
+  "extratags": {
+    "ele": "159",
+    "min_age": "21",
+    "smoking": "no",
+    "website": "https://www.spaceneedle.com/lounge",
+    "check_date": "2026-01-15",
+    "opening_hours": "Mo-Th 10:30-19:30; Fr 09:30-21:30; Sa 09:00-21:30; Su 09:30-20:30"
+  },
+  "boundingbox": [
+    "47.6204652",
+    "47.6205652",
+    "-122.3494123",
+    "-122.3493123"
+  ]
+}

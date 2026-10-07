@@ -1,0 +1,130 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_type": "W",
+        "osm_id": 12903132,
+        "osm_key": "man_made",
+        "osm_value": "tower",
+        "type": "house",
+        "housenumber": "400",
+        "name": "Space Needle",
+        "street": "Broad Street",
+        "locality": "South Lake Union",
+        "district": "Belltown",
+        "city": "Seattle",
+        "county": "King",
+        "state": "Washington",
+        "country": "United States",
+        "postcode": "98109",
+        "countrycode": "US",
+        "extent": [
+          -122.3495555,
+          47.620676,
+          -122.3490519,
+          47.6203364
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3493036,
+          47.6205131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_type": "W",
+        "osm_id": 12903131,
+        "osm_key": "highway",
+        "osm_value": "service",
+        "type": "street",
+        "name": "Space Needle Loop",
+        "locality": "Uptown",
+        "district": "Belltown",
+        "city": "Seattle",
+        "county": "King",
+        "state": "Washington",
+        "country": "United States",
+        "postcode": "98121",
+        "countrycode": "US",
+        "extent": [
+          -122.3494506,
+          47.6201849,
+          -122.3491557,
+          47.619986
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3493033,
+          47.6200872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_type": "N",
+        "osm_id": 6315115701,
+        "osm_key": "tourism",
+        "osm_value": "attraction",
+        "type": "house",
+        "name": "Space Needle of Renton",
+        "street": "Northwest 5th Street",
+        "city": "Renton",
+        "county": "King",
+        "state": "Washington",
+        "country": "United States",
+        "postcode": "98057",
+        "countrycode": "US"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.218144,
+          47.4898138
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_type": "W",
+        "osm_id": 217604426,
+        "osm_key": "tourism",
+        "osm_value": "hotel",
+        "type": "house",
+        "housenumber": "200",
+        "name": "Travelodge Seattle by the Space Needle",
+        "street": "6th Avenue North",
+        "locality": "South Lake Union",
+        "district": "Belltown",
+        "city": "Seattle",
+        "county": "King",
+        "state": "Washington",
+        "country": "United States",
+        "postcode": "98109",
+        "countrycode": "US",
+        "extent": [
+          -122.3448112,
+          47.6204695,
+          -122.3444335,
+          47.619816
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3445459,
+          47.6201477
+        ]
+      }
+    }
+  ]
+}

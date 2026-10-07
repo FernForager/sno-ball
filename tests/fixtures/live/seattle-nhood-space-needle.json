@@ -1,0 +1,83 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryProperties": {
+    "shapeAreaFieldName": "Shape__Area",
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriFeet"
+  },
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 2926,
+    "latestWkid": 2926
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "L_HOOD",
+      "type": "esriFieldTypeString",
+      "alias": "District",
+      "sqlType": "sqlTypeOther",
+      "length": 26,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "S_HOOD",
+      "type": "esriFieldTypeString",
+      "alias": "Neighborhood",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "S_HOOD_ALT_NAMES",
+      "type": "esriFieldTypeString",
+      "alias": "Alternate Names",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Area",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 45,
+        "L_HOOD": "Queen Anne",
+        "S_HOOD": "Lower Queen Anne",
+        "S_HOOD_ALT_NAMES": "Uptown, Seattle Center",
+        "Shape__Area": 17515624.456695557,
+        "Shape__Length": 20496.72892223937
+      }
+    }
+  ]
+}

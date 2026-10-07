@@ -1,0 +1,84 @@
+{
+  "displayFieldName": "DMU_100K_NAME",
+  "fieldAliases": {
+    "OBJECTID": "OBJECTID",
+    "DMU_100K_MAP_UNIT": "Map Unit",
+    "DMU_100K_FULL_NAME": "Full Name",
+    "DMU_100K_AGE": "Age",
+    "DMU_100K_DESCRIPTION": "Description",
+    "DMU_100K_QUAD_NAME": "Quad Name",
+    "DMU_FEATURE_QUAD_UNIT": "Quad and Unit",
+    "DMU_100K_ID": "Description ID",
+    "GLOBALID": "GLOBALID"
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "DMU_100K_MAP_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit",
+      "length": 20
+    },
+    {
+      "name": "DMU_100K_FULL_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Full Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_AGE",
+      "type": "esriFieldTypeString",
+      "alias": "Age",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_DESCRIPTION",
+      "type": "esriFieldTypeString",
+      "alias": "Description",
+      "length": 1073741822
+    },
+    {
+      "name": "DMU_100K_QUAD_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Quad Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_FEATURE_QUAD_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Quad and Unit",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_ID",
+      "type": "esriFieldTypeString",
+      "alias": "Description ID",
+      "length": 50
+    },
+    {
+      "name": "GLOBALID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GLOBALID",
+      "length": 38
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1338,
+        "DMU_100K_MAP_UNIT": "Qfg",
+        "DMU_100K_FULL_NAME": "Missoula, glacial Lake, deposits of",
+        "DMU_100K_AGE": "Pleistocene",
+        "DMU_100K_DESCRIPTION": "Poorly sorted, sand and coarse gravel deposited by high-energy flows of catastrophic Pleistocene floods, especially the Missoula floods that occurred between 15,300 and 12,700 years ago. Along the Columbia River and in the Moses and Grand Coulees, subrounded to angular clasts consist of diverse lithologies. In many places the deposits display foreset bedding and contain tephra layers. Surfaces marked by giant current dunes 50 to 60 m above the natural surface grade of Columbia River but below tops of sidestream delta terraces unmodified by floodwater. Giant current dunes spaced 100 m or less; composed of gravel similar with rare boulders as large as 3 m. Correlative with Touchet Beds. In Vancouver area, well-rounded, foreset-bedded, well-sorted and stratified pebble and cobble gravel with angular to subangular boulders typically 2.5 m or less in length. Clasts supported with a sandy matrix. Sandy matrix composed of mafic volcanic fragments, quartz, and muscovite; pebbles and cobbles consist of 60% Columbia River basalt, 30% other mafic volcanic rocks, and 10% quartzite, tuff, granitic rocks, and sandstone.",
+        "DMU_100K_QUAD_NAME": "Compiled",
+        "DMU_FEATURE_QUAD_UNIT": "Compiled | Qfg",
+        "DMU_100K_ID": "DMU_1338",
+        "GLOBALID": "{A4F6C16C-FC6A-471A-B333-5D92CB8FF8A0}"
+      }
+    }
+  ]
+}

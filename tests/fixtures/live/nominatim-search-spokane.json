@@ -1,0 +1,81 @@
+[
+  {
+    "place_id": 327066296,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 460674435,
+    "lat": "47.6607039",
+    "lon": "-117.4226117",
+    "category": "shop",
+    "type": "ticket",
+    "place_rank": 30,
+    "importance": 0.21822785325192331,
+    "addresstype": "shop",
+    "name": "Numerica Skate Ribbon",
+    "display_name": "Numerica Skate Ribbon, 507, North Howard Street, Riverside, Spokane, Spokane County, Washington, 99201, United States",
+    "address": {
+      "shop": "Numerica Skate Ribbon",
+      "house_number": "507",
+      "road": "North Howard Street",
+      "quarter": "Riverside",
+      "city": "Spokane",
+      "county": "Spokane County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "99201",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {
+      "building": "yes",
+      "wikidata": "Q65066530",
+      "wikipedia": "en:Numerica Skate Ribbon",
+      "check_date": "2025-10-04"
+    },
+    "namedetails": {
+      "name": "Numerica Skate Ribbon"
+    },
+    "boundingbox": [
+      "47.6606186",
+      "47.6607931",
+      "-117.4229467",
+      "-117.4222767"
+    ]
+  },
+  {
+    "place_id": 401965231,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 37178337,
+    "lat": "47.6614806",
+    "lon": "-117.4211134",
+    "category": "place",
+    "type": "house",
+    "place_rank": 30,
+    "importance": 9.99999999995449e-06,
+    "addresstype": "place",
+    "name": "",
+    "display_name": "507, North Howard Street, North Bank, Riverside, Spokane, Spokane County, Washington, 99201, United States",
+    "address": {
+      "house_number": "507",
+      "road": "North Howard Street",
+      "neighbourhood": "North Bank",
+      "quarter": "Riverside",
+      "city": "Spokane",
+      "county": "Spokane County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "99201",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": null,
+    "namedetails": null,
+    "boundingbox": [
+      "47.6614306",
+      "47.6615306",
+      "-117.4211634",
+      "-117.4210634"
+    ]
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "displayFieldName": "DMU_100K_NAME",
+  "fieldAliases": {
+    "OBJECTID": "OBJECTID",
+    "DMU_100K_MAP_UNIT": "Map Unit",
+    "DMU_100K_FULL_NAME": "Full Name",
+    "DMU_100K_AGE": "Age",
+    "DMU_100K_DESCRIPTION": "Description",
+    "DMU_100K_QUAD_NAME": "Quad Name",
+    "DMU_FEATURE_QUAD_UNIT": "Quad and Unit",
+    "DMU_100K_ID": "Description ID",
+    "GLOBALID": "GLOBALID"
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "DMU_100K_MAP_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit",
+      "length": 20
+    },
+    {
+      "name": "DMU_100K_FULL_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Full Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_AGE",
+      "type": "esriFieldTypeString",
+      "alias": "Age",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_DESCRIPTION",
+      "type": "esriFieldTypeString",
+      "alias": "Description",
+      "length": 1073741822
+    },
+    {
+      "name": "DMU_100K_QUAD_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Quad Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_FEATURE_QUAD_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Quad and Unit",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_ID",
+      "type": "esriFieldTypeString",
+      "alias": "Description ID",
+      "length": 50
+    },
+    {
+      "name": "GLOBALID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GLOBALID",
+      "length": 38
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1142,
+        "DMU_100K_MAP_UNIT": "Qgt",
+        "DMU_100K_FULL_NAME": "mostly Vashon Stade in western WA; unnamed in eastern WA",
+        "DMU_100K_AGE": "Pleistocene",
+        "DMU_100K_DESCRIPTION": "Till and outwash deposits from continental glaciers. Heterogeneous mixture of subrounded to subangular pebbles, cobbles, and boulders in an unsorted matrix of sand, silt, and clay deposited directly by glacial ice. Rare angular to subrounded glacial erratic boulders. May contain occasional lenses of glaciofluvial and glaciolacustrine sediments characterized by the presence of northern-provenance clasts in western Washington. Locally includes lacustrine deposits and glacial deposits modified by stream terracing. Surface features include moraines, drumlins, striations, and flutes. Deposited by the Okanogan lobe of the Cordilleran ice sheet in eastern Washington, the Puget lobe in western Washington during the late Wisconsin. May include alpine glacial deposits by Cape Flattery.",
+        "DMU_100K_QUAD_NAME": "Compiled",
+        "DMU_FEATURE_QUAD_UNIT": "Compiled | Qgt",
+        "DMU_100K_ID": "DMU_1142",
+        "GLOBALID": "{9D1E986A-56B0-4596-9011-19D2B85259B4}"
+      }
+    }
+  ]
+}

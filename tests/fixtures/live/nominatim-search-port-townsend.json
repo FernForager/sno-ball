@@ -1,0 +1,41 @@
+[
+  {
+    "place_id": 376223522,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 77086668,
+    "lat": "48.1120683",
+    "lon": "-122.7678190",
+    "category": "amenity",
+    "type": "courthouse",
+    "place_rank": 30,
+    "importance": 5.468757152661963e-05,
+    "addresstype": "amenity",
+    "name": "Jefferson County Courthouse",
+    "display_name": "Jefferson County Courthouse, 1820, Jefferson Street, Port Townsend, Jefferson County, Washington, 98368, United States",
+    "address": {
+      "amenity": "Jefferson County Courthouse",
+      "house_number": "1820",
+      "road": "Jefferson Street",
+      "town": "Port Townsend",
+      "county": "Jefferson County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "98368",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {
+      "building": "yes"
+    },
+    "namedetails": {
+      "name": "Jefferson County Courthouse"
+    },
+    "boundingbox": [
+      "48.1118641",
+      "48.1122745",
+      "-122.7681155",
+      "-122.7674458"
+    ]
+  }
+]
