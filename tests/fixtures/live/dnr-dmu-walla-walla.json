@@ -1,0 +1,84 @@
+{
+  "displayFieldName": "DMU_100K_NAME",
+  "fieldAliases": {
+    "OBJECTID": "OBJECTID",
+    "DMU_100K_MAP_UNIT": "Map Unit",
+    "DMU_100K_FULL_NAME": "Full Name",
+    "DMU_100K_AGE": "Age",
+    "DMU_100K_DESCRIPTION": "Description",
+    "DMU_100K_QUAD_NAME": "Quad Name",
+    "DMU_FEATURE_QUAD_UNIT": "Quad and Unit",
+    "DMU_100K_ID": "Description ID",
+    "GLOBALID": "GLOBALID"
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "DMU_100K_MAP_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit",
+      "length": 20
+    },
+    {
+      "name": "DMU_100K_FULL_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Full Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_AGE",
+      "type": "esriFieldTypeString",
+      "alias": "Age",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_DESCRIPTION",
+      "type": "esriFieldTypeString",
+      "alias": "Description",
+      "length": 1073741822
+    },
+    {
+      "name": "DMU_100K_QUAD_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Quad Name",
+      "length": 255
+    },
+    {
+      "name": "DMU_FEATURE_QUAD_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Quad and Unit",
+      "length": 255
+    },
+    {
+      "name": "DMU_100K_ID",
+      "type": "esriFieldTypeString",
+      "alias": "Description ID",
+      "length": 50
+    },
+    {
+      "name": "GLOBALID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GLOBALID",
+      "length": 38
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 687,
+        "DMU_100K_MAP_UNIT": "Qa",
+        "DMU_100K_FULL_NAME": null,
+        "DMU_100K_AGE": "Quaternary",
+        "DMU_100K_DESCRIPTION": "Unconsolidated clay, silt, sand, and gravel deposited along rivers, streams, floodplains, alluvial fans, and estuaries; includes sand bars and islands in major rivers and stabilized tidal flats. The low-gradient reaches of these rivers are characterized by large-amplitude, migrating meanders and large amounts of sediment input from adjacent landslides and debris flows.",
+        "DMU_100K_QUAD_NAME": "Compiled",
+        "DMU_FEATURE_QUAD_UNIT": "Compiled | Qa",
+        "DMU_100K_ID": "DMU_687",
+        "GLOBALID": "{77E7F640-7585-4F48-B751-B272A1859208}"
+      }
+    }
+  ]
+}

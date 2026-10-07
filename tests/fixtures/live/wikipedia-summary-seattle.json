@@ -1,0 +1,53 @@
+{
+  "type": "standard",
+  "title": "Seattle",
+  "displaytitle": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Seattle</span></span>",
+  "namespace": {
+    "id": 0,
+    "text": ""
+  },
+  "wikibase_item": "Q5083",
+  "titles": {
+    "canonical": "Seattle",
+    "normalized": "Seattle",
+    "display": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Seattle</span></span>"
+  },
+  "pageid": 11388236,
+  "thumbnail": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Seattle_Center_as_night_falls.jpg/330px-Seattle_Center_as_night_falls.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 330,
+    "height": 206
+  },
+  "originalimage": {
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/58/Seattle_Center_as_night_falls.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "width": 2560,
+    "height": 1600
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "revision": "1378745630",
+  "tid": "31dd60d4-c11d-11f1-95a6-28f98ca254a3",
+  "timestamp": "2026-10-06T00:30:56Z",
+  "description": "City in Washington, United States",
+  "description_source": "local",
+  "coordinates": {
+    "lat": 47.60388889,
+    "lon": -122.33
+  },
+  "content_urls": {
+    "desktop": {
+      "page": "https://en.wikipedia.org/wiki/Seattle",
+      "revisions": "https://en.wikipedia.org/wiki/Seattle?action=history",
+      "edit": "https://en.wikipedia.org/wiki/Seattle?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Seattle"
+    },
+    "mobile": {
+      "page": "https://en.wikipedia.org/wiki/Seattle",
+      "revisions": "https://en.wikipedia.org/wiki/Special:History/Seattle",
+      "edit": "https://en.wikipedia.org/wiki/Seattle?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Seattle"
+    }
+  },
+  "extract": "Seattle is the most populous city in the U.S. state of Washington and the Pacific Northwest region of North America. It is the 18th-most populous city in the United States with a population of 784,777 in 2025, while the Seattle metropolitan area at over 4.15 million residents is the 15th-most populous metropolitan area in the nation. The city is the county seat of King County, the most populous county in Washington. Seattle's growth rate of 21.1% between 2010 and 2020 made it one of the country's fastest-growing large cities.",
+  "extract_html": "<p><b>Seattle</b> is the most populous city in the U.S. state of Washington and the Pacific Northwest region of North America. It is the 18th-most populous city in the United States with a population of 784,777 in 2025, while the Seattle metropolitan area at over 4.15 million residents is the 15th-most populous metropolitan area in the nation. The city is the county seat of King County, the most populous county in Washington. Seattle's growth rate of 21.1% between 2010 and 2020 made it one of the country's fastest-growing large cities.</p>"
+}

@@ -1,0 +1,38 @@
+{
+  "place_id": 320959631,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 397378610,
+  "lat": "47.6903805",
+  "lon": "-122.2901894",
+  "category": "amenity",
+  "type": "parking",
+  "place_rank": 30,
+  "importance": 7.72983901731444e-05,
+  "addresstype": "amenity",
+  "name": "",
+  "display_name": "Northeast 85th Street, Wedgwood, Seattle, King County, Washington, 98115, United States",
+  "address": {
+    "road": "Northeast 85th Street",
+    "suburb": "Wedgwood",
+    "city": "Seattle",
+    "county": "King County",
+    "state": "Washington",
+    "ISO3166-2-lvl4": "US-WA",
+    "postcode": "98115",
+    "country": "United States",
+    "country_code": "us"
+  },
+  "extratags": {
+    "fee": "no",
+    "access": "customers",
+    "parking": "surface",
+    "surface": "asphalt"
+  },
+  "boundingbox": [
+    "47.6902926",
+    "47.6904684",
+    "-122.2905604",
+    "-122.2898184"
+  ]
+}

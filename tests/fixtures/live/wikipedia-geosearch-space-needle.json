@@ -1,0 +1,97 @@
+{
+  "batchcomplete": "",
+  "query": {
+    "geosearch": [
+      {
+        "pageid": 9454416,
+        "ns": 0,
+        "title": "SkyCity",
+        "lat": 47.620555555555555,
+        "lon": -122.34916666666666,
+        "dist": 11.7,
+        "primary": ""
+      },
+      {
+        "pageid": 242937,
+        "ns": 0,
+        "title": "Space Needle",
+        "lat": 47.6204,
+        "lon": -122.3491,
+        "dist": 18.7,
+        "primary": ""
+      },
+      {
+        "pageid": 74997560,
+        "ns": 0,
+        "title": "Moses (2/3)",
+        "lat": 47.620777777777775,
+        "lon": -122.34888888888888,
+        "dist": 43.6,
+        "primary": ""
+      },
+      {
+        "pageid": 37739788,
+        "ns": 0,
+        "title": "Chihuly Garden and Glass",
+        "lat": 47.62062,
+        "lon": -122.35007,
+        "dist": 59.2,
+        "primary": ""
+      },
+      {
+        "pageid": 76613035,
+        "ns": 0,
+        "title": "Black Lightning (sculpture)",
+        "lat": 47.620459,
+        "lon": -122.348361,
+        "dist": 70.5,
+        "primary": ""
+      },
+      {
+        "pageid": 70114306,
+        "ns": 0,
+        "title": "Sonic Bloom (sculpture)",
+        "lat": 47.62,
+        "lon": -122.3503,
+        "dist": 93.3,
+        "primary": ""
+      },
+      {
+        "pageid": 78094099,
+        "ns": 0,
+        "title": "The Seattle Mural",
+        "lat": 47.6205,
+        "lon": -122.3507,
+        "dist": 104.9,
+        "primary": ""
+      },
+      {
+        "pageid": 58698713,
+        "ns": 0,
+        "title": "Statue of Chris Cornell",
+        "lat": 47.6212,
+        "lon": -122.34784,
+        "dist": 134.3,
+        "primary": ""
+      },
+      {
+        "pageid": 40160226,
+        "ns": 0,
+        "title": "Olympic Iliad",
+        "lat": 47.6194,
+        "lon": -122.3501,
+        "dist": 136.2,
+        "primary": ""
+      },
+      {
+        "pageid": 50277,
+        "ns": 0,
+        "title": "Century 21 Exposition",
+        "lat": 47.62138888888889,
+        "lon": -122.35083333333333,
+        "dist": 151.6,
+        "primary": ""
+      }
+    ]
+  }
+}

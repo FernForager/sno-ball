@@ -1,0 +1,262 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "GlobalID",
+  "geometryProperties": {
+    "shapeAreaFieldName": "Shape__Area",
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriFeet"
+  },
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 2926,
+    "latestWkid": 2926
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute",
+      "type": "esriFieldTypeString",
+      "alias": "Statute",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Statute_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Statute_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance",
+      "type": "esriFieldTypeString",
+      "alias": "Ordinance",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Ordinance_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Ordinance_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution",
+      "type": "esriFieldTypeString",
+      "alias": "Resolution",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Resolution_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Resolution_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Clerk_File",
+      "type": "esriFieldTypeString",
+      "alias": "Clerk_File",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Clerk_File_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Clerk_File_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Council_Bill",
+      "type": "esriFieldTypeString",
+      "alias": "Council_Bill",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Council_Bill_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Council_Bill_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Method",
+      "type": "esriFieldTypeString",
+      "alias": "Method",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Seattle_Archives_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Seattle_Archives_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Title",
+      "type": "esriFieldTypeString",
+      "alias": "Title",
+      "sqlType": "sqlTypeOther",
+      "length": 400,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Amendment",
+      "type": "esriFieldTypeString",
+      "alias": "Amendment",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ward",
+      "type": "esriFieldTypeString",
+      "alias": "Ward",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Effective_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Effective_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Year",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Year",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Area",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "GlobalID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GlobalID",
+      "sqlType": "sqlTypeOther",
+      "length": 38,
+      "domain": null,
+      "defaultValue": "NEWID() WITH VALUES"
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 27,
+        "Statute": null,
+        "Statute_Date": null,
+        "Statute_Link": null,
+        "Ordinance": "81655",
+        "Ordinance_Date": -536284800000,
+        "Ordinance_Link": "http://clerk.seattle.gov/search/ordinances/81655",
+        "Resolution": "16240",
+        "Resolution_Date": -535766400000,
+        "Resolution_Link": null,
+        "Clerk_File": "219446",
+        "Clerk_File_Link": null,
+        "Council_Bill": "73049",
+        "Council_Bill_Link": null,
+        "Method": null,
+        "Seattle_Archives_Link": null,
+        "Title": "Sand Point District in Sec. 2, T. 25 N., R 4 E., WM - Lake City, Northgate, Wedgewood, Sand Point",
+        "Amendment": null,
+        "Ward": null,
+        "Effective_Date": -531360000000,
+        "Year": 1953,
+        "Shape__Area": 113714437.0131836,
+        "Shape__Length": 60432.72199986652,
+        "GlobalID": "97045ad5-9a1d-4226-bc06-e1c6c8cad67e"
+      }
+    }
+  ]
+}

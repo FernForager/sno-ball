@@ -1,0 +1,53 @@
+{
+  "type": "standard",
+  "title": "Washington (state)",
+  "displaytitle": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Washington (state)</span></span>",
+  "namespace": {
+    "id": 0,
+    "text": ""
+  },
+  "wikibase_item": "Q1223",
+  "titles": {
+    "canonical": "Washington_(state)",
+    "normalized": "Washington (state)",
+    "display": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Washington (state)</span></span>"
+  },
+  "pageid": 13015878,
+  "thumbnail": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/330px-Flag_of_Washington.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 330,
+    "height": 206
+  },
+  "originalimage": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/1920px-Flag_of_Washington.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 1600,
+    "height": 1000
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "revision": "1378007490",
+  "tid": "64a202d4-be56-11f1-b391-09915c4dd870",
+  "timestamp": "2026-10-02T11:42:49Z",
+  "description": "U.S. state",
+  "description_source": "local",
+  "coordinates": {
+    "lat": 47,
+    "lon": -120
+  },
+  "content_urls": {
+    "desktop": {
+      "page": "https://en.wikipedia.org/wiki/Washington_(state)",
+      "revisions": "https://en.wikipedia.org/wiki/Washington_(state)?action=history",
+      "edit": "https://en.wikipedia.org/wiki/Washington_(state)?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Washington_(state)"
+    },
+    "mobile": {
+      "page": "https://en.wikipedia.org/wiki/Washington_(state)",
+      "revisions": "https://en.wikipedia.org/wiki/Special:History/Washington_(state)",
+      "edit": "https://en.wikipedia.org/wiki/Washington_(state)?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Washington_(state)"
+    }
+  },
+  "extract": "Washington is a state in the Pacific Northwest region of the United States. It is often referred to as Washington state to distinguish it from the national capital; both are named after George Washington, a U.S. Founding Father and the first U.S. president. Washington borders the Pacific Ocean to the west, Oregon to the south, and Idaho to the east; it shares an international border with the Canadian province of British Columbia to the north. Olympia is the state capital, and the state's most populous city is Seattle.",
+  "extract_html": "<p><b>Washington</b> is a state in the Pacific Northwest region of the United States. It is often referred to as <b>Washington state</b> to distinguish it from the national capital; both are named after George Washington, a U.S. Founding Father and the first U.S. president. Washington borders the Pacific Ocean to the west, Oregon to the south, and Idaho to the east; it shares an international border with the Canadian province of British Columbia to the north. Olympia is the state capital, and the state's most populous city is Seattle.</p>"
+}

@@ -1,0 +1,318 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "GlobalID",
+  "geometryProperties": {
+    "shapeAreaFieldName": "Shape__Area",
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriFeet"
+  },
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 2926,
+    "latestWkid": 2926
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute",
+      "type": "esriFieldTypeString",
+      "alias": "Statute",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Statute_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Statute_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Statute_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance",
+      "type": "esriFieldTypeString",
+      "alias": "Ordinance",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Ordinance_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ordinance_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Ordinance_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution",
+      "type": "esriFieldTypeString",
+      "alias": "Resolution",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Resolution_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Resolution_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Resolution_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Clerk_File",
+      "type": "esriFieldTypeString",
+      "alias": "Clerk_File",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Clerk_File_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Clerk_File_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Council_Bill",
+      "type": "esriFieldTypeString",
+      "alias": "Council_Bill",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Council_Bill_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Council_Bill_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Method",
+      "type": "esriFieldTypeString",
+      "alias": "Method",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Seattle_Archives_Link",
+      "type": "esriFieldTypeString",
+      "alias": "Seattle_Archives_Link",
+      "sqlType": "sqlTypeOther",
+      "length": 200,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Title",
+      "type": "esriFieldTypeString",
+      "alias": "Title",
+      "sqlType": "sqlTypeOther",
+      "length": 400,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Amendment",
+      "type": "esriFieldTypeString",
+      "alias": "Amendment",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ward",
+      "type": "esriFieldTypeString",
+      "alias": "Ward",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Effective_Date",
+      "type": "esriFieldTypeDate",
+      "alias": "Effective_Date",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Year",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Year",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Area",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "GlobalID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GlobalID",
+      "sqlType": "sqlTypeOther",
+      "length": 38,
+      "domain": null,
+      "defaultValue": "NEWID() WITH VALUES"
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1,
+        "Statute": "Statutes of the Territory of Washington 1869 ",
+        "Statute_Date": -3158179200000,
+        "Statute_Link": "http://leg.wa.gov/CodeReviser/documents/sessionlaw/1869pam1.pdf",
+        "Ordinance": null,
+        "Ordinance_Date": null,
+        "Ordinance_Link": null,
+        "Resolution": null,
+        "Resolution_Date": null,
+        "Resolution_Link": null,
+        "Clerk_File": null,
+        "Clerk_File_Link": null,
+        "Council_Bill": null,
+        "Council_Bill_Link": null,
+        "Method": null,
+        "Seattle_Archives_Link": null,
+        "Title": "Area of First Incorporation",
+        "Amendment": null,
+        "Ward": null,
+        "Effective_Date": -3158265600000,
+        "Year": 1869,
+        "Shape__Area": 284732701.2219696,
+        "Shape__Length": 88582.67702241306,
+        "GlobalID": "a82402a8-315b-4c40-bbf7-6626b815219c"
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 4,
+        "Statute": "Laws of the Territory of Washington 1885-6",
+        "Statute_Date": -2647728000000,
+        "Statute_Link": "http://leg.wa.gov/CodeReviser/documents/sessionlaw/1885pam1.pdf",
+        "Ordinance": null,
+        "Ordinance_Date": null,
+        "Ordinance_Link": null,
+        "Resolution": null,
+        "Resolution_Date": null,
+        "Resolution_Link": null,
+        "Clerk_File": null,
+        "Clerk_File_Link": null,
+        "Council_Bill": null,
+        "Council_Bill_Link": null,
+        "Method": null,
+        "Seattle_Archives_Link": null,
+        "Title": "Area after Charter Amendment of 1886",
+        "Amendment": "Amends Acts of 1869, 1875, 1877, 1879, 1883",
+        "Ward": null,
+        "Effective_Date": -2647728000000,
+        "Year": 1886,
+        "Shape__Area": 323344155.17671204,
+        "Shape__Length": 107232.70368421261,
+        "GlobalID": "015ce073-ad85-4952-a022-48df64de3a85"
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 40,
+        "Statute": "Laws of the Territory of Washington 1883",
+        "Statute_Date": -2716761600000,
+        "Statute_Link": "http://leg.wa.gov/CodeReviser/documents/sessionlaw/1883pam1.pdf",
+        "Ordinance": null,
+        "Ordinance_Date": null,
+        "Ordinance_Link": null,
+        "Resolution": null,
+        "Resolution_Date": null,
+        "Resolution_Link": null,
+        "Clerk_File": null,
+        "Clerk_File_Link": null,
+        "Council_Bill": null,
+        "Council_Bill_Link": null,
+        "Method": null,
+        "Seattle_Archives_Link": null,
+        "Title": "Area after Charter Amendment of 1883",
+        "Amendment": "Amends Acts of 1869, 1875, 1877, 1879",
+        "Ward": null,
+        "Effective_Date": -2716761600000,
+        "Year": 1883,
+        "Shape__Area": 323208562.7510834,
+        "Shape__Length": 107520.37057838247,
+        "GlobalID": "7304d7f7-7b65-42dd-8130-a6a7c6a2fe1e"
+      }
+    }
+  ]
+}

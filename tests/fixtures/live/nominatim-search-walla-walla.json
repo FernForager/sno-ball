@@ -1,0 +1,36 @@
+[
+  {
+    "place_id": 415083775,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 6186809,
+    "lat": "46.0668480",
+    "lon": "-118.3392710",
+    "category": "place",
+    "type": "house",
+    "place_rank": 30,
+    "importance": 9.99999999995449e-06,
+    "addresstype": "place",
+    "name": "",
+    "display_name": "1, East Main Street, Walla Walla, Walla Walla County, Washington, 99362, United States",
+    "address": {
+      "house_number": "1",
+      "road": "East Main Street",
+      "city": "Walla Walla",
+      "county": "Walla Walla County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "99362",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": null,
+    "namedetails": null,
+    "boundingbox": [
+      "46.0667980",
+      "46.0668980",
+      "-118.3393210",
+      "-118.3392210"
+    ]
+  }
+]

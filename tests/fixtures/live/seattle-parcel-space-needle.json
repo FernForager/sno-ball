@@ -1,0 +1,100 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 2926,
+    "latestWkid": 2926
+  },
+  "fields": [
+    {
+      "name": "PIN",
+      "type": "esriFieldTypeString",
+      "alias": "Parcel Identification Number (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 10,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "ADDRESS",
+      "type": "esriFieldTypeString",
+      "alias": "Site Address (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 60,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "PROP_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Property Name (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 80,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "YR_BUILT_MAX",
+      "type": "esriFieldTypeString",
+      "alias": "Year Built of Largest Building (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 4,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "YR_RENOV_MAX",
+      "type": "esriFieldTypeString",
+      "alias": "Year Renovated of Largest Building (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 4,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "NR_BLDGS",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Number of Buildings (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "LANDMARK",
+      "type": "esriFieldTypeString",
+      "alias": "Landmark (Y)",
+      "sqlType": "sqlTypeOther",
+      "length": 1,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "BLDG_DESC",
+      "type": "esriFieldTypeString",
+      "alias": "Building Description (per KCA)",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "PIN": "1985200495",
+        "ADDRESS": "400   BROAD ST",
+        "PROP_NAME": "SPACE NEEDLE",
+        "YR_BUILT_MAX": "1961",
+        "YR_RENOV_MAX": "2013",
+        "NR_BLDGS": 1,
+        "LANDMARK": "Y",
+        "BLDG_DESC": "SPACE NEEDLE"
+      }
+    }
+  ]
+}
