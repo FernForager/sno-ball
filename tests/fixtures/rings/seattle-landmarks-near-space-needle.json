@@ -1,0 +1,682 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "NAME",
+      "type": "esriFieldTypeString",
+      "alias": "NAME",
+      "sqlType": "sqlTypeOther",
+      "length": 60,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "ADDRESS",
+      "type": "esriFieldTypeString",
+      "alias": "ADDRESS",
+      "sqlType": "sqlTypeOther",
+      "length": 35,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "ORIG_ADDRE",
+      "type": "esriFieldTypeString",
+      "alias": "ORIG_ADDRE",
+      "sqlType": "sqlTypeOther",
+      "length": 60,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "PIN",
+      "type": "esriFieldTypeString",
+      "alias": "PIN",
+      "sqlType": "sqlTypeOther",
+      "length": 10,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "LANDNO",
+      "type": "esriFieldTypeDouble",
+      "alias": "LANDNO",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "ORDINANCE",
+      "type": "esriFieldTypeInteger",
+      "alias": "ORDINANCE",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "EFF_DATE",
+      "type": "esriFieldTypeDate",
+      "alias": "EFF_DATE",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "SE_ANNO_CAD_DATA",
+      "type": "esriFieldTypeBlob",
+      "alias": "SE_ANNO_CAD_DATA",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "PHOTO",
+      "type": "esriFieldTypeString",
+      "alias": "PHOTO",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "DOCUMENT",
+      "type": "esriFieldTypeString",
+      "alias": "DOCUMENT",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 318709,
+        "NAME": "Century 21 Coliseum / Key Arena",
+        "ADDRESS": "305 Harrison St",
+        "ORIG_ADDRE": "305 Harrison St",
+        "PIN": "1985200003",
+        "LANDNO": 470,
+        "ORDINANCE": 125642,
+        "EFF_DATE": 1501718400000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "ArenaSeattleCenter.jpg ",
+        "DOCUMENT": "DesRptKey_Arena.pdf"
+      },
+      "geometry": {
+        "x": -122.35398171600714,
+        "y": 47.622079264280785
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 319032,
+        "NAME": "Memorial Wall",
+        "ADDRESS": "401 5th Avenue N",
+        "ORIG_ADDRE": null,
+        "PIN": null,
+        "LANDNO": 809,
+        "ORDINANCE": null,
+        "EFF_DATE": 1696348800000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "MemorialWall.jpg",
+        "DOCUMENT": "DesRpt_MemorialWall.pdf"
+      },
+      "geometry": {
+        "x": -122.34882541072297,
+        "y": 47.62276623865091
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318809,
+        "NAME": "Fire Station #2",
+        "ADDRESS": "2318 4th Ave",
+        "ORIG_ADDRE": "2318 4th Ave",
+        "PIN": "0696000160",
+        "LANDNO": 87,
+        "ORDINANCE": 113089,
+        "EFF_DATE": 528336000000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "Firestation2bDON.jpg",
+        "DOCUMENT": "fire-station-2-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34445613017901,
+        "y": 47.61603493166834
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318654,
+        "NAME": "Seattle-First National Bank",
+        "ADDRESS": "566 Denny Way",
+        "ORIG_ADDRE": "566 Denny Way",
+        "PIN": "1991200580",
+        "LANDNO": 301,
+        "ORDINANCE": 126749,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "bofa.jpg",
+        "DOCUMENT": "DesRptSeafirst_Natl_Bank_Denny.pdf"
+      },
+      "geometry": {
+        "x": -122.34549830821389,
+        "y": 47.61883602758448
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318614,
+        "NAME": "Seattle Monorail",
+        "ADDRESS": " ",
+        "ORIG_ADDRE": " ",
+        "PIN": "1991200235",
+        "LANDNO": 258,
+        "ORDINANCE": 121240,
+        "EFF_DATE": 1059955200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "monorail.jpg",
+        "DOCUMENT": "seattle-monorail-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34739622368208,
+        "y": 47.61871799284025
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318783,
+        "NAME": "Ainsworth & Dunn Warehouse",
+        "ADDRESS": "2815 Elliott Ave",
+        "ORIG_ADDRE": " ",
+        "PIN": "7666202305",
+        "LANDNO": 406,
+        "ORDINANCE": 125853,
+        "EFF_DATE": 1408464000000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "Ainsworth_Dunn.jpg",
+        "DOCUMENT": "ainsworth-dunn-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35385141419663,
+        "y": 47.61523269506723
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318778,
+        "NAME": "777 Thomas St",
+        "ADDRESS": "777 Thomas St",
+        "ORIG_ADDRE": " ",
+        "PIN": "1991201080",
+        "LANDNO": 401,
+        "ORDINANCE": 124501,
+        "EFF_DATE": -2209161600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "ArtDecoBuilding.png",
+        "DOCUMENT": "777-thomas-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34137970601739,
+        "y": 47.62068644694642
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318615,
+        "NAME": "Seattle Monorail",
+        "ADDRESS": " ",
+        "ORIG_ADDRE": " ",
+        "PIN": " ",
+        "LANDNO": 259,
+        "ORDINANCE": 121240,
+        "EFF_DATE": 1059955200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "monorail.jpg",
+        "DOCUMENT": "seattle-monorail-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34551492483267,
+        "y": 47.61749513049221
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318715,
+        "NAME": "Broad St Substation",
+        "ADDRESS": "319 6th Ave N",
+        "ORIG_ADDRE": "319 6th Ave N",
+        "PIN": "1991200405",
+        "LANDNO": 481,
+        "ORDINANCE": 125783,
+        "EFF_DATE": 1509465600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "BroadStreetSub.jpg ",
+        "DOCUMENT": "DesRptBroadStreetSubstation.pdf"
+      },
+      "geometry": {
+        "x": -122.34575847834246,
+        "y": 47.62180911754253
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318695,
+        "NAME": "Kobe Bell",
+        "ADDRESS": "210 Republican St",
+        "ORIG_ADDRE": "305 Harrison Street",
+        "PIN": "1988200440",
+        "LANDNO": 446,
+        "ORDINANCE": 123297,
+        "EFF_DATE": 1276300800000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "kobe.jpg ",
+        "DOCUMENT": "DesRptKobeBell.pdf"
+      },
+      "geometry": {
+        "x": -122.35224431167951,
+        "y": 47.62348356373032
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318752,
+        "NAME": "Seattle Post Intelligencer Globe",
+        "ADDRESS": "101 Elliott Ave W",
+        "ORIG_ADDRE": " ",
+        "PIN": "7666202220",
+        "LANDNO": 368,
+        "ORDINANCE": 124964,
+        "EFF_DATE": -2209161600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "seattle_PI_globe.jpg",
+        "DOCUMENT": "pi-globe-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35951098403788,
+        "y": 47.6189358907791
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318735,
+        "NAME": "Pacific Science Center",
+        "ADDRESS": "202 2nd Ave N",
+        "ORIG_ADDRE": "202 2nd Ave N",
+        "PIN": "1985200140",
+        "LANDNO": 347,
+        "ORDINANCE": 124932,
+        "EFF_DATE": 1275321600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "PacificScienceCenter.bmp",
+        "DOCUMENT": "pacific-science-center-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35110681248094,
+        "y": 47.61974059556401
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318612,
+        "NAME": "Seattle Monorail",
+        "ADDRESS": " ",
+        "ORIG_ADDRE": " ",
+        "PIN": "1985200550",
+        "LANDNO": 256,
+        "ORDINANCE": 121240,
+        "EFF_DATE": 1059955200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "monorail.jpg",
+        "DOCUMENT": "seattle-monorail-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34969722424917,
+        "y": 47.62124047890483
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 319047,
+        "NAME": "Fifth Avenue Court ",
+        "ADDRESS": "2132 Fifth Avenue",
+        "ORIG_ADDRE": null,
+        "PIN": null,
+        "LANDNO": 891,
+        "ORDINANCE": null,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "FifthAvenueCourt.jpg",
+        "DOCUMENT": "DesRpt_5thAveCt.pdf"
+      },
+      "geometry": {
+        "x": -122.34135763023227,
+        "y": 47.61536154358895
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318613,
+        "NAME": "Seattle Monorail",
+        "ADDRESS": " ",
+        "ORIG_ADDRE": " ",
+        "PIN": "1991200005",
+        "LANDNO": 257,
+        "ORDINANCE": 121240,
+        "EFF_DATE": 1059955200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "monorail.jpg",
+        "DOCUMENT": "seattle-monorail-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34799514949921,
+        "y": 47.62107668646515
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 319039,
+        "NAME": "Seattle Center Playhouse",
+        "ADDRESS": "201 Mercer Street",
+        "ORIG_ADDRE": null,
+        "PIN": null,
+        "LANDNO": 859,
+        "ORDINANCE": null,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "SeattleCenterPlayhouse.jpg",
+        "DOCUMENT": "DesRpt_Seattle_Center_Playhouse_Exhibition_Hall.pdf"
+      },
+      "geometry": {
+        "x": -122.35240946100471,
+        "y": 47.62403669553646
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318676,
+        "NAME": "Seattle Labor Temple",
+        "ADDRESS": "2800 First Ave",
+        "ORIG_ADDRE": "2800 First Ave",
+        "PIN": "0654000005",
+        "LANDNO": 324,
+        "ORDINANCE": 123345,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "SeattleLaborTemple.bmp",
+        "DOCUMENT": "seattle-labor-temple-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35176866210747,
+        "y": 47.61683648740689
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318856,
+        "NAME": "Space Needle",
+        "ADDRESS": "219 Fourth Av",
+        "ORIG_ADDRE": "219 4th Av",
+        "PIN": "1985200495",
+        "LANDNO": 211,
+        "ORDINANCE": 119428,
+        "EFF_DATE": 888940800000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "SpaceNeedle10DON.jpg",
+        "DOCUMENT": "space-needle-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.3492880353679,
+        "y": 47.620507340997584
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318650,
+        "NAME": "Windham Apartments",
+        "ADDRESS": "420 Blanchard St",
+        "ORIG_ADDRE": "420 Blanchard St",
+        "PIN": "0696000135",
+        "LANDNO": 297,
+        "ORDINANCE": 122595,
+        "EFF_DATE": 1200096000000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "windham_apts.jpg",
+        "DOCUMENT": "windham-apartments-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34223565792621,
+        "y": 47.61513498204586
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318710,
+        "NAME": "Bressi Garage",
+        "ADDRESS": "226 First Ave N",
+        "ORIG_ADDRE": "226-232 First Ave N",
+        "PIN": "1989201515",
+        "LANDNO": 474,
+        "ORDINANCE": 125643,
+        "EFF_DATE": 1501718400000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "Bressi_Garage.jpg",
+        "DOCUMENT": "DesRptBressi_Garage.pdf"
+      },
+      "geometry": {
+        "x": -122.35517027948269,
+        "y": 47.62077114665642
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318696,
+        "NAME": "Seattle Center House-Armory",
+        "ADDRESS": "305 Harrison Street",
+        "ORIG_ADDRE": "305 Harrison Street",
+        "PIN": "1985200305",
+        "LANDNO": 447,
+        "ORDINANCE": 123298,
+        "EFF_DATE": 1276300800000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "Sea_ctr_house.jpg",
+        "DOCUMENT": "seattle-center-house-seattle-armory-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35102956831341,
+        "y": 47.62129368853695
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 319051,
+        "NAME": "Elephant Car Wash Sign",
+        "ADDRESS": "2200 7th Avenue",
+        "ORIG_ADDRE": null,
+        "PIN": null,
+        "LANDNO": 929,
+        "ORDINANCE": 126973,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "ElephantCarWashSign.jpg",
+        "DOCUMENT": "DesRpt_ElephantCarWashSign.pdf"
+      },
+      "geometry": {
+        "x": -122.34003593182591,
+        "y": 47.61678069033675
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 319031,
+        "NAME": "Seattle Center Exhibition Hall",
+        "ADDRESS": "301 Mercer Street",
+        "ORIG_ADDRE": null,
+        "PIN": null,
+        "LANDNO": 799,
+        "ORDINANCE": null,
+        "EFF_DATE": 1696348800000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "SeattleCenterExhibitionHall.jpg",
+        "DOCUMENT": "DesRpt_Seattle_Center_Playhouse_Exhibition_Hall.pdf"
+      },
+      "geometry": {
+        "x": -122.35163179192166,
+        "y": 47.624070654343654
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318774,
+        "NAME": "Northwest Rooms and Int'l Fountain Pavilion",
+        "ADDRESS": "305 Harrison St",
+        "ORIG_ADDRE": " ",
+        "PIN": "1985200003",
+        "LANDNO": 393,
+        "ORDINANCE": 124584,
+        "EFF_DATE": 1375833600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "SeaCtrNWRooms.jpg",
+        "DOCUMENT": "DesRptNorthwestRooms.pdf"
+      },
+      "geometry": {
+        "x": -122.35400760539295,
+        "y": 47.623093305514075
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318974,
+        "NAME": "Franklin Apartments",
+        "ADDRESS": "2302 4th Ave",
+        "ORIG_ADDRE": "2302 4th Ave",
+        "PIN": "0696000140",
+        "LANDNO": 452,
+        "ORDINANCE": null,
+        "EFF_DATE": -2209161600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "Franklin_Apts.png ",
+        "DOCUMENT": "DesRptFranklin Apartments.pdf"
+      },
+      "geometry": {
+        "x": -122.34385741024538,
+        "y": 47.61565171828817
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318891,
+        "NAME": "Seattle, Chief of Suquamish Statue, Tillicum Place",
+        "ADDRESS": "5th Ave / Denny Way",
+        "ORIG_ADDRE": "at intersection of 5th Ave, Denny Way, and Cedar St",
+        "PIN": " ",
+        "LANDNO": 79,
+        "ORDINANCE": 112273,
+        "EFF_DATE": 484185600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "ChiefSeattle4DON.jpg",
+        "DOCUMENT": "chief-statue-tillicum-place-designation-nomination.pdf"
+      },
+      "geometry": {
+        "x": -122.34743359058353,
+        "y": 47.61839942140587
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318940,
+        "NAME": "Street Clock:  West Earth Co.",
+        "ADDRESS": "406 Dexter Ave N",
+        "ORIG_ADDRE": "406 Dexter Ave N",
+        "PIN": "1988201380",
+        "LANDNO": 71,
+        "ORDINANCE": null,
+        "EFF_DATE": null,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "WestearthClockDON.jpg",
+        "DOCUMENT": "street-clock-designation-nomination.pdf"
+      },
+      "geometry": {
+        "x": -122.34208072902425,
+        "y": 47.622397078750666
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318616,
+        "NAME": "Seattle Monorail",
+        "ADDRESS": " ",
+        "ORIG_ADDRE": " ",
+        "PIN": " ",
+        "LANDNO": 260,
+        "ORDINANCE": 121240,
+        "EFF_DATE": 1059955200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "monorail.jpg",
+        "DOCUMENT": "seattle-monorail-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.34303235307645,
+        "y": 47.6160220386182
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318951,
+        "NAME": "New Pacific Apartment Building",
+        "ADDRESS": "2602 1st Ave",
+        "ORIG_ADDRE": "2600-04 1st Ave",
+        "PIN": "0654000085",
+        "LANDNO": 88,
+        "ORDINANCE": 108517,
+        "EFF_DATE": 301017600000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "NewPacificApts4DON.jpg",
+        "DOCUMENT": "new-pacific-apartment-designation-data-sheet.pdf"
+      },
+      "geometry": {
+        "x": -122.34960798971854,
+        "y": 47.61558719118902
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 318794,
+        "NAME": "Horiuchi Mural",
+        "ADDRESS": "335 Thomas St",
+        "ORIG_ADDRE": "305 Harrison St",
+        "PIN": "1985200003",
+        "LANDNO": 421,
+        "ORDINANCE": 123292,
+        "EFF_DATE": 1095091200000,
+        "SE_ANNO_CAD_DATA": "",
+        "PHOTO": "horiuchi_mural.jpg",
+        "DOCUMENT": "horiuchi-mural-designation.pdf"
+      },
+      "geometry": {
+        "x": -122.35077111554254,
+        "y": 47.620455043489656
+      }
+    }
+  ]
+}

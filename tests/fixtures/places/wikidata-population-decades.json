@@ -1,0 +1,28 @@
+{
+  "head": { "vars": ["pop", "time"] },
+  "results": {
+    "bindings": [
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "1107" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1870-06-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "3533" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1880-06-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "42837" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1890-06-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "80671" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1900-06-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "150000" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1905-01-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "237194" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1910-04-15T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "315312" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1920-01-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "365583" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1930-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "368302" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1940-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "467591" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1950-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "557087" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1960-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "530831" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1970-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "493846" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1980-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "516259" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "1990-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "563374" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2000-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "608660" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2010-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "744955" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2018-07-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "737015" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2020-04-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "755078" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2023-07-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "not a number" }, "time": { "datatype": "http://www.w3.org/2001/XMLSchema#dateTime", "type": "literal", "value": "2024-07-01T00:00:00Z" } },
+      { "pop": { "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "literal", "value": "999" } }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "disambiguation",
+  "title": "Washington",
+  "displaytitle": "<span class=\"mw-page-title-main\">Washington</span>",
+  "namespace": { "id": 0, "text": "" },
+  "wikibase_item": "Q223050",
+  "titles": { "canonical": "Washington", "normalized": "Washington", "display": "Washington" },
+  "pageid": 33142,
+  "lang": "en",
+  "dir": "ltr",
+  "description": "Topics referred to by the same term",
+  "description_source": "local",
+  "content_urls": {
+    "desktop": { "page": "https://en.wikipedia.org/wiki/Washington" },
+    "mobile": { "page": "https://en.m.wikipedia.org/wiki/Washington" }
+  },
+  "extract": "Washington most commonly refers to: George Washington, the first president of the United States; Washington (state), a state in the Pacific Northwest; Washington, D.C., the capital of the United States.",
+  "extract_html": "<p><b>Washington</b> most commonly refers to:</p>"
+}

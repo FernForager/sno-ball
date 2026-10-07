@@ -1,0 +1,27 @@
+{
+  "batchcomplete": "",
+  "query": {
+    "normalized": [
+      {
+        "from": "Seattle,_Washington",
+        "to": "Seattle, Washington"
+      }
+    ],
+    "redirects": [
+      {
+        "from": "Seattle, Washington",
+        "to": "Seattle"
+      }
+    ],
+    "pages": {
+      "11388": {
+        "pageid": 11388,
+        "ns": 0,
+        "title": "Seattle",
+        "pageprops": {
+          "wikibase_item": "Q5083"
+        }
+      }
+    }
+  }
+}

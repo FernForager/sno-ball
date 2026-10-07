@@ -1,0 +1,34 @@
+{
+  "place_id": 110412392,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 3359850618,
+  "lat": "47.6204873",
+  "lon": "-122.3493041",
+  "category": "amenity",
+  "type": "restaurant",
+  "place_rank": 30,
+  "importance": 0.00001,
+  "addresstype": "amenity",
+  "name": "The Loupe Lounge",
+  "display_name": "The Loupe Lounge, 400, Broad Street, Belltown, Uptown, Seattle, King County, Washington, 98109, United States",
+  "address": {
+    "amenity": "The Loupe Lounge",
+    "house_number": "400",
+    "road": "Broad Street",
+    "neighbourhood": "Belltown",
+    "suburb": "Uptown",
+    "city": "Seattle",
+    "county": "King County",
+    "state": "Washington",
+    "ISO3166-2-lvl4": "US-WA",
+    "postcode": "98109",
+    "country": "United States",
+    "country_code": "us"
+  },
+  "extratags": {},
+  "namedetails": {
+    "name": "The Loupe Lounge"
+  },
+  "boundingbox": ["47.6204373", "47.6205373", "-122.3493541", "-122.3492541"]
+}

@@ -1,0 +1,56 @@
+{
+  "20": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        -109.2309,
+        49.8907
+      ]
+    ]
+  },
+  "50": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        -92.0497,
+        54.6553
+      ]
+    ]
+  },
+  "100": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        -72.5869,
+        55.0114
+      ]
+    ]
+  },
+  "200": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        -45.9595,
+        24.3733
+      ]
+    ]
+  },
+  "300": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        -36.0706,
+        21.429
+      ]
+    ]
+  },
+  "500": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        999.99,
+        999.99
+      ]
+    ]
+  }
+}

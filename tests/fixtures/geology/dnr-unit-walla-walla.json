@@ -1,0 +1,114 @@
+{
+  "displayFieldName": "MAP_UNIT_100K_LABEL",
+  "fieldAliases": {
+    "OBJECTID": "OBJECTID",
+    "SHAPE.LEN": "SHAPE.LEN",
+    "SHAPE.AREA": "SHAPE.AREA",
+    "MAP_UNIT_100K": "Map Unit",
+    "MAP_UNIT_100K_ID_CONFIDENCE": "Identity Confidence",
+    "MAP_UNIT_100K_LABEL": "Label",
+    "MAP_UNIT_100K_SYMBOL": "Symbol",
+    "MAP_UNIT_100K_NOTES": "Notes",
+    "MAP_UNIT_ORIGINAL": "Original Unit",
+    "MAP_UNIT_100K_ID": "Map Unit ID",
+    "MAP_UNIT_100K_QUAD_NAME": "Quad Name",
+    "MAP_UNIT_100K_QUAD_UNIT": "Quad and Unit",
+    "GLOBALID": "GLOBALID"
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "SHAPE.LEN",
+      "type": "esriFieldTypeDouble",
+      "alias": "SHAPE.LEN"
+    },
+    {
+      "name": "SHAPE.AREA",
+      "type": "esriFieldTypeDouble",
+      "alias": "SHAPE.AREA"
+    },
+    {
+      "name": "MAP_UNIT_100K",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit",
+      "length": 20
+    },
+    {
+      "name": "MAP_UNIT_100K_ID_CONFIDENCE",
+      "type": "esriFieldTypeString",
+      "alias": "Identity Confidence",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_LABEL",
+      "type": "esriFieldTypeString",
+      "alias": "Label",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_SYMBOL",
+      "type": "esriFieldTypeString",
+      "alias": "Symbol",
+      "length": 255
+    },
+    {
+      "name": "MAP_UNIT_100K_NOTES",
+      "type": "esriFieldTypeString",
+      "alias": "Notes",
+      "length": 255
+    },
+    {
+      "name": "MAP_UNIT_ORIGINAL",
+      "type": "esriFieldTypeString",
+      "alias": "Original Unit",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_ID",
+      "type": "esriFieldTypeString",
+      "alias": "Map Unit ID",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_QUAD_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Quad Name",
+      "length": 50
+    },
+    {
+      "name": "MAP_UNIT_100K_QUAD_UNIT",
+      "type": "esriFieldTypeString",
+      "alias": "Quad and Unit",
+      "length": 255
+    },
+    {
+      "name": "GLOBALID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GLOBALID",
+      "length": 38
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 31090,
+        "SHAPE.LEN": 4760435.24849287,
+        "SHAPE.AREA": 3582310308.2542,
+        "MAP_UNIT_100K": "Qa",
+        "MAP_UNIT_100K_ID_CONFIDENCE": "certain",
+        "MAP_UNIT_100K_LABEL": "Qa",
+        "MAP_UNIT_100K_SYMBOL": "Quaternary alluvium",
+        "MAP_UNIT_100K_NOTES": null,
+        "MAP_UNIT_ORIGINAL": null,
+        "MAP_UNIT_100K_ID": "MUP_31177",
+        "MAP_UNIT_100K_QUAD_NAME": "Compiled",
+        "MAP_UNIT_100K_QUAD_UNIT": "Compiled | Qa",
+        "GLOBALID": "{98C326CA-FE52-4CB4-BFD6-076E42C0EF7B}"
+      }
+    }
+  ]
+}

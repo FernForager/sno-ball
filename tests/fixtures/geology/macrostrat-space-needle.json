@@ -1,0 +1,91 @@
+{
+  "success": {
+    "v": 2,
+    "license": "CC-BY 4.0",
+    "data": [
+      {
+        "map_id": 2973758,
+        "source_id": 133,
+        "name": "Younger glacial drift",
+        "strat_name": "Vashon Drift; Sumas Drift",
+        "lith": "Major:{fine alluvium,coarse alluvium}",
+        "descrip": "Till.  Hard, blue-gray to gray concrete-like mixture of clay, silt, sand, and gravel deposited as end or recessional moraine.  Principally Wisconsin in age.",
+        "comments": "Vashon drift (moraine and till members); Sumas Drift (in part); Possibly some outwash from the Fraser Glaciation (which encompassed the Vashon and Sumas Stades) occurs in this unit; most of it, however, is mapped within WAQg1o. Original map source: Raines, Gary L., and Johnson, Bruce R., 1996, Digital representation of the Washington state geologic map; a contribution to the Interior Columbia River basin ecosystem management project, U.S. Geological Survey Open-file report 95-0684, 20 p., plus digi. Primary reference: Jones, M.A., 1999, Geologic Framework for the Puget Sound Aquifer System, Washington and British Columbia: U. S. Geological Survey Professional Paper 1424-C, 31 p., 18 pls.",
+        "macro_units": [
+          33448
+        ],
+        "strat_names": [
+          78457
+        ],
+        "liths": [
+          154
+        ],
+        "t_int_id": 4,
+        "t_int_age": 0.0117,
+        "t_int_name": "Pleistocene",
+        "b_int_id": 4,
+        "b_int_age": 2.58,
+        "b_int_name": "Pleistocene",
+        "color": "#F9F97F",
+        "t_age": 0.0088,
+        "b_age": 0.6558,
+        "best_int_name": "Quaternary"
+      },
+      {
+        "map_id": 966206,
+        "source_id": 7,
+        "name": "Quaternary sedimentary",
+        "strat_name": "",
+        "lith": "sedimentary",
+        "descrip": "",
+        "comments": "",
+        "macro_units": [],
+        "strat_names": [],
+        "liths": [
+          111
+        ],
+        "t_int_id": 421,
+        "t_int_age": 0,
+        "t_int_name": "Quaternary",
+        "b_int_id": 421,
+        "b_int_age": 2.58,
+        "b_int_name": "Quaternary",
+        "color": "#F9F97F",
+        "t_age": 0,
+        "b_age": 2.588,
+        "best_int_name": "Cenozoic"
+      },
+      {
+        "map_id": 1433322,
+        "source_id": 19,
+        "name": "mostly Vashon Stade in western WA; unnamed in eastern WA",
+        "strat_name": "",
+        "lith": "continental glacial (sand, gravel) till, Fraser-age",
+        "descrip": "",
+        "comments": "",
+        "macro_units": [],
+        "strat_names": [],
+        "liths": [
+          2,
+          3,
+          97
+        ],
+        "t_int_id": 4,
+        "t_int_age": 0.0117,
+        "t_int_name": "Pleistocene",
+        "b_int_id": 4,
+        "b_int_age": 2.58,
+        "b_int_name": "Pleistocene",
+        "color": "#FFF2AE",
+        "t_age": 0.0117,
+        "b_age": 2.588,
+        "best_int_name": "Cenozoic"
+      }
+    ],
+    "refs": {
+      "7": "Garrity, C.P., and Soller, D.R.,. Database of the Geologic Map of North America: adapted from the map by J.C. Reed, Jr. and others (2005). U.S. Geological Survey Data Series 424 . ",
+      "19": "Washington State Department of Natural Resources, Division of Geology and Earth Resources. Washington Interactive Geologic Map: 1:100,000 scale. Washington Division of Geology and Earth Resources. ",
+      "133": "Horton, J.D., C.A. San Juan, and D.B. Stoeser. The State Geologic Map Compilation (SGMC) geodatabase of the conterminous United States. doi: 10.3133/ds1052. U.S. Geological Survey Data Series 1052. "
+    }
+  }
+}

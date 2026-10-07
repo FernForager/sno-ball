@@ -1,0 +1,31 @@
+[
+  {
+    "qid": "Q108738",
+    "name": "Thurston County",
+    "inception": "1852-01-01",
+    "seat": "Olympia",
+    "areaKm2": null,
+    "population": 294793,
+    "populationYear": 2020,
+    "lat": null,
+    "lon": null,
+    "wikipedia": "Thurston County, Washington",
+    "fips": "53067",
+    "namedAfter": []
+  },
+  {
+    "qid": "Q999999",
+    "name": "Nowhere County"
+  },
+  {
+    "qid": "Q485301",
+    "name": "Q485301",
+    "seat": "Newport",
+    "wikipedia": "Pend Oreille County, Washington"
+  },
+  {
+    "name": "Row without a qid",
+    "inception": "1900-01-01"
+  },
+  "not an object"
+]

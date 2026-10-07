@@ -1,0 +1,40 @@
+[
+  {
+    "place_id": 95372617,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 12903132,
+    "lat": "47.6205063",
+    "lon": "-122.3492774",
+    "category": "tourism",
+    "type": "attraction",
+    "place_rank": 30,
+    "importance": 0.6234,
+    "addresstype": "tourism",
+    "name": "Space Needle",
+    "display_name": "Space Needle, 400, Broad Street, Belltown, Uptown, Seattle, King County, Washington, 98109, United States",
+    "address": {
+      "tourism": "Space Needle",
+      "house_number": "400",
+      "road": "Broad Street",
+      "neighbourhood": "Belltown",
+      "suburb": "Uptown",
+      "city": "Seattle",
+      "county": "King County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "98109",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {
+      "height": "184",
+      "wikidata": "Q1361",
+      "wikipedia": "en:Space Needle"
+    },
+    "namedetails": {
+      "name": "Space Needle"
+    },
+    "boundingbox": ["47.6203177", "47.6206949", "-122.3495515", "-122.3490033"]
+  }
+]

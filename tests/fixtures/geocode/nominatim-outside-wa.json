@@ -1,0 +1,74 @@
+[
+  {
+    "place_id": 282817384,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 186579,
+    "lat": "45.5202471",
+    "lon": "-122.6741949",
+    "category": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.7531,
+    "addresstype": "city",
+    "name": "Portland",
+    "display_name": "Portland, Multnomah County, Oregon, United States",
+    "address": {
+      "city": "Portland",
+      "county": "Multnomah County",
+      "state": "Oregon",
+      "ISO3166-2-lvl4": "US-OR",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "boundingbox": ["45.4325212", "45.6529333", "-122.8367489", "-122.4718871"]
+  },
+  {
+    "place_id": 281345112,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 2277336,
+    "lat": "47.7179902",
+    "lon": "-116.9515896",
+    "category": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.4912,
+    "addresstype": "city",
+    "name": "Post Falls",
+    "display_name": "Post Falls, Kootenai County, Idaho, United States",
+    "address": {
+      "city": "Post Falls",
+      "county": "Kootenai County",
+      "state": "Idaho",
+      "ISO3166-2-lvl4": "US-ID",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "boundingbox": ["47.6788541", "47.7592263", "-117.0414218", "-116.8972751"]
+  },
+  {
+    "place_id": 258321999,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 1852574,
+    "lat": "49.2608724",
+    "lon": "-123.1139529",
+    "category": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.7802,
+    "addresstype": "city",
+    "name": "Vancouver",
+    "display_name": "Vancouver, Metro Vancouver Regional District, British Columbia, Canada",
+    "address": {
+      "city": "Vancouver",
+      "county": "Metro Vancouver Regional District",
+      "state": "British Columbia",
+      "ISO3166-2-lvl4": "CA-BC",
+      "country": "Canada",
+      "country_code": "ca"
+    },
+    "boundingbox": ["49.1984203", "49.3160419", "-123.2249611", "-123.0232419"]
+  }
+]

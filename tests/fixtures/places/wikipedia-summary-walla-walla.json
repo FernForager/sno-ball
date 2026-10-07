@@ -1,0 +1,53 @@
+{
+  "type": "standard",
+  "title": "Walla Walla, Washington",
+  "displaytitle": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Walla Walla, Washington</span></span>",
+  "namespace": {
+    "id": 0,
+    "text": ""
+  },
+  "wikibase_item": "Q222338",
+  "titles": {
+    "canonical": "Walla_Walla,_Washington",
+    "normalized": "Walla Walla, Washington",
+    "display": "<span lang=\"en\" dir=\"ltr\"><span class=\"mw-page-title-main\">Walla Walla, Washington</span></span>"
+  },
+  "pageid": 138300,
+  "thumbnail": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Second_and_Main_in_Walla_Walla.jpg/330px-Second_and_Main_in_Walla_Walla.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "width": 330,
+    "height": 172
+  },
+  "originalimage": {
+    "source": "https://upload.wikimedia.org/wikipedia/commons/a/af/Second_and_Main_in_Walla_Walla.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "width": 2518,
+    "height": 1315
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "revision": "1375488504",
+  "tid": "fcf1a3ed-b308-11f1-ab4e-f36e9e1c4c1e",
+  "timestamp": "2026-09-18T02:31:01Z",
+  "description": "City in Washington, United States",
+  "description_source": "local",
+  "coordinates": {
+    "lat": 46.07916667,
+    "lon": -118.31361111
+  },
+  "content_urls": {
+    "desktop": {
+      "page": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington",
+      "revisions": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington?action=history",
+      "edit": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Walla_Walla%2C_Washington"
+    },
+    "mobile": {
+      "page": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington",
+      "revisions": "https://en.wikipedia.org/wiki/Special:History/Walla_Walla%2C_Washington",
+      "edit": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington?action=edit",
+      "talk": "https://en.wikipedia.org/wiki/Talk:Walla_Walla%2C_Washington"
+    }
+  },
+  "extract": "Walla Walla is a city in and the county seat of Walla Walla County, Washington, United States. It is one of the largest cities in Southeastern Washington with a population of 34,060 at the 2020 census, estimated to have decreased to 33,339 as of 2023. The combined population of the city and its two suburbs, the town of College Place and unincorporated Walla Walla East, is about 45,500. Walla Walla is located near the Palouse and Blue Mountains, approximately 6 miles (9.7 km) from the Oregon border to the south.",
+  "extract_html": "<p><b>Walla Walla</b> is a city in and the county seat of Walla Walla County, Washington, United States. It is one of the largest cities in Southeastern Washington with a population of 34,060 at the 2020 census, estimated to have decreased to 33,339 as of 2023. The combined population of the city and its two suburbs, the town of College Place and unincorporated Walla Walla East, is about 45,500. Walla Walla is located near the Palouse and Blue Mountains, approximately 6 miles (9.7 km) from the Oregon border to the south.</p>"
+}
