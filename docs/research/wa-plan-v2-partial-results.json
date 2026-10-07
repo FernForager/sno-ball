@@ -1,0 +1,1194 @@
+{
+ "research-parcels": {
+  "domain": "HOUSE-RING: year built (plus stories, square footage, plat/lot/block, renovation year) for a Washington address or parcel, with Seattle/King County depth and a realistic statewide path",
+  "sources": [
+   {
+    "name": "King County Assessor bulk extract: Residential Building (EXTR_ResBldg.csv)",
+    "url": "https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip",
+    "what_it_gives": "One row per residential building (1-3 living units): Major, Minor, BldgNbr, Address, Stories (decimal), BldgGrade (1-13), SqFt1stFloor/2ndFloor/UpperFloor, SqFtTotLiving, SqFtTotBasement, Bedrooms, bath counts, YrBuilt, YrRenovated (0 = none), Condition (1-5), NbrLivingUnits. PIN = Major(6)+Minor(4), zero-padded strings; values are space-padded and the file is latin1.",
+    "coverage": "All of King County incl. Seattle; 533,734 rows / 525,498 distinct PINs; YrBuilt spans 1894-2020s with a 1900 placeholder cluster (2,010 rows); nothing before 1894; current structures only (no demolished buildings)",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Public records of the King County Assessor. The DataDownload landing page requires acknowledging RCW 42.56.070(9) (no use of lists of individuals for commercial purposes); these three extracts contain no owner names. King County open-data terms grant a revocable license to use/redistribute and ask for the legend 'Data provided by permission of King County'. Cite 'King County Assessor'.",
+    "evidence_urls": [
+     "https://info.kingcounty.gov/assessor/DataDownload/default.aspx",
+     "https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip",
+     "https://www5.kingcounty.gov/sdc/?Layer=resbldg_extr",
+     "https://github.com/psrc/assessor-housing-estimates/blob/main/process_assessor_king.R",
+     "https://github.com/BraPil/Seattle_Real_Estate_Estimation_Pipeline/blob/main/scripts/download_kc_data.py",
+     "https://www.kingcounty.gov/About/dataTermsOfUse.aspx"
+    ],
+    "confidence": "high",
+    "example_request": "curl -L -o resbldg.zip 'https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip' && unzip -p resbldg.zip EXTR_ResBldg.csv | head -3",
+    "size_or_volume": "21.7 MB zip -> 154.6 MB CSV; Last-Modified 2026-10-01; refreshed ~weekly; accept-ranges: bytes",
+    "notes": "Probed live by the helper session (no ACAO header, so build-time only). Widely used on GitHub (psrc, kingCoData, Flatiron curricula) so the format is stable. Take min(YrBuilt) per PIN as 'oldest building' and keep max for 'newest'."
+   },
+   {
+    "name": "King County Assessor bulk extract: Commercial Building (EXTR_CommBldg.csv)",
+    "url": "https://aqua.kingcounty.gov/extranet/assessor/Commercial%20Building.zip",
+    "what_it_gives": "One row per commercial building: Major, Minor, BldgNbr, NbrBldgs, Address, NbrStories, PredominantUse, Shape, ConstrClass, BldgQuality, BldgDescr, BldgGrossSqFt, BldgNetSqFt, YrBuilt, EffYr, PcntComplete, Elevators, Sprinklers (plus CommBldgSection and CommBldgFeature tables).",
+    "coverage": "All of King County; 41,836 rows / 31,407 distinct PINs; YrBuilt from 1880s (2 rows) onward",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Same as the Residential Building extract (RCW 42.56.070(9) acknowledgment; no owner names; cite King County Assessor).",
+    "evidence_urls": [
+     "https://info.kingcounty.gov/assessor/DataDownload/default.aspx",
+     "https://www5.kingcounty.gov/sdc/?Layer=commbldg_extr"
+    ],
+    "confidence": "high",
+    "example_request": "curl -L -o commbldg.zip 'https://aqua.kingcounty.gov/extranet/assessor/Commercial%20Building.zip'",
+    "size_or_volume": "3.7 MB zip -> 11.8 MB CSV + 3.9 MB sections; Last-Modified 2026-10-03",
+    "notes": "Multiple buildings per PIN are common; store oldest/newest YrBuilt and building count."
+   },
+   {
+    "name": "King County Assessor bulk extract: Parcel (EXTR_Parcel.csv)",
+    "url": "https://aqua.kingcounty.gov/extranet/assessor/Parcel.zip",
+    "what_it_gives": "One row per parcel, 83 columns: Major, Minor, PropName, PlatName, PlatLot, PlatBlock, Range/Township/Section, PropType, DistrictName, CurrentZoning, PresentUse, SqFtLot, view and waterfront flags, HistoricSite, SeismicHazard, LandslideHazard. No coordinates (join to KCGIS polygons by PIN). PlatName is the only free proxy for 'who first subdivided this land' (e.g. DENNY'S A A 2ND ADD, BOREN'S ADD).",
+    "coverage": "All of King County; 628,594 rows (every parcel, built or vacant)",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Same as the other Assessor extracts.",
+    "evidence_urls": [
+     "https://info.kingcounty.gov/assessor/DataDownload/default.aspx",
+     "https://www5.kingcounty.gov/sdc/Metadata.aspx?Layer=parcel_extr",
+     "https://www5.kingcounty.gov/sdc/FGDCDocs/PARCEL_EXTR_faq.htm"
+    ],
+    "confidence": "high",
+    "example_request": "curl -L -o parcel.zip 'https://aqua.kingcounty.gov/extranet/assessor/Parcel.zip' (stream-parse the 247 MB CSV; do not load it whole)",
+    "size_or_volume": "31.9 MB zip -> 247.5 MB CSV; Last-Modified 2026-09-26",
+    "notes": "Minor 0000 = condominium complex; Minor 9xxx = unplatted land (Major then encodes section/township/range, e.g. 092503 = sec 9, T25N, R3E); Minor 0xxx = platted lot. Keep Major/Minor as strings. PIN values can be reused over time."
+   },
+   {
+    "name": "King County Assessor extracts: Apartment Complex and Condo Complex (EXTR_AptComplex.csv, EXTR_CondoComplex.csv)",
+    "url": "https://aqua.kingcounty.gov/extranet/assessor/Apartment%20Complex.zip",
+    "what_it_gives": "Building-level YrBuilt, NbrBldgs, NbrStories, NbrUnits, AvgUnitSize/BldgQuality for apartment complexes and condominium complexes, which the Residential (1-3 units) and Commercial extracts do not fully cover. Condo units (Minor != 0000) resolve to their complex via the Major.",
+    "coverage": "King County; ~9,170 apartment buildings (per a 2026 project that bundled them) plus condo complexes",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Same Assessor terms; Condo Complex and Units.zip also contains unit rows without owner names.",
+    "evidence_urls": [
+     "https://github.com/zz85/random-sketches/blob/master/vibes/estate-ar/fetch_data.js",
+     "https://github.com/psrc/assessor-housing-estimates/blob/main/process_assessor_king.R",
+     "https://github.com/PHSKC-APDE/kcparcelpop/blob/main/misc/historical.R"
+    ],
+    "confidence": "medium",
+    "example_request": "curl -L -O 'https://aqua.kingcounty.gov/extranet/assessor/Apartment%20Complex.zip'; curl -L -O 'https://aqua.kingcounty.gov/extranet/assessor/Condo%20Complex%20and%20Units.zip'",
+    "size_or_volume": "small (a few MB each); same weekly cadence",
+    "notes": "Column names (yrbuilt, nbrbldgs, nbrstories, nbrunits) come from PSRC and estate-ar code that reads these files, not from a live probe; verify headers in the build script and fail loudly if they drift."
+   },
+   {
+    "name": "KCGIS Property/KingCo_PropertyInfo MapServer layer 2 (Parcels) - runtime point-to-PIN",
+    "url": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2",
+    "what_it_gives": "Point-in-polygon lookup returning PIN, MAJOR, MINOR, ADDR, PROPTYPE, PREUSE, zoning, plat, appraised land/improvement values and the parcel polygon in WGS84; layer 3 has 3-year sales. No year built.",
+    "coverage": "All King County parcels (~636k); weekly refresh",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "KCGIS Center Terms and Conditions (no warranty; attribution to King County).",
+    "evidence_urls": [
+     "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2",
+     "https://www5.kingcounty.gov/sdc/addl_doc/KCGISCenterTermsAndConditions.pdf",
+     "https://github.com/zz85/random-sketches/blob/master/vibes/estate-ar/README.md"
+    ],
+    "confidence": "high",
+    "example_request": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2/query?geometry=-122.3493,47.6205&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PIN,MAJOR,MINOR,ADDR,PROPTYPE,PREUSE&returnGeometry=true&outSR=4326&f=json",
+    "size_or_volume": "1 feature per point; 1000-feature transfer limit on area queries",
+    "notes": "Already verified CORS-OK from a browser by the first helper. Zero-pad PIN to 10 characters before using it as the shard key."
+   },
+   {
+    "name": "Seattle GeoData PARCEL_GEO (King County Tax Parcel Polygons with select City of Seattle overlays)",
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/PARCEL_GEO/FeatureServer/0",
+    "what_it_gives": "Per Seattle parcel: PIN, MAJOR, MINOR, ADDRESS, PROP_NAME, BLDG_DESC, YR_BUILT_MAX, YR_RENOV_MAX, EFF_YEAR_MAX, NR_BLDGS, NR_STORIES_MAX, NR_UNITS, GRSS_SQFT, RES_GRSSQF/COM_GRSSQF, LOT_SQFT, PRES_USE, LU_GEN_DESC, LANDMARK (Y/N), zoning and overlay fields. Year built client-side without any build step.",
+    "coverage": "City of Seattle only; 237,102 polygons; quarterly refresh (last 2026-07-08); right-of-way polygons have empty PIN",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Hub item shows 'Custom License' (City disclaimer, no warranty on boundaries); the centroid twin on data.seattle.gov is PDDL; underlying parcel data is King County's (same KCGIS terms). Attribute City of Seattle and King County Assessor.",
+    "evidence_urls": [
+     "https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::king-county-tax-parcel-polygons-with-select-city-of-seattle-geographic-overlays/about",
+     "https://data.seattle.gov/dataset/King-County-Tax-Parcel-Centroids-with-select-City-/xeax-bz9e",
+     "https://github.com/reshamjagtiani/AISeattleREI/blob/main/index.html",
+     "https://github.com/LUH-DBS/Matelda/blob/main/datasets/DGov-subsets/dgov-1173/Public_Schools_-_Absolute_%25_Change/clean.csv"
+    ],
+    "confidence": "high",
+    "example_request": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/PARCEL_GEO/FeatureServer/0/query?geometry=-122.3493,47.6205&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PIN,ADDRESS,PROP_NAME,BLDG_DESC,YR_BUILT_MAX,YR_RENOV_MAX,NR_STORIES_MAX,NR_BLDGS,NR_UNITS,GRSS_SQFT,LANDMARK&returnGeometry=false&f=json",
+    "size_or_volume": "237k features; maxRecordCount 2000; the full layer can also be downloaded as CSV from the Hub at build time",
+    "notes": "Field list confirmed from a published CSV export of this layer (header includes YR_BUILT_MAX, NR_STORIES_MAX, EFF_YEAR_MAX) and from a 2026 GitHub app that queries it with a point. YR_BUILT_MAX is the newest building on the parcel, so it is a cross-check and fallback, not a replacement for the extract's oldest-building year. Note the 1900 placeholder (e.g. Garfield High School shows YR_BUILT_MAX 1900)."
+   },
+   {
+    "name": "Washington State Current Parcels (OCIO Geospatial Program / WA Geoportal), hosted FeatureServer",
+    "url": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
+    "what_it_gives": "Normalized statewide parcel polygons: FIPS_NR, COUNTY_NM, PARCEL_ID_NR, ORIG_PARCEL_ID, SITUS_ADDRESS, SUB_ADDRESS, SITUS_CITY_NM, SITUS_ZIP_NR, LANDUSE_CD (DOR 2-digit code), ORIG_LANDUSE_CD, VALUE_LAND, VALUE_BLDG, DATA_LINK (URL of the county assessor's record for this parcel), FILE_DATE. Table 1 = per-county File_Date (freshness), table 2 = county-unique land-use code lookup. NO year built, no owner fields in the live schema.",
+    "coverage": "Statewide, 3,321,859 parcels (Parcels_2026); counties that keep digital parcels (effectively all 39); compiled annually (data updated 2026-04-09), per-county vintage in the File_Date table",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Geoportal 'Custom License': informational use only, no warranty, data may change; 'some of the counties restrict the use of parcels for State of Washington business only - refer requests to the appropriate county'. Single-parcel display lookups with attribution are the intended public use; do not redistribute bulk copies.",
+    "evidence_urls": [
+     "https://geo.wa.gov/datasets/wa-geoservices::current-parcels/",
+     "https://geo.wa.gov/datasets/parcels-2026-1",
+     "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0",
+     "https://github.com/tcole333/ithildin/blob/main/tools/query_washington_parcels.py"
+    ],
+    "confidence": "high",
+    "example_request": "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0/query?geometry=-122.9007,47.0379&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=COUNTY_NM,PARCEL_ID_NR,ORIG_PARCEL_ID,SITUS_ADDRESS,SITUS_CITY_NM,LANDUSE_CD,VALUE_LAND,VALUE_BLDG,DATA_LINK,FILE_DATE&returnGeometry=false&f=json",
+    "size_or_volume": "3.3M polygons; maxRecordCount 2000; GDB download available on the Geoportal",
+    "notes": "ArcGIS Online hosted services send ACAO *. The 'Parcels 2026' description mentions owner/taxpayer names but two independent 2026 tools found no owner fields in the live schema. VALUE_BLDG > 0 is a usable 'there is a structure here' signal; LANDUSE_CD 11 = single family, 12 = 2-4 units, etc."
+   },
+   {
+    "name": "WA DNR mirror of the statewide parcel layer (WADNR_PUBLIC_OCIO_Parcels)",
+    "url": "https://gis.dnr.wa.gov/site2/rest/services/Public_Forest_Practices/WADNR_PUBLIC_OCIO_Parcels/MapServer/0",
+    "what_it_gives": "Same normalized schema as Current Parcels (PARCEL_ID_NR string 24, SITUS_ADDRESS string 200, LANDUSE_CD, VALUE_LAND, VALUE_BLDG int, DATA_LINK string 255, FILE_DATE date). A second host for the same data, useful as a fallback when the hosted service is slow.",
+    "coverage": "Statewide; may lag the Geoportal snapshot",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "DNR provides data 'as is'; underlying terms are the Geoportal/county terms above.",
+    "evidence_urls": [
+     "https://gis.dnr.wa.gov/site2/rest/services/Public_Forest_Practices/WADNR_PUBLIC_OCIO_Parcels/MapServer/0",
+     "https://github.com/zz85/random-sketches/blob/master/vibes/estate-ar/providers.js"
+    ],
+    "confidence": "high",
+    "example_request": "https://gis.dnr.wa.gov/site2/rest/services/Public_Forest_Practices/WADNR_PUBLIC_OCIO_Parcels/MapServer/0/query?geometry=-117.4260,47.6588&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=COUNTY_NM,PARCEL_ID_NR,SITUS_ADDRESS,LANDUSE_CD,VALUE_BLDG,DATA_LINK,FILE_DATE&returnGeometry=false&f=json",
+    "size_or_volume": "3.3M polygons; maxRecordCount 2000",
+    "notes": "gis.dnr.wa.gov echoes the Origin header (verified by the helper probe), and a 2026 static web app used exactly this layer from a browser as its all-Washington fallback, reporting values identical to King County's own service."
+   },
+   {
+    "name": "Thurston County Thurston_Parcels FeatureServer (GeoData Center / Assessor) - live year built",
+    "url": "https://map.co.thurston.wa.us/arcgis/rest/services/Thurston/Thurston_Parcels/FeatureServer/0",
+    "what_it_gives": "Parcel polygons with 45 assessor attributes including PARCEL_NO, SITUS_STRE, SITUS_CITY, SITUS_ZIP, USE_CODE, PROP_TYPE, BLDG_VALUE, LAND_VALUE, TOTAL_ACRES, SALE_DATE, SALE_PRICE, YEAR_BUILT, EFF_YR_BUI, RES_QUAL, RES_COND, INCORP, LEGAL_DESC. The only WA county found so far that puts year built directly on a public parcel layer.",
+    "coverage": "Thurston County (Olympia, Lacey, Tumwater); ~131k records",
+    "use_at": "either",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "GeoData Center disclaimer (https://www.geodata.org/disclaimerfordata.html); Hub item 'Custom License'; no owner names on this layer (mailing ADDRESS1/2 only - do not display).",
+    "evidence_urls": [
+     "https://gisdata-thurston.opendata.arcgis.com/datasets/thurston::thurston-parcels/about",
+     "https://github.com/urbankitstudio/atlas/blob/main/data/washington.json",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/thurston.json",
+     "https://www.thurstoncountywa.gov/apte-access-database"
+    ],
+    "confidence": "high",
+    "example_request": "https://map.co.thurston.wa.us/arcgis/rest/services/Thurston/Thurston_Parcels/FeatureServer/0/query?geometry=-122.9007,47.0379&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PARCEL_NO,SITUS_STRE,USE_CODE,YEAR_BUILT,EFF_YR_BUI,RES_QUAL,RES_COND,BLDG_VALUE&returnGeometry=false&f=json",
+    "size_or_volume": "131,401 records; maxRecordCount 1000; also downloadable as CSV/GeoJSON from the Hub, and the Assessor's APTE Access database (atimextd table: YEAR_BUILT, EFF_YR_BUI; structures table: NUM_STORIE, floor areas) is a free zip",
+    "notes": "Field list confirmed by a 2026-05-15 live schema capture in a public catalog; CORS not probed from this sandbox (ArcGIS Server allows all origins by default, so expect yes). A sibling tconline.co.thurston.wa.us Common_Layers/Parcels layer 4 carries the same extract."
+   },
+   {
+    "name": "Pierce County Assessor-Treasurer Data Mart: improvement_builtas.zip (+ improvement.zip, appraisal_account.zip)",
+    "url": "https://www.piercecountywa.gov/736/Data-Downloads",
+    "what_it_gives": "Weekly pipe-delimited text tables. improvement_builtas: parcel_number (10 char), building_id, built_as_number, built_as_id, built_as_description, built_as_square_feet, hvac, exterior, interior, stories, story_height, roof_cover, bedrooms, bathrooms, units, class_code, class_description, year_built, year_remodeled, adjusted_year_built, physical_age. improvement: parcel_number, building_id, property_type, square_feet, condition, quality, primary_occupancy_description, basement/porch/garage square feet. appraisal_account: parcel number, latitude/longitude, appraisal_account_type.",
+    "coverage": "Pierce County (Tacoma); ~340k parcels; active parcels only; updated weekly",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Pierce County GIS Data Terms of Use (https://matterhorn.co.pierce.wa.us/Disclaimer/PierceCountyGISDataTermsofUse.pdf) and the RCW 42.56.070 commercial-list restriction; no taxpayer names in these tables.",
+    "evidence_urls": [
+     "https://www.piercecountywa.gov/736/Data-Downloads",
+     "https://online.co.pierce.wa.us/cfapps/atr/datamart/metadata/improvement.pdf",
+     "https://github.com/psrc/parcels/blob/master/assessor/to_db/PierceColNames.py",
+     "https://github.com/psrc/assessor-housing-estimates/blob/main/process_assessor_pierce.R",
+     "https://github.com/ds25m025edbertolima/SOE-R-House-Price-Prediction/blob/main/etl/01-eml-pierce-county-schema.sql"
+    ],
+    "confidence": "high",
+    "example_request": "curl -L -O https://online.co.pierce.wa.us/datamart/improvement_builtas.zip (file base used by PSRC's downloader; confirm the current link on the Data Downloads page) then unzip and split on '|'",
+    "size_or_volume": "tens of MB zipped; weekly",
+    "notes": "Join parcel_number+building_id between improvement and improvement_builtas; a building can have several built-as rows (take min year_built). Pierce's runtime parcel polygons are the hosted Tax_Parcels FeatureServer (services2.arcgis.com/1UvBaQ5y1ubjUPmd/.../Tax_Parcels/FeatureServer/0, key TaxParcelNumber, 339,984 records) which has values and use codes but no year built."
+   },
+   {
+    "name": "Snohomish County Open Data: Improvement Records (bulk) and hosted Parcels FeatureServer (runtime)",
+    "url": "https://snohomish-county-open-data-portal-snoco-gis.hub.arcgis.com/documents/3c5edc985cec4fba8b3938d16ed1d3c3/about",
+    "what_it_gives": "Improvement Records: one row per structure/improvement with parcel number, use code description, improvement type, year built and other dates/features; PSRC reads it as improvement.txt with columns pin, imprtype, usecode, usedesc, bldgtype, stories, yrbuilt, finsize, numberrooms, numbedrms, propext. Hosted Parcels layer: 54 fields (PARCEL_ID 14-digit, SITUSLINE1, SITUSCITY, USECODE, MKLND, MKIMP, MKTTL, GIS_ACRES, TAXPRNAME, OWNERNAME...) with no year built.",
+    "coverage": "Snohomish County (Everett); ~319k parcels; parcels updated 3x/week, no parcel fabric in the eastern mountains",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "County parcel data dictionary: users agree not to use lists of individuals, or data from which such lists could be compiled, for commercial purposes. The public parcel layer exposes OWNERNAME/TAXPRNAME - never display them.",
+    "evidence_urls": [
+     "https://snohomish-county-open-data-portal-snoco-gis.hub.arcgis.com/documents/3c5edc985cec4fba8b3938d16ed1d3c3",
+     "https://www.snohomishcountywa.gov/DocumentCenter/View/101955/Parcels-Data-Dictionary",
+     "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/ArcGIS/rest/services/Parcels/FeatureServer/0",
+     "https://github.com/psrc/urbansim-baseyear-prep/blob/master/collect_parcels_buildings/BY2023on18/process_snohomish.R",
+     "https://github.com/zz85/random-sketches/blob/master/vibes/estate-ar/providers.js"
+    ],
+    "confidence": "medium",
+    "example_request": "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/ArcGIS/rest/services/Parcels/FeatureServer/0/query?geometry=-122.2021,47.9790&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PARCEL_ID,SITUSLINE1,SITUSCITY,USECODE,MKIMP,MKLND&returnGeometry=false&f=json",
+    "size_or_volume": "Parcels 319k features, maxRecordCount 2000; Improvement Records size unknown (a document item on the Hub - confirm the download URL and delimiter)",
+    "notes": "CORS for the hosted layer is an ArcGIS Online default; the county's gis.snoco.org pds_prop_report MapServer (market values, zoning, Assessor_Link) was also driven from a browser in 2026. Year built is bulk-only; the exact file name/URL behind the Hub document item is unverified from this sandbox."
+   },
+   {
+    "name": "Kitsap County Assessor Parcel Data File Downloads (Dwellings.txt, Parcels.txt) and Open Data 'Real Property Information' table",
+    "url": "https://www.kitsap.gov/assessor/Pages/DataDownload.aspx",
+    "what_it_gives": "Weekly tab-delimited files: Parcels.txt (one row per real-property account; rp_acct_id = primary key, acct_no = tax parcel number), Dwellings.txt (~13 MB; dwelling characteristics incl. YEAR_BUILT), MH.txt (manufactured homes), Comml_Imps.txt, Other_res_imps.txt, Valuations.txt, Plats.txt, Property_addresses.txt, Codes.txt. The Hub's Real Property Information table joins to tax parcel polygons via RP_ACCT_ID.",
+    "coverage": "Kitsap County (Bremerton, Bainbridge); ~127k parcels; weekly",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Kitsap GIS disclaimer (https://www.kitsapgov.com/dis/Pages/resources.aspx#disclaimer); public records, no registration.",
+    "evidence_urls": [
+     "https://www.kitsap.gov/assessor/Pages/DataDownload.aspx",
+     "https://www.kitsap.gov/assessor/Documents/parcels.pdf",
+     "https://kitsap-od-kitcowa.hub.arcgis.com/datasets/KitCoWA::real-property-information",
+     "https://github.com/psrc/assessor-housing-estimates/blob/main/process_assessor_kitsap.R"
+    ],
+    "confidence": "medium",
+    "example_request": "Download Dwellings.txt and Parcels.txt from the Data Download page; join on rp_acct_id; map acct_no (strip hyphens) to the statewide layer's ORIG_PARCEL_ID",
+    "size_or_volume": "Parcels.txt ~10.8 MB, Dwellings.txt ~13 MB; weekly",
+    "notes": "PSRC's 2026 Kitsap script filters a county parcel shapefile on YEAR_BUILT with keys RP_ACCT_ID/ACCT_NO/PROP_CLASS, and its base-year improvements CSV has IMP_TYPE and YEAR_BUILT, so the field exists in county exports; the Dwellings.txt header itself was not readable from here."
+   },
+   {
+    "name": "Spokane County: hosted Parcels FeatureServer (runtime) + Parcel Data Files curr_year_info / features_info (bulk) + SCOUT",
+    "url": "https://services1.arcgis.com/ozNll27nt9ZtPWOn/arcgis/rest/services/Parcels/FeatureServer/0",
+    "what_it_gives": "Hosted parcels: 43 fields incl. PID_NUM, parcel, site_address, site_city, site_zip, prop_use_code, prop_use_desc, acreage, land_value, assessed_amt, taxable_amt, nbhd_name, res_com_flag, vacant_land_flag - no year built. Bulk: zipped pipe-delimited 'Current Year Info' and 'Features Info' with metadata PDFs; a county data-table description lists improvement fields quality, condition, year_built, eff_year_built, year_remodeled, story_config, house_type. SCOUT property page shows year built (link-out via DATA_LINK).",
+    "coverage": "Spokane County; ~214k parcels; hosted layer maxRecordCount 2000",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "OpenAddresses records the county parcel layer as CC BY-NC-SA 4.0 (attribution 'Spokane County', share-alike); the Parcel Data Files page repeats the RCW 42.56.070 commercial-list prohibition. Non-commercial site is fine; attribute and share-alike any derived table.",
+    "evidence_urls": [
+     "https://gisdatacatalog-spokanecounty.opendata.arcgis.com/pages/parcel-data-file-downloads",
+     "https://spokanecounty.gov/DocumentCenter/View/5150/County-Data-Table-Description-PDF",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/spokane.json",
+     "https://github.com/urbankitstudio/atlas/blob/main/data/washington.json",
+     "https://gismo.spokanecounty.org/arcgis/rest/services/Assessor/Parcels/MapServer"
+    ],
+    "confidence": "medium",
+    "example_request": "https://services1.arcgis.com/ozNll27nt9ZtPWOn/arcgis/rest/services/Parcels/FeatureServer/0/query?geometry=-117.4260,47.6588&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PID_NUM,parcel,site_address,prop_use_desc,acreage,assessed_amt&returnGeometry=false&f=json",
+    "size_or_volume": "214k parcels; bulk files tens of MB",
+    "notes": "Which bulk file carries year_built (features_info vs curr_year_info) is unverified; the metadata PDFs on the Parcel Data Files page settle it. Spokane also has pre-2000 assessor record cards (1940-2000) at the State Archives Eastern Branch (paper)."
+   },
+   {
+    "name": "Clark County: Property Assessment and Taxation Data bundle (PropImprvVw) + TaxlotsPublic / TaxlotsforPublicUse services + Property Information Center",
+    "url": "https://hub-clarkcountywa.opendata.arcgis.com/pages/property-assessment-and-taxation-data",
+    "what_it_gives": "Weekly ~130 MB zip of pipe-delimited text tables with owner names redacted; PropImprvVw = building information by component (main floor, second floor, basement, porch, addition) and is the documented home of year built. Runtime: ClarkView_Public/TaxlotsPublic MapServer (gis.clark.wa.gov) and hosted TaxlotsforPublicUse FeatureServer (services2.arcgis.com/ylxwjFBdCPBzP16d) with situs, values, acreage, property use, latest sale - no year built. PIC property report (https://gis.clark.wa.gov/gishome/propertyReports/?account=<parcel>) shows year built per parcel.",
+    "coverage": "Clark County (Vancouver); ~196k taxlots; bulk weekly, GIS library monthly",
+    "use_at": "either",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "County GIS disclaimer; owner data redacted from the bulk files; building characteristics 'reflect the current state of the data'.",
+    "evidence_urls": [
+     "https://hub-clarkcountywa.opendata.arcgis.com/pages/property-assessment-and-taxation-data",
+     "https://gis.clark.wa.gov/arcgisfed/rest/services/ClarkView_Public/TaxlotsPublic/MapServer",
+     "https://github.com/Abenezer1244/web-scrapper-automation/blob/main/src/scrapers/enrichment/clark_pic.py",
+     "https://github.com/harlanljones/urban-signal/blob/main/docs/research/two-family-depth-2026-09-30.md"
+    ],
+    "confidence": "medium",
+    "example_request": "https://gis.clark.wa.gov/arcgisfed/rest/services/ClarkView_Public/TaxlotsPublic/MapServer/0/query?geometry=-122.6615,45.6387&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+    "size_or_volume": "~130 MB bundle; 196,272 taxlot polygons",
+    "notes": "The exact PropImprvVw column name for year built is documented only in the county's GIS metadata application (gis.clark.wa.gov/gishome/metadata/), unreachable from here; read the file header in the build script."
+   },
+   {
+    "name": "Whatcom County WhatcomCo_Property MapServer layer 1 (Public Tax Parcels) + Property Data Downloads",
+    "url": "https://wcgis.whatcomcounty.us/arcgis/rest/services/EnterprisePublishing/WhatcomCo_Property/MapServer/1",
+    "what_it_gives": "111,159 parcel polygons keyed by geo_id (16-digit) and PID; assessment attributes; the county's interactive map exposes 'the year a home was built' but the layer's field list was not retrievable. Property Short Master CSV/MDB/XLSX (2026-09-01) has parcel numbers, addresses, owners and values (no year built documented). PropertyAccess parcel pages list Year Built per building segment (link-out via DATA_LINK).",
+    "coverage": "Whatcom County (Bellingham); 111k parcels",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Whatcom GIS Data Disclaimer (https://www.whatcomcounty.us/4444/GIS-Data-Disclaimer): no warranty, hold harmless; RCW commercial-list restriction on the downloads.",
+    "evidence_urls": [
+     "https://www.whatcomcounty.us/3869/Property-Data-Downloads",
+     "https://github.com/openaddresses/openaddresses/pull/9554",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/whatcom.json"
+    ],
+    "confidence": "low",
+    "example_request": "https://wcgis.whatcomcounty.us/arcgis/rest/services/EnterprisePublishing/WhatcomCo_Property/MapServer/1/query?geometry=-122.4787,48.7519&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+    "size_or_volume": "111,159 records; maxRecordCount 1000",
+    "notes": "Host moved from gis.whatcomcounty.us to wcgis.whatcomcounty.us in Sept 2026 (OpenAddresses PR). Probe outFields=* once to see whether a year-built column exists."
+   },
+   {
+    "name": "Skagit County Tax_Parcels (geo.skagitcountywa.gov) / Assessor PropertyMap + Digital Data Warehouse delimited files",
+    "url": "https://geo.skagitcountywa.gov/server/rest/services/PortalServiceLayers/Tax_Parcels/MapServer/0",
+    "what_it_gives": "Assessor-maintained parcels with deed holder, assessed land/improvement values, acres, land-use code with description (e.g. '(120) HOUSEHOLD, 2-4 UNITS'); free shapefile (~30 MB) and delimited assessor data files from the Digital Data Warehouse. No year-built field documented; the full Assessor database is a paid request.",
+    "coverage": "Skagit County (Mount Vernon, Anacortes); parcel set refreshed monthly/bimonthly",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "County disclaimer; parcel layer explicitly excludes ownership/use attributes in metadata; paid full database has its own terms.",
+    "evidence_urls": [
+     "https://www.skagitcountywa.gov/living-in-skagit/maps/digital-data-warehouse/assessor-tax-parcels-cad-and-gis",
+     "https://gis.skagitcountywa.gov/arcgis/rest/services/Assessor/PropertyMap/MapServer",
+     "https://github.com/justin-tran1/multicare-parcel-mapping-2026/blob/main/js/providers.js"
+    ],
+    "confidence": "low",
+    "size_or_volume": "~30 MB shapefile; maxRecordCount 1000 on PropertyMap",
+    "notes": "Regrid reports structure year built populated for only 63% of Skagit parcels, consistent with year built not being in the open files. Anacortes' house-history guide warns the assessor's online construction date needs cross-checking."
+   },
+   {
+    "name": "Yakima County AssessorParcels MapServer (City of Yakima GIS) + ParcelAnalysis table + hosted Parcels",
+    "url": "https://gis.yakimawa.gov/arcgis/rest/services/Assessor/AssessorParcels/MapServer",
+    "what_it_gives": "Two parcel polygon layers (0 Parcels, 1 Parcels Yellow with latest sale: excise number, gross price, SALE_DATE, use code; 105,110 polygons) and table 2 'ParcelAnalysis' described as more information about the parcels' properties; updated daily from county data. The county's own property search app templates YearBuilt/EffYearBuilt for residential, detached and commercial records, so the data exists; whether ParcelAnalysis exposes it is unverified. Hosted county Parcels: services3.arcgis.com/9Qz94N8Zml9hnG84/ArcGIS/rest/services/Parcels/FeatureServer/1.",
+    "coverage": "Yakima County; 105k parcels; daily",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Credit 'City of Yakima GIS and Yakima County GIS'; no explicit license text found.",
+    "evidence_urls": [
+     "https://gis.yakimawa.gov/arcgis/rest/services/Assessor/AssessorParcels/MapServer?f=pjson",
+     "https://yes.co.yakima.wa.us/AssessorAPI/Print_Property_Search.html",
+     "https://github.com/harlanljones/urban-signal/blob/main/apps/api/src/spatial/cities/yakima.py",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/yakima.json"
+    ],
+    "confidence": "low",
+    "example_request": "https://gis.yakimawa.gov/arcgis/rest/services/Assessor/AssessorParcels/MapServer/2?f=pjson (read the ParcelAnalysis field list first)",
+    "size_or_volume": "105,110 polygons",
+    "notes": "Regrid shows year built for 76% of Yakima parcels, so a public source exists; the yes.co.yakima.wa.us AssessorAPI behind the property search may be callable but was not probed."
+   },
+   {
+    "name": "Benton County Parcels_and_Assess hosted FeatureServer",
+    "url": "https://services7.arcgis.com/NURlY7V8UHl6XumF/ArcGIS/rest/services/Parcels_and_Assess/FeatureServer/0",
+    "what_it_gives": "Parcel polygons keyed Parcel_ID with assessment attributes ('and Assess'); the county property search filters on year built, and Regrid shows 87% year-built coverage, so a year-built column is plausible but unconfirmed. Shapefile download on the hub is gated by a short survey.",
+    "coverage": "Benton County (Kennewick, Richland); ~79k parcels",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "County states GIS property information is a mapping/presentation resource; no explicit license found.",
+    "evidence_urls": [
+     "https://gisdata-bentonco.hub.arcgis.com/",
+     "https://github.com/nilesandstuff/Lawn-mapper/blob/main/worker/src/counties-verified.js",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/benton.json"
+    ],
+    "confidence": "low",
+    "example_request": "https://services7.arcgis.com/NURlY7V8UHl6XumF/ArcGIS/rest/services/Parcels_and_Assess/FeatureServer/0?f=pjson",
+    "size_or_volume": "~79k polygons; AGOL-hosted (ACAO *)",
+    "notes": "Verified reachable 2026-09-18 by a third-party catalog; field list unknown."
+   },
+   {
+    "name": "Clallam County Parcel_Published_Public hosted FeatureServer / Assessors_Data MapServer",
+    "url": "https://services8.arcgis.com/noCZ2SM2C0rVag8y/arcgis/rest/services/Parcel_Published_Public/FeatureServer/0",
+    "what_it_gives": "Parcel polygons (PNUM 12-digit, PROP_ID, acreage, situs) without owner info; the county's search pages have an 'Improvements & Buildings' section per parcel (link-out via DATA_LINK). A 2012 statewide-parcel document mapped Clallam's year built from an improvements file joined on prop_id, not from the parcel layer.",
+    "coverage": "Clallam County (Port Angeles, Sequim); ~48k appraisal records",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "County disclaimer page (https://clallam-county-portal-clallam.hub.arcgis.com/pages/county-disclaimer); attribution 'Clallam County GIS & Assessor's Dept.'",
+    "evidence_urls": [
+     "https://clallam-county-portal-clallam.hub.arcgis.com/",
+     "https://websrv31.clallamcountywa.gov/server/rest/services/Assessors_Data/MapServer/13",
+     "https://github.com/openaddresses/openaddresses/blob/master/sources/us/wa/clallam.json"
+    ],
+    "confidence": "low",
+    "size_or_volume": "~50k polygons",
+    "notes": "Regrid year-built coverage only 57%; treat Clallam as link-out only."
+   },
+   {
+    "name": "Island County Geocortex/Base MapServer layer 0 (Assessor parcels joined to PACS, nightly)",
+    "url": "https://maps.islandcountywa.gov/arcgis/rest/services/Geocortex/Base/MapServer/0",
+    "what_it_gives": "Parcels with ParcelNo (e.g. R03213-384-4950), taxpayer, physical_addr (+city/zip), values, acreage, land-use code, appraisal year; exported nightly from the Assessor's PACS system. No year-built field seen in the open-data preview; AssessorFiles folder also has a QualifiedSales service.",
+    "coverage": "Island County (Whidbey, Camano); 52,711 parcels; nightly",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Layer copyright text 'DO NOT USE AS LEGAL DOCUMENT'; no license stated; taxpayer names present - do not display.",
+    "evidence_urls": [
+     "https://data-islandcountygis.opendata.arcgis.com/datasets/5b5f9b6872894eb093f24ebb5778398d_0/data",
+     "https://github.com/urbankitstudio/atlas/blob/main/data/washington.json",
+     "https://maps.islandcountywa.gov/arcgis/rest/services"
+    ],
+    "confidence": "low",
+    "size_or_volume": "52,711 parcels; maxRecordCount 60000",
+    "notes": "CORS reflects the request Origin with Allow-Credentials true (works for plain fetch). Year built likely only on the Assessor's property record card pages."
+   },
+   {
+    "name": "DAHP Washington Historic Property Inventory points (WISAARD public FeatureServer)",
+    "url": "https://wisaard.dahp.wa.gov/server/rest/services/Hosted/DAHP_Historic_Property_Inventory/FeatureServer/0",
+    "what_it_gives": "Statewide inventory of surveyed historic buildings/structures (600,000+ recorded sites; ~1,800 on state/national registers): point per property with historic site name, address, tax parcel number, resource/historic IDs, significance. 2017 metadata lists SiteNameHistoric, Historic_ID, ResourceID, Loc_FullAddress, TaxParcel_No, FieldSiteNo; a construction-date field is not confirmed. Also published via geo.wa.gov (DAHP::historicpropertyinventory-pnts) and register layers.",
+    "coverage": "Statewide; non-archaeological layers downloadable without a data-sharing agreement; quarterly updates (data 2025-09-03, item 2026-01-30)",
+    "use_at": "either",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Public layers free to download; archaeology excluded (address-restricted). Attribute DAHP.",
+    "evidence_urls": [
+     "https://geo.wa.gov/datasets/DAHP::historicpropertyinventory-pnts",
+     "https://dahp.wa.gov/sites/default/files/WA_HistoricPropertyInventories.xml",
+     "https://dahp.wa.gov/about-us/geographic-information-system-information-technology-program"
+    ],
+    "confidence": "low",
+    "example_request": "https://wisaard.dahp.wa.gov/server/rest/services/Hosted/DAHP_Historic_Property_Inventory/FeatureServer/0?f=pjson",
+    "size_or_volume": "hundreds of thousands of points; maxRecordCount 2000",
+    "notes": "The best statewide analogue of Seattle's Historical Sites survey for 'this house was surveyed as historic'; probe the field list for a built-date column once network access allows."
+   },
+   {
+    "name": "Seattle Historical Sites database (Department of Neighborhoods Historic Resources Survey) - link-out",
+    "url": "https://web.seattle.gov/DPD/HistoricalSite/default.aspx",
+    "what_it_gives": "Per surveyed property: address, parcel number, inventory number, historic name, style, neighborhood, builder, architect, year built, significance statement, cladding/foundation/roof; searchable by address, parcel number, year built, style, neighborhood, architect. The only Seattle source naming builders/architects (and sometimes original owners in the narrative) for ordinary houses.",
+    "coverage": "Seattle; 5,000+ surveyed properties concentrated in neighborhoods surveyed since 2000 plus pre-1906 residences; coverage uneven",
+    "use_at": "runtime",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "City web application; no bulk export or API; link-out only.",
+    "evidence_urls": [
+     "https://web.seattle.gov/DPD/HistoricalSite/default.aspx",
+     "https://seattle.gov/neighborhoods/historic-preservation/historic-resources-survey",
+     "https://web.seattle.gov/dpd/historicalsite/QueryResult.aspx?ID=-1435729688"
+    ],
+    "confidence": "high",
+    "example_request": "Link the visitor to https://web.seattle.gov/DPD/HistoricalSite/default.aspx with instructions to paste the address or 10-digit PIN; record pages are QueryResult.aspx?ID=<opaque signed integer> and cannot be derived from the PIN",
+    "notes": "Not an open dataset; HTML only, so no client-side fetch (no CORS). Landmarks (517 points, Seattle GeoData) and Wikidata/Wikipedia cover the famous buildings."
+   },
+   {
+    "name": "Washington State Digital Archives: County Assessor Real Property Record Cards (King 1937-1972, Thurston 1936-1997, Spokane 1940-2000) - link-out",
+    "url": "https://digitalarchives.wa.gov/Collections/TitleInfo/854",
+    "what_it_gives": "WPA-era assessor cards with a photo of every building, construction details, room counts and 1937-1972 assessed values; searchable by address (house number + street name) or parcel/legal description; images viewable free with PDF download. The 'what did this house look like in 1937' link for the house ring, and the only official record of buildings demolished since.",
+    "coverage": "King County cards 1937-1972 (originals at Puget Sound Regional Archives, Bellevue; online scanning partial), Thurston 1936-1997, Spokane 1940-2000 (Eastern Branch, paper)",
+    "use_at": "runtime",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Public records held by the Secretary of State; viewable free; copies by request.",
+    "evidence_urls": [
+     "https://digitalarchives.wa.gov/Collections/TitleInfo/854",
+     "https://kingcounty.gov/en/dept/executive-services/data-information-services/archives/find-it-in-archives/property-land-use/neighborhood-history/real-property-report-cards",
+     "https://digitalarchives.wa.gov/Collections/TitleInfo/2303",
+     "https://digitalarchives.wa.gov/Collections/TitleInfo/1871"
+    ],
+    "confidence": "medium",
+    "example_request": "Deep-link the collection page and pre-fill guidance: search '1234 Main' (house number + street name, no direction/suffix) or the plat name without 'Addition'",
+    "notes": "No API; online coverage of the King cards is incomplete, so phrase it as 'look up the 1937 card' rather than promising a photo."
+   },
+   {
+    "name": "King County Historic Resource Inventory Sites point layer (historic_resource_invd_point)",
+    "url": "https://www5.kingcounty.gov/sdc/?Layer=historic_resource_invd",
+    "what_it_gives": "2,889 points (inventory says 3,500+) with HRI_NO, PARCEL_NO, HISTORIC_NAME, ADDRESS, YEAR_BUILT, DESIGNATION for King County's Historic Preservation Program survey (ongoing since 1977).",
+    "coverage": "King County outside and inside Seattle; mostly unincorporated/suburban survey work",
+    "use_at": "build-time",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Catalog sharing status 'Not Public'; KCGIS terms if released.",
+    "evidence_urls": [
+     "https://www5.kingcounty.gov/sdc/?Layer=historic_resource_invd",
+     "https://your.kingcounty.gov/dnrp/library/dnrp-directors-office/historic-preservation/strategic-plan/final-hpp-strategic-plan.pdf"
+    ],
+    "confidence": "low",
+    "size_or_volume": "2,889 points",
+    "notes": "Probably not downloadable; ask giscenter@kingcounty.gov or wait for the HPP's planned iMap layer (target late 2027)."
+   }
+  ],
+  "gaps": "1) No open dataset anywhere in Washington gives a FIRST OWNER. The free proxies are PlatName/PlatLot/PlatBlock from the King County Parcel extract (the subdivider's name is usually in the plat name), Seattle's Historical Sites survey (builder/architect, 5,000+ properties, link-out only, no API), the 517 Seattle Landmarks, Wikidata/Wikipedia for notable buildings, and the 1937-1972 assessor record cards (link-out). Plat RECORDING DATES are not in any extract: King County's platfile_extr is 'Not Public', the Recorder's online index starts 1976, and the 1853-1975 General Recordings Index is offline at King County Archives (the Digital Archives collection 'King County Recorder, Plats and Surveys, 1870-Present' is a link-out). 2) Assessor data describes the CURRENT structure only: nothing before 1894 in King County, no demolished buildings, and a 1900 placeholder year (2,010 King rows; Garfield High shows 1900 in PARCEL_GEO). For 'what stood here in 1910/1950' the house ring must fall back to Sanborn sheets (LOC), OHM building ways, record cards and photos. Year built also differs by county semantics (Pierce has year_built AND adjusted_year_built; Thurston YEAR_BUILT vs EFF_YR_BUI; King YrBuilt vs YrRenovated; Seattle PARCEL_GEO is the NEWEST building). Always say 'the assessor records\u2026' and link the DATA_LINK page. 3) Statewide 'Current Parcels' has NO year built and no building fields beyond VALUE_BLDG; its license lets single-parcel display but says some counties restrict reuse to state business, so never bulk-copy it. 4) Field-level verification is still missing for every county-hosted ArcGIS server because the sandbox blocks all *.wa.gov/*.county hosts: Whatcom layer 1, Skagit Tax_Parcels, Yakima ParcelAnalysis table, Benton Parcels_and_Assess, Clallam Parcel_Published_Public, Island Geocortex/Base, Spokane features_info vs curr_year_info, Clark PropImprvVw column names, Kitsap Dwellings.txt header, the Snohomish Improvement Records download URL, and the DAHP HPI schema. Each needs one ?f=pjson or header read from a machine with normal egress (a GitHub Actions runner will do). CORS is unverified for county-hosted servers (ArcGIS Server allows all origins by default; Island reflects Origin; AGOL-hosted services send *). 5) Owner/taxpayer names leak onto several public layers (Snohomish OWNERNAME/TAXPRNAME, Island taxpayer, Skagit OwnerName, Thurston mailing address). The site should never request or display them; several county terms and RCW 42.56.070(9) forbid commercial lists of individuals, and Spokane's hosted parcels are CC BY-NC-SA. 6) Census-style 'who lived here' data (city directories, census sheets) is out of scope for open APIs; Seattle city directories 1938+ are offline at Seattle Public Library/Archives. 7) The King County extracts encode condo units as Minor != 0000 under a complex Major and unplatted land as Minor 9xxx; the build script must handle both or ~15% of PIN lookups will miss. 8) Kitsap/Thurston/Pierce/Snohomish bulk files each have a different delimiter, key (rp_acct_id, PARCEL_NO 11-digit, parcel_number 10-char, PARCEL_ID 14-digit) and update rhythm, so every added county is a bespoke parser; Regrid's coverage figures (Thurston 85%, Benton 87%, Snohomish 86%, Whatcom 78%, Kitsap 76%, Yakima 76%, Skagit 63%, Clallam 57%) are a good proxy for how complete each county's year built will be.",
+  "recommendation": "SEATTLE / KING COUNTY: use the BUILD-TIME path. A GitHub Actions job (weekly cron, ~2 minutes, ~57 MB of downloads) fetches Residential Building, Commercial Building, Parcel (+ Apartment Complex and Condo Complex) from aqua.kingcounty.gov, stream-parses the latin1 CSVs, trims padded values, and writes sharded JSON keyed by PIN: file = data/kc/<first 3 digits of Major>.json (at most 1,000 files), each holding {majors: {<Major>: [platName, platBlockOfComplexYrBuilt...]}, pins: {<Minor>: [yrBuiltOldest, yrBuiltNewest, yrRenovated, stories*10, sqftLiving, grade, condition, nBldgs, presentUseCode, platLot, platBlock]}}. With ~630k parcels at ~40 bytes per row that is ~25 MB of JSON in the repo (~7 MB gzipped on the wire in total) and an average shard of ~25 KB raw / ~7 KB gzipped, i.e. one small request per visit on a phone; the script should split any hot prefix (unplatted section-based Majors such as 092503 carry hundreds of 9xxx Minors) to a 4-digit prefix when a file exceeds ~150 KB, and commit only changed shards so weekly diffs stay small. Runtime: geocode (Photon/Nominatim) -> point query on KCGIS KingCo_PropertyInfo/MapServer/2 (PIN, ADDR, PROPTYPE, PREUSE, polygon) -> fetch the shard -> pins[minor] or, if absent, majors[major] (condo/apartment complex) -> render. Inside Seattle also query PARCEL_GEO (YR_BUILT_MAX, YR_RENOV_MAX, NR_STORIES_MAX, BLDG_DESC, LANDMARK) as a cross-check and as the fallback if the shard is missing; disagreements (oldest vs newest building, 1900 placeholder) should be shown honestly ('assessor records 1925; newest structure 1998'). The same shard gives the BLOCK ring for free: all Minors of a Major are the lots of one plat, so 'most houses in <PlatName> were built in the 1920s' is a one-line aggregation with no extra fetch. Link out from the house ring to the Assessor's eReal Property page (PIN), Seattle Historical Sites (address), and the 1937-1972 record cards. Do NOT choose the pure runtime path for year built in King County: the only CORS source with year built is Seattle-only, and the KC server has none. REST OF WASHINGTON (realistic statement): at runtime, query the statewide Current Parcels FeatureServer (fallback: the DNR mirror) by point and show parcel number, situs address, DOR land-use description, 'building value > 0 = there is a structure here', the per-county file date, and a 'See the county assessor's record (year built, buildings)' link built from DATA_LINK; this works for all 39 counties today with zero build work. Add live year built for Thurston County from Thurston_Parcels (YEAR_BUILT, EFF_YR_BUI, RES_QUAL, RES_COND) once a CORS probe confirms it. Phase 2, only if friends outside King County ask: extend the same build-time shard format (keyed by the county's own parcel number, matched to ORIG_PARCEL_ID from the statewide layer) with Pierce (improvement_builtas.zip: year_built, adjusted_year_built, stories, square feet; weekly pipe text), Snohomish (Improvement Records: yrbuilt, stories, finsize) and Kitsap (Dwellings.txt YEAR_BUILT via rp_acct_id), which together with King and Thurston cover roughly 60% of Washington's population; Spokane and Clark are feasible later from their bulk text bundles once a column check is done. Treat Whatcom, Skagit, Yakima, Benton, Clallam and Island as 'parcel + link-out' until their layers are probed. Policy for every source: attribute the county assessor and the state Geospatial Program, show an 'as of' date, never display owner/taxpayer names, and keep Spokane-derived data non-commercial and share-alike."
+ },
+ "research-seattle": {
+  "domain": "Seattle-specific layers for the neighborhood, street and block rings and for \"surroundings change over time\" (boundaries, annexation, plats, shoreline/fill/regrades, landmarks, streetcars, street names, photo collections), plus year-built/incorporation/population sources for the rest of Washington",
+  "sources": [
+   {
+    "name": "Seattle Neighborhood Map Atlas (nma_nhoods_sub + nma_nhoods_main)",
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/nma_nhoods_sub/FeatureServer/0",
+    "what_it_gives": "94 neighborhood polygons: L_HOOD (district), S_HOOD (neighborhood), S_HOOD_ALT_NAMES; nma_nhoods_main/FeatureServer/0 has the 20 districts. Present-day, undated boundaries ('unofficial delineation').",
+    "coverage": "Seattle city limits only; current boundaries",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "PDDL (Open Data Commons Public Domain Dedication); credit City of Seattle / Seattle GeoData",
+    "evidence_urls": [
+     "https://data-seattlecitygis.opendata.arcgis.com/",
+     "https://catalog.data.gov/dataset/neighborhood-map-atlas-neighborhoods/resource/cbca6df6-ecab-4647-a642-1ec86f79ae4d"
+    ],
+    "confidence": "high",
+    "example_request": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/nma_nhoods_sub/FeatureServer/0/query?geometry=-122.3493,47.6205&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=L_HOOD,S_HOOD,S_HOOD_ALT_NAMES&returnGeometry=false&f=json",
+    "size_or_volume": "94 polygons (+20 districts); baked as simplified TopoJSON well under 300 KB",
+    "notes": "Verified live by the earlier probe. City_Clerk_Neighborhoods service is gone (HTTP 400) so do not plan on it. Bake the 94 polygons into public/data/seattle/neighborhoods.topojson and do point-in-polygon locally; keep the live query only as a fallback."
+   },
+   {
+    "name": "Seattle Community Reporting Areas (CRA)",
+    "url": "https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::community-reporting-areas-3",
+    "what_it_gives": "The City's official statistical neighborhood units (about 50 polygons, redrawn to follow 2020 census tract lines); each has a reporting-area name, alias/detail names and the larger neighborhood district. The only 'official' Seattle neighborhood geography.",
+    "coverage": "Seattle city limits; current boundaries (2020-tract based); companion 'Redistricting Data 1990-2020' version carries P.L. 94-171 counts per CRA for 1990/2000/2010/2020",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Seattle GeoData open license (item-level; most City layers are PDDL or public domain)",
+    "evidence_urls": [
+     "https://catalog.data.gov/dataset/community-reporting-areas",
+     "https://catalog.data.gov/dataset/community-reporting-areas-2020-redistricting-data-1990-2020"
+    ],
+    "confidence": "medium",
+    "notes": "The exact FeatureServer name was not confirmed this session (download links reference layers=43 of a larger service); read the Hub item's REST link at build time. Use CRA as the 'official name' line and the Map Atlas S_HOOD as the colloquial name; the CRA redistricting variant gives 1990-2020 population per neighborhood for the time control."
+   },
+   {
+    "name": "Seattle Annexation polygons + Seattle Municipal Archives Annexed Cities reference",
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Annexation/FeatureServer/0",
+    "what_it_gives": "45 annexation polygons 1869-1986 with Year, Ordinance, Ordinance_Date, Statute, Method, Effective_Date, Title, Ward and Seattle_Archives_Link (point-in-polygon returns cumulative extents, take min Year). SMA tables add the seven annexed towns with dates/ordinances/votes: South Seattle Oct 20 1905 (Ord 12898); Southeast Seattle Jan 7 1907 (15172); Ravenna Jan 15 1907 (15228); Columbia May 3 1907 (15918); South Park May 3 1907 (15917); Ballard May 29 1907 (16083, vote 996-874 on Nov 6 1906); West Seattle Jul 24 1907 (16558); Rainier Beach Sep 12 1907; Georgetown Apr 11 1910 (23814); north to 145th St (Lake City) 1953-54; Wedgwood 1945 (Ord 73879).",
+    "coverage": "Seattle only, 1869-1986",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Seattle GeoData open license; SMA pages are public records (cite 'Seattle Municipal Archives')",
+    "evidence_urls": [
+     "https://seattle.gov/cityarchives/search-collections/annexed-cities-reference",
+     "https://seattle.gov/cityarchives/exhibits-and-education/online-exhibits/annexed-cities",
+     "https://clerk.seattle.gov/~F_archives/annexations/West_Seattle.htm",
+     "https://www.historylink.org/File/1954",
+     "https://historylink.org/File/1421"
+    ],
+    "confidence": "high",
+    "size_or_volume": "45 polygons; bake as TopoJSON (<200 KB)",
+    "notes": "Bake polygons plus a hand-checked annexations.json (year, ordinance, archive link, one-sentence note) so the Neighborhood ring can say 'this spot became part of Seattle on May 29, 1907 (Ballard)'. The SMA interactive annexation map (clerk.seattle.gov/~F_archives/annexations/) is the link-out for each polygon."
+   },
+   {
+    "name": "Municipal incorporation dates for all 281 Washington cities/towns (cbgoodman/muni-incorporation, sourced from MRSC)",
+    "url": "https://raw.githubusercontent.com/cbgoodman/muni-incorporation/master/rawdata/muni-incorporation.csv",
+    "what_it_gives": "CSV columns census_id_pid6, muniname, statename, yr_incorp. Verified this session: 281 Washington rows (100% complete per README, source 'MRSC of Washington'); earliest Steilacoom 1854, Vancouver 1857, Olympia 1859, Port Townsend 1860, Walla Walla 1862, Seattle 1865; latest Spokane Valley 2003; 84 incorporations in the 1900s decade, 50 in the 1890s.",
+    "coverage": "All active Washington municipalities (year of first incorporation only; no disincorporated towns like Ballard/Georgetown)",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "No LICENSE file; README asks that the repo be cited (CITATION.cff present). Dates are facts; cite 'Goodman, Municipal Incorporation Data (GitHub), via MRSC'. Cross-check against MRSC's officials directory and Wikipedia 'List of municipalities in Washington'.",
+    "evidence_urls": [
+     "https://github.com/cbgoodman/muni-incorporation",
+     "https://mrsc.org/mrsctools/officials-directory/city.aspx?amp=&ci=a",
+     "https://en.wikipedia.org/wiki/List_of_municipalities_in_Washington"
+    ],
+    "confidence": "high",
+    "size_or_volume": "19,485 rows nationally; 281 for WA (~10 KB after filtering)",
+    "notes": "Fills the Wikidata gap (only 13% of WA places have inception). Add Seattle's 1865 incorporation / 1867 disincorporation / Dec 2 1869 reincorporation and the annexed towns (Ballard 1890-1907, Georgetown 1904-1910, West Seattle 1902-1907, Columbia 1893-1907, South Park 1902-1907, South Seattle 1905, Southeast Seattle 1906) by hand from HistoryLink/SMA."
+   },
+   {
+    "name": "OFM decennial census counts 1890-2020 (state, counties, cities)",
+    "url": "https://ofm.wa.gov/data-research/population-demographics/estimates/archive/",
+    "what_it_gives": "One Excel workbook of decennial population for every Washington county and city/town 1890-2020, plus April 1 estimates 1960-present. Drives 'population then' lines for the city and county rings at every decade stop.",
+    "coverage": "Statewide, every decade 1890-2020",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "Washington state public record; cite 'Washington Office of Financial Management'",
+    "evidence_urls": [
+     "https://ofm.wa.gov/data-research/population-demographics/decennial-census/",
+     "https://ofm.wa.gov/data-research/population-demographics/estimates/archive/"
+    ],
+    "confidence": "medium",
+    "notes": "File confirmed by OFM page text ('Decennial census counts of population: 1890-2020 [Excel]'); columns not inspected. Replaces the Census API (key-only, nothing before 2000). Parse with a script, emit populations.json keyed by city name + county."
+   },
+   {
+    "name": "King County Assessor Parcel extract: plat name, lot and block (block ring)",
+    "url": "https://aqua.kingcounty.gov/extranet/assessor/Parcel.zip",
+    "what_it_gives": "EXTR_Parcel.csv (628,594 rows, 83 columns) with Major/Minor (PIN), PlatName, PlatLot, PlatBlock, PropName, Township/Range/Section, DistrictName, PresentUse, HistoricSite, plus the Residential/Commercial Building extracts with YrBuilt. Gives the block ring its name: 'Lot 7, Block 12, Denny's Second Addition'. At runtime the same PLAT_NAME is on gismaps.kingcounty.gov Property/KingCo_PropertyInfo/MapServer/2.",
+    "coverage": "King County only; current records (no plat recording dates)",
+    "use_at": "build-time",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "RCW 42.56.070(9) acknowledgment only (no commercial use of lists of individuals); no owner names in these files; cite 'King County Assessor'",
+    "evidence_urls": [
+     "https://info.kingcounty.gov/assessor/DataDownload/default.aspx",
+     "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer"
+    ],
+    "confidence": "high",
+    "size_or_volume": "Parcel.zip 31.9 MB (CSV 247 MB); emit a PIN -> {plat, lot, block, yrBuilt} table split by 3-digit Major prefix so the browser loads <100 KB per lookup",
+    "notes": "Plat names are the key to the block ring: group parcels by PlatName to derive the addition's extent (union of parcel polygons from PARCEL_GEO) and count how many houses in the addition predate the chosen year (from YrBuilt), which makes the block ring 'thick' instead of empty."
+   },
+   {
+    "name": "Plat recording dates: Washington State Digital Archives (King County plats and surveys 1870-present) and King County Recorder 'Landmark'",
+    "url": "https://digitalarchives.wa.gov/",
+    "what_it_gives": "Images and indexes of every plat recorded with the King County Recorder since 1870, searchable by addition name or year; Landmark search by Book/Page (Book Type = Plat) returns the recorded plat image with its recording date. This is the only place to get 'this addition was platted in 1889'.",
+    "coverage": "King County, 1870-present; other counties have their own recorder sites and Digital Archives collections",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Public records; no API; link-out only (Landmark images are watermarked, free to view)",
+    "evidence_urls": [
+     "https://kingcounty.gov/en/dept/executive-services/certificates-permits-licenses/records-licensing/recorders-office/surveys-plats-condos",
+     "https://kingcounty.gov/en/dept/executive-services/certificates-permits-licenses/records-licensing/recorders-office/records-search",
+     "https://kingcounty.gov/en/dept/executive-services/data-information-services/archives/find-it-in-archives/property-land-use/maps-plats-surveys"
+    ],
+    "confidence": "medium",
+    "notes": "No dataset of plat dates exists. Practical plan: hand-curate plats.json for the ~150 most common Seattle PlatName values (year recorded, platter, HistoryLink/Wikipedia link) from the Digital Archives index, and show a 'look up this plat' link for the rest."
+   },
+   {
+    "name": "Seattle Modified Land (artificial fill and graded land)",
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Modified_Land/FeatureServer/12",
+    "what_it_gives": "367 polygons with PTYPE_1 (af = artificial fill, gr = graded land) and DESCRIPTIO, derived from the USGS/UW Geologic Map of Seattle. Tells the house/block ring 'this lot sits on fill (former tideflat)' or 'this ground was regraded'. Undated.",
+    "coverage": "Seattle city limits",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Seattle GeoData open license (SPU); underlying USGS data public domain",
+    "evidence_urls": [
+     "https://data-seattlecitygis.opendata.arcgis.com/",
+     "https://pubs.usgs.gov/publication/ofr20051252"
+    ],
+    "confidence": "high",
+    "size_or_volume": "367 polygons; bake as TopoJSON",
+    "notes": "Pair each fill/graded polygon with a dated event by location (hand-tagged at build time): Denny Regrade 1898-1930, Jackson St 1907-09, Dearborn St 1909-12, tideflat fill 1895-1917, Harbor Island 1903-1909, Duwamish straightening 1913-20, Interbay/Smith Cove fill, University Village/Union Bay lakebed exposed 1916. That turns an undated layer into 'surroundings change over time'."
+   },
+   {
+    "name": "USGS OFR 2005-1252 'Geologic Map of Seattle' GIS data release (2024)",
+    "url": "https://data.usgs.gov/datacatalog/data/USGS:6543ceced34ee4b6e05becd7",
+    "what_it_gives": "Full geodatabase/shapefiles behind the Troost, Booth, Wisher and Shimel map (36,000+ subsurface points): map units including modified land, contacts, faults. Source of the Seattle Modified Land layer with its complete attributes.",
+    "coverage": "City of Seattle",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "US public domain; authors ask that both the report and the data release (doi 10.5066/P93L6SPS) be cited",
+    "evidence_urls": [
+     "https://catalog.data.gov/dataset/gis-data-for-u-s-geological-survey-ofr-2005-1252-the-geologic-map-of-seattlea-progress-rep",
+     "https://pubs.usgs.gov/publication/ofr20051252"
+    ],
+    "confidence": "medium",
+    "notes": "Only needed if the Seattle Modified Land service ever disappears or if richer unit descriptions are wanted for the 'rock under your house' card within Seattle (finer than DNR 100K)."
+   },
+   {
+    "name": "UW Puget Sound River History Project: georeferenced US Coast Survey T-sheets (1850-1890s) and composite vector T-sheet geodatabase",
+    "url": "https://riverhistory.ess.washington.edu/tsheets.php",
+    "what_it_gives": "GIS-ready rasters of 125 T-sheets surveyed 1850-1890 (NAD27 and NAD83/HARN, UTM 10N) and a digitized composite shoreline/tidal-marsh/tideflat geodatabase for all of Puget Sound, plus GLO plat maps and early aerials. This is the pre-settlement shoreline the Burke Museum Waterlines map was drawn from.",
+    "coverage": "Puget Sound saltwater shorelines (Elliott Bay, Duwamish estuary, Salmon Bay, Commencement Bay, etc.), 1850s-1890s; not Lake Washington/Lake Union",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "Source T-sheets are US public domain; UW derived data offered for research with attribution to the Puget Sound River History Project (Collins et al.)",
+    "evidence_urls": [
+     "http://riverhistory.ess.washington.edu/tsheets/",
+     "https://wdfw.wa.gov/sites/default/files/publications/02204/wdfw02204.pdf",
+     "https://wagda.lib.washington.edu/data/geography/wa_state/wageol/metadata/PSNERP%20CA%20GEOSPATIAL%20METHODOLOGY.pdf"
+    ],
+    "confidence": "medium",
+    "notes": "Download once by hand (site is old; its viewer broke in 2016 but downloads are listed). Clip to the Seattle bbox and emit shoreline_1850s.topojson (land/water/tideflat/marsh) so the map can show the 1850s waterline and the house ring can say 'in 1860 this spot was tideflat'. The PSNERP Change Analysis geodatabases (WAGDA, 2012) and the geo.wa.gov 'SOW2016 PS Nearshore' modification layer are the same lineage for the rest of Puget Sound."
+   },
+   {
+    "name": "NOAA NGS Shoreline Data Explorer: historical T-sheet rasters and vectorized 'Shoreline Data Rescue' shorelines",
+    "url": "https://nsde.ngs.noaa.gov/",
+    "what_it_gives": "Public-domain georeferenced T-sheet scans and vector shorelines by project, including Seattle (WA1920A 'Shoreline Data Rescue Project of Seattle', WA1805 Port of Seattle), Commencement Bay WA1927E, Tacoma Harbor CM-7311, Whidbey WA1940B, Admiralty Inlet, Hood Canal, Willapa Bay, Columbia River.",
+    "coverage": "Washington saltwater coast, various survey years (check each project's time frame)",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "US public domain (NOAA); cite NOAA NGS",
+    "evidence_urls": [
+     "https://www.fisheries.noaa.gov/inport/item/64096",
+     "https://www.fisheries.noaa.gov/inport/item/61853",
+     "https://catalog.data.gov/dataset/shoreline-data-rescue-project-of-commencement-bay-wa-wa1927e",
+     "https://www.fisheries.noaa.gov/inport/item/62055"
+    ],
+    "confidence": "medium",
+    "notes": "Second source for dated historic shorelines outside Seattle (Tacoma, Everett, Bellingham, Olympia). Survey years were not confirmed this session; read the InPort 'Time Frame' field before labelling a year."
+   },
+   {
+    "name": "USGS Historical Topographic Maps ImageServer as the dated-landscape overlay (1894/1897/1908/1909 sheets)",
+    "url": "https://historical1.arcgis.com/arcgis/rest/services/USGS_Historical_Topographic_Maps/ImageServer",
+    "what_it_gives": "31 sheets at the Space Needle; the 1894 Seattle 1:62,500 and 1897 1:125,000 sheets show Denny Hill before regrading, the open tideflats south of King St, the Black River outlet of Lake Washington and the pre-1916 lake shoreline; 1908/1909 sheets show Harbor Island and the Jackson regrade under way; 1949 and later show the modern city. Rendered per sheet with exportImage + lockRaster.",
+    "coverage": "Statewide, 1894 onward",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "US public domain (USGS)",
+    "evidence_urls": [
+     "https://historical1.arcgis.com/arcgis/rest/services/USGS_Historical_Topographic_Maps/ImageServer",
+     "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=Historical%20Topographic%20Maps&bbox=-122.36,47.61,-122.34,47.63&outputFormat=JSON"
+    ],
+    "confidence": "high",
+    "notes": "Verified by the earlier probe. This is the pragmatic answer to 'no dated shoreline GIS': at the 1890s and 1900s stops show the 1894/1897/1909 sheet instead of a polygon. Pre-1916 Lake Washington has no vector layer anywhere; the 1894 sheet is the honest picture."
+   },
+   {
+    "name": "King County 1936 aerial photo tiles (KingCo_Aerial_1936) and Seattle SP_Aerial_1936",
+    "url": "https://gismaps.kingcounty.gov/arcgis/rest/services/BaseMaps/KingCo_Aerial_1936/MapServer",
+    "what_it_gives": "Cached raster tiles of the 1936 (Pacific Aerial Surveys / WPA Land Use Survey) photography of western King County, 1-ft pixels, Web Mercator (WKID 102100), 256 px tiles, URL pattern .../MapServer/tile/{z}/{y}/{x}. Lets the 1936 stop show the actual neighborhood from the air.",
+    "coverage": "Western King County (all of Seattle and inner suburbs), 1936",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "King County GIS terms (free display with attribution 'King County'); export of tiles disallowed, bulk raster download not offered",
+    "evidence_urls": [
+     "https://gismaps.kingcounty.gov/arcgis/rest/services/BaseMaps/KingCo_Aerial_1936/MapServer/info/iteminfo?f=pjson",
+     "https://wiki.openstreetmap.org/wiki/OpenHistoricalMap/Projects/Seattle",
+     "https://catalog.data.gov/dataset/sp-aerial-1936-f49ab",
+     "https://kingcounty.gov/en/legacy/depts/records-licensing/archives/findarchives/photos_guide"
+    ],
+    "confidence": "medium",
+    "example_request": "MapLibre raster source: tiles ['https://gismaps.kingcounty.gov/arcgis/rest/services/BaseMaps/KingCo_Aerial_1936/MapServer/tile/{z}/{y}/{x}'], tileSize 256",
+    "notes": "OHM's Seattle project lists it as an imagery source, which implies it loads as XYZ tiles in iD. Seattle's own copy (gis.seattle.gov/image/.../SP_Aerial_1936/MapServer) is State Plane ('SP') and not directly usable in MapLibre. Raster tiles need no CORS. Verify tileInfo origin once live."
+   },
+   {
+    "name": "Burke Museum Waterlines Project (mid-1800s Seattle landscape map with Lushootseed place names)",
+    "url": "https://www.burkemuseum.org/collections-and-research/heritage/archaeology/waterlines-project",
+    "what_it_gives": "Hand-painted map of the Seattle area before settlement (based on the River History Project mapping) with Coast Salish place names, downloadable as PDF; project map pages; blog posts on 'ghost shorelines'. No public GIS layer was ever released.",
+    "coverage": "Seattle area, mid-19th century",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Copyright Burke Museum; link-out and citation only (do not hotlink the PDF image)",
+    "evidence_urls": [
+     "https://www.burkemuseum.org/static/waterlines/project_map.html",
+     "https://www.burkemuseum.org/static/waterlines/images/maps-and-images/waterlines_map_medium.pdf",
+     "https://www.knkx.org/other-news/2014-11-25/burke-museums-new-map-shows-seattles-original-shoreline",
+     "https://www.hiddenhydrology.org/seattle-the-waterlines-project/"
+    ],
+    "confidence": "high",
+    "notes": "Use as the 'see the 1850s map' link on the pre-1851 stop and as the source credit for place names quoted via Wikipedia (Duwamish people) and the Duwamish Tribe site. Do not draw village polygons the site invents."
+   },
+   {
+    "name": "HistoryLink.org essays (dated events; neighborhood thumbnail histories)",
+    "url": "https://www.historylink.org/",
+    "what_it_gives": "Authoritative dated facts with essay numbers: Alki landing Nov 13 1851 (5392); founding and 1853 plats (303); Battle of Seattle Jan 26 1856 (5208); Great Fire Jun 6 1889 (21090); Klondike Jul 17 1897 (687); AYP Jun 1-Oct 16 1909 (8892); Denny Regrade phases 1898-99 (708), 1903-Oct 31 1911 (709/710), 1928-Dec 10 1930 (711), overview (21204), regrades overview 'Altering Terrain' (23379); Jackson St regrade May 27 1907-Dec 1909 (23118); Dearborn St regrade Aug 31 1909-autumn 1912 (23149, 23150); tideflat filling from Jul 29 1895 and Duwamish straightening begun Oct 14 1913, done ~1920 (2986, 21333, 22852); Harbor Island finished 1909/early 1910 (3631); Lake Washington Ship Canal, lake lowered from Aug 28 1916 (1444); horse streetcar Sep 23 1884 (2690), first electric Mar 31 1889 (2691), street railways overview (2707), interurbans (2667, 2669, 5341); Belltown-Denny Regrade (1123); neighborhood thumbnails: Ballard 983, Fremont 1320, Wallingford 3461, Georgetown 2975, Columbia City 3327, Beacon Hill 3004, Capitol Hill 3188 and 9841, Cascade/South Lake Union 3178, Seward Park 3143, Portage Bay-Roanoke 10180; Spokane 7462; Tacoma 20749.",
+    "coverage": "Statewide; densest for Seattle",
+    "use_at": "runtime",
+    "cors": "no",
+    "api_key": "none",
+    "license_terms": "Copyrighted (free for personal/educational use); no API and no CORS. Use only as link-outs with our own one-line dated facts citing the essay number.",
+    "evidence_urls": [
+     "https://historylink.org/File/708",
+     "https://historylink.org/File/711",
+     "https://historylink.org/File/23118",
+     "https://historylink.org/File/23149",
+     "https://www.historylink.org/File/2986",
+     "https://historylink.org/File/3631",
+     "https://historylink.org/File/1444",
+     "https://www.historylink.org/File/2707",
+     "https://historylink.org/File/5392",
+     "https://www.historylink.org/file/21090",
+     "https://historylink.org/File/687",
+     "https://www.historylink.org/File/1123",
+     "https://historylink.org/File/1320",
+     "https://www.historylink.org/file/3461",
+     "https://www.historylink.org/file/3327",
+     "https://historylink.org/File/3188"
+    ],
+    "confidence": "high",
+    "notes": "Bake historylink.json: {neighborhoodName -> essay URL} for every Map Atlas S_HOOD that has a Thumbnail History (about 60 exist), and events.json with the dated facts above. Link format https://www.historylink.org/File/<n>."
+   },
+   {
+    "name": "Wikipedia timelines and topical articles (Timeline of Seattle, Timeline of Spokane, Street layout of Seattle, Regrading in Seattle, List of Seattle landmarks, Duwamish people, Seattle Municipal Street Railway)",
+    "url": "https://en.wikipedia.org/wiki/Timeline_of_Seattle",
+    "what_it_gives": "Year-by-year city chronologies (Seattle from Sept 1851, Spokane from 1874) that can be parsed into dated events for the city ring; Street layout of Seattle explains the 1853 Denny/Boren vs Maynard grids (32 and 49 degree tilts) and the true-north grid elsewhere; List of Seattle landmarks has date listed and descriptions with build years; Duwamish people lists the 17 villages with Lushootseed names (West Point paq\u0313ac\u0313a\u026c\u010du\u0294 occupied 4,200 years; h\u0259\u0294apus and t\u0315u\u0294\u0259lal\u0294tx\u02b7 since the 6th century; d\u1dbbid\u1dbb\u0259lal\u0315i\u010d at Pioneer Square).",
+    "coverage": "Seattle and Spokane timelines exist; no 'Timeline of Tacoma' (use History of Tacoma); 'List of streets in Seattle' does not exist (use individual street articles via search)",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "CC BY-SA 4.0: quote as excerpts with attribution, never rewrite as our own",
+    "evidence_urls": [
+     "https://en.wikipedia.org/wiki/Timeline_of_Spokane,_Washington",
+     "https://en.wikipedia.org/wiki/Street_layout_of_Seattle",
+     "https://en.wikipedia.org/wiki/Regrading_in_Seattle",
+     "https://en.wikipedia.org/wiki/List_of_Seattle_landmarks",
+     "https://en.wikipedia.org/wiki/Duwamish_people",
+     "https://en.wikipedia.org/wiki/Seattle_Municipal_Street_Railway"
+    ],
+    "confidence": "high",
+    "example_request": "https://en.wikipedia.org/w/api.php?action=parse&page=Timeline_of_Seattle&prop=wikitext&format=json&origin=*",
+    "notes": "Parse the timeline wikitext at build time into timeline_seattle.json (year, text, section) so scrubbing the dial never refetches; same for Spokane. Keep runtime Wikipedia use for summaries and street-article search as in plan v1."
+   },
+   {
+    "name": "Seattle Landmarks (517 points) joined to PARCEL_GEO year built; Dept of Neighborhoods designation reports",
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Landmarks/FeatureServer/0",
+    "what_it_gives": "NAME, ADDRESS, PIN, LANDNO, ORDINANCE, EFF_DATE (designation date), PHOTO, DOCUMENT (designation report PDF). Year built is not a field: join PIN to PARCEL_GEO/FeatureServer/0 YR_BUILT_MAX (Seattle, CORS *) or to the Assessor extract; designation report PDFs state 'Year built' in their header.",
+    "coverage": "City of Seattle designated landmarks (450+), updated daily",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Seattle GeoData open license; report PDFs are public records",
+    "evidence_urls": [
+     "https://seattle.gov/neighborhoods/historic-preservation/city-landmarks/landmarks-map",
+     "https://www.seattle.gov/documents/departments/neighborhoods/historicpreservation/landmarks/relateddocuments/desrpt_1101epike.pdf",
+     "https://en.wikipedia.org/wiki/List_of_Seattle_landmarks"
+    ],
+    "confidence": "high",
+    "size_or_volume": "517 points; bake landmarks.json (~100 KB) with yrBuilt from PARCEL_GEO and a Wikipedia title where one matches",
+    "notes": "Multi-point landmarks repeat rows; dedupe on LANDNO. Nearest landmark within 300 m is a good 'thin ring' filler for the street ring."
+   },
+   {
+    "name": "Seattle Historic and Special Review Districts (8 polygons)",
+    "url": "https://data.seattle.gov/dataset/Historic-and-Special-Review-Districts/qa75-nuwx",
+    "what_it_gives": "Polygons for Pioneer Square (designated 1970), Pike Place Market (1971), International District (1973), Ballard Avenue (1976), Columbia City (1978), Harvard-Belmont (1980), Fort Lawton (1988) and Sand Point Naval Air Station (2011). Also on Seattle GeoData as ArcGIS item c2957847954e456d8ca9fa3db693cb95 sublayer 23.",
+    "coverage": "Seattle",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Seattle open data terms (public domain style)",
+    "evidence_urls": [
+     "https://catalog.data.gov/dataset/historic-and-special-review-districts",
+     "https://seattle.gov/documents/Departments/Neighborhoods/HistoricPreservation/HistoricDistricts/Seattle-historic-districts_brochure.pdf"
+    ],
+    "confidence": "medium",
+    "notes": "Field names not confirmed; designation years above are from general knowledge and should be checked against the brochure/Wikipedia at build time. Bake as districts.topojson with the designation year so the street ring can say 'inside the Pioneer Square Historic District (designated 1970)'."
+   },
+   {
+    "name": "Seattle Historical Sites database (Dept of Neighborhoods Historic Resources Survey)",
+    "url": "https://web.seattle.gov/DPD/HistoricalSite/default.aspx",
+    "what_it_gives": "5,000+ surveyed properties with year built, architect, builder, style, neighborhood, significance narrative; searchable by address, parcel, year built, architect. Records have numeric deep links (QueryResult.aspx?ID=n, as cited by PCAD).",
+    "coverage": "Seattle; surveyed neighborhoods only (partial)",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "City web content; no bulk export, no API, no documented open-data copy (open.data@seattle.gov is the contact to ask)",
+    "evidence_urls": [
+     "https://seattle.gov/neighborhoods/historic-preservation/historic-resources-survey",
+     "https://www1.adc.seattle.gov/cityarchives/search-collections/research-tips-and-tools/resources-for-property-history-research",
+     "https://web.seattle.gov/DPD/HistoricalSite/QueryResult.aspx",
+     "https://pcad.lib.washington.edu/link/7241"
+    ],
+    "confidence": "medium",
+    "notes": "Link-out from the house ring ('search this address in Seattle's historical sites survey'). Ask the City for a CSV export; if granted, bake year-built/architect by PIN."
+   },
+   {
+    "name": "King County Historic Landmarks and Historic Resource Inventory (outside Seattle)",
+    "url": "https://services.arcgis.com/Ej0PsM5Aw677QF1W/ArcGIS/rest/services/Historic_Landmarks/FeatureServer",
+    "what_it_gives": "County-designated landmarks (program since 1982, year designated in the printed list) and HRI_Sites (3,500+ surveyed properties since 1977) as hosted feature layers; Wikipedia 'List of landmarks in King County' for prose.",
+    "coverage": "King County outside Seattle (and interlocal cities)",
+    "use_at": "either",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "King County GIS open data terms (attribution)",
+    "evidence_urls": [
+     "https://services.arcgis.com/Ej0PsM5Aw677QF1W/ArcGIS/rest/services/HRI_Sites/FeatureServer",
+     "https://kingcounty.gov/~/media/services/home-property/historic-preservation/documents/KCLC/T06_KCLandmarkList.ashx?la=en",
+     "https://en.wikipedia.org/wiki/List_of_landmarks_in_King_County,_Washington"
+    ],
+    "confidence": "medium",
+    "notes": "ArcGIS Online hosted (services.arcgis.com) so CORS * is expected; field names unverified. Max record count 2,000."
+   },
+   {
+    "name": "WA DAHP register and inventory layers (Register Properties, Register Districts, Historic Property Inventory) + WISAARD",
+    "url": "https://geo.wa.gov/datasets/2fb909843215410f8c4ba42f3c66f674_0",
+    "what_it_gives": "Statewide National Register / Washington Heritage Register properties and districts and the Historic Property Inventory as quarterly-refreshed feature layers; WISAARD web app for per-property inventory forms (year built, style). WSDOT republishes the register layers at data.wsdot.wa.gov EnvironmentalMapping layers 39-40.",
+    "coverage": "Statewide",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Conflicting: DAHP's GIS page says non-archaeological layers can be downloaded without a data-sharing agreement; WSDOT's copy says register properties require special arrangements. Read the item license at build time; archaeological sites are never public.",
+    "evidence_urls": [
+     "https://dahp.wa.gov/node/90",
+     "https://geo.btaa.org/catalog/2fb909843215410f8c4ba42f3c66f674_0.oai_dc_xml",
+     "https://data.wsdot.wa.gov/arcgis/rest/services/Environmental/EnvironmentalMapping/MapServer/40",
+     "https://historicseattle.org/research-you-can-use-the-magic-of-wisaard/"
+    ],
+    "confidence": "medium",
+    "notes": "Alternative with clean licensing: NPS NRHP spatial data (public domain) plus Wikipedia per-county NRHP lists (coordinates, build years in descriptions, CC BY-SA) and Wikidata P649/P571 for inception; that trio gives year built for notable buildings statewide at build time."
+   },
+   {
+    "name": "NPS National Register spatial data + Wikipedia NRHP county lists + Wikidata inception",
+    "url": "https://www.nps.gov/subjects/nationalregister/data-downloads.htm",
+    "what_it_gives": "All NRHP-listed properties/districts in Washington with name, address, listing date (public domain geodatabase); Wikipedia 'National Register of Historic Places listings in <county/city>' tables with coordinates and descriptions that usually state the build year; Wikidata items (P649 NRHP ref) often carry P571 inception and P84 architect.",
+    "coverage": "Statewide (about 1,600 WA listings)",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "NPS public domain; Wikipedia CC BY-SA (quote); Wikidata CC0",
+    "evidence_urls": [
+     "https://www.nps.gov/subjects/nationalregister/database-research.htm",
+     "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Seattle"
+    ],
+    "confidence": "medium",
+    "notes": "Bake nrhp_wa.json (name, lat/lon, listed, built, wikipedia). Gives every WA county a 'historic buildings nearby' line without licensing doubts."
+   },
+   {
+    "name": "OpenHistoricalMap railway/streetcar ways with dates (Overpass extract)",
+    "url": "https://overpass-api.openhistoricalmap.org/api/interpreter",
+    "what_it_gives": "759 railway ways in the Seattle bbox carry start_date/end_date (cable cars, streetcars, interurbans, railroads), hand-mapped mostly 1850s-1920s; the only ready geodata for 'streetcar lines by year'. Spokane 413 dated ways total, Tacoma 79 (mostly railway).",
+    "coverage": "Seattle good for rail; thin elsewhere",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "CC0; credit 'OpenHistoricalMap'",
+    "evidence_urls": [
+     "https://wiki.openstreetmap.org/wiki/OpenHistoricalMap/Projects/Seattle",
+     "https://www.openhistoricalmap.org/"
+    ],
+    "confidence": "high",
+    "example_request": "[out:json][timeout:60];way[\"railway\"][\"start_date\"](47.49,-122.46,47.73,-122.22);out tags geom;",
+    "notes": "Run once at build time (Overpass fair use), emit rail_seattle.geojson with start/end years and railway=tram|light_rail|rail|funicular, then at runtime filter by date and compute 'nearest line within 400 m in <year>'. The live OHM tiles already draw these lines on the map."
+   },
+   {
+    "name": "Historic streetcar track maps and timeline (for optional hand-tracing): MOHAI 1920 track map at UW, SMA 1933 track map, Kroll 1930 guide map, Tundria 1931 route list, HistoryLink 2707",
+    "url": "https://digitalcollections.lib.washington.edu/digital/collection/imlsmohai/id/15177/",
+    "what_it_gives": "Track System of Seattle Municipal Street Railway, January 1920 (MOHAI 1977.6521); April 1933 track map (Seattle Room, reproduced on Seattle Transit Blog; Penn State catalog); Kroll Guide Map of Seattle 1930 with route designations; Tundria's 1931 route-by-street listing; Seattle Times timeline. Timeline facts: horse cars Sep 23 1884; Yesler Way cable (Lake Washington Cable Railway) Sep 28 1887; Front St cable 1888; electric cars Mar 31 1889; James St cable Jan-May 1891; Madison St cable c.1890 (unverified); Seattle Electric Co consolidation 1900; city purchase Mar 1919 (Seattle Municipal Street Railway); 26-28 lines in 1936; Yesler cable last run Aug 10 1940; last streetcars April 1941; Puget Sound Electric Railway (Seattle-Tacoma) Sep 25 1902-1928; Seattle-Everett Interurban Apr 30 1910-Feb 20 1939; Waterfront Streetcar 1982-2005; South Lake Union 2007; First Hill 2016.",
+    "coverage": "Seattle streetcar era 1884-1941",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "City-produced 1920/1933 maps are public records (SMA: City-created works need no permission, cite with identifier); MOHAI scan requires permission beyond fair use; Tundria/blog content copyrighted (use as reference only)",
+    "evidence_urls": [
+     "https://www.historylink.org/File/2707",
+     "https://historylink.org/File/2690",
+     "https://www.historylink.org/file/2691",
+     "https://www.historylink.org/File/5341",
+     "https://historylink.org/File/2669",
+     "http://www.tundria.com/trams/USA/Seattle-1931.php",
+     "https://seattletransitblog.com/2008/10/15/seattle-street-car-maps/",
+     "https://archives.seattle.gov/digital-collections/index.php/Detail/objects/21464",
+     "https://archive.seattletimes.com/archive/20071210/streetcartimeline10/seattles-streetcar-history",
+     "https://en.wikipedia.org/wiki/Seattle_Municipal_Street_Railway"
+    ],
+    "confidence": "medium",
+    "notes": "No GIS of streetcar lines by year exists anywhere (american-rail-history on GitHub has no Seattle file). Phase 6 option: trace the 1933 map over today's streets into streetcar_lines.geojson (line name, years); MVP: use OHM rail ways plus these dated facts."
+   },
+   {
+    "name": "Rob Ketcherside's Seattle street renaming tables (1895 Ordinance 4044 CSV on figshare; 1906-07 annexation renamings on ba-kground.com)",
+    "url": "https://figshare.com/articles/dataset/Renaming_Seattle_s_Streets_1895_Ordinance_Number_4044/1339514",
+    "what_it_gives": "Tabular old-name -> new-name mapping from the Dec 1895 citywide renaming (e.g. Front St -> First Ave, High St -> Aloha St), plus tables for Beacon Hill/Rainier Valley (Ord 17213), West Seattle, Georgetown, Columbia City and old Ballard street names at annexation, and the 1906 table (Ravenna, Queen Anne, Magnolia, Montlake, Capitol Hill, Eastlake, Madrona, Leschi, Sodo). SMA adds the 1961 directional re-designation (Ord 89910).",
+    "coverage": "Seattle streets renamed 1895-1910 (a minority of all historical renamings)",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "figshare dataset described as Creative Commons (default CC BY 4.0; confirm on the item); blog tables copyrighted, cite the author; the ordinances themselves are public records on the SMA site",
+    "evidence_urls": [
+     "https://ba-kground.com/1895-seattle-street-renaming-searchable-table/",
+     "https://ba-kground.com/renaming-the-streets-of-south-and-west-seattle/",
+     "https://ba-kground.com/old-ballard-street-names/",
+     "https://www.writesofway.org/rob-ketchersides-seattle-street-renaming-tables/",
+     "https://www.seattle.gov/city-archives/search-collections/research-tips-and-tools/street-directional-designations"
+    ],
+    "confidence": "medium",
+    "size_or_volume": "1895 CSV 45 KB",
+    "notes": "Bake street_old_names.json keyed by normalized current name (and old name) so the street ring can say 'before Dec 23 1895 this was Front Street' with the ordinance link. The Street ring's 'then called' logic should also switch N/S/E/W suffix style before 1961."
+   },
+   {
+    "name": "Street-name origin prose: Writes of Way, Wedgwood in Seattle History, Sophie Frye Bass 'Pig-Tail Days in Old Seattle' (1937), SMA ordinances 1869-present",
+    "url": "https://www.writesofway.org/",
+    "what_it_gives": "Street-by-street etymologies (Writes of Way is the most complete modern survey; Wedgwood blog covers north-end street naming and plat origins; Pig-Tail Days is the classic 1937 source quoted by both). SMA hosts every ordinance since 1869 for renamings. Seattle's OSM/Wikidata etymology coverage is sparse (isolated name:etymology:wikidata tags only).",
+    "coverage": "Seattle streets; uneven",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Blogs copyrighted (link-out only). Pig-Tail Days: 1937 Metropolitan Press; renewal status not found in Stanford's database this session, no scan on archive.org/HathiTrust, 1973 Binfords & Mort reprint in print, so treat as in copyright and cite only. OSM tags ODbL.",
+    "evidence_urls": [
+     "https://wedgwoodinseattlehistory.com/2018/01/20/searching-for-the-origins-of-seattle-street-names/",
+     "https://wedgwoodinseattlehistory.com/2015/10/10/seattle-street-names/",
+     "https://openlibrary.org/books/OL6365592M/Pig-tail_days_in_old_Seattle",
+     "https://streetsofseattle.wordpress.com/2012/02/15/pig-tail-days/",
+     "https://www.openstreetmap.org/way/6375320",
+     "https://wiki.openstreetmap.org/wiki/Key:etymology"
+    ],
+    "confidence": "medium",
+    "notes": "Hand-curate street_origins.json for the ~120 named (non-numbered) arterials in Seattle: one sentence in our own words plus source link (HistoryLink/Wikipedia preferred, Writes of Way as citation). Numbered streets get a generated explanation from Street layout of Seattle."
+   },
+   {
+    "name": "USGS GNIS: Washington Domestic Names + national Feature Description/History + Historical Features (verified download)",
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/DomesticNames/DomesticNames_WA_Text.zip",
+    "what_it_gives": "DomesticNames_WA.txt: 22,874 named features (6,389 streams, 3,004 lakes, 2,674 populated places, 2,648 summits, 613 civil units) with feature_id, class, county, lat/lon, BGN decision date. Topical/FeatureDescriptionHistory_National_Text.zip (189,911 rows): 2,171 WA features with description, 722 with name-origin 'history' text (70 in King County, e.g. Duwamish River 'named from the Duwamish tribe', Shilshole Bay from Lushootseed Cil-col 'threading'). Topical/HistoricalFeatures_National_Text.zip: 175 WA features that no longer exist, 19 in King County: Denny Hill, Latona, Ross, Edgewater, Hillman City, Day City, Naval Air Station Seattle, etc. with coordinates.",
+    "coverage": "Statewide; administrative features (schools, parks, churches) removed in 2021 but frozen in the Archive folder",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "US public domain; cite 'USGS Geographic Names Information System'",
+    "evidence_urls": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/Topical/FeatureDescriptionHistory_National_Text.zip",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/Topical/HistoricalFeatures_National_Text.zip",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/GNIS_file_format.pdf",
+     "https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data"
+    ],
+    "confidence": "high",
+    "size_or_volume": "WA names zip 1.2 MB; description/history 4.2 MB; historical 1.0 MB; emit gnis_wa.json of populated places + civil + historical features with any history text (~1-2 MB, split by county)",
+    "notes": "prd-tnm.s3.amazonaws.com is reachable from the build (and was from this sandbox). Join history to WA by feature_id. Use 'Populated Place' points for unincorporated community names (the neighborhood ring outside cities) and '(historical)' places for 'then called Latona / Ross / Edgewater'."
+   },
+   {
+    "name": "Edmond S. Meany, 'Origin of Washington Geographic Names' (1923, public domain) via HathiTrust and the Washington Historical Quarterly serial",
+    "url": "https://catalog.hathitrust.org/Record/001444300",
+    "what_it_gives": "357-page alphabetical dictionary of the origins of Washington county, town, river, bay and mountain names (first serialized in Washington Historical Quarterly 1917-1923; UW hosts the installments as PDFs). Partial transcriptions exist for Cowlitz and Lewis counties.",
+    "coverage": "Statewide place names as of 1923",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "Published 1923 in the US: public domain since 2019; HathiTrust full view expected (not confirmed this session)",
+    "evidence_urls": [
+     "https://journals.lib.washington.edu/index.php/WHQ/article/view/6483/5557",
+     "https://journals.lib.washington.edu/index.php/WHQ/article/view/6321/5395",
+     "https://www.ahgp.org/wa/origin-of-washington-geograpic-names.html",
+     "https://www.jtenlen.drizzlehosting.com/wacowlitz/meany-cowlitz.html"
+    ],
+    "confidence": "medium",
+    "notes": "Curate rather than OCR everything: extract entries for the 39 counties, the 281 municipalities and major water bodies into placename_origins.json (quote verbatim, it is PD). Complements GNIS history text and Wikidata P138."
+   },
+   {
+    "name": "Seattle Municipal Archives photographs: Wikimedia Commons mirror (CC BY 2.0), Flickr stream, and SMA Digital Collections",
+    "url": "https://commons.wikimedia.org/wiki/Category:Seattle_Municipal_Archives",
+    "what_it_gives": "Tens of thousands of City photographs 1880s-present (streets, regrades, streetcars, neighborhoods, parks) with the SMA identifier in each caption; Commons categories 'Seattle Municipal Archives via Flickr', 'CC-BY Seattle Municipal Archives', 'Files from Seattle Municipal Archives Flickr stream'. SMA Digital Collections (archives.seattle.gov, CollectiveAccess) has 110,000+ images searchable by Geographical Area/Neighborhood and street name.",
+    "coverage": "Seattle, 1880s-present",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Flickr/Commons copies CC BY 2.0; City-created photos are public records: credit 'Courtesy Seattle Municipal Archives, Item <id>'. Flickr API keys are now Pro-subscriber only (effectively paid) and api.flickr.com lacks reliable CORS, so do not build on Flickr. SMA site has no API and warns of bot load: link-out only.",
+    "evidence_urls": [
+     "https://commons.wikimedia.org/wiki/Commons:Uploading_from_the_Seattle_Municipal_Archives_Flickr_stream",
+     "https://archives.seattle.gov/digital-collections/index.php/Search/advanced/objects",
+     "https://www.flickrhelp.com/hc/en-us/articles/4404070036884-Flickr-API",
+     "https://seattle.gov/city-archives/search-collections/digital-archives"
+    ],
+    "confidence": "high",
+    "example_request": "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=categorymembers&gcmtitle=Category:Files_from_Seattle_Municipal_Archives_Flickr_stream&gcmtype=file&gcmlimit=50&prop=imageinfo|coordinates&iiprop=url|extmetadata&iiurlwidth=640",
+    "notes": "Commons API returns 429 after ~5 quick calls: build a static manifest in GitHub Actions at 1 request per 2-3 s with maxlag=5 and a descriptive User-Agent, then bucket photos by neighborhood (from caption/tag text matched against S_HOOD names and street names) and by decade (from DateTimeOriginal). Most SMA files lack coordinates, so text matching is the practical geolocation."
+   },
+   {
+    "name": "Seattle Public Library CONTENTdm: Seattle Historical Photograph Collection (p15015coll4), Seattle Neighborhood History Project (p16118coll1), Maps and Atlases (Baist 1905 plates)",
+    "url": "https://cdm16118.contentdm.oclc.org/digital/collection/p15015coll4",
+    "what_it_gives": "2,000-3,000 photographs 1850s-1980s with date, location and rights per item; West Seattle neighborhood history project; digitized Baist 1905 Real Estate Atlas plates (23) and other maps. CONTENTdm JSON API: /digital/api/search/collection/<alias>/searchterm/<term>/maxRecords/<n> and /digital/api/collections/<alias>/items/<id>/false.",
+    "coverage": "Seattle, 1850s-1980s",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Per item: many pre-1930 photos marked 'No Copyright - United States', others 'undetermined' or 'In Copyright (SPL)'; collection offered for educational/personal use; SPL asserts copyright on its Baist scans (the 1905 map itself is PD). Show thumbnail + link, respect the item rights field.",
+    "evidence_urls": [
+     "https://www.spl.org/online-resources/seattle-room-digital-collections/seattle-historical-photograph-collection",
+     "https://spl.contentdm.oclc.org/digital/collection/p15015coll4/id/2073/",
+     "http://cdm16118.contentdm.oclc.org/cdm/westseattle/collection/p16118coll1",
+     "https://www.spl.org/online-resources/seattle-culture-and-local-history/maps-and-atlases-collection"
+    ],
+    "confidence": "medium",
+    "example_request": "https://cdm16118.contentdm.oclc.org/digital/api/search/collection/p15015coll4/searchterm/Ballard/maxRecords/20",
+    "notes": "UW's CONTENTdm (same product) sends CORS *, so OCLC-hosted SPL very likely does too; verify once live before wiring it. Neighborhood-name search is the right query (addresses are rarely indexed)."
+   },
+   {
+    "name": "UW Libraries Digital Collections (CONTENTdm, CORS *): 'seattle' Seattle Photograph Collection, 'imlsmohai' MOHAI, 'ayp' Alaska-Yukon-Pacific Exposition, 'lee' James P. Lee 1901-1940, and others",
+    "url": "https://digitalcollections.lib.washington.edu/digital/collection/seattle",
+    "what_it_gives": "Seattle Photograph Collection (~2,900+ images, searchable by neighborhood: Ballard, Capitol Hill, Fremont, Georgetown, Pioneer Square, West Seattle), MOHAI's 4,000-5,000 grant-digitized items (including the 1920 streetcar track map), 1,200+ AYP 1909 photos, Lee's neighborhood photos; item API returns date, rights URI, imageUri, iiifInfoUri (images ~700 px).",
+    "coverage": "Seattle and King County, 1860s-1980s",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Per item (rightsstatements.org URIs, many In Copyright); UW terms allow fair use (comment, teaching, scholarship); MOHAI items need written permission beyond fair use (photos@seattlehistory.org). Thumbnails with a link and full credit line only.",
+    "evidence_urls": [
+     "https://content.lib.washington.edu/seattleweb",
+     "https://content.lib.washington.edu/aypweb",
+     "https://digitalcollections.lib.washington.edu/digital/collection/imlsmohai/id/15177/",
+     "https://content.lib.washington.edu/ordering.html"
+    ],
+    "confidence": "medium",
+    "example_request": "https://digitalcollections.lib.washington.edu/digital/api/search/collection/seattle!imlsmohai!lee/searchterm/Fremont/maxRecords/12",
+    "notes": "Verified cross-origin by the earlier probe. MOHAI's own catalog (mohai.org/collections-and-research) and Paul Dorpat's 'Seattle Now & Then' (pauldorpat.com, Seattle Times column since 1982, tagged by neighborhood) are copyrighted and link-out only; a build-time index of Dorpat post URLs by neighborhood tag is acceptable, image hotlinking is not."
+   },
+   {
+    "name": "Library of Congress Sanborn fire-insurance maps and photos (IIIF) + OldInsuranceMaps.net/Allmaps georeferenced mosaics",
+    "url": "https://www.loc.gov/collections/sanborn-maps/?q=seattle&fo=json",
+    "what_it_gives": "32 Seattle Sanborn items (1884 sanborn09315_001 onward, 1893, 1904-05, 1916-17, updates to 1950), 591 Seattle photos; IIIF tiles via tile.loc.gov; block-level building footprints, materials and addresses for the block ring. OldInsuranceMaps.net (ohmg.dev) crowdsources georeferenced LOC Sanborn mosaics served as XYZ tiles usable in OHM/MapLibre (Olympia mosaic exists; Seattle not confirmed).",
+    "coverage": "Seattle (and other WA cities in LOC's Sanborn collection), 1884-1950",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Pre-1964 Sanborn sheets public domain; LOC rate limits ~20 req/10 s; OldInsuranceMaps outputs open",
+    "evidence_urls": [
+     "https://forum.openhistoricalmap.org/t/using-openhistoricalmap-with-sanborn-maps-from-oldinsurancemaps-net/198",
+     "https://allmaps.org/",
+     "https://archives.seattle.gov/digital-collections/index.php/Detail/objects/21612",
+     "https://pcad.lib.washington.edu/image/4787"
+    ],
+    "confidence": "medium",
+    "notes": "Block ring link: 'see this block on the 1904 Sanborn sheet'. If a Seattle mosaic exists on OldInsuranceMaps, its XYZ URL is a free dated overlay; otherwise georeference the 1884/1893 downtown sheets in Allmaps (30-minute job each) and use Allmaps' tile proxy."
+   },
+   {
+    "name": "Pierce County Assessor-Treasurer weekly data downloads (Improvement and Improvement Built-As tables)",
+    "url": "https://www.piercecountywa.gov/736/Data-Downloads",
+    "what_it_gives": "Zipped pipe-delimited text tables refreshed weekly: Improvement (parcel_number, building_id, property type, square feet, percent complete), Improvement Built-As (built-as number/type), Appraisal Account, Tax Account, Sale; year-built lives in the Improvement/Built-As tables (field name not confirmed this session; Regrid reports 88% of Pierce parcels have a structure year). Tax Parcels polygons on gisdata-piercecowa.opendata.arcgis.com (ArcGIS Online).",
+    "coverage": "Pierce County (Tacoma); active parcels",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "Public records, no formal request needed; accuracy disclaimer; cite 'Pierce County Assessor-Treasurer'",
+    "evidence_urls": [
+     "https://online.co.pierce.wa.us/cfapps/atr/datamart/metadata/improvement.pdf",
+     "https://www.piercecountywa.gov/DocumentCenter/View/6498/Datamart-Diagram",
+     "https://gisdata-piercecowa.opendata.arcgis.com/datasets/piercecowa::tax-parcels/about",
+     "https://www.piercecountywa.gov/735/Public-Records-Reports-Forms"
+    ],
+    "confidence": "medium",
+    "notes": "Second-priority county after King. Read improvement.pdf and the built-as PDF for the exact year field, then emit a parcel_number -> yrBuilt table like King's."
+   },
+   {
+    "name": "Snohomish County Assessor Improvement Records + Current Parcels (ArcGIS Hub)",
+    "url": "https://snohomish-county-open-data-portal-snoco-gis.hub.arcgis.com/",
+    "what_it_gives": "Improvement Records spreadsheet with parcel number, use code, improvement type and year built (also renovations/additions); parcel polygons ('Current Parcels', 'All Parcels Past and Present') free on the hub/FTP.",
+    "coverage": "Snohomish County (Everett)",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "County open data; cite 'Snohomish County Assessor'",
+    "evidence_urls": [
+     "https://snohomish-county-open-data-portal-snoco-gis.hub.arcgis.com/documents/3c5edc985cec4fba8b3938d16ed1d3c3",
+     "https://depts.washington.edu/wagis/projects/parcels/producers/producer.php?org=431"
+    ],
+    "confidence": "medium",
+    "notes": "Year-built field confirmed by the county's own document description; file location may be the assessor FTP (ftp.snoco.org/Assessor/Property_Characteristics/), which GitHub Actions can fetch with curl."
+   },
+   {
+    "name": "Spokane County and Clark County assessor bulk files; Thurston, Kitsap, Whatcom parcel downloads",
+    "url": "https://www.spokanecounty.gov/4123/Property-Information-Downloads",
+    "what_it_gives": "Spokane County 'Parcel Data File Downloads' (Property Info file; year built unconfirmed; Spokane County GIS Data Catalog parcels on ArcGIS Hub). Clark County: ~130 MB pipe-delimited Assessor/Treasurer zip including a building table, plus monthly TaxlotsPublic shapefiles. Thurston Parcels (131,401, ArcGIS Hub, attributes from the assessor DB). Kitsap: weekly tab-delimited Parcels.txt and Dwellings.txt with PDF data dictionaries. Whatcom: master property CSV (year built only in the viewer).",
+    "coverage": "Spokane, Clark (Vancouver), Thurston (Olympia), Kitsap (Bremerton), Whatcom (Bellingham) counties",
+    "use_at": "build-time",
+    "cors": "n/a-build-time",
+    "api_key": "none",
+    "license_terms": "County public records / open data terms (owner names redacted in Clark); cite each county assessor",
+    "evidence_urls": [
+     "https://gisdatacatalog-spokanecounty.opendata.arcgis.com/pages/parcel-data-file-downloads",
+     "https://hub-clarkcountywa.opendata.arcgis.com/pages/property-assessment-and-taxation-data",
+     "https://hub-clarkcountywa.opendata.arcgis.com/pages/digital-gis-data-download",
+     "https://gisdata-thurston.opendata.arcgis.com/datasets/thurston-parcels",
+     "https://www.kitsap.gov/assessor/Pages/DataDownload.aspx",
+     "https://www.whatcomcounty.us/3869/Property-Data-Downloads"
+    ],
+    "confidence": "low",
+    "notes": "Each needs one manual look at its data dictionary to find the year-built column. Prioritize by population: Spokane, Clark, then Kitsap/Thurston/Whatcom. For counties without a usable file the house ring falls back to OSM start_date or 'no record'."
+   },
+   {
+    "name": "Washington statewide parcels (geo.wa.gov Current Parcels / Parcels_2026) and the UW Washington State Parcel Database",
+    "url": "https://geo.wa.gov/datasets/parcels-2026-1",
+    "what_it_gives": "Statewide tax-parcel polygons with standardized parcel ID, situs address, Dept of Revenue land-use code, land/improvement values and a link to each county assessor site (no year built). The UW WAGIS normalized database has YearBuilt/YearRenovated/SquareFeetTotal but is only available on request to UW affiliates.",
+    "coverage": "All WA counties with digital parcels",
+    "use_at": "runtime",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "State open data (hosted on ArcGIS Online); county-level attribution",
+    "evidence_urls": [
+     "https://geo.wa.gov/content/2b603a599a0842a3b2284c04c8927f35",
+     "https://depts.washington.edu/wagis/projects/parcels/techdocs/attributes.php",
+     "https://gis.dnr.wa.gov/site2/rest/services/Public_Forest_Practices/WADNR_PUBLIC_OCIO_Parcels/MapServer/0"
+    ],
+    "confidence": "medium",
+    "notes": "Use as the runtime parcel-outline fallback for counties outside King (point query returns the parcel polygon and address) and as the key to join county year-built tables baked at build time."
+   },
+   {
+    "name": "Other-city official neighborhood and landmark layers (Tacoma Open Data, City of Spokane open data, Historic Spokane map)",
+    "url": "https://data-spokane.opendata.arcgis.com/",
+    "what_it_gives": "Tacoma: Neighborhood Council Districts (8, since 1992), Registered Historic Districts (9), Historic Inventory 1979-2004 (property points). Spokane: 29 neighborhood councils (city GIS 'Neighborhoods' item; dataset download unconfirmed), 'Spokane Landmarks' item on the city portal, and historicspokane.org's map of register properties and 23 historic districts (link-out).",
+    "coverage": "Tacoma and Spokane city limits",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "City open data terms (ArcGIS Online hosted); historicspokane.org copyrighted (link-out)",
+    "evidence_urls": [
+     "https://geo.btaa.org/catalog/cdd531a4b1864d94a9e79b7e3b4f965d_0.oai_dc_xml",
+     "https://www.Cityoftacoma.org/UserFiles/Servers/Server_6/File/cms/NeighborhoodCouncils/TMC%201.45%20-%20Adopted%2012.17.2019.pdf",
+     "https://my.spokanecity.org/neighborhoods/councils/",
+     "https://www.historicspokane.org/map"
+    ],
+    "confidence": "low",
+    "notes": "Gives the neighborhood ring an official name in the two next-largest cities; elsewhere fall back to Nominatim suburb/neighbourhood (OSM) and GNIS populated places."
+   },
+   {
+    "name": "Statewide/regional photo archives for link-outs: Washington State Digital Archives, Washington Rural Heritage (CONTENTdm), Tacoma Public Library Northwest ORCA",
+    "url": "https://digitalarchives.wa.gov/",
+    "what_it_gives": "State Library Photograph Collection (5,274 images 1851-1990), county collections, King County plats/surveys 1870-present; Washington Rural Heritage aggregates 150+ small libraries/museums on CONTENTdm (same JSON API pattern as UW/SPL); Tacoma's Northwest Room (Richards Studio, News Tribune archive, 10,000+ photos) via Northwest ORCA.",
+    "coverage": "Statewide; Tacoma/Pierce for ORCA",
+    "use_at": "runtime",
+    "cors": "unknown",
+    "api_key": "none",
+    "license_terms": "Per item; State Digital Archives images free to use with citation (some collections copyrighted); no documented APIs except CONTENTdm's",
+    "evidence_urls": [
+     "https://digitalarchives.wa.gov/Collections/TitleInfo/445",
+     "https://sos.wa.gov/taxonomy/term/5263",
+     "https://northwestroom.tacomalibrary.org/",
+     "https://www.tacomalibrary.org/news/tpls-northwest-room-introduces-new-database-of-local-history-collections/"
+    ],
+    "confidence": "medium",
+    "notes": "Link-out buttons per county ('photos of <county> at the State Digital Archives'); try the CONTENTdm search API on washingtonruralheritage.org once live for a runtime photo strip outside the Seattle area."
+   },
+   {
+    "name": "Lushootseed place names and Duwamish villages (Wikipedia 'Duwamish people', Duwamish Tribe site, Waterfront Seattle 'Dzidzilalich', Burke Waterlines PDF)",
+    "url": "https://en.wikipedia.org/wiki/Duwamish_people",
+    "what_it_gives": "Content for the pre-1851 stop: at least 17 Duwamish villages and ~93 longhouses around Seattle in the 1850s; West Point (paq\u0313ac\u0313a\u026c\u010du\u0294) occupied 4,200+ years; h\u0259\u0294apus and t\u0315u\u0294\u0259lal\u0294tx\u02b7 at the Duwamish mouth since the 6th century; d\u1dbbid\u1dbb\u0259lal\u0315i\u010d ('little crossing-over place') at Pioneer Square, now the honorary name of Alaskan/Elliott Way; Lake Washington villages at Edgewater Park and the Arboretum creek; Seward Park \u0294\u0259sb\u0259q\u02b7\u00e1bqs.",
+    "coverage": "Seattle area, pre-contact to 1850s",
+    "use_at": "build-time",
+    "cors": "yes",
+    "api_key": "none",
+    "license_terms": "Wikipedia CC BY-SA (quote); tribal and city pages copyrighted (cite/link); spellings differ between sources, so quote with the source named and do not invent coordinates",
+    "evidence_urls": [
+     "https://waterfrontseattle.org/dzidzilalich",
+     "https://www.duwamishtribe.org/cheshiahud",
+     "https://www.burkemuseum.org/static/waterlines/images/maps-and-images/waterlines_map_medium.pdf",
+     "https://seattle.gov/Documents/Departments/Neighborhoods/HistoricPreservation/HistoricResourcesSurvey/context-waterfront.pdf"
+    ],
+    "confidence": "medium",
+    "notes": "Present as quoted text with links on the 'Before 1851' stop for Seattle addresses; keep polygons out (none exist publicly, and Native Land was already ruled out for the time slider)."
+   }
+  ],
+  "gaps": "1. No dated historic-shoreline or regrade polygon layer exists on any Seattle/King County portal; the Burke Waterlines GIS was never published. The only vector sources for the 1850s saltwater shoreline are the UW River History Project T-sheet geodatabase and NOAA's data-rescue shorelines (both need a one-time manual download, and the UW site is aging). Pre-1916 Lake Washington / Lake Union shorelines and the Black River exist only on the USGS 1894/1897 topo sheets (raster) and in a 1981 USGS report; the lake dropped 8-12 ft depending on source (HistoryLink 9 ft, Wikipedia 8.8 ft). Regrade extents must be hand-drawn from HistoryLink/Wikipedia descriptions or taken from the undated Modified Land 'graded' polygons.\n2. Plat recording dates: no dataset. King County extracts give PlatName/Lot/Block but the year platted lives only in Recorder 'Landmark' and the WA Digital Archives index (manual lookup, no API).\n3. Streetcar lines by year: no GIS anywhere (american-rail-history has no Seattle file). OHM's 759 dated railway ways are the only geodata; a full by-year network requires hand-tracing the 1920/1933 city track maps.\n4. Seattle Historical Sites (5,000+ properties with year built/architect) has no export or API; the only citywide year-built source stays the Assessor/PARCEL_GEO. The Landmarks layer has no year-built field (join needed).\n5. Community Reporting Areas: FeatureServer path and field names unverified (Hub item confirmed). City Clerk Neighborhoods service is retired.\n6. Photos: Flickr API keys are now Pro-only and the endpoint lacks dependable CORS, so the SMA Flickr stream must be reached through its Wikimedia Commons mirror (rate-limited, mostly ungeocoded, so neighborhood assignment is by caption text). SMA Digital Collections has no API and discourages scraping. SPL CONTENTdm CORS unverified. MOHAI requires permission beyond fair use; Paul Dorpat columns are link-out only. Sophie Frye Bass's 'Pig-Tail Days' (1937) has no online scan and its renewal status was not resolved, so treat as copyrighted.\n7. Other counties: only Snohomish's year-built file is confirmed by the county's own description; Pierce (Improvement/Built-As), Spokane (Property Info), Clark (building table), Kitsap (Dwellings.txt), Thurston and Whatcom need one manual read of their data dictionaries. The statewide geo.wa.gov parcel layer has no year built; the UW statewide parcel DB with YearBuilt is not public.\n8. DAHP register layers have conflicting access statements (DAHP: free download; WSDOT: agreement required); NPS NRHP + Wikipedia + Wikidata is the clean fallback.\n9. Wikipedia has no 'List of streets in Seattle' and no 'Timeline of Tacoma'; OSM etymology tags in Seattle are sparse, so street-name origins need a curated file.\n10. Not verified live this session (sandbox blocked all but S3/GitHub): KingCo_Aerial_1936 tile origin, SPL/OCLC CORS, King County Historic_Landmarks fields, Tacoma/Spokane layer names, HathiTrust full-view status of Meany 1923, figshare license on Ketcherside's CSV.",
+  "recommendation": "BUILD-TIME DESIGN (scripts/build-wa.mjs run by a monthly GitHub Actions job, output committed under public/data/, each file with a sources.json entry carrying name, URL, license and fetch date):\n- seattle/neighborhoods.topojson (94 Map Atlas polygons + 20 districts, PDDL), seattle/cra.topojson (official reporting areas with 1990-2020 counts), seattle/annexations.topojson + annexations.json (45 polygons, year/ordinance/archive link, the seven annexed towns' dates), seattle/districts.topojson (8 historic districts with designation year), seattle/landmarks.json (517 points deduped by LANDNO, yrBuilt joined from PARCEL_GEO, Wikipedia title), seattle/modified_land.topojson (367 fill/graded polygons hand-tagged with the dated event: tideflat fill 1895-1917, Denny 1898-1930, Jackson 1907-09, Dearborn 1909-12, Harbor Island 1903-09, Duwamish straightening 1913-20, lakebed exposed 1916), seattle/shoreline_1850s.topojson (clipped from the UW T-sheet geodatabase, one-time manual download), seattle/rail.geojson (OHM Overpass extract of railway ways with start/end dates), seattle/street_old_names.json (Ketcherside 1895/1906/1907 tables), seattle/street_origins.json (curated ~120 arterials, own words + source link), seattle/historylink.json (neighborhood -> thumbnail essay), seattle/timeline.json (parsed Wikipedia Timeline of Seattle; same for Spokane), seattle/photos_manifest.json (Commons SMA categories, throttled 1 req/2-3 s, bucketed by neighborhood/street text and decade), seattle/plats.json (hand-curated year platted for the ~150 commonest PlatName values).\n- King County: yrbuilt/<major3>.json shards (PIN -> yrBuilt, yrRenovated, plat, lot, block) from the Assessor extracts (33 MB zips, weekly).\n- Statewide: incorporations.json (281 cities from the muni-incorporation CSV, cross-checked with MRSC; add Seattle's 1865/1867/1869 and the annexed towns by hand), populations.json (OFM 1890-2020 decennial), gnis_wa.json (populated places, civil units, historical features, with GNIS history text), placename_origins.json (Meany 1923 entries for counties/cities/water bodies, PD), nrhp_wa.json (NPS + Wikipedia + Wikidata), counties/<fips>_yrbuilt shards for Pierce, Snohomish, Spokane, Clark as each data dictionary is confirmed.\n- Target: every Seattle-specific file under 300 KB gzipped; shards fetched on demand by county/Major prefix so a phone loads <500 KB per address.\nRUNTIME (browser, no keys): Nominatim/Photon geocode; Seattle PARCEL_GEO year built; KC PropertyInfo layer 2 plat name (and geo.wa.gov parcels elsewhere); local point-in-polygon on the baked TopoJSON for neighborhood/CRA/annexation/district/fill; USGS Historical Topo exportImage (1894/1897/1909/1949 sheets) and the King County 1936 aerial tiles as dated map layers; OHM tiles date-filtered; UW CONTENTdm (and SPL if CORS confirms) neighborhood photo search; Commons geosearch; Wikipedia summaries/sections; link-outs to HistoryLink, SMA Digital Collections, Seattle Historical Sites, Landmark plats, MOHAI, Dorpat, Burke Waterlines.\nTIME CONTROL BEHAVIOUR FOR THE SEATTLE RINGS: house ring hides before yrBuilt and says 'on fill since c.1895-1917' or 'ground regraded 1907-09' from modified_land tags; block ring names the addition and (where curated) its plat year, links the nearest Sanborn sheet year and shows the 1936 aerial at the 1936 stop; street ring shows the pre-1895 name before Dec 23 1895 (Ord 4044), the pre-1961 directional style before Ord 89910, the nearest dated streetcar/cable line from rail.geojson, and the curated origin sentence; neighborhood ring shows annexation year ('not yet Seattle' before it), GNIS historical names (Latona, Ross, Edgewater, Hillman City), the HistoryLink thumbnail link and photos from the manifest for the chosen decade; city ring shows population for the decade and events from timeline.json.\nDATED FACTS TO ENCODE (source in brackets): Sept 1851 Collins party settles on the Duwamish (Wikipedia Timeline of Seattle); Nov 13 1851 Denny Party lands at Alki (HL 5392); Apr 1852 move to Elliott Bay, May 23 1853 first plats filed (HL 303); Jan 26 1856 Battle of Seattle (HL 5208); 1865 incorporated, 1867 disincorporated, Dec 2 1869 reincorporated (HL 303); Sept 23 1884 horse streetcars (HL 2690); Sept 28 1887 Yesler Way cable cars (HL 2707); Mar 31 1889 first electric streetcar (HL 2691); Jun 6 1889 Great Fire, 64 acres (HL 21090); Nov 11 1889 statehood; 1891 north annexation to 85th St (Annexation layer); Jul 29 1895 tideflat filling begins, ~92% filled by 1917 (HL 2986, 22852); Dec 1895 citywide street renaming Ord 4044 (Ketcherside); Jul 17 1897 Portland arrives with Klondike gold (HL 687); 1898-Jan 6 1899 Denny Regrade phase 1, 1903-Oct 31 1911 phase 2, 1928-Dec 10 1930 phase 3 (HL 708-711, 21204); Sept 25 1902 Seattle-Tacoma Interurban (HL 2669); Oct 20 1905 South Seattle annexed; Jan 7/Jan 15/May 3/May 29/Jul 24/Sept 12 1907 Southeast Seattle, Ravenna, Columbia and South Park, Ballard, West Seattle, Rainier Beach annexed (SMA reference); May 27 1907-Dec 1909 Jackson Street Regrade (HL 23118); Jun 1-Oct 16 1909 AYP Exposition (HL 8892); Aug 31 1909-autumn 1912 Dearborn Regrade (HL 23149); 1909/early 1910 Harbor Island completed (HL 3631); Apr 11 1910 Georgetown annexed; Apr 30 1910 Seattle-Everett Interurban (HL 5341); Oct 14 1913 Duwamish straightening begins, done ~1920 (HL 2986, 21333); 1916 Montlake Cut opens, Aug 28 1916 Lake Washington lowering begins (~9 ft), Black River dries (HL 1444); Jul 4 1917 Ballard Locks dedicated; 1919 city buys the streetcar system (HL 2707); 1936 aerial survey and peak 26-28 streetcar lines; Aug 10 1940 last Yesler cable car, April 1941 last streetcar (Seattle Times/HL); 1945 Wedgwood annexed (Ord 73879); 1953-54 north annexations to 145th St (Lake City); 1961 directional designations Ord 89910 (SMA); 1970-2011 historic districts designated; 1982-2005 Waterfront Streetcar; 2007 and 2016 modern streetcars.\nPRIORITY ORDER: (1) bake Map Atlas, annexations, landmarks+yrBuilt, modified land, timeline, incorporations, populations, GNIS (all verified or near-verified, all free); (2) Commons SMA photo manifest and UW CONTENTdm runtime search; (3) 1850s shoreline from UW T-sheets and the USGS 1894 sheet as the dated map stop; (4) street old names + curated origins; (5) OHM rail extract; (6) other-county year-built shards starting with Snohomish and Pierce; (7) optional hand-traced streetcar network and Allmaps Sanborn overlays. Keep 'thin ring' honesty everywhere: say 'no record' rather than guess a plat year or a streetcar line."
+ }
+}
