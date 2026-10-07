@@ -1,0 +1,4 @@
+## phone
+Failed to load resource: the server responded with a status of 429 ()
+## desktop
+Failed to load resource: the server responded with a status of 429 ()
