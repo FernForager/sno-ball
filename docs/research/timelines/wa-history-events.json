@@ -1,0 +1,2958 @@
+{
+ "v": 1,
+ "asOf": "2026-10-07",
+ "convention": "start_years_ago and end_years_ago are years before 2000 CE; negative = after 2000; 0 = continuing",
+ "standing_line": "The tribes of Washington have lived here since time immemorial; archaeological dates are minimum ages, not arrival dates.",
+ "events": [
+  {
+   "id": "manis-mastodon-people",
+   "title": "Mastodon hunters at the Manis site",
+   "when": "about 13,800 years ago",
+   "start_years_ago": 13800,
+   "end_years_ago": 13800,
+   "region": [
+    "Olympic Peninsula"
+   ],
+   "lat": 48.08,
+   "lon": -123.14,
+   "summary": "Near Sequim, a bone spear point lodged in a mastodon rib (found by Emanuel Manis in 1977 and re-dated by CT scanning in 2011) is the oldest known firm evidence of people in Washington. It predates the Clovis culture and shows hunters here as the ice sheets were still retreating from the lowlands.",
+   "at_your_spot": "When these hunters were alive, your spot had only just emerged from the ice age; the Manis site is {distance} away.",
+   "sources": [
+    {
+     "title": "HistoryLink: Manis Mastodon Site",
+     "url": "https://www.historylink.org/File/8511"
+    },
+    {
+     "title": "Wikipedia: Manis Mastodon site",
+     "url": "https://en.wikipedia.org/wiki/Manis_Mastodon_site"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "east-wenatchee-clovis",
+   "title": "East Wenatchee Clovis cache",
+   "when": "about 13,000 years ago",
+   "start_years_ago": 13000,
+   "end_years_ago": 13000,
+   "region": [
+    "North Cascades",
+    "Columbia Basin"
+   ],
+   "lat": 47.41,
+   "lon": -120.27,
+   "summary": "In 1987 orchard workers digging an irrigation trench found a cache of huge Clovis spear points and bone rods, among the finest ever discovered. It is the best evidence of the Clovis people in Washington; the Colville Tribes asked that the site be reburied, and it was.",
+   "at_your_spot": "Clovis hunters were camped on the Columbia {distance} from your spot while the last ice was melting out of the north of the state.",
+   "sources": [
+    {
+     "title": "HistoryLink: East Wenatchee Clovis cache",
+     "url": "https://historylink.org/File/7966"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "bear-creek-redmond",
+   "title": "Toolmakers camp at Bear Creek, Redmond",
+   "when": "more than 10,000 years ago",
+   "start_years_ago": 12500,
+   "end_years_ago": 10000,
+   "region": [
+    "Puget Sound"
+   ],
+   "lat": 47.67,
+   "lon": -122.12,
+   "summary": "A 2009 salmon-habitat dig beside Bear Creek, next to Redmond Town Center, turned up thousands of stone flakes, points and a salmon bone under 10,000-year-old peat. It is the oldest known tool-making site in the Puget Sound lowland, used repeatedly by small groups hunting bison, deer, bear and salmon.",
+   "at_your_spot": "People were already making tools in the Puget lowland {distance} from your spot.",
+   "sources": [
+    {
+     "title": "Tulalip News: 10,000-year-old stone tools unearthed in Redmond dig",
+     "url": "https://tulalipnews.com/?p=33563"
+    },
+    {
+     "title": "ZME Science summary of PaleoAmerica paper",
+     "url": "https://zmescience.com/science/archaeology/treasure-trove-stone-tools-827834"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "marmes-rockshelter",
+   "title": "Marmes Rockshelter",
+   "when": "about 11,000 years ago",
+   "start_years_ago": 11000,
+   "end_years_ago": 8000,
+   "region": [
+    "Palouse and Blue Mountains",
+    "Columbia Basin"
+   ],
+   "lat": 46.61,
+   "lon": -118.22,
+   "summary": "A rock overhang near the mouth of the Palouse River held some of the oldest human remains then known in North America and thousands of tools spanning 11,000 years. Excavated 1962-68, it was drowned in February 1969 behind Lower Monumental Dam when an emergency levee leaked.",
+   "at_your_spot": "Families were sheltering at Marmes, {distance} from your spot, when the ice-age floods were only a few thousand years in the past.",
+   "sources": [
+    {
+     "title": "HistoryLink: Marmes Rockshelter",
+     "url": "https://www.historylink.org/File/7970"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ancient-one",
+   "title": "The Ancient One (Kennewick Man) lives on the Columbia",
+   "when": "about 8,500-9,000 years ago",
+   "start_years_ago": 9000,
+   "end_years_ago": 8500,
+   "region": [
+    "Columbia Basin"
+   ],
+   "lat": 46.21,
+   "lon": -119.16,
+   "summary": "One of the most complete ancient skeletons in the Americas eroded from the Columbia riverbank at Kennewick in July 1996. A 20-year legal fight ended when DNA proved his kinship to living Plateau peoples; the Umatilla, Yakama, Colville, Wanapum and Nez Perce reburied him on February 18, 2017.",
+   "at_your_spot": "The Ancient One walked the Columbia Plateau about 9,000 years ago, {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Kennewick Man (The Ancient One)",
+     "url": "https://historylink.org/File/5664"
+    },
+    {
+     "title": "HistoryLink: Tribes rebury the Ancient One, Feb 18, 2017",
+     "url": "https://historylink.org/File/21141"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "coast-salish-central",
+   "title": "Coast Salish nations of central Puget Sound",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "King County",
+    "Snohomish County",
+    "Kitsap County"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "The Seattle area is the homeland of Lushootseed-speaking peoples: the Duwamish (dx\u02b7d\u0259w\u0294ab\u0161, people of the inside, on the Duwamish, Black and Cedar rivers and Elliott Bay), the Suquamish across the Sound at Port Madison, the Muckleshoot (Green and White river bands, reservation near Auburn), the Snoqualmie of the Snoqualmie valley, and the Tulalip Tribes (Snohomish, Snoqualmie, Skykomish and allied bands). Chief Seattle (si\u0294a\u026c) was a Suquamish-Duwamish leader; the Duwamish remain unrecognized by the federal government.",
+   "at_your_spot": "Your spot is within the homelands of these nations, whose people live here today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Muckleshoot Indian Tribe",
+     "url": "https://historylink.org/File/3636"
+    },
+    {
+     "title": "HistoryLink: Tulalip Tribes",
+     "url": "https://historylink.org/File/8852"
+    },
+    {
+     "title": "HistoryLink: Chief Seattle",
+     "url": "https://historylink.org/File/5071"
+    },
+    {
+     "title": "Duwamish Tribe",
+     "url": "https://www.duwamishtribe.org/"
+    },
+    {
+     "title": "Suquamish Tribe",
+     "url": "https://suquamish.nsn.us/"
+    },
+    {
+     "title": "Snoqualmie Indian Tribe",
+     "url": "https://snoqualmietribe.us/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "coast-salish-south",
+   "title": "Coast Salish nations of south Puget Sound",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Pierce County",
+    "Thurston County",
+    "Mason County"
+   ],
+   "lat": 47.1,
+   "lon": -122.6,
+   "summary": "The Puyallup (Commencement Bay and Puyallup River), Nisqually (Nisqually River and prairies) and Squaxin Island (the seven inlets of the southern Sound) are Lushootseed-speaking peoples who signed the Medicine Creek Treaty in 1854 and led the 20th-century fight for treaty fishing rights. The Steilacoom people are not federally recognized.",
+   "at_your_spot": "Your spot lies in the homeland of these nations, who still fish these waters under the 1854 treaty and live here today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Treaty of Medicine Creek, 1854",
+     "url": "https://www.historylink.org/File/5253"
+    },
+    {
+     "title": "Puyallup Tribe of Indians",
+     "url": "https://www.puyalluptribe-nsn.gov/"
+    },
+    {
+     "title": "Nisqually Indian Tribe",
+     "url": "https://www.nisqually-nsn.gov/"
+    },
+    {
+     "title": "Squaxin Island Tribe",
+     "url": "https://squaxinisland.org/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "coast-salish-north",
+   "title": "Coast Salish nations of the north Sound and Salish Sea",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Snohomish County",
+    "Skagit County",
+    "Whatcom County",
+    "San Juan County",
+    "Island County"
+   ],
+   "lat": 48.5,
+   "lon": -122.4,
+   "summary": "From the Stillaguamish and Skagit valleys to the Canadian line live the Stillaguamish, Sauk-Suiattle (upper Sauk and Suiattle rivers), Upper Skagit, Swinomish (Fidalgo Island and Skagit delta), Samish (San Juan Islands and Samish Bay), Lummi (Lhaq'temish, reef-net fishers of the San Juans and Lummi Bay) and Nooksack (Nooksack River valley). Most signed Point Elliott in 1855; several regained federal recognition only in the 1970s-90s.",
+   "at_your_spot": "Your spot is within the homelands of these nations, whose people live here today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Bellingham thumbnail history (First Peoples)",
+     "url": "https://historylink.org/file/7904"
+    },
+    {
+     "title": "Lummi Nation",
+     "url": "https://www.lummi-nsn.gov/"
+    },
+    {
+     "title": "Swinomish Indian Tribal Community",
+     "url": "https://swinomish-nsn.gov/"
+    },
+    {
+     "title": "Samish Indian Nation",
+     "url": "https://www.samishtribe.nsn.us/"
+    },
+    {
+     "title": "Nooksack Indian Tribe",
+     "url": "https://nooksacktribe.org/"
+    },
+    {
+     "title": "Upper Skagit Indian Tribe",
+     "url": "https://www.upperskagittribe-nsn.gov/"
+    },
+    {
+     "title": "Stillaguamish Tribe",
+     "url": "https://www.stillaguamish.com/"
+    },
+    {
+     "title": "Sauk-Suiattle Indian Tribe",
+     "url": "https://sauk-suiattle.com/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "hood-canal-strait-peoples",
+   "title": "Hood Canal and Strait of Juan de Fuca peoples",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Clallam County",
+    "Jefferson County",
+    "Kitsap County",
+    "Mason County"
+   ],
+   "lat": 47.9,
+   "lon": -123,
+   "summary": "The Skokomish (Twana, Big River People, of the Skokomish River and Hood Canal) and the three S'Klallam nations, Strong People of the Strait: Port Gamble S'Klallam at Point Julia, Jamestown S'Klallam near Sequim (who bought their own land in 1874) and Lower Elwha Klallam at the Elwha River mouth. All three nations' reservations and treaty rights trace to the Point No Point Treaty of 1855; the peoples themselves have been here since time immemorial.",
+   "at_your_spot": "Your spot is in the homeland of these nations, whose people live here today along the water that has fed them for millennia.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Treaty of Point No Point, 1855",
+     "url": "https://www.historylink.org/file/5637"
+    },
+    {
+     "title": "Jamestown S'Klallam history",
+     "url": "https://jamestowntribe.org/history-and-culture/jamestown-sklallam-history"
+    },
+    {
+     "title": "Lower Elwha Klallam historical timeline",
+     "url": "https://www.elwha.org/culture-history/elwha-klallam-historical-timeline/"
+    },
+    {
+     "title": "Port Gamble S'Klallam Tribe",
+     "url": "https://www.pgst.nsn.us/"
+    },
+    {
+     "title": "Skokomish Tribe culture and history",
+     "url": "https://skokomish.org/culture-and-history/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "outer-coast-nations",
+   "title": "Nations of the outer Olympic coast",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Clallam County",
+    "Jefferson County",
+    "Grays Harbor County"
+   ],
+   "lat": 47.9,
+   "lon": -124.5,
+   "summary": "The Makah (Cape Flattery, the only U.S. tribe with a treaty whaling right, exercised again in 1999), the Quileute (La Push), the Hoh (Hoh River mouth) and the Quinault Indian Nation (Taholah; the Quinault reservation also hosts Queets, Chehalis, Chinook and Cowlitz descendants) are seagoing peoples whose villages, such as Ozette, were occupied for 2,000 years or more.",
+   "at_your_spot": "Your spot is on the coast where these nations have fished, whaled and sealed for thousands of years, and where their people live today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Makah Whaling",
+     "url": "https://www.historylink.org/File/5301"
+    },
+    {
+     "title": "HistoryLink: Treaty of Olympia (Quinault River Treaty)",
+     "url": "https://historylink.org/File/9791"
+    },
+    {
+     "title": "Makah Tribe",
+     "url": "https://makah.com/"
+    },
+    {
+     "title": "Quileute Tribe",
+     "url": "https://quileutetribe.com/"
+    },
+    {
+     "title": "Quinault Indian Nation",
+     "url": "https://www.quinaultindiannation.com/"
+    },
+    {
+     "title": "Hoh Tribe",
+     "url": "https://hohtribe-nsn.org/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "lower-columbia-peoples",
+   "title": "Peoples of the lower Columbia and southwest Washington",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Southwest Washington",
+    "Grays Harbor County",
+    "Thurston County"
+   ],
+   "lat": 46.4,
+   "lon": -123.3,
+   "summary": "The Chinook Indian Nation (Chinook, Clatsop, Cathlamet, Wahkiakum and Willapa, the traders who met Gray and Lewis and Clark; signed the unratified 1851 Tansy Point treaties; still denied federal recognition), the Shoalwater Bay Tribe (Willapa Bay, reservation since 1866), the Cowlitz Indian Tribe (Cowlitz River valley; recognized 2000, first reservation 2015) and the Confederated Tribes of the Chehalis (Chehalis River, reservation 1864) never accepted Stevens' 1855 treaty terms.",
+   "at_your_spot": "Your spot is in the homeland of these nations, who refused the 1855 treaty, stayed, and live here today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Chehalis Reservation created July 8, 1864",
+     "url": "https://historylink.org/File/8533"
+    },
+    {
+     "title": "Chinook Indian Nation",
+     "url": "https://chinooknation.org/"
+    },
+    {
+     "title": "Cowlitz Indian Tribe",
+     "url": "https://www.cowlitz.org/"
+    },
+    {
+     "title": "Shoalwater Bay Indian Tribe history",
+     "url": "https://www.shoalwaterbay-nsn.gov/about-the-tribe/history/"
+    },
+    {
+     "title": "Confederated Tribes of the Chehalis Reservation",
+     "url": "https://www.chehalistribe.org/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "plateau-nations",
+   "title": "Plateau nations east of the Cascades",
+   "when": "since time immemorial; living nations today",
+   "start_years_ago": 10000,
+   "end_years_ago": 0,
+   "region": [
+    "Columbia Basin",
+    "Yakima Valley",
+    "Okanogan",
+    "Northeast Washington",
+    "Palouse and Blue Mountains",
+    "North Cascades",
+    "South Cascades"
+   ],
+   "lat": 47,
+   "lon": -119.5,
+   "summary": "Sahaptin- and Salish-speaking peoples of the Columbia Plateau include the Yakama Nation (14 bands, 1.3 million-acre reservation at Toppenish), the Wanapum at Priest Rapids (non-treaty, never removed), the Confederated Tribes of the Colville Reservation (12 bands incl. Chief Joseph's Nez Perce, Moses-Columbia, Wenatchi, Chelan, Methow, Okanogan, Sanpoil, Lakes, Palus), the Spokane Tribe (Spokane River, Wellpinit), the Kalispel (Pend Oreille River, Usk), plus the Nez Perce and the Confederated Tribes of the Umatilla, whose ceded and usual-and-accustomed lands cover southeast Washington. Salmon fisheries at Kettle Falls and Celilo were the great gathering places until the dams.",
+   "at_your_spot": "Your spot is in the ceded territory of these nations, who retain hunting, fishing and gathering rights here and live here today.",
+   "sources": [
+    {
+     "title": "Governor's Office of Indian Affairs: federally recognized tribes of Washington",
+     "url": "https://goia.wa.gov/tribal-directory/federally-recognized-tribes-washington-state"
+    },
+    {
+     "title": "HistoryLink: Yakima County thumbnail history (Yakama Nation)",
+     "url": "https://historylink.org/File/7651"
+    },
+    {
+     "title": "HistoryLink: Nespelem thumbnail history (12 Colville bands)",
+     "url": "https://historylink.org/File/23229"
+    },
+    {
+     "title": "Yakama Nation",
+     "url": "https://www.yakama.com/"
+    },
+    {
+     "title": "Confederated Tribes of the Colville Reservation",
+     "url": "https://www.colvilletribes.com/"
+    },
+    {
+     "title": "Spokane Tribe history",
+     "url": "https://spokanetribe.com/history"
+    },
+    {
+     "title": "Kalispel Tribe",
+     "url": "https://kalispeltribe.com/"
+    },
+    {
+     "title": "Confederated Tribes of the Umatilla Indian Reservation",
+     "url": "https://ctuir.org/"
+    },
+    {
+     "title": "Nez Perce Tribe",
+     "url": "https://nezperce.org/"
+    },
+    {
+     "title": "Wanapum Band",
+     "url": "https://wanapum.org/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ozette",
+   "title": "Mudslide buries houses at Ozette",
+   "when": "about 300-500 years ago (roughly 1500-1700)",
+   "start_years_ago": 500,
+   "end_years_ago": 300,
+   "region": [
+    "Olympic Peninsula"
+   ],
+   "lat": 48.17,
+   "lon": -124.7,
+   "summary": "A clay slide sealed several cedar longhouses at the Makah village of Ozette, preserving 55,000 everyday objects in wet mud. Excavated from 1970 to 1981 by the Makah Tribe and Washington State University, the collection is owned by the Makah and fills the Makah Cultural and Research Center at Neah Bay; some researchers link the slide to the 1700 earthquake, others to earlier events.",
+   "at_your_spot": "Ozette shows what daily life looked like on this coast just before Europeans arrived; it is {distance} from your spot.",
+   "sources": [
+    {
+     "title": "Wikipedia: Ozette Indian Village Archeological Site",
+     "url": "https://en.wikipedia.org/wiki/Ozette_Indian_Village_Archeological_Site"
+    },
+    {
+     "title": "WSU: Ozette 18th century mudslide catastrophe",
+     "url": "https://cas.wsu.edu/?p=28320"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "smallpox-1770s",
+   "title": "Smallpox reaches the Northwest before the ships",
+   "when": "about 1775-1782",
+   "start_years_ago": 225,
+   "end_years_ago": 218,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "Smallpox swept the coast and interior in the late 1770s, killing perhaps a third of the Native population of western Washington; Vancouver's crews in 1792 saw pockmarked survivors and abandoned villages. Later waves of measles, influenza and malaria continued the catastrophe through the 1850s.",
+   "at_your_spot": "The villages nearest your spot lost a third or more of their people in this epidemic.",
+   "sources": [
+    {
+     "title": "HistoryLink: Smallpox epidemic ravages Native Americans, 1770s",
+     "url": "https://historylink.org/File/5100"
+    },
+    {
+     "title": "Wikipedia: 1770s Pacific Northwest smallpox epidemic",
+     "url": "https://en.wikipedia.org/wiki/1770s_Pacific_Northwest_smallpox_epidemic"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "hezeta-point-grenville-1775",
+   "title": "Spaniards land at Point Grenville",
+   "when": "July 12, 1775 (some sources July 14)",
+   "start_years_ago": 225,
+   "end_years_ago": 225,
+   "region": [
+    "Olympic Peninsula",
+    "Grays Harbor County"
+   ],
+   "lat": 47.3,
+   "lon": -124.27,
+   "summary": "Bruno de Hezeta's crew from the Santiago went ashore on the Quinault coast and claimed the Northwest for Spain, the first recorded European landing in Washington. The same day Quinault fighters killed seven of Bodega y Quadra's crew from the Sonora who had gone ashore for water and wood, and Hezeta named the headland Punta de los M\u00e1rtires; Juan P\u00e9rez had sighted the coast the year before.",
+   "at_your_spot": "Europeans first set foot in Washington {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Hezeta lands and claims the Northwest for Spain, July 1775",
+     "url": "https://historylink.org/File/5690"
+    },
+    {
+     "title": "HistoryLink: Spanish expedition of 1775 (overview)",
+     "url": "https://historylink.org/File/5688"
+    },
+    {
+     "title": "Wikipedia: Point Grenville",
+     "url": "https://en.wikipedia.org/wiki/Point_Grenville"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "spain-strait-nunez-gaona",
+   "title": "Spain explores the Strait and builds N\u00fa\u00f1ez Gaona at Neah Bay",
+   "when": "1790-1792",
+   "start_years_ago": 210,
+   "end_years_ago": 208,
+   "region": [
+    "Olympic Peninsula",
+    "San Juan County",
+    "Island County"
+   ],
+   "lat": 48.37,
+   "lon": -124.62,
+   "summary": "Manuel Quimper (1790) and Francisco de Eliza (1791) charted the Strait of Juan de Fuca and the San Juans, leaving names like Port Angeles and Fidalgo. In 1792 Salvador Fidalgo built Fort N\u00fa\u00f1ez Gaona at Neah Bay in Makah territory, the only Spanish settlement in Washington; it was abandoned within months.",
+   "at_your_spot": "Spanish charts of 1790-92 are the first maps to show the waters near your spot.",
+   "sources": [
+    {
+     "title": "Wikipedia: Salvador Fidalgo (Neah Bay)",
+     "url": "https://en.wikipedia.org/wiki/Salvador_Fidalgo"
+    },
+    {
+     "title": "Wikipedia: Neah Bay, Washington",
+     "url": "https://en.wikipedia.org/wiki/Neah_Bay,_Washington"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "vancouver-1792",
+   "title": "Vancouver charts and names Puget Sound",
+   "when": "May 19-June 5, 1792",
+   "start_years_ago": 208,
+   "end_years_ago": 208,
+   "region": [
+    "Puget Sound",
+    "Olympic Peninsula"
+   ],
+   "lat": 47.6,
+   "lon": -122.5,
+   "summary": "George Vancouver's Discovery anchored off Bainbridge Island on May 19, 1792; his officers named Mount Rainier, Mount Baker, Hood Canal, Whidbey and Vashon islands and Puget's Sound, and on June 4 he claimed the region for Britain at Possession Sound. His crews met Coast Salish people recovering from smallpox.",
+   "at_your_spot": "In May and June 1792 Vancouver's boats were charting the water nearest your spot, giving English names to the peaks and inlets you can see.",
+   "sources": [
+    {
+     "title": "HistoryLink: Vancouver expedition enters Puget Sound, May 1792",
+     "url": "https://historylink.org/File/5230"
+    },
+    {
+     "title": "HistoryLink: Puget Sound named, 1792",
+     "url": "https://historylink.org/File/20969"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "gray-columbia-1792",
+   "title": "Robert Gray enters the Columbia River",
+   "when": "May 11, 1792",
+   "start_years_ago": 208,
+   "end_years_ago": 208,
+   "region": [
+    "Southwest Washington",
+    "Columbia Basin",
+    "South Cascades"
+   ],
+   "lat": 46.25,
+   "lon": -123.95,
+   "summary": "Boston trader Robert Gray crossed the bar in the Columbia Rediviva, the first non-Native vessel to enter the great river the Chinook called Wimahl, and renamed it for his ship. He traded with Chinook villages for nine days; the voyage became the basis of the U.S. claim to the region.",
+   "at_your_spot": "The river that drains your spot got its English name this week.",
+   "sources": [
+    {
+     "title": "HistoryLink: Gray enters the Columbia, May 11, 1792",
+     "url": "https://www.historylink.org/File/5051"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "lewis-and-clark-1805",
+   "title": "Lewis and Clark cross Washington",
+   "when": "October 10 - November 25, 1805; return April-May 1806",
+   "start_years_ago": 195,
+   "end_years_ago": 194,
+   "region": [
+    "statewide"
+   ],
+   "lat": 46.21,
+   "lon": -119.03,
+   "summary": "The Corps of Discovery entered present Washington at the Clearwater-Snake confluence on October 10, 1805, ran the Columbia past Celilo and the Cascades, and spent 10 days at Station Camp near Chinook before wintering in Oregon. They passed back upriver in spring 1806, hosted by the Walla Walla chief Yellept.",
+   "at_your_spot": "The Corps' route along the Snake and Columbia passes {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Lewis and Clark in Washington",
+     "url": "https://historylink.org/File/5556"
+    },
+    {
+     "title": "HistoryLink: Corps enters Washington, Oct 10, 1805",
+     "url": "https://historylink.org/File/5323"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "fur-posts-1810",
+   "title": "Fur posts: Spokane House, Fort Okanogan, Astoria",
+   "when": "1810-1811",
+   "start_years_ago": 190,
+   "end_years_ago": 189,
+   "region": [
+    "statewide"
+   ],
+   "lat": 48.1,
+   "lon": -119.72,
+   "summary": "The North West Company built Spokane House at the Little Spokane confluence in 1810, the first long-term non-Native settlement in the state. Astor's Pacific Fur Company founded Fort Astoria at the Columbia mouth in spring 1811 and, in September, Fort Okanogan where the Okanogan meets the Columbia, the first U.S. post in Washington. The British bought out Astor in 1813.",
+   "at_your_spot": "Fur traders were now trading for beaver {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Fort Okanogan",
+     "url": "https://historylink.org/File/7522"
+    },
+    {
+     "title": "Wikipedia: Spokane House",
+     "url": "https://en.wikipedia.org/wiki/Spokane_House"
+    },
+    {
+     "title": "Wikipedia: Fort Astoria",
+     "url": "https://en.wikipedia.org/wiki/Fort_Astoria"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "fort-vancouver-1825",
+   "title": "Hudson's Bay Company opens Fort Vancouver",
+   "when": "March 19, 1825",
+   "start_years_ago": 175,
+   "end_years_ago": 140,
+   "region": [
+    "statewide"
+   ],
+   "lat": 45.63,
+   "lon": -122.66,
+   "summary": "Governor George Simpson and Dr. John McLoughlin dedicated Fort Vancouver on the Columbia's north bank; for two decades it was the headquarters of everything British west of the Rockies, with farms, mills, a hospital and a multi-ethnic village of Hawaiian, M\u00e9tis, Iroquois and Native workers. Fort Colvile (1825), Fort Nez Perc\u00e9s (1818) and Fort Langley fed it furs; the HBC left in 1860.",
+   "at_your_spot": "Your spot was inside the Hudson's Bay Company's trading world, supplied from Fort Vancouver {distance} away.",
+   "sources": [
+    {
+     "title": "HistoryLink: HBC establishes Fort Vancouver, March 19, 1825",
+     "url": "https://historylink.org/File/5251"
+    },
+    {
+     "title": "NPS: Introductory history of Fort Vancouver",
+     "url": "https://www.nps.gov/fova/learn/historyculture/introductory-history-of-fort-vancouver.htm"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "malaria-1830",
+   "title": "Fever and ague: malaria devastates the lower Columbia",
+   "when": "1830-1833",
+   "start_years_ago": 170,
+   "end_years_ago": 167,
+   "region": [
+    "Southwest Washington"
+   ],
+   "lat": 45.7,
+   "lon": -122.8,
+   "summary": "Beginning near Fort Vancouver in summer 1830, malaria (intermittent fever) returned each summer and killed as many as nine in ten of the Chinookan people of the lower Columbia and Willamette, including Chief Comcomly. The HBC had quinine; the villages did not.",
+   "at_your_spot": "Villages on the river nearest your spot were nearly emptied by this epidemic.",
+   "sources": [
+    {
+     "title": "Oregon Encyclopedia: Disease epidemics 1770s-1850s",
+     "url": "https://www.oregonencyclopedia.org/articles/disease_epidemics_1770s-1850s"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "fort-nisqually-1833",
+   "title": "Fort Nisqually, first non-Native settlement on Puget Sound",
+   "when": "spring 1833",
+   "start_years_ago": 167,
+   "end_years_ago": 131,
+   "region": [
+    "Puget Sound"
+   ],
+   "lat": 47.1,
+   "lon": -122.65,
+   "summary": "The Hudson's Bay Company built Fort Nisqually at today's DuPont as a fur post, then turned it into the Puget Sound Agricultural Company's sheep-and-cattle farm (1839). It was the only European outpost on the Sound when the first American settlers arrived.",
+   "at_your_spot": "Fort Nisqually, {distance} from your spot, was the only store on Puget Sound.",
+   "sources": [
+    {
+     "title": "HistoryLink: HBC builds Fort Nisqually, spring 1833",
+     "url": "https://www.historylink.org/file/20999"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "whitman-mission",
+   "title": "Whitman mission at Waiilatpu and the 1847 killings",
+   "when": "October 1836 - November 29, 1847",
+   "start_years_ago": 164,
+   "end_years_ago": 153,
+   "region": [
+    "Palouse and Blue Mountains",
+    "Columbia Basin"
+   ],
+   "lat": 46.04,
+   "lon": -118.46,
+   "summary": "Marcus and Narcissa Whitman founded a Presbyterian mission among the Cayuse near Walla Walla in 1836; it became a way station for Oregon Trail wagons from 1843. After a measles epidemic killed nearly half the Cayuse near the mission, a group killed the Whitmans and 11 others on November 29, 1847, triggering the Cayuse War and the creation of Oregon Territory in 1848; five Cayuse men were hanged at Oregon City in 1850.",
+   "at_your_spot": "Wagon trains were now rolling through the Walla Walla valley, {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Whitman establishes mission at Waiilatpu, 1836",
+     "url": "https://historylink.org/File/5191"
+    },
+    {
+     "title": "HistoryLink: Cayuse attack the Whitman mission on November 29, 1847",
+     "url": "https://www.historylink.org/File/5192"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "tumwater-1845",
+   "title": "Simmons-Bush party settles Tumwater",
+   "when": "October-November 1845",
+   "start_years_ago": 155,
+   "end_years_ago": 155,
+   "region": [
+    "Puget Sound",
+    "Thurston County"
+   ],
+   "lat": 47.01,
+   "lon": -122.9,
+   "summary": "Michael Simmons, George Bush (a Black pioneer barred from settling south of the Columbia by Oregon's exclusion laws) and their families founded New Market at the Deschutes falls, the first American settlement on Puget Sound. Olympia grew next door, platted by Edmund Sylvester in 1850.",
+   "at_your_spot": "The first American farms north of the Columbia were planted {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Tumwater thumbnail history",
+     "url": "https://historylink.org/File/22514"
+    },
+    {
+     "title": "HistoryLink: George Bush",
+     "url": "https://historylink.org/file/5645"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "oregon-treaty-1846",
+   "title": "Oregon Treaty sets the 49th parallel",
+   "when": "June 15, 1846",
+   "start_years_ago": 154,
+   "end_years_ago": 154,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "Britain and the United States ended 28 years of joint occupation by drawing the border along the 49th parallel to the Strait of Georgia; everything that became Washington fell to the U.S. The ambiguous water boundary through the San Juans was left for the Pig War.",
+   "at_your_spot": "Your spot became officially American on this day.",
+   "sources": [
+    {
+     "title": "HistoryLink: Treaty of Oregon signed, June 15, 1846",
+     "url": "https://www.historylink.org/File/5247"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "donation-land-claim-1850",
+   "title": "Donation Land Claim Act opens free land",
+   "when": "September 27, 1850",
+   "start_years_ago": 150,
+   "end_years_ago": 145,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "Congress gave 320 acres to each white male settler (640 to a married couple) who lived on Oregon Territory land for four years, with no reference to Native title. It drove the first settler rush into Puget Sound and the Cowlitz and Walla Walla valleys before any treaties existed.",
+   "at_your_spot": "If your spot was claimed before 1855, it was probably a Donation Land Claim.",
+   "sources": [
+    {
+     "title": "HistoryLink: Donation Land Claim Act",
+     "url": "https://historylink.org/File/9501"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "olympia-founded",
+   "title": "Olympia founded; later capital and city",
+   "when": "1850 (platted); capital 1853; incorporated January 28, 1859",
+   "start_years_ago": 150,
+   "end_years_ago": 141,
+   "region": [
+    "Olympia",
+    "Thurston County"
+   ],
+   "lat": 47.04,
+   "lon": -122.9,
+   "summary": "Edmund Sylvester laid out Olympia at the head of Budd Inlet in 1850; Governor Stevens made it the territorial capital in 1853 and the first legislature met above Sylvester's store in February 1854. It incorporated as a town in 1859 and kept the capital at statehood.",
+   "at_your_spot": "Olympia, the seat of government for your spot, was a mud-street village of a few hundred people.",
+   "sources": [
+    {
+     "title": "HistoryLink: Olympia thumbnail history",
+     "url": "https://historylink.org/File/5105"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "denny-party-alki-1851",
+   "title": "Denny Party lands at Alki Point",
+   "when": "November 13, 1851",
+   "start_years_ago": 149,
+   "end_years_ago": 149,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.58,
+   "lon": -122.42,
+   "summary": "Twenty-two settlers led by Arthur Denny came ashore from the schooner Exact in the rain at Alki, in Duwamish territory. Helped through the winter by Chief Seattle's people, most moved across Elliott Bay in spring 1852 to the deep-water shore that became Seattle; the Collins party had settled the Duwamish River that September.",
+   "at_your_spot": "Seattle's founders landed {distance} from your spot, in a landscape of Duwamish villages and longhouses.",
+   "sources": [
+    {
+     "title": "HistoryLink: Denny Party lands at Alki Point, Nov 13, 1851",
+     "url": "https://historylink.org/File/5392"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "washington-territory-1853",
+   "title": "Washington Territory created",
+   "when": "March 2, 1853",
+   "start_years_ago": 147,
+   "end_years_ago": 111,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "President Fillmore signed the act splitting Washington Territory from Oregon, with Isaac Stevens as first governor; Congress renamed it from Columbia to avoid confusion with D.C. The territory initially reached to the Rockies and took its present shape when Idaho Territory was carved out on March 3, 1863.",
+   "at_your_spot": "Your spot was now in Washington Territory, population about 4,000 settlers.",
+   "sources": [
+    {
+     "title": "HistoryLink: Washington Territory created, March 2, 1853",
+     "url": "https://www.historylink.org/File/5244"
+    },
+    {
+     "title": "HistoryLink: Idaho, when it was part of Washington",
+     "url": "https://www.historylink.org/File/10237"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-platted-1853",
+   "title": "Seattle platted by Denny, Boren and Maynard",
+   "when": "May 23, 1853",
+   "start_years_ago": 147,
+   "end_years_ago": 147,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "Arthur Denny, Carson Boren and Doc Maynard filed the first plats of the Town of Seattle; Maynard's compass-aligned grid clashed with the Dennys' shoreline grid, producing the kink in streets at Yesler Way that survives today. Henry Yesler's steam sawmill, the town's first industry, started the same year.",
+   "at_your_spot": "If your spot is downtown, its street grid was drawn this day.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle plats filed, May 23, 1853",
+     "url": "https://historylink.org/File/2026"
+    },
+    {
+     "title": "HistoryLink: Seattle, a brief history of its founding",
+     "url": "https://www.historylink.org/File/303"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "naches-pass-1853",
+   "title": "Longmire wagon train crosses Naches Pass",
+   "when": "October 1853",
+   "start_years_ago": 147,
+   "end_years_ago": 147,
+   "region": [
+    "Pierce County",
+    "Yakima Valley",
+    "South Cascades"
+   ],
+   "lat": 47,
+   "lon": -121.3,
+   "summary": "About 150 emigrants with 36 wagons lowered their wagons by rope down the Cascade crest on a half-built road, the first wagon train to reach Puget Sound directly over the mountains. Few followed; the Snoqualmie Pass wagon road of 1867 took over.",
+   "at_your_spot": "The first wagons over the Cascades reached the Sound {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Longmire-Biles wagon train crosses Naches Pass, 1853",
+     "url": "https://historylink.org/File/5053"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "medicine-creek-1854",
+   "title": "Treaty of Medicine Creek",
+   "when": "December 26, 1854",
+   "start_years_ago": 146,
+   "end_years_ago": 146,
+   "region": [
+    "Pierce County",
+    "Thurston County",
+    "Mason County"
+   ],
+   "lat": 47.07,
+   "lon": -122.78,
+   "summary": "Governor Stevens' first treaty took most of the south Sound from the Nisqually, Puyallup, Squaxin Island and Steilacoom peoples for $32,500 and three small reservations, while reserving the right to fish at usual and accustomed grounds. Anger over the tiny reservations led Leschi and others to war within a year; larger reservations followed in 1857.",
+   "at_your_spot": "Your spot was ceded to the United States in this treaty.",
+   "sources": [
+    {
+     "title": "HistoryLink: Treaty of Medicine Creek, 1854",
+     "url": "https://www.historylink.org/File/5253"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "point-elliott-1855",
+   "title": "Treaty of Point Elliott",
+   "when": "January 22, 1855",
+   "start_years_ago": 145,
+   "end_years_ago": 145,
+   "region": [
+    "King County",
+    "Snohomish County",
+    "Skagit County",
+    "Whatcom County",
+    "San Juan County",
+    "Island County",
+    "Kitsap County"
+   ],
+   "lat": 47.95,
+   "lon": -122.3,
+   "summary": "At Mukilteo, Chief Seattle, Patkanim, Chow-its-hoot and some 80 other leaders ceded the land from Three Tree Point to the Canadian border in exchange for reservations (Tulalip, Port Madison, Lummi, Swinomish), payments and fishing rights. The Duwamish never received their promised reservation; the treaty underlies the 1974 Boldt decision.",
+   "at_your_spot": "Your spot was ceded in this treaty; the reservations it promised were Tulalip, Port Madison, Lummi and Swinomish.",
+   "sources": [
+    {
+     "title": "HistoryLink: Treaty of Point Elliott, 1855",
+     "url": "https://historylink.org/File/2629"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "point-no-point-neah-bay-1855",
+   "title": "Treaties of Point No Point and Neah Bay",
+   "when": "January 26 and 31, 1855",
+   "start_years_ago": 145,
+   "end_years_ago": 145,
+   "region": [
+    "Olympic Peninsula",
+    "Kitsap County"
+   ],
+   "lat": 47.9,
+   "lon": -122.53,
+   "summary": "The S'Klallam, Chimakum and Skokomish ceded the land from the Olympic crest to the Sound at Point No Point; five days later 42 Makah leaders at Neah Bay gave up most of their territory but secured the only treaty right to whale and seal. Both reserved fishing at usual and accustomed places.",
+   "at_your_spot": "Your spot changed hands in these treaties.",
+   "sources": [
+    {
+     "title": "HistoryLink: Treaty of Point No Point, 1855",
+     "url": "https://www.historylink.org/file/5637"
+    },
+    {
+     "title": "HistoryLink: Treaty of Neah Bay, 1855",
+     "url": "https://historylink.org/File/2632"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "chehalis-council-1855",
+   "title": "Chehalis River council refuses Stevens' treaty",
+   "when": "February 1855",
+   "start_years_ago": 145,
+   "end_years_ago": 145,
+   "region": [
+    "Southwest Washington",
+    "Grays Harbor County"
+   ],
+   "lat": 46.95,
+   "lon": -123.77,
+   "summary": "The Chinook, Lower and Upper Chehalis, Cowlitz, Shoalwater Bay, Queets and Quinault met Stevens near Cosmopolis and refused to sign a treaty that would move them onto one distant reservation. Southwest Washington was taken without a treaty; small reservations came later by executive order (Chehalis 1864, Shoalwater 1866).",
+   "at_your_spot": "The people of your spot never signed a treaty ceding it.",
+   "sources": [
+    {
+     "title": "HistoryLink: Chehalis Reservation created, 1864 (with council background)",
+     "url": "https://historylink.org/File/8533"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "walla-walla-council-1855",
+   "title": "Walla Walla treaty council",
+   "when": "May 29 - June 11, 1855",
+   "start_years_ago": 145,
+   "end_years_ago": 145,
+   "region": [
+    "Columbia Basin",
+    "Yakima Valley",
+    "Palouse and Blue Mountains",
+    "North Cascades",
+    "South Cascades",
+    "Okanogan"
+   ],
+   "lat": 46.07,
+   "lon": -118.3,
+   "summary": "Some 5,000 Yakama, Nez Perce, Cayuse, Walla Walla and Umatilla people gathered on Mill Creek. Stevens and Joel Palmer secured three treaties ceding about 60,000 square miles: the Yakama treaty (14 bands under Kamiakin, June 9), the Walla Walla-Cayuse-Umatilla treaty (June 9) and the Nez Perce treaty (June 11). Stevens opened the land to settlers before ratification, breaking his promise and igniting war.",
+   "at_your_spot": "Your spot was ceded at Walla Walla; the tribes kept the right to fish, hunt and gather here.",
+   "sources": [
+    {
+     "title": "HistoryLink: Walla Walla treaty council opens, May 29, 1855",
+     "url": "https://historylink.org/File/5188"
+    },
+    {
+     "title": "NPS: Walla Walla Council 1855",
+     "url": "https://www.nps.gov/articles/000/walla-walla-council-1855.htm"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "quinault-treaty-1855",
+   "title": "Quinault River Treaty (Treaty of Olympia)",
+   "when": "July 1, 1855 and January 25, 1856",
+   "start_years_ago": 145,
+   "end_years_ago": 144,
+   "region": [
+    "Olympic Peninsula",
+    "Grays Harbor County"
+   ],
+   "lat": 47.34,
+   "lon": -124.29,
+   "summary": "The Quinault and Quileute (with the Hoh and Queets) signed on the Quinault River and again at Olympia, ceding 1.2 million acres of the outer coast for a shared reservation at Taholah. The Quileute (1889) and Hoh (1893) reservations were added later by executive order.",
+   "at_your_spot": "Your spot on the coast was ceded in this treaty.",
+   "sources": [
+    {
+     "title": "HistoryLink: Treaty of Olympia, 1856",
+     "url": "https://historylink.org/File/9791"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "yakama-war",
+   "title": "Yakama War",
+   "when": "September 23, 1855 - 1858",
+   "start_years_ago": 145,
+   "end_years_ago": 142,
+   "region": [
+    "Yakima Valley",
+    "Columbia Basin",
+    "South Cascades",
+    "Palouse and Blue Mountains"
+   ],
+   "lat": 46.4,
+   "lon": -120.4,
+   "summary": "After gold miners trespassed on Yakama land and Indian agent Andrew Bolon was killed, Kamiakin's warriors routed Major Haller at Toppenish Creek (October 5, 1855). Union Gap, the Cascades attack (March 1856), the killing of Peopeomoxmox and the building of Fort Simcoe followed; eastern Washington was closed to settlers until 1858.",
+   "at_your_spot": "Your spot was a war zone closed to settlement in these years.",
+   "sources": [
+    {
+     "title": "HistoryLink: Yakama killings of Bolon spark war, Sept 1855",
+     "url": "https://www.historylink.org/File/8118"
+    },
+    {
+     "title": "Wikipedia: Yakima War",
+     "url": "https://en.wikipedia.org/wiki/Yakima_War"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "puget-sound-war",
+   "title": "Puget Sound War",
+   "when": "October 1855 - 1856",
+   "start_years_ago": 145,
+   "end_years_ago": 144,
+   "region": [
+    "King County",
+    "Pierce County",
+    "Thurston County"
+   ],
+   "lat": 47.3,
+   "lon": -122.2,
+   "summary": "On October 28, 1855, Native fighters killed nine settlers on the White River; warriors from the Nisqually, Puyallup, Muckleshoot and Klickitat, with the Nisqually leader Leschi as the resistance's best-known figure, fought territorial volunteers and regulars through the winter. Settlers crowded into blockhouses; most Puyallup, Nisqually and Squaxin families were confined under guard on Fox Island. Peace brought larger reservations, including Muckleshoot by executive order in January 1857.",
+   "at_your_spot": "Settlers near your spot abandoned farms for blockhouses this winter.",
+   "sources": [
+    {
+     "title": "HistoryLink: Indian War of 1855-56 begins in Pierce County",
+     "url": "https://www.historylink.org/file/8149"
+    },
+    {
+     "title": "HistoryLink: Leschi, Part 2",
+     "url": "https://historylink.org/File/21195"
+    },
+    {
+     "title": "HistoryLink: Muckleshoot Reservation established, Jan 20, 1857",
+     "url": "https://www.historylink.org/File/20261"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "battle-of-seattle-1856",
+   "title": "Battle of Seattle",
+   "when": "January 26, 1856",
+   "start_years_ago": 144,
+   "end_years_ago": 144,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "Warned by Chief Seattle's people, the village's 50 or so settlers sheltered in a blockhouse while several hundred Native fighters from east of the lake attacked. Cannon and Marines from the sloop-of-war Decatur drove them off by nightfall; two settlers died. The Bells and others fled town for years.",
+   "at_your_spot": "If your spot is near Pioneer Square, shells from the Decatur fell on this ground.",
+   "sources": [
+    {
+     "title": "HistoryLink: Native Americans attack Seattle, Jan 26, 1856",
+     "url": "https://historylink.org/File/5208"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "leschi-1858",
+   "title": "Leschi hanged; exonerated in 2004",
+   "when": "February 19, 1858; cleared December 10, 2004",
+   "start_years_ago": 142,
+   "end_years_ago": -4,
+   "region": [
+    "Pierce County",
+    "Thurston County"
+   ],
+   "lat": 47.17,
+   "lon": -122.57,
+   "summary": "Nisqually leader Leschi was convicted of murder for the wartime killing of militiaman A. Benton Moses and hanged near Fort Steilacoom, after the Army refused to host the execution. In 2004 the legislature and a special historical court of state Supreme Court justices ruled the death was an act of war, not a crime, and that the prosecution should never have happened.",
+   "at_your_spot": "The Nisqually leader who resisted the treaty that covered your spot was executed here.",
+   "sources": [
+    {
+     "title": "HistoryLink: Leschi exonerated, 2004",
+     "url": "https://www.historylink.org/file/7257"
+    },
+    {
+     "title": "HistoryLink: Leschi, Part 2",
+     "url": "https://historylink.org/File/21195"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "steptoe-wright-1858",
+   "title": "Steptoe's defeat and Wright's campaign",
+   "when": "May 17 - September 1858",
+   "start_years_ago": 142,
+   "end_years_ago": 142,
+   "region": [
+    "Northeast Washington",
+    "Palouse and Blue Mountains"
+   ],
+   "lat": 47.63,
+   "lon": -117.05,
+   "summary": "Coeur d'Alene, Spokane, Palouse and Yakama fighters routed Colonel Steptoe near Rosalia in May. Colonel George Wright returned with howitzers, won at Four Lakes and Spokane Plains, slaughtered about 800 Native horses near Liberty Lake, and hanged about 16 men without trial, Qualchan within minutes of arriving under a flag of truce, at the creek now called Hangman Creek. Armed resistance on the Plateau ended.",
+   "at_your_spot": "The last battles for eastern Washington were fought {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Battle of Four Lakes, Sept 1, 1858",
+     "url": "https://www.historylink.org/File/5143"
+    },
+    {
+     "title": "HistoryLink: Battle of Spokane Plains, Sept 5, 1858",
+     "url": "https://www.historylink.org/File/5144"
+    },
+    {
+     "title": "HistoryLink: Wright slaughters horses, Sept 8-9, 1858",
+     "url": "https://www.historylink.org/File/5142"
+    },
+    {
+     "title": "HistoryLink: Wright hangs Yakama and Palouse prisoners at the Ned-Whauld River, Sept 25, 1858",
+     "url": "https://historylink.org/File/5141"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "pig-war",
+   "title": "Pig War on San Juan Island",
+   "when": "June 15, 1859 - November 25, 1872",
+   "start_years_ago": 141,
+   "end_years_ago": 128,
+   "region": [
+    "San Juan County",
+    "Puget Sound"
+   ],
+   "lat": 48.47,
+   "lon": -123,
+   "summary": "An American settler shot a Hudson's Bay Company pig, and within weeks U.S. troops under George Pickett and British warships faced off. Both sides camped on the island for 12 years until Kaiser Wilhelm I's arbitration awarded the San Juans to the United States, fixing Washington's last border.",
+   "at_your_spot": "The San Juan Islands' nationality was undecided until 1872.",
+   "sources": [
+    {
+     "title": "HistoryLink: San Juan Island Pig War, Part 1",
+     "url": "https://www.historylink.org/file/5724"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "mullan-road",
+   "title": "Mullan Road built from Walla Walla to Fort Benton",
+   "when": "1859-1862",
+   "start_years_ago": 141,
+   "end_years_ago": 138,
+   "region": [
+    "Palouse and Blue Mountains",
+    "Northeast Washington",
+    "Columbia Basin"
+   ],
+   "lat": 46.07,
+   "lon": -118.34,
+   "summary": "Lieutenant John Mullan's crews built the first engineered wagon road across the Rockies, 624 miles from Fort Walla Walla to the Missouri. Gold-rush traffic made Walla Walla the largest town in the territory by 1870; I-90 follows much of the route.",
+   "at_your_spot": "The Mullan Road passed {distance} from your spot, carrying miners to Idaho and Montana.",
+   "sources": [
+    {
+     "title": "HistoryLink: Mullan Road",
+     "url": "https://historylink.org/File/5225"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "territorial-university-1861",
+   "title": "Territorial University (UW) opens",
+   "when": "November 4, 1861",
+   "start_years_ago": 139,
+   "end_years_ago": 139,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.61,
+   "lon": -122.33,
+   "summary": "On 10 acres donated by Arthur Denny and others (today's Olympic Hotel block), the territory's university opened with one teacher, Asa Mercer, and about 30 students, mostly schoolchildren. It moved to its present campus in 1895.",
+   "at_your_spot": "Seattle had a university before it had a bank.",
+   "sources": [
+    {
+     "title": "HistoryLink: Territorial University opens, Nov 4, 1861",
+     "url": "https://historylink.org/File/5242"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "executive-order-reservations",
+   "title": "Executive-order reservations for non-treaty peoples",
+   "when": "1864-1914",
+   "start_years_ago": 136,
+   "end_years_ago": 86,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "For peoples who never signed treaties, presidents set land aside by executive order: Chehalis (July 8, 1864), Shoalwater Bay (September 22, 1866), Colville (April and July 1872; its north half was taken in 1892 and the south half opened in 1916), Spokane (January 18, 1881), Quileute (1889), Hoh (1893) and Kalispel (March 23, 1914). The Cowlitz got no land until 2015.",
+   "at_your_spot": "The reservations nearest your spot were created by executive order rather than by treaty.",
+   "sources": [
+    {
+     "title": "HistoryLink: Chehalis Reservation created, July 8, 1864",
+     "url": "https://historylink.org/File/8533"
+    },
+    {
+     "title": "HistoryLink: Pacific County thumbnail history (Shoalwater)",
+     "url": "https://historylink.org/File/7914"
+    },
+    {
+     "title": "HistoryLink: Stevens County thumbnail history (Colville Reservation)",
+     "url": "https://www.historylink.org/file/7995"
+    },
+    {
+     "title": "Spokane Tribe history",
+     "url": "https://spokanetribe.com/history"
+    },
+    {
+     "title": "HistoryLink: Ione incorporates on January 11, 1910 (mentions the 1914 Kalispel order)",
+     "url": "https://historylink.org/File/23551"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-incorporated",
+   "title": "Seattle incorporated as town, then city",
+   "when": "January 14, 1865 (town); disincorporated 1867; city December 2, 1869",
+   "start_years_ago": 135,
+   "end_years_ago": 131,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "The territorial legislature incorporated the Town of Seattle in 1865, dissolved it in 1867 after residents objected to taxes, and re-incorporated it as a city with a mayor and council on December 2, 1869. The Seattle Annexation layer's 1869 polygon is this original city.",
+   "at_your_spot": "If your spot is in the 1869 city limits, it has been in Seattle since the city was reborn.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle incorporated as town, 1865",
+     "url": "https://www.historylink.org/File/168"
+    },
+    {
+     "title": "HistoryLink: Mayors of Seattle",
+     "url": "https://historylink.org/File/23420"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "chief-seattle-dies-1866",
+   "title": "Chief Seattle dies at Old Man House",
+   "when": "June 7, 1866",
+   "start_years_ago": 134,
+   "end_years_ago": 134,
+   "region": [
+    "Kitsap County",
+    "Seattle"
+   ],
+   "lat": 47.73,
+   "lon": -122.56,
+   "summary": "The Suquamish-Duwamish leader si\u0294a\u026c, who had befriended the settlers and signed Point Elliott, died at the Port Madison reservation, aged about 80, and was buried at Suquamish with Catholic and Suquamish rites. Federal agents burned Old Man House, his 600-foot longhouse, in 1870.",
+   "at_your_spot": "The man the city of Seattle is named for died at Suquamish, {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Chief Seattle dies, June 7, 1866",
+     "url": "https://historylink.org/File/171"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "bellevue-founded",
+   "title": "Bellevue homesteaded; incorporated 1953",
+   "when": "1869 (first homesteads); March 31, 1953 (incorporated)",
+   "start_years_ago": 131,
+   "end_years_ago": 47,
+   "region": [
+    "Bellevue"
+   ],
+   "lat": 47.61,
+   "lon": -122.2,
+   "summary": "Seattle baker William Meydenbauer and farmer Aaron Mercer took the first claims on the lake's east shore in 1869; the strawberry and ferry town stayed rural until the 1940 floating bridge. Bellevue incorporated with about 6,000 residents (5,950) on March 31, 1953 and became the state's fifth-largest city.",
+   "at_your_spot": "Your spot was forest and strawberry farms until the bridge came in 1940.",
+   "sources": [
+    {
+     "title": "HistoryLink: Bellevue thumbnail history",
+     "url": "https://historylink.org/File/313"
+    },
+    {
+     "title": "HistoryLink: Bellevue incorporates, March 31, 1953",
+     "url": "https://historylink.org/File/3552"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "redmond-founded",
+   "title": "Redmond settled; incorporated 1912",
+   "when": "1871 (McRedmond and Perrigo claims); December 31, 1912 (incorporated)",
+   "start_years_ago": 129,
+   "end_years_ago": 88,
+   "region": [
+    "Redmond"
+   ],
+   "lat": 47.67,
+   "lon": -122.12,
+   "summary": "Luke and Kate McRedmond and Warren and Laura Perrigo homesteaded the Sammamish valley in 1871; the logging and farm town of Redmond reached the 300 residents needed to incorporate when a baby was born in November 1912, and became a town on December 31.",
+   "at_your_spot": "Your spot was within sight of the McRedmond homestead on the Sammamish Slough.",
+   "sources": [
+    {
+     "title": "HistoryLink: Redmond thumbnail history",
+     "url": "https://www.historylink.org/file/304"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "spokane-founded",
+   "title": "Spokane Falls founded; incorporated 1881",
+   "when": "1873 (James Glover); November 29, 1881 (incorporated); Spokane from 1891",
+   "start_years_ago": 127,
+   "end_years_ago": 109,
+   "region": [
+    "Spokane",
+    "Spokane County"
+   ],
+   "lat": 47.66,
+   "lon": -117.42,
+   "summary": "James Glover bought the sawmill at the falls in 1873 in the heart of Spokane tribal territory; the Northern Pacific's arrival in 1881 made Spokane Falls a city, incorporated November 29, 1881. It dropped Falls from its name in 1891 and became the capital of the Inland Empire's mines, wheat and timber.",
+   "at_your_spot": "Your spot was within a few miles of a village of two bachelors and three families in 1873.",
+   "sources": [
+    {
+     "title": "HistoryLink: Spokane thumbnail history",
+     "url": "https://www.historylink.org/file/7462"
+    },
+    {
+     "title": "HistoryLink: Spokane Falls incorporated, Nov 29, 1881",
+     "url": "https://historylink.org/File/9176"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "tacoma-founded",
+   "title": "Tacoma: Job Carr's cabin to consolidated city",
+   "when": "1864 (Carr); 1873 (NP terminus); November 12, 1875 (incorporated); January 7, 1884 (Tacoma and New Tacoma merge)",
+   "start_years_ago": 136,
+   "end_years_ago": 116,
+   "region": [
+    "Tacoma",
+    "Pierce County"
+   ],
+   "lat": 47.25,
+   "lon": -122.44,
+   "summary": "Job Carr claimed the shore of Commencement Bay in 1864; in 1873 the Northern Pacific chose it as its Pacific terminus, platting New Tacoma south of McCarver's Tacoma City. The two towns merged on January 7, 1884, and the City of Destiny rivaled Seattle through the 1880s.",
+   "at_your_spot": "Your spot was in Puyallup country when the railroad picked Commencement Bay.",
+   "sources": [
+    {
+     "title": "HistoryLink: Tacoma thumbnail history",
+     "url": "https://www.historylink.org/file/5055"
+    },
+    {
+     "title": "HistoryLink: Tacoma incorporates, Nov 12, 1875",
+     "url": "https://historylink.org/File/11064"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "vancouver-incorporated",
+   "title": "Vancouver platted and incorporated",
+   "when": "1850 (Columbia City plat); January 23, 1857 (incorporated)",
+   "start_years_ago": 150,
+   "end_years_ago": 143,
+   "region": [
+    "Vancouver",
+    "Clark County"
+   ],
+   "lat": 45.64,
+   "lon": -122.66,
+   "summary": "Amos and Esther Short's claim beside the HBC fort became Columbia City in 1850 and Vancouver in 1855; the territorial legislature incorporated it on January 23, 1857, the territory's second city. The U.S. Army's Vancouver Barracks stood on the hill above until 2011.",
+   "at_your_spot": "Your spot was a short ride from the oldest non-Native town north of the Columbia.",
+   "sources": [
+    {
+     "title": "HistoryLink: Vancouver thumbnail history",
+     "url": "https://historylink.org/File/9101"
+    },
+    {
+     "title": "HistoryLink: Vancouver incorporated, Jan 23, 1857",
+     "url": "https://historylink.org/File/9115"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "renton-founded",
+   "title": "Renton platted; incorporated 1901",
+   "when": "September 5, 1875 (plat); September 6, 1901 (incorporated)",
+   "start_years_ago": 125,
+   "end_years_ago": 99,
+   "region": [
+    "Renton",
+    "King County"
+   ],
+   "lat": 47.48,
+   "lon": -122.2,
+   "summary": "Erasmus Smithers platted a coal town named for investor William Renton at the Black-Cedar river confluence, where the Duwamish village of Mox La Push had stood. Coal, the Seattle and Walla Walla Railroad (1877) and later Pacific Car and Foundry and Boeing built the city, incorporated September 6, 1901.",
+   "at_your_spot": "Coal cars were rolling past your spot toward Seattle by 1877.",
+   "sources": [
+    {
+     "title": "HistoryLink: Renton thumbnail history",
+     "url": "https://www.historylink.org/file/688"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "chief-joseph-colville",
+   "title": "Nez Perce War and Chief Joseph's exile to Colville",
+   "when": "1877; 1885 (arrival at Nespelem); September 21, 1904 (death)",
+   "start_years_ago": 123,
+   "end_years_ago": 96,
+   "region": [
+    "Okanogan",
+    "Northeast Washington",
+    "Palouse and Blue Mountains"
+   ],
+   "lat": 48.17,
+   "lon": -118.97,
+   "summary": "Forced from the Wallowa, Joseph's band fought a 1,170-mile running retreat before surrendering in Montana in October 1877. After exile in Oklahoma, Joseph and about 150 followers were sent in 1885 to the Colville Reservation, where he died at Nespelem in 1904, never allowed home.",
+   "at_your_spot": "Chief Joseph lived out his life {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Chief Joseph (1840-1904)",
+     "url": "https://historylink.org/File/8975"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "marysville-founded",
+   "title": "Marysville founded; incorporated 1891",
+   "when": "1878 (Comeford homestead); 1885 (plat); March 20, 1891 (incorporated)",
+   "start_years_ago": 122,
+   "end_years_ago": 109,
+   "region": [
+    "Marysville",
+    "Snohomish County"
+   ],
+   "lat": 48.05,
+   "lon": -122.18,
+   "summary": "James Comeford, who had run the Tulalip trading post since 1872, bought land across the slough from the reservation in 1878 and platted Marysville (named for his wife Maria) in 1885. It incorporated as a fourth-class town on March 20, 1891.",
+   "at_your_spot": "Your spot was marsh and timber at the edge of the Tulalip Reservation.",
+   "sources": [
+    {
+     "title": "HistoryLink: Marysville thumbnail history",
+     "url": "https://historylink.org/File/8227"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "northern-pacific-1883",
+   "title": "Northern Pacific completes the transcontinental line",
+   "when": "September 8, 1883 (last spike); Stampede Pass direct line 1887-88",
+   "start_years_ago": 117,
+   "end_years_ago": 112,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47.25,
+   "lon": -122.44,
+   "summary": "Henry Villard drove the last spike in Montana, linking Tacoma (via Portland and Kalama) to the East; the Cascade branch over Stampede Pass (1887) and its tunnel (1888) made Tacoma a true terminus. Seattle, bypassed, got only the Orphan Road branch.",
+   "at_your_spot": "Trains from the East were now reaching Puget Sound, {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Northern Pacific's Orphan Road",
+     "url": "https://historylink.org/File/2286"
+    },
+    {
+     "title": "HistoryLink: Northern Pacific Railroad and Seattle development",
+     "url": "https://www.historylink.org/File/1734"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "north-yakima-founded",
+   "title": "North Yakima founded by the railroad",
+   "when": "December 1884 - 1885 (townsite); January 1886 (incorporated); renamed Yakima 1918",
+   "start_years_ago": 116,
+   "end_years_ago": 82,
+   "region": [
+    "Yakima",
+    "Yakima County"
+   ],
+   "lat": 46.6,
+   "lon": -120.5,
+   "summary": "When Yakima City refused the Northern Pacific's terms, the railroad platted North Yakima four miles north in early 1885 and townspeople rolled their buildings up the valley on logs. North Yakima incorporated in 1886, took the county seat, and dropped North in 1918 (the old town became Union Gap).",
+   "at_your_spot": "Your spot was sagebrush until irrigation canals arrived with the railroad.",
+   "sources": [
+    {
+     "title": "HistoryLink: Yakima thumbnail history",
+     "url": "https://historylink.org/File/9187"
+    },
+    {
+     "title": "HistoryLink: Yakima County thumbnail history",
+     "url": "https://historylink.org/File/7651"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "pasco-founded",
+   "title": "Pasco founded at the railroad junction",
+   "when": "November 1884 (NP townsite); September 3, 1891 (incorporated)",
+   "start_years_ago": 116,
+   "end_years_ago": 109,
+   "region": [
+    "Pasco",
+    "Franklin County"
+   ],
+   "lat": 46.24,
+   "lon": -119.1,
+   "summary": "After dismantling its construction camp of Ainsworth at the Snake mouth, the Northern Pacific platted Pasco in 1884-85 as a division point. It voted 55 to 20 for incorporation on August 29, 1891 (official incorporation date September 3, 1891; HistoryLink gives August 31) and boomed with Hanford after 1943.",
+   "at_your_spot": "Your spot was a windy railroad siding at the meeting of three rivers.",
+   "sources": [
+    {
+     "title": "HistoryLink: Pasco thumbnail history",
+     "url": "https://www.historylink.org/file/8604"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "tacoma-expulsion-1885",
+   "title": "Tacoma expels its Chinese community",
+   "when": "November 3, 1885",
+   "start_years_ago": 115,
+   "end_years_ago": 115,
+   "region": [
+    "Tacoma"
+   ],
+   "lat": 47.25,
+   "lon": -122.44,
+   "summary": "Led by Mayor Jacob Weisbach, a mob marched about 200 Chinese residents to the railroad in the rain and burned their homes the next day; the Tacoma Method was copied across the West. The city council formally apologized in 1993.",
+   "at_your_spot": "Your spot's Chinese neighbors were marched out of town by a mob on this day.",
+   "sources": [
+    {
+     "title": "HistoryLink: Tacoma expels the entire Chinese community, Nov 3, 1885",
+     "url": "https://historylink.org/File/5063"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-anti-chinese-riot-1886",
+   "title": "Seattle anti-Chinese riot",
+   "when": "February 7-8, 1886",
+   "start_years_ago": 114,
+   "end_years_ago": 114,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "A mob marched most of Seattle's 350 Chinese residents to the steamer Queen of the Pacific; when deputies and the Home Guard blocked the forced departure, shots killed one rioter. Governor Squire declared martial law and federal troops occupied the city for months; the community took decades to recover.",
+   "at_your_spot": "Martial law covered your spot for two weeks in February 1886.",
+   "sources": [
+    {
+     "title": "HistoryLink: Anti-Chinese riot in Seattle, Feb 7-8, 1886",
+     "url": "https://historylink.org/File/2745"
+    },
+    {
+     "title": "HistoryLink: Anti-Chinese activism in Seattle",
+     "url": "https://historylink.org/File/1057"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "kirkland-founded",
+   "title": "Kirkland founded as a steel town; incorporated 1905",
+   "when": "1888 (Peter Kirk); October 12, 1905 (incorporated)",
+   "start_years_ago": 112,
+   "end_years_ago": 95,
+   "region": [
+    "Kirkland"
+   ],
+   "lat": 47.68,
+   "lon": -122.21,
+   "summary": "English steelmaker Peter Kirk and Seattle investors platted a Pittsburgh of the West on Lake Washington's east shore in 1888; the Panic of 1893 killed the mill before it made steel. The lakeside town incorporated with 400 people on October 12, 1905.",
+   "at_your_spot": "Your spot was platted for a steel city that never happened.",
+   "sources": [
+    {
+     "title": "HistoryLink: Kirkland thumbnail history",
+     "url": "https://www.historylink.org/File/208"
+    },
+    {
+     "title": "HistoryLink: Kirkland incorporates, Oct 12, 1905",
+     "url": "https://historylink.org/File/7508"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "great-seattle-fire-1889",
+   "title": "Great Seattle Fire",
+   "when": "June 6, 1889",
+   "start_years_ago": 111,
+   "end_years_ago": 111,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "A glue pot boiled over in a cabinet shop at Front and Madison and by nightfall some 29 blocks (about 120 acres) of the wooden business district (today's Pioneer Square) were ash, with no confirmed deaths in the fire itself. Seattle rebuilt in brick and stone, raised its streets, and nearly doubled in population within a year.",
+   "at_your_spot": "If your spot is in Pioneer Square, everything on it burned on this afternoon and the street outside was later raised a full story.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle's Great Fire, June 6, 1889 (re-verify link before publishing)",
+     "url": "https://www.historylink.org/File/715"
+    },
+    {
+     "title": "Wikipedia: Great Seattle Fire",
+     "url": "https://en.wikipedia.org/wiki/Great_Seattle_Fire"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ellensburg-fire-1889",
+   "title": "Ellensburg fire",
+   "when": "July 4, 1889",
+   "start_years_ago": 111,
+   "end_years_ago": 111,
+   "region": [
+    "Ellensburg",
+    "Kittitas County"
+   ],
+   "lat": 46.99,
+   "lon": -120.55,
+   "summary": "A wind-driven fire starting in a grocery about 10:30 p.m. destroyed 10 business blocks and 200 homes in the town then bidding to be state capital. It rebuilt in brick, many buildings still dated 1889.",
+   "at_your_spot": "Ellensburg's downtown, {distance} from your spot, burned the month before statehood.",
+   "sources": [
+    {
+     "title": "HistoryLink: Ellensburg fire, July 4, 1889",
+     "url": "https://historylink.org/File/5111"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "great-spokane-fire-1889",
+   "title": "Great Spokane Fire",
+   "when": "August 4, 1889",
+   "start_years_ago": 111,
+   "end_years_ago": 111,
+   "region": [
+    "Spokane",
+    "Spokane County"
+   ],
+   "lat": 47.66,
+   "lon": -117.42,
+   "summary": "Starting near the Northern Pacific depot about 6 p.m. while the waterworks failed, fire leveled 32 blocks of downtown Spokane Falls; one person died. Rebuilt in brick and stone, the city soon surpassed its wooden predecessor.",
+   "at_your_spot": "Spokane's downtown burned {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Great Spokane Fire, Aug 4, 1889",
+     "url": "https://historylink.org/File/7696"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "statehood-1889",
+   "title": "Washington becomes the 42nd state",
+   "when": "November 11, 1889",
+   "start_years_ago": 111,
+   "end_years_ago": 111,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "After voters ratified the constitution on October 1, President Harrison signed the proclamation with a pen of Washington gold, three days after Montana. Elisha P. Ferry became the first governor; women, who had voted in the territory 1883-87, were excluded until 1910.",
+   "at_your_spot": "Your spot has been in the State of Washington since this day.",
+   "sources": [
+    {
+     "title": "HistoryLink: Washington becomes 42nd state, Nov 11, 1889",
+     "url": "https://historylink.org/File/5210"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "kent-incorporates-1890",
+   "title": "Kent incorporates",
+   "when": "May 28, 1890",
+   "start_years_ago": 110,
+   "end_years_ago": 110,
+   "region": [
+    "Kent",
+    "King County"
+   ],
+   "lat": 47.38,
+   "lon": -122.23,
+   "summary": "The White River valley hop-farming settlement of Titusville, renamed Kent for England's hop county when the railroad came in 1885, became King County's second city on May 28, 1890 with 793 people. Japanese American farmers made it a produce center until 1942.",
+   "at_your_spot": "Your spot was in hop fields along the White River.",
+   "sources": [
+    {
+     "title": "HistoryLink: Kent thumbnail history",
+     "url": "https://www.historylink.org/file/3587"
+    },
+    {
+     "title": "HistoryLink: Kent incorporates, May 28, 1890",
+     "url": "https://www.historylink.org/File/1666"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "everett-founded",
+   "title": "Everett founded by Eastern capital",
+   "when": "1891 (townsite); May 4, 1893 (incorporated)",
+   "start_years_ago": 109,
+   "end_years_ago": 107,
+   "region": [
+    "Everett",
+    "Snohomish County"
+   ],
+   "lat": 47.98,
+   "lon": -122.2,
+   "summary": "Rockefeller-backed promoters cleared the Port Gardner peninsula in 1891 for a mill-and-smelter city next to the Tulalip Reservation. Everett incorporated May 4, 1893, weeks before the Panic; Weyerhaeuser's giant mills and later Boeing's 747 plant defined it.",
+   "at_your_spot": "Your spot was being logged and graded for a planned industrial city.",
+   "sources": [
+    {
+     "title": "HistoryLink: Everett thumbnail history",
+     "url": "https://historylink.org/File/7397"
+    },
+    {
+     "title": "HistoryLink: Everett incorporates, May 4, 1893",
+     "url": "https://historylink.org/File/9324"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "auburn-slaughter",
+   "title": "Auburn incorporates as Slaughter",
+   "when": "June 13, 1891 (as Slaughter); renamed Auburn February 21, 1893",
+   "start_years_ago": 109,
+   "end_years_ago": 107,
+   "region": [
+    "Auburn",
+    "King County"
+   ],
+   "lat": 47.31,
+   "lon": -122.23,
+   "summary": "The Green River valley town incorporated as Slaughter, after a lieutenant killed nearby in 1855; embarrassed residents had the legislature rename it Auburn in 1893. Hops, dairies and the Northern Pacific yards supported it; the Muckleshoot Reservation adjoins the city.",
+   "at_your_spot": "Your spot was in a town named Slaughter, for an Army lieutenant killed in the 1855-56 war, until 1893.",
+   "sources": [
+    {
+     "title": "HistoryLink: Auburn thumbnail history",
+     "url": "https://historylink.org/File/675"
+    },
+    {
+     "title": "HistoryLink: Slaughter renamed Auburn, 1893",
+     "url": "https://www.historylink.org/File/1758"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "great-northern-1893",
+   "title": "Great Northern Railway reaches Seattle",
+   "when": "January 6, 1893 (line completed at Scenic); February 1893 (first freight train); June 18, 1893 (first transcontinental passenger train)",
+   "start_years_ago": 107,
+   "end_years_ago": 107,
+   "region": [
+    "Seattle",
+    "King County",
+    "Snohomish County"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "James J. Hill's Great Northern crossed Stevens Pass by switchbacks and made Seattle its terminus, thanks to Judge Thomas Burke's lobbying; the first transcontinental passenger train left for St. Paul in June. The Panic of 1893 struck weeks later, but the line sealed Seattle's victory over Tacoma.",
+   "at_your_spot": "Your spot was now four days by rail from Minnesota.",
+   "sources": [
+    {
+     "title": "HistoryLink: Great Northern train reaches Seattle, 1893",
+     "url": "https://historylink.org/File/776"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "klondike-1897",
+   "title": "Klondike gold arrives on the steamer Portland",
+   "when": "July 17, 1897",
+   "start_years_ago": 103,
+   "end_years_ago": 102,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.6,
+   "lon": -122.34,
+   "summary": "The Portland docked at Schwabacher's Wharf with 68 miners and more than a ton of gold, and Seattle promoted itself as the gateway to the Yukon. Outfitting tens of thousands of stampeders ended the 1893 depression and tripled the city's population in a decade.",
+   "at_your_spot": "Gold fever hit your spot this summer; Seattle's population tripled in the next 10 years.",
+   "sources": [
+    {
+     "title": "HistoryLink: Klondike Gold Rush",
+     "url": "https://historylink.org/File/687"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "denny-regrade",
+   "title": "Denny Regrade flattens Denny Hill",
+   "when": "1898-1930",
+   "start_years_ago": 102,
+   "end_years_ago": 70,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.62,
+   "lon": -122.34,
+   "summary": "City engineer R. H. Thomson's crews sluiced and shoveled away Denny Hill in stages (1898-99, 1903-11, 1928-30), lowering the ground by more than 100 feet and dumping the earth into Elliott Bay. Jackson and Dearborn streets were regraded too; the flattened land became Belltown and the Denny Triangle.",
+   "at_your_spot": "If your spot is on regraded ground, it was up to 100 feet higher before the regrade.",
+   "sources": [
+    {
+     "title": "HistoryLink: Denny Regrade completed, Dec 10, 1930",
+     "url": "https://historylink.org/File/711"
+    },
+    {
+     "title": "HistoryLink: Denny Regrade",
+     "url": "https://historylink.org/File/21204"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "rainier-national-park-1899",
+   "title": "Mount Rainier National Park established",
+   "when": "March 2, 1899",
+   "start_years_ago": 101,
+   "end_years_ago": 101,
+   "region": [
+    "Pierce County",
+    "Lewis County",
+    "Yakima Valley",
+    "South Cascades"
+   ],
+   "lat": 46.85,
+   "lon": -121.76,
+   "summary": "Congress created the nation's fifth national park around the 14,411-foot volcano (Tahoma to the Puyallup and Nisqually), first climbed by Hazard Stevens and P. B. Van Trump in 1870 with Yakama guide Sluiskin.",
+   "at_your_spot": "The mountain you can see from your spot became a national park.",
+   "sources": [
+    {
+     "title": "HistoryLink: Mount Rainier National Park created, March 2, 1899",
+     "url": "https://historylink.org/File/5345"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "bellingham-consolidated",
+   "title": "Bellingham consolidated from four towns",
+   "when": "December 14, 1852 (Roeder and Peabody mill); December 28, 1903 (consolidation)",
+   "start_years_ago": 148,
+   "end_years_ago": 97,
+   "region": [
+    "Bellingham",
+    "Whatcom County"
+   ],
+   "lat": 48.75,
+   "lon": -122.48,
+   "summary": "Henry Roeder and Russell Peabody built a sawmill at Whatcom Creek falls in Lummi territory in 1852; Whatcom, Sehome, Fairhaven and Bellingham grew on the bay, boomed in the 1858 Fraser gold rush, and merged as Bellingham in 1903.",
+   "at_your_spot": "Your spot was in one of four rival towns before 1903.",
+   "sources": [
+    {
+     "title": "HistoryLink: Bellingham thumbnail history",
+     "url": "https://historylink.org/file/7904"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "kennewick-incorporates-1904",
+   "title": "Kennewick incorporates",
+   "when": "February 5, 1904",
+   "start_years_ago": 96,
+   "end_years_ago": 96,
+   "region": [
+    "Kennewick",
+    "Benton County"
+   ],
+   "lat": 46.21,
+   "lon": -119.14,
+   "summary": "A railroad camp of 1884 became a town only after irrigation canals arrived in 1902; Kennewick incorporated February 5, 1904 and grew into the largest of the Tri-Cities after Hanford.",
+   "at_your_spot": "Your spot was irrigated orchard land on the Columbia.",
+   "sources": [
+    {
+     "title": "HistoryLink: Kennewick thumbnail history",
+     "url": "https://www.historylink.org/file/8499"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-annexations-1907",
+   "title": "Seattle annexes Ballard, West Seattle and four other towns",
+   "when": "January 7 - July 24, 1907",
+   "start_years_ago": 93,
+   "end_years_ago": 93,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.67,
+   "lon": -122.38,
+   "spot_rule": "annexed-in-range",
+   "summary": "Within seven months of 1907 Seattle absorbed Southeast Seattle, Ravenna, Columbia City, South Park, Ballard and West Seattle, roughly doubling its land area; Georgetown followed in 1910. The city's Annexation GIS layer records each of these dates.",
+   "at_your_spot": "Your spot joined Seattle in {annex_year}.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle 1907, a milestone year",
+     "url": "https://www.historylink.org/File/8244"
+    },
+    {
+     "title": "Seattle Municipal Archives: Annexed Cities",
+     "url": "https://seattle.gov/city-archives/exhibits-and-education/online-exhibits/annexed-cities"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "pike-place-market-1907",
+   "title": "Pike Place Market opens",
+   "when": "August 17, 1907",
+   "start_years_ago": 93,
+   "end_years_ago": 0,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.61,
+   "lon": -122.34,
+   "summary": "To cut out price-gouging commission houses, the city invited farmers to sell from wagons on Pike Place; eight showed up and sold out by 11 a.m. The arcade opened that November, and the market survived a 1971 vote to save it from urban renewal.",
+   "at_your_spot": "Farmers from the valleys near your spot sold produce here from day one.",
+   "sources": [
+    {
+     "title": "HistoryLink: Pike Place Market opens, Aug 17, 1907",
+     "url": "https://historylink.org/File/1949"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ayp-1909",
+   "title": "Alaska-Yukon-Pacific Exposition",
+   "when": "June 1 - October 16, 1909",
+   "start_years_ago": 91,
+   "end_years_ago": 91,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.65,
+   "lon": -122.31,
+   "summary": "Washington's first world's fair drew 3.7 million visitors to the forested University of Washington campus, laid out by the Olmsted Brothers around Rainier Vista. President Taft opened it by telegraph key; the fair left the campus plan and the Seattle suffrage campaign energized.",
+   "at_your_spot": "Your spot was a streetcar ride from the fairgrounds.",
+   "sources": [
+    {
+     "title": "HistoryLink: AYP Exposition opens, June 1, 1909",
+     "url": "https://historylink.org/File/8965"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "wellington-avalanche-1910",
+   "title": "Wellington avalanche",
+   "when": "March 1, 1910",
+   "start_years_ago": 90,
+   "end_years_ago": 90,
+   "region": [
+    "King County",
+    "North Cascades",
+    "Snohomish County"
+   ],
+   "lat": 47.75,
+   "lon": -121.13,
+   "summary": "After days of blizzard, a slide off Windy Mountain swept two snowbound Great Northern trains into the Tye River canyon near Stevens Pass, killing 96, the deadliest avalanche in U.S. history. The railroad built snowsheds and later the 7.8-mile Cascade Tunnel (1929).",
+   "at_your_spot": "The deadliest avalanche in American history struck {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Train disaster at Wellington kills 96, March 1, 1910",
+     "url": "https://historylink.org/File/5127"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "womens-suffrage-1910",
+   "title": "Washington women win the vote",
+   "when": "November 8, 1910",
+   "start_years_ago": 90,
+   "end_years_ago": 90,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "Voters approved woman suffrage 52,299 to 29,676, making Washington the fifth state and breaking a 14-year national stalemate; Emma Smith DeVoe and May Arkwright Hutton led the campaign. Territorial women had voted 1883-87 before courts struck the law down.",
+   "at_your_spot": "Women at your spot voted in the next election, a decade before the 19th Amendment.",
+   "sources": [
+    {
+     "title": "HistoryLink: Women win the vote, Nov 8, 1910",
+     "url": "https://historylink.org/File/5213"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "boeing-founded-1916",
+   "title": "Boeing founded on Lake Union",
+   "when": "July 15, 1916",
+   "start_years_ago": 84,
+   "end_years_ago": 0,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.53,
+   "lon": -122.3,
+   "summary": "A month after flying his B&W seaplane off Lake Union, timber heir William Boeing incorporated Pacific Aero Products, renamed Boeing Airplane Co. in 1917, in the Red Barn on the Duwamish. Navy trainers, air mail, the B-17 and B-29 made it the region's dominant employer by World War II.",
+   "at_your_spot": "The company that would employ a tenth of your neighbors was born in a boathouse.",
+   "sources": [
+    {
+     "title": "HistoryLink: Boeing incorporates, July 15, 1916",
+     "url": "https://www.historylink.org/File/370"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "everett-massacre-1916",
+   "title": "Everett Massacre",
+   "when": "November 5, 1916",
+   "start_years_ago": 84,
+   "end_years_ago": 84,
+   "region": [
+    "Everett",
+    "Snohomish County"
+   ],
+   "lat": 47.98,
+   "lon": -122.22,
+   "summary": "When the steamer Verona brought some 300 IWW members from Seattle to support striking shingle weavers, Sheriff McRae's citizen deputies opened fire at the dock; at least five Wobblies and two deputies died in the bloodiest labor clash in Northwest history. All 74 arrested were freed after one acquittal.",
+   "at_your_spot": "Gunfire at the Everett city dock was heard {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Everett Massacre (1916)",
+     "url": "https://historylink.org/File/9981"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ship-canal-1916",
+   "title": "Lake Washington Ship Canal and locks open",
+   "when": "August-October 1916 (lake lowered); July 4, 1917 (dedication)",
+   "start_years_ago": 84,
+   "end_years_ago": 83,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.67,
+   "lon": -122.4,
+   "summary": "The Army Corps' Hiram Chittenden Locks and the Fremont and Montlake cuts joined Puget Sound, Lake Union and Lake Washington; Lake Washington dropped about nine feet, drying the Black River outlet, shrinking Union Bay and the Mercer Slough and exposing new shoreline. The dedication parade of 200 boats came on July 4, 1917.",
+   "at_your_spot": "If your spot is near the lake, its shoreline moved in autumn 1916 when the water fell nine feet.",
+   "sources": [
+    {
+     "title": "HistoryLink: Lake Washington Ship Canal",
+     "url": "https://historylink.org/File/1444"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "general-strike-1919",
+   "title": "Seattle General Strike",
+   "when": "February 6-11, 1919",
+   "start_years_ago": 81,
+   "end_years_ago": 81,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "Some 65,000 workers walked out in sympathy with 35,000 striking shipyard workers, the first general strike in U.S. history; a labor committee ran milk and food deliveries while the city stayed calm. It collapsed in five days, Mayor Ole Hanson claimed credit, and the Red Scare followed.",
+   "at_your_spot": "For five days nothing moved at your spot without the strike committee's say-so.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle General Strike, 1919",
+     "url": "https://historylink.org/File/861"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "centralia-1919",
+   "title": "Centralia tragedy",
+   "when": "November 11, 1919",
+   "start_years_ago": 81,
+   "end_years_ago": 81,
+   "region": [
+    "Centralia",
+    "Lewis County"
+   ],
+   "lat": 46.72,
+   "lon": -122.95,
+   "summary": "When an Armistice Day parade of American Legion veterans reached the IWW hall, gunfire killed four Legionnaires; that night a mob lynched Wobbly veteran Wesley Everest from the Chehalis River bridge. Seven IWW members got 25-40 years; the state outlawed IWW membership.",
+   "at_your_spot": "The Armistice Day violence happened {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Centralia Massacre, Nov 11, 1919",
+     "url": "https://historylink.org/File/5605"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "grand-coulee-kettle-falls",
+   "title": "Grand Coulee Dam and the drowning of Kettle Falls",
+   "when": "1933-1942 (construction); June 14-16, 1940 (Ceremony of Tears); March 22, 1941 (first power)",
+   "start_years_ago": 67,
+   "end_years_ago": 58,
+   "region": [
+    "Northeast Washington",
+    "Okanogan",
+    "Columbia Basin"
+   ],
+   "lat": 47.96,
+   "lon": -118.98,
+   "summary": "The New Deal's largest concrete dam blocked salmon from the upper Columbia permanently and flooded Kettle Falls, where Plateau peoples had fished for 9,000 years; thousands gathered for a Ceremony of Tears in June 1940. Its power ran wartime aluminum plants and Hanford; its canals irrigated the Columbia Basin from 1952.",
+   "at_your_spot": "Cheap Coulee power and basin irrigation reshaped the economy around your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink (This Week Then): Ceremony of Tears at Kettle Falls, June 1940",
+     "url": "https://www.historylink.org/File/22746"
+    },
+    {
+     "title": "NW Power and Conservation Council: Ceremony of Tears",
+     "url": "https://www.nwcouncil.org/reports/columbia-river-history/ceremonyoftears/"
+    },
+    {
+     "title": "Wikipedia: Grand Coulee Dam",
+     "url": "https://en.wikipedia.org/wiki/Grand_Coulee_Dam"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "olympic-national-park-1938",
+   "title": "Olympic National Park created",
+   "when": "June 29, 1938",
+   "start_years_ago": 62,
+   "end_years_ago": 62,
+   "region": [
+    "Olympic Peninsula"
+   ],
+   "lat": 47.8,
+   "lon": -123.6,
+   "summary": "Franklin Roosevelt, after touring the peninsula in 1937, signed the act creating Olympic National Park from the old Mount Olympus National Monument, protecting the rain forests and glaciers at the core of Klallam, Makah, Quileute, Hoh, Quinault and Skokomish homelands.",
+   "at_your_spot": "The mountains above your spot became a national park.",
+   "sources": [
+    {
+     "title": "Wikipedia: Olympic National Park",
+     "url": "https://en.wikipedia.org/wiki/Olympic_National_Park"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "floating-bridge-1940",
+   "title": "Lake Washington Floating Bridge opens",
+   "when": "July 2, 1940",
+   "start_years_ago": 60,
+   "end_years_ago": 60,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.59,
+   "lon": -122.27,
+   "summary": "The world's first large concrete floating bridge carried U.S. 10 from Seattle across Mercer Island to the Eastside, turning farms into suburbs. The Evergreen Point (SR 520) bridge followed in 1963; the original sank in a 1990 storm and was rebuilt by 1993.",
+   "at_your_spot": "Your spot became a commute from Seattle on this day.",
+   "sources": [
+    {
+     "title": "HistoryLink: Lake Washington Floating Bridge (Lacey V. Murrow)",
+     "url": "https://historylink.org/File/21298"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "narrows-bridge-1940",
+   "title": "Tacoma Narrows Bridge collapses",
+   "when": "November 7, 1940",
+   "start_years_ago": 60,
+   "end_years_ago": 60,
+   "region": [
+    "Tacoma",
+    "Pierce County",
+    "Kitsap County"
+   ],
+   "lat": 47.27,
+   "lon": -122.55,
+   "summary": "Four months after opening, Galloping Gertie twisted apart in a 42-mph wind and fell into the Narrows, filmed for every engineering class since; the only casualty was a dog. A replacement opened in 1950 and a second span in 2007.",
+   "at_your_spot": "The bridge {distance} from your spot was filmed falling into the water.",
+   "sources": [
+    {
+     "title": "HistoryLink: Tacoma Narrows Bridge collapses, Nov 7, 1940",
+     "url": "https://historylink.org/File/5048"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "japanese-american-removal-1942",
+   "title": "Japanese Americans forcibly removed, Bainbridge Island first",
+   "when": "March 30, 1942",
+   "start_years_ago": 58,
+   "end_years_ago": 55,
+   "region": [
+    "Puget Sound",
+    "Yakima Valley",
+    "Spokane County"
+   ],
+   "lat": 47.6,
+   "lon": -122.52,
+   "summary": "Under Executive Order 9066, soldiers marched 227 Bainbridge Islanders to the Eagledale ferry dock, the first forced removal in the nation. About 12,000 Washingtonians of Japanese ancestry, two-thirds U.S. citizens, were forcibly removed, held at the Puyallup fairgrounds (Camp Harmony) and incarcerated at Minidoka; Kent and Bellevue farms were lost.",
+   "at_your_spot": "Japanese American families at your spot were given days to leave in spring 1942.",
+   "sources": [
+    {
+     "title": "HistoryLink: Bainbridge Island Japanese Americans removed, March 30, 1942",
+     "url": "https://historylink.org/File/8277"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "hanford-1943",
+   "title": "Hanford: towns condemned for the atomic bomb",
+   "when": "February 23, 1943 (condemnation order); September 1944 (B Reactor starts)",
+   "start_years_ago": 57,
+   "end_years_ago": 0,
+   "region": [
+    "Columbia Basin",
+    "Benton County",
+    "Franklin County"
+   ],
+   "lat": 46.55,
+   "lon": -119.5,
+   "summary": "The Army seized 625 square miles on the Columbia, evicting 1,500 residents of Hanford and White Bluffs with 30 days' notice and cutting the Wanapum off from the river. B Reactor made the plutonium for the Nagasaki bomb; nine reactors ran until 1987, leaving the nation's largest nuclear cleanup.",
+   "at_your_spot": "Your spot was inside or beside the most secret place in America.",
+   "sources": [
+    {
+     "title": "HistoryLink: Hanford condemnation, Feb 23, 1943",
+     "url": "https://historylink.org/File/8451"
+    },
+    {
+     "title": "HistoryLink: Hanford Nuclear Site",
+     "url": "https://www.historylink.org/file/21101"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "celilo-falls-1957",
+   "title": "Celilo Falls silenced by The Dalles Dam",
+   "when": "March 10, 1957",
+   "start_years_ago": 43,
+   "end_years_ago": 43,
+   "region": [
+    "South Cascades",
+    "Yakima Valley",
+    "Columbia Basin"
+   ],
+   "lat": 45.65,
+   "lon": -120.96,
+   "summary": "When the dam's gates closed, the oldest continuously inhabited fishing site in North America vanished in four and a half hours as 10,000 people watched. Yakama, Warm Springs, Umatilla and Nez Perce families lost their scaffolds but kept their treaty rights.",
+   "at_your_spot": "The great fishery at Celilo, {distance} from your spot, was drowned in a single morning.",
+   "sources": [
+    {
+     "title": "HistoryLink: Celilo Falls submerged, March 10, 1957",
+     "url": "https://historylink.org/File/10010"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "century-21-1962",
+   "title": "Century 21 Exposition (Seattle World's Fair)",
+   "when": "April 21 - October 21, 1962",
+   "start_years_ago": 38,
+   "end_years_ago": 38,
+   "region": [
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.62,
+   "lon": -122.35,
+   "summary": "Nearly 10 million people visited the space-age fair on the regraded land at the foot of Queen Anne Hill, which left the Space Needle, Monorail, Pacific Science Center and Seattle Center. The Columbus Day storm closed the fair early on October 12.",
+   "at_your_spot": "Your spot was within sight of the brand-new Space Needle.",
+   "sources": [
+    {
+     "title": "HistoryLink: Century 21 World's Fair opens, April 21, 1962",
+     "url": "https://historylink.org/File/5396"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "columbus-day-storm-1962",
+   "title": "Columbus Day Storm",
+   "when": "October 12, 1962",
+   "start_years_ago": 38,
+   "end_years_ago": 38,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "The remnant of Typhoon Freda hit with gusts over 100 mph (160 at Naselle), killed nine in Washington, blew down more than 11 billion board feet of timber across the Northwest (some estimates say 15 billion) and cut power for days; the Weather Service calls it the state's worst weather disaster of the century.",
+   "at_your_spot": "Trees around your spot came down by the thousand this evening.",
+   "sources": [
+    {
+     "title": "HistoryLink: Columbus Day windstorm, Oct 12, 1962",
+     "url": "https://historylink.org/File/5325"
+    },
+    {
+     "title": "Wikipedia: Columbus Day Storm of 1962",
+     "url": "https://en.wikipedia.org/wiki/Columbus_Day_Storm_of_1962"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "fish-wars",
+   "title": "Fish Wars on the Nisqually and Puyallup",
+   "when": "1963-1974",
+   "start_years_ago": 37,
+   "end_years_ago": 26,
+   "region": [
+    "Pierce County",
+    "Thurston County",
+    "Puget Sound"
+   ],
+   "lat": 47.07,
+   "lon": -122.7,
+   "summary": "Billy Frank Jr. (arrested more than 50 times) and others held fish-ins at Frank's Landing, defying state game wardens who seized boats and nets; Marlon Brando's 1964 arrest and a 1970 tear-gas raid on the Puyallup camp drew national attention and led to the federal lawsuit decided by Judge Boldt.",
+   "at_your_spot": "Treaty fishers were being arrested on the river nearest your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Billy Frank Jr. (1931-2014)",
+     "url": "https://historylink.org/File/8929"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "interstate-5",
+   "title": "Interstate 5 completed through Washington",
+   "when": "January 31, 1967 (Everett-Tacoma); May 14, 1969 (last gap)",
+   "start_years_ago": 33,
+   "end_years_ago": 31,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "The freeway cut through Seattle's First Hill and Capitol Hill, demolishing thousands of homes, and opened end-to-end from Everett to Tacoma in January 1967; the final Marysville-Everett section opened in May 1969, finishing the 276-mile state route.",
+   "at_your_spot": "The freeway through Seattle opened in 1967; the last gap, between Everett and Marysville, closed in 1969.",
+   "sources": [
+    {
+     "title": "HistoryLink: Interstate 5 completed Everett to Tacoma, Jan 31, 1967",
+     "url": "https://historylink.org/File/9393"
+    },
+    {
+     "title": "HistoryLink (This Week Then): Driving through Seattle (I-5)",
+     "url": "https://www.historylink.org/File/20507"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "boeing-747-everett",
+   "title": "Boeing builds the 747 in Everett",
+   "when": "1967 (plant); February 9, 1969 (first flight)",
+   "start_years_ago": 33,
+   "end_years_ago": 31,
+   "region": [
+    "Everett",
+    "Snohomish County"
+   ],
+   "lat": 47.92,
+   "lon": -122.28,
+   "summary": "Boeing raised the world's largest building by volume beside Paine Field and rolled out the first jumbo jet in September 1968; it flew on February 9, 1969. The gamble nearly broke the company and then defined air travel for 50 years.",
+   "at_your_spot": "The biggest building on earth went up {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Boeing 747 first flight, Feb 9, 1969",
+     "url": "https://www.historylink.org/File/1181"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "boeing-bust",
+   "title": "Boeing Bust",
+   "when": "1969-1971",
+   "start_years_ago": 31,
+   "end_years_ago": 29,
+   "region": [
+    "Puget Sound"
+   ],
+   "lat": 47.44,
+   "lon": -122.3,
+   "summary": "Boeing employment fell from 100,800 in 1967 to 38,690 by April 1971 after the SST was cancelled and airline orders dried up; Seattle unemployment topped 12 percent and two realtors posted the billboard Will the last person leaving SEATTLE turn out the lights.",
+   "at_your_spot": "One in ten jobs around your spot vanished in two years.",
+   "sources": [
+    {
+     "title": "HistoryLink: Last person leaving Seattle billboard, April 1971",
+     "url": "https://www.historylink.org/File/1287"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "boldt-decision-1974",
+   "title": "Boldt decision affirms treaty fishing rights",
+   "when": "February 12, 1974",
+   "start_years_ago": 26,
+   "end_years_ago": 0,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "In United States v. Washington, Judge George Boldt ruled the Stevens treaties entitle tribes to half the harvestable salmon and steelhead and to co-manage the fishery; the Supreme Court upheld it in 1979. Unrecognized tribes such as the Duwamish, Samish and Snoqualmie were excluded, driving later recognition fights.",
+   "at_your_spot": "Salmon returning past your spot are now shared 50-50 with the treaty tribes.",
+   "sources": [
+    {
+     "title": "HistoryLink: Boldt decision, Feb 12, 1974",
+     "url": "https://historylink.org/File/5282"
+    },
+    {
+     "title": "HistoryLink: Boldt Decision, United States v. State of Washington",
+     "url": "https://historylink.org/file/21084"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "expo-74",
+   "title": "Expo '74 reclaims Spokane's riverfront",
+   "when": "May 4 - November 3, 1974",
+   "start_years_ago": 26,
+   "end_years_ago": 26,
+   "region": [
+    "Spokane",
+    "Spokane County"
+   ],
+   "lat": 47.66,
+   "lon": -117.42,
+   "summary": "The smallest city ever to host a world's fair cleared rail yards from the islands at Spokane Falls for the first environment-themed exposition, opened by President Nixon; the site became Riverfront Park.",
+   "at_your_spot": "The falls that drew the Spokane people and James Glover were opened to view again.",
+   "sources": [
+    {
+     "title": "HistoryLink: Expo '74 opens, May 4, 1974",
+     "url": "https://www.historylink.org/File/5133"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "kingdome",
+   "title": "Kingdome opens and is imploded",
+   "when": "March 27, 1976 - March 26, 2000",
+   "start_years_ago": 24,
+   "end_years_ago": 0,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.33,
+   "summary": "The concrete dome on the old tideflats south of Pioneer Square brought the Seahawks and Mariners to Seattle; it was demolished in 16.8 seconds in 2000 with $206 million still owed, replaced by the football and baseball stadiums.",
+   "at_your_spot": "The dome stood {distance} from your spot for 24 years.",
+   "sources": [
+    {
+     "title": "HistoryLink: Kingdome imploded, March 26, 2000",
+     "url": "https://historylink.org/File/2252"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "microsoft-eastside",
+   "title": "Microsoft moves to Bellevue, then Redmond",
+   "when": "January 1, 1979 (Bellevue); February 1986 (Redmond campus and IPO)",
+   "start_years_ago": 21,
+   "end_years_ago": 0,
+   "region": [
+    "Bellevue",
+    "Redmond",
+    "King County"
+   ],
+   "lat": 47.64,
+   "lon": -122.13,
+   "summary": "Bill Gates and Paul Allen brought their 13-person company home from Albuquerque to the Old National Bank building in Bellevue, then to a Redmond campus in 1986; the stock offering that March created thousands of Eastside millionaires and the region's software economy.",
+   "at_your_spot": "The Eastside tech boom that remade your spot began with 13 employees downtown.",
+   "sources": [
+    {
+     "title": "HistoryLink: Microsoft moves to Bellevue, Jan 1, 1979",
+     "url": "https://historylink.org/File/21161"
+    },
+    {
+     "title": "HistoryLink: Microsoft goes public, March 13, 1986",
+     "url": "https://historylink.org/File/2000"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "wppss-default-1983",
+   "title": "WPPSS bond default",
+   "when": "July 25, 1983",
+   "start_years_ago": 17,
+   "end_years_ago": 17,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "The Washington Public Power Supply System, building five nuclear plants at Hanford and Satsop, defaulted on $2.25 billion of bonds, the largest municipal default in U.S. history; only one plant (Columbia Generating Station) was finished, and ratepayers paid for decades.",
+   "at_your_spot": "Your spot's electric bill carried the Whoops surcharge.",
+   "sources": [
+    {
+     "title": "HistoryLink: Washington Public Power Supply System (WPPSS)",
+     "url": "https://www.historylink.org/File/5482"
+    },
+    {
+     "title": "UPI, July 31, 1983: Giant nuclear plant builder collapses into record bond default",
+     "url": "https://www.upi.com/Archives/1983/07/31/Giant-nuclear-plant-builder-collapses-into-record-bond-default/2761428472000/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "suburban-incorporations",
+   "title": "Wave of suburban incorporations",
+   "when": "February 28, 1990 (Federal Way, SeaTac); 1995 (Shoreline); February 28, 1996 (Lakewood); August 31, 1999 (Sammamish); March 31, 2003 (Spokane Valley)",
+   "start_years_ago": 10,
+   "end_years_ago": -3,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "spot_rule": "incorporated-in-range",
+   "summary": "Frustrated with county growth management (and, after 1990, pushed by the Growth Management Act), unincorporated suburbs became cities: Federal Way and SeaTac (February 28, 1990), Shoreline (1995), Lakewood (1996), Sammamish (1999) and Spokane Valley (2003, instantly the ninth-largest city). Each had been farms, prairie or lake cabins a generation earlier.",
+   "at_your_spot": "Your spot was unincorporated county land until {inc_year}.",
+   "sources": [
+    {
+     "title": "HistoryLink: Federal Way incorporates, Feb 28, 1990",
+     "url": "https://historylink.org/File/4213"
+    },
+    {
+     "title": "HistoryLink: Lakewood incorporates, Feb 28, 1996",
+     "url": "https://historylink.org/File/23293"
+    },
+    {
+     "title": "HistoryLink: Sammamish incorporates, Aug 31, 1999",
+     "url": "https://historylink.org/File/7466"
+    },
+    {
+     "title": "HistoryLink: Spokane Valley incorporates, March 31, 2003",
+     "url": "https://www.historylink.org/File/10120"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "amazon-founded-1994",
+   "title": "Amazon founded in a Bellevue garage",
+   "when": "July 5, 1994",
+   "start_years_ago": 6,
+   "end_years_ago": 0,
+   "region": [
+    "Bellevue",
+    "Seattle",
+    "King County"
+   ],
+   "lat": 47.59,
+   "lon": -122.2,
+   "summary": "Jeff Bezos incorporated Cadabra, soon Amazon.com, in the garage of a rented Bellevue house and sold the first book online in July 1995. The company's move into South Lake Union after 2007 transformed Seattle's Denny Regrade into a tech district and drove the city's fastest growth since the Klondike.",
+   "at_your_spot": "The company that remade South Lake Union started {distance} from your spot.",
+   "sources": [
+    {
+     "title": "Wikipedia: History of Amazon",
+     "url": "https://en.wikipedia.org/wiki/History_of_Amazon"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "tribal-recognition",
+   "title": "Tribal federal recognition won, lost and denied",
+   "when": "1973-2015",
+   "start_years_ago": 27,
+   "end_years_ago": -15,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "Landless treaty tribes regained federal status one by one: Nooksack (1973), Upper Skagit (1974), Sauk-Suiattle (1975), Stillaguamish (1976), Jamestown S'Klallam (1981), Samish (1996), Snoqualmie (1999), Cowlitz (2000, first reservation 2015). The Chinook were recognized in January 2001 and un-recognized in July 2002; the Duwamish, recognized for 48 hours in January 2001, remain denied.",
+   "at_your_spot": "Several of the nations whose homelands include your spot had to fight for federal recognition in these years; the Duwamish and Chinook are still denied it.",
+   "sources": [
+    {
+     "title": "HistoryLink: Snoqualmie Tribe recognized, Oct 6, 1999",
+     "url": "https://www.historylink.org/file/2458"
+    },
+    {
+     "title": "HistoryLink: Duwamish recognition granted then suspended, Jan 2001",
+     "url": "https://www.historylink.org/File/2951"
+    },
+    {
+     "title": "Chinook Indian Nation: political history",
+     "url": "https://chinooknation.org/political-history/"
+    },
+    {
+     "title": "Federal Register: Cowlitz reservation proclaimed, Nov 13, 2015",
+     "url": "https://www.govinfo.gov/content/pkg/FR-2015-11-13/html/2015-28805.htm"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "makah-whaling-1999",
+   "title": "Makah resume whaling",
+   "when": "May 17, 1999",
+   "start_years_ago": 1,
+   "end_years_ago": 1,
+   "region": [
+    "Olympic Peninsula",
+    "Clallam County"
+   ],
+   "lat": 48.37,
+   "lon": -124.6,
+   "summary": "Exercising the only treaty whaling right in the United States, a Makah crew in a cedar canoe took a gray whale off Cape Flattery, the first in 70 years, amid protests and Coast Guard escorts. Lawsuits suspended hunts; NOAA approved a limited waiver in 2024.",
+   "at_your_spot": "The Neah Bay treaty's whaling clause was exercised again on this day, {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Makah whale hunt succeeds, May 17, 1999",
+     "url": "https://historylink.org/File/5310"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "wto-1999",
+   "title": "WTO protests shut down downtown Seattle",
+   "when": "November 30 - December 3, 1999",
+   "start_years_ago": 1,
+   "end_years_ago": 1,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.61,
+   "lon": -122.33,
+   "summary": "Some 35,000 to 50,000 union members, environmentalists and activists blockaded the World Trade Organization ministerial, police answered with tear gas and rubber bullets, and Mayor Schell declared a curfew and no-protest zone; about 600 were arrested over the week.",
+   "at_your_spot": "Tear gas drifted across downtown, {distance} from your spot, during the Battle in Seattle.",
+   "sources": [
+    {
+     "title": "HistoryLink: WTO meeting and protests, Part 1",
+     "url": "https://www.historylink.org/File/9183"
+    },
+    {
+     "title": "HistoryLink: WTO protests timeline, Nov 30, 1999",
+     "url": "https://historylink.org/File/2142"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "link-light-rail-2009",
+   "title": "Link light rail opens",
+   "when": "July 18, 2009",
+   "start_years_ago": -9,
+   "end_years_ago": 0,
+   "region": [
+    "Seattle",
+    "King County",
+    "Snohomish County"
+   ],
+   "lat": 47.58,
+   "lon": -122.3,
+   "summary": "Four decades after voters rejected Forward Thrust rail in 1968 and 1970, Sound Transit's 14-mile Central Link from Westlake to Tukwila opened with 45,000 riders; extensions reached the airport (2009), UW (2016), Northgate (2021), Lynnwood and the Eastside (2024-25).",
+   "at_your_spot": "Trains began running {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Seattle light rail opens, July 18, 2009",
+     "url": "https://www.historylink.org/File/20711"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "elwha-dams-removed",
+   "title": "Elwha dams removed",
+   "when": "September 17, 2011 - August 26, 2014",
+   "start_years_ago": -11,
+   "end_years_ago": -14,
+   "region": [
+    "Olympic Peninsula",
+    "Clallam County"
+   ],
+   "lat": 48.1,
+   "lon": -123.55,
+   "summary": "The largest dam removal in U.S. history took down Elwha Dam (1913) and Glines Canyon Dam (1927), which had blocked salmon from 70 miles of river for a century; the Lower Elwha Klallam Tribe, whose creation site lay under the reservoir, led the campaign. Salmon returned within months.",
+   "at_your_spot": "The Elwha runs free again {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: Elwha dam removal begins, Sept 17, 2011",
+     "url": "https://www.historylink.org/File/11011"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "oso-landslide-2014",
+   "title": "Oso landslide",
+   "when": "March 22, 2014, 10:37 a.m.",
+   "start_years_ago": -14,
+   "end_years_ago": -14,
+   "region": [
+    "Snohomish County",
+    "Puget Sound"
+   ],
+   "lat": 48.28,
+   "lon": -121.85,
+   "summary": "A hillside above the Stillaguamish River collapsed onto the Steelhead Haven neighborhood near Oso, burying a square mile and State Route 530. Forty-three people died. The slope had failed before, in 2006; a memorial stands at the site.",
+   "at_your_spot": "Landslide-hazard mapping of your spot was expanded after Oso, {distance} away.",
+   "sources": [
+    {
+     "title": "HistoryLink: Oso landslide, March 22, 2014",
+     "url": "https://historylink.org/File/10792"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "viaduct-tunnel-2019",
+   "title": "Alaskan Way Viaduct closes; SR 99 tunnel opens",
+   "when": "January 11 - February 4, 2019",
+   "start_years_ago": -19,
+   "end_years_ago": -19,
+   "region": [
+    "Seattle"
+   ],
+   "lat": 47.6,
+   "lon": -122.34,
+   "summary": "The 1953 double-deck highway, damaged in 2001, carried its last traffic on January 11, 2019; the 1.7-mile tunnel bored by the machine Bertha opened February 4 and the viaduct was demolished by 2020, reopening the waterfront to Elliott Bay for a new park.",
+   "at_your_spot": "The roar of the viaduct stopped {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: SR 99 tunnel opens, Feb 4, 2019",
+     "url": "https://www.historylink.org/File/20945"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "covid-first-case-2020",
+   "title": "First U.S. COVID-19 case confirmed in Snohomish County",
+   "when": "January 20, 2020",
+   "start_years_ago": -20,
+   "end_years_ago": -23,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47.98,
+   "lon": -122.2,
+   "summary": "A 35-year-old Everett-area man returning from Wuhan became the nation's first confirmed case; the first U.S. death and the Life Care Center of Kirkland outbreak followed in late February, and Washington issued the country's first school and business closures in March 2020.",
+   "at_your_spot": "The pandemic reached the United States {distance} from your spot.",
+   "sources": [
+    {
+     "title": "HistoryLink: First U.S. COVID-19 case, Jan 20, 2020",
+     "url": "https://historylink.org/File/21018"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "heat-dome-2021",
+   "title": "Pacific Northwest heat dome",
+   "when": "June 26-30, 2021",
+   "start_years_ago": -21,
+   "end_years_ago": -21,
+   "region": [
+    "statewide"
+   ],
+   "lat": null,
+   "lon": null,
+   "summary": "A record high-pressure ridge pushed Seattle to 108 F and Spokane to 109 F; the state confirmed 100 heat-related deaths during the heat dome itself (157 for the summer through August), and a 2023 UW study estimated more than 400 excess deaths, the deadliest weather event in state history.",
+   "at_your_spot": "Your spot recorded its hottest day ever during this week.",
+   "sources": [
+    {
+     "title": "Washington State Department of Health: 2021 heat wave",
+     "url": "https://doh.wa.gov/emergencies/be-prepared-be-safe/severe-weather-and-natural-disasters/hot-weather-safety/heat-wave-2021"
+    },
+    {
+     "title": "KUOW: New UW report states 2021 heat dome was deadlier than previously thought",
+     "url": "https://www.kuow.org/2023-07-10/new-uw-report-states-2021-heat-dome-was-deadlier-than-previously-thought"
+    }
+   ],
+   "confidence": "medium"
+  }
+ ]
+}

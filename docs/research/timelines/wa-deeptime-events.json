@@ -1,0 +1,1320 @@
+{
+ "v": 1,
+ "asOf": "2026-10-07",
+ "convention": "start_years_ago and end_years_ago are years before 2000 CE; negative = after 2000 or in the future",
+ "events": [
+  {
+   "id": "belt-supergroup",
+   "title": "Washington's oldest rocks: the Belt Supergroup",
+   "when": "about 1.47 to 1.40 billion years ago (Mesoproterozoic)",
+   "start_years_ago": 1470000000,
+   "end_years_ago": 1400000000,
+   "region": [
+    "Northeast Washington"
+   ],
+   "lat": 48.7,
+   "lon": -117.4,
+   "summary": "The oldest rocks you can touch in Washington are mudstones, sandstones and limy layers of the Belt Supergroup in the state's far northeast corner (Pend Oreille and Stevens counties, Colville National Forest). They settled in a vast, shallow inland basin on the ancient continent of Laurentia when the only life was microbial; stromatolite mounds built by cyanobacteria are preserved in them. Some ten miles of these sediments bury an even older continental basement that never reaches the surface in Washington; rocks of about 2.5 billion years crop out just across the Idaho line. (A 2024 USGS field guide argues some strata mapped as Belt are younger; 1.47-1.40 billion years remains the standard public figure.)",
+   "at_your_spot": "{place} sits over continental crust that was already old when these rocks formed; the nearest Belt Supergroup outcrops are in Pend Oreille and Stevens counties, about {distance} away.",
+   "sources": [
+    {
+     "title": "WA100 (WA DNR): Washington's ancient core",
+     "url": "https://wa100.dnr.wa.gov/okanogan/washingtons-ancient-core"
+    },
+    {
+     "title": "WA DNR Washington Geological Survey: Okanogan geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/okanogan"
+    },
+    {
+     "title": "USGS (2024): Unscrambling the Proterozoic supercontinent record of northeastern Washington State",
+     "url": "https://www.usgs.gov/publications/unscrambling-proterozoic-supercontinent-record-northeastern-washington-state-usa"
+    },
+    {
+     "title": "WA100 (WA DNR): Selkirk Ridges",
+     "url": "https://wa100.dnr.wa.gov/okanogan/selkirk-ridges"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "rodinia-rifts",
+   "title": "Rodinia breaks apart: North America's new western edge",
+   "when": "roughly 720 to 600 million years ago (Neoproterozoic)",
+   "start_years_ago": 720000000,
+   "end_years_ago": 600000000,
+   "region": [
+    "Northeast Washington"
+   ],
+   "lat": 48.9,
+   "lon": -117.5,
+   "summary": "When the supercontinent Rodinia rifted apart, the piece that became North America was left with a brand-new western coastline running roughly through today's northeastern Washington. Rift-valley gravels and glacial debris of the Windermere Group (about 700 million years old) record that break-up and a global 'Snowball Earth' cold spell. Everything west of this line, most of the state, did not exist yet; it would arrive piece by piece over the next half-billion years.",
+   "at_your_spot": "When Rodinia split, the coast of North America ran through what is now northeastern Washington; {place} was open ocean or not yet created.",
+   "sources": [
+    {
+     "title": "USGS (2024): Unscrambling the Proterozoic supercontinent record of northeastern Washington State",
+     "url": "https://www.usgs.gov/publications/unscrambling-proterozoic-supercontinent-record-northeastern-washington-state-usa"
+    },
+    {
+     "title": "WA DNR Washington Geological Survey: Okanogan geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/okanogan"
+    },
+    {
+     "title": "WA100 (WA DNR): Washington's ancient core",
+     "url": "https://wa100.dnr.wa.gov/okanogan/washingtons-ancient-core"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "metaline-cambrian",
+   "title": "Warm Cambrian seas: the Metaline limestone and Gardner Cave",
+   "when": "about 510 to 470 million years ago (Cambrian-Ordovician)",
+   "start_years_ago": 510000000,
+   "end_years_ago": 470000000,
+   "region": [
+    "Northeast Washington"
+   ],
+   "lat": 48.98,
+   "lon": -117.37,
+   "summary": "Northeastern Washington was the continental shelf of North America, under a warm shallow sea where shells and reef debris piled up into more than 3,000 feet of Metaline limestone, capped by black Ordovician slate. Trilobites and graptolites are its fossils. That limestone later hosted the Pend Oreille zinc-lead mines and, dissolved by rainwater, Gardner Cave, one of Washington's longest limestone caves (State Parks ranks it third), about 1,055 feet long with the first 494 feet open on guided tours, in Crawford State Park near Metaline Falls.",
+   "at_your_spot": "In the Cambrian the shoreline of North America lay near present-day Metaline Falls; {place} was either on that shelf or far out to sea.",
+   "sources": [
+    {
+     "title": "Washington State Parks: Crawford State Park",
+     "url": "https://parks.wa.gov/492/Crawford"
+    },
+    {
+     "title": "Washington State Parks: Crawford State Park (Gardner Cave) heritage site history",
+     "url": "https://parks.wa.gov/about/news-center/field-guide-blog/crawford-state-park-heritage-site-history"
+    },
+    {
+     "title": "USGS Professional Paper 489: Metaline zinc-lead district, Washington",
+     "url": "https://pubs.usgs.gov/pp/0489/report.pdf"
+    },
+    {
+     "title": "Wikipedia: Gardner Cave",
+     "url": "https://en.wikipedia.org/wiki/Gardner_Cave"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "quesnellia-docks",
+   "title": "Island arcs dock: Quesnellia and the Okanogan Highlands",
+   "when": "about 180 to 160 million years ago (Jurassic)",
+   "start_years_ago": 180000000,
+   "end_years_ago": 160000000,
+   "region": [
+    "Northeast Washington",
+    "Okanogan"
+   ],
+   "lat": 48.5,
+   "lon": -119,
+   "summary": "The first big piece of 'new' Washington arrived in the Jurassic: Quesnellia, a volcanic island arc that had been growing offshore since the Mississippian, was shoved onto the old continental edge. The collision squeezed and lifted the Kootenay Arc (about 160 million years ago) and set the stage for huge granite bodies such as the Cretaceous Okanogan Batholith. Much later, in the Eocene (56-34 million years ago), the crust here stretched and the Okanogan and Kettle dome-and-basin landscape formed.",
+   "at_your_spot": "{place} stands on, or just west of, Quesnellia, an island chain that collided with North America about 170 million years ago.",
+   "sources": [
+    {
+     "title": "WA100 (WA DNR): Washington's ancient core",
+     "url": "https://wa100.dnr.wa.gov/okanogan/washingtons-ancient-core"
+    },
+    {
+     "title": "WA DNR Washington Geological Survey: Okanogan geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/okanogan"
+    },
+    {
+     "title": "Geological Society of the Oregon Country: Washington State, Land of Geologic Complexity",
+     "url": "https://www.gsoc.org/news/2020/3/13/washington-state-land-of-geologic-complexity"
+    },
+    {
+     "title": "Wenatchee Valley College (R. Dawes): Accreted terranes of the Pacific Northwest",
+     "url": "https://commons.wvc.edu/rdawes/focuspages/PNWterranes.html"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "terranes-cretaceous",
+   "title": "The North Cascades, Methow and San Juan terranes are welded on",
+   "when": "about 100 to 84 million years ago (mid-Late Cretaceous), building on Jurassic pieces",
+   "start_years_ago": 100000000,
+   "end_years_ago": 84000000,
+   "region": [
+    "North Cascades",
+    "Puget Sound",
+    "Okanogan"
+   ],
+   "lat": 48.5,
+   "lon": -121.5,
+   "summary": "Long-running subduction dragged a jumble of exotic crust (ocean floor, island arcs, deep-sea sediments) against the continent. The San Juan Islands and the Northwest Cascades are stacked thrust sheets of such terranes, pinned down before about 84 million years ago by the overlying Nanaimo Group sediments; the Methow Valley records island-arc and ocean-floor terranes docking in the middle and late Cretaceous; and the North Cascades crystalline core was cooked and squeezed at depth into the gneisses seen at Stehekin and Washington Pass. Paleomagnetic data suggest some of these blocks formed up to a thousand miles to the south and slid north along the coast.",
+   "at_your_spot": "The bedrock under or near {place} is accreted terrane: crust that formed far offshore and was bulldozed onto North America in the Cretaceous.",
+   "sources": [
+    {
+     "title": "WA DNR Washington Geological Survey: North Cascades geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/north-cascades"
+    },
+    {
+     "title": "USGS I-2660: Geologic map of the Mount Baker 30x60 quadrangle (pamphlet)",
+     "url": "https://pubs.usgs.gov/imap/i2660/pamphlet.pdf"
+    },
+    {
+     "title": "Wenatchee Valley College (R. Dawes): Accreted terranes of the Pacific Northwest",
+     "url": "https://commons.wvc.edu/rdawes/focuspages/PNWterranes.html"
+    },
+    {
+     "title": "WA DNR GM-50: Geologic map of Washington, northwest quadrant",
+     "url": "https://www.dnr.wa.gov/publications/ger_gm50_geol_map_nw_wa_250k.pdf"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "siletzia",
+   "title": "Siletzia: a volcanic ocean plateau collides and becomes western Washington's basement",
+   "when": "eruptions 56-48 million years ago; collision 51-50 million years ago (early Eocene)",
+   "start_years_ago": 56000000,
+   "end_years_ago": 48000000,
+   "region": [
+    "Olympic Peninsula",
+    "Puget Sound",
+    "Southwest Washington"
+   ],
+   "lat": 48,
+   "lon": -123.6,
+   "summary": "An enormous pile of submarine basalt, Siletzia, possibly built over the young Yellowstone hotspot, rode in on the Farallon plate and jammed against North America about 51-50 million years ago, too thick to subduct. Its Washington part is the Crescent Formation: pillow lavas that now form the horseshoe of ridges around the Olympic Mountains (Hurricane Ridge road cuts), the Black Hills and Willapa Hills, and the hidden basement beneath Seattle, Tacoma and the whole Puget Lowland. The collision ended the old coastline, folded the Chuckanut and Swauk basins, and reset the subduction zone to roughly its present position.",
+   "at_your_spot": "Deep beneath {place}, the basement rock is Siletzia/Crescent Formation basalt: sea-floor volcanoes that docked here about 50 million years ago.",
+   "sources": [
+    {
+     "title": "Eddy et al. 2017, Lithosphere: Age and volcanic stratigraphy of the Eocene Siletzia oceanic plateau in Washington and on Vancouver Island",
+     "url": "https://pubs.geoscienceworld.org/gsw/lithosphere/article/9/4/652/207463/Age-and-volcanic-stratigraphy-of-the-Eocene"
+    },
+    {
+     "title": "Wells et al. 2014, Geosphere: Geologic history of Siletzia",
+     "url": "https://pubs.geoscienceworld.org/gsa/geosphere/article/10/4/692/132166/Geologic-history-of-Siletzia-a-large-igneous"
+    },
+    {
+     "title": "WA100 (WA DNR): How the Olympic Mountains formed",
+     "url": "https://wa100.dnr.wa.gov/olympic-peninsula/how-olympics-formed"
+    },
+    {
+     "title": "Anderson et al. 2024, Tectonics: Deep structure of Siletzia in the Puget Lowland",
+     "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022TC007720"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "eocene-forests",
+   "title": "Eocene palm forests and coal swamps: Chuckanut, Swauk and the Puget Group",
+   "when": "about 57 to 38 million years ago (late Paleocene to late Eocene)",
+   "start_years_ago": 57000000,
+   "end_years_ago": 38000000,
+   "region": [
+    "Puget Sound",
+    "North Cascades",
+    "Yakima Valley"
+   ],
+   "lat": 48.65,
+   "lon": -122.45,
+   "summary": "Western Washington was a steamy, subtropical river plain. Fan palms, tree ferns and swamp cypresses grew along braided rivers that laid down the Chuckanut Formation around Bellingham (fossil palm fronds and the tracks of the giant flightless bird Diatryma at Racehorse Creek), the Swauk Formation near Blewett Pass, and later the Puget Group of the Seattle area. Peat from those swamps became the coal that built Newcastle, Renton, Black Diamond, Issaquah and Roslyn in the 1800s. Cooling late in the Eocene drove the palms out for good.",
+   "at_your_spot": "About 50 million years ago {place} was a hot, humid river floodplain with palms and tree ferns; the coal under the Eastside and the Cle Elum valley is the remains of those swamps.",
+   "sources": [
+    {
+     "title": "Mustoe, Washington Geology v.29 (WA DNR, 2001): Washington's fossil forests",
+     "url": "https://dnr.wa.gov/publications/ger_washington_geology_2001_v29_no1-2.pdf"
+    },
+    {
+     "title": "Dillhoff, Dillhoff & Mustoe 2007 (GSA abstract): Early Eocene Chuckanut flora and climate",
+     "url": "https://gsa.confex.com/gsa/2007CD/webprogram/Paper120669.html"
+    },
+    {
+     "title": "Whatcom Watch: The Chuckanut Formation in our backyard",
+     "url": "https://whatcomwatch.org/index.php/article/the-chuckanut-formation-in-our-backyard/"
+    },
+    {
+     "title": "WA DNR RI-21: Stratigraphy of the Eocene rocks of King County",
+     "url": "https://file.dnr.wa.gov/publications/ger_ri21_strat_eocene_king_co.pdf"
+    },
+    {
+     "title": "Wikipedia: Puget Group",
+     "url": "https://en.wikipedia.org/wiki/Puget_Group"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "stonerose",
+   "title": "Stonerose: the Republic fossil lake",
+   "when": "about 49.4 million years ago (early-middle Eocene)",
+   "start_years_ago": 50000000,
+   "end_years_ago": 49000000,
+   "region": [
+    "Northeast Washington",
+    "Okanogan"
+   ],
+   "lat": 48.648,
+   "lon": -118.737,
+   "summary": "As the crust of the Okanogan Highlands stretched apart (53-45 million years ago), a deep upland lake filled the Republic graben. Its fine lakebed shales, the Klondike Mountain Formation, dated 49.4 +/- 0.5 million years, preserve one of the world's finest Eocene floras: dawn redwood, sassafras, early relatives of roses, maples and apples, plus insects, fish and feathers. At the Stonerose Interpretive Center in Republic, visitors can dig their own fossils (important finds stay in the research collection; the Burke Museum holds a major collection too).",
+   "at_your_spot": "{place} is {distance} from Republic, where a 49-million-year-old mountain lake preserved leaves, flowers, insects and fish you can dig for today.",
+   "sources": [
+    {
+     "title": "WA100 (WA DNR): Republic",
+     "url": "https://wa100.dnr.wa.gov/okanogan/republic"
+    },
+    {
+     "title": "Stonerose Interpretive Center and Eocene Fossil Site",
+     "url": "https://stonerosefossil.org/"
+    },
+    {
+     "title": "Wikipedia: Klondike Mountain Formation",
+     "url": "https://en.wikipedia.org/wiki/Klondike_Mountain_Formation"
+    },
+    {
+     "title": "Geologic History of Eocene Stonerose Fossil Beds, Republic, Washington (ResearchGate)",
+     "url": "https://www.researchgate.net/publication/279786883_Geologic_History_of_Eocene_Stonerose_Fossil_Beds_Republic_Washington_USA"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "cascade-arc-begins",
+   "title": "The Cascade volcanic arc switches on",
+   "when": "about 40-37 million years ago, and still active",
+   "start_years_ago": 40000000,
+   "end_years_ago": 0,
+   "region": [
+    "North Cascades",
+    "South Cascades",
+    "Puget Sound",
+    "Yakima Valley"
+   ],
+   "lat": 46.853,
+   "lon": -121.76,
+   "summary": "Once Siletzia had reset the plate boundary, the sinking ocean plate began feeding magma to a new line of volcanoes, the ancestral Cascades, starting about 40-37 million years ago (DNR gives 43-37). Early vents punched through shallow seas and coastal plains in southwest Washington; their ash and lava (the Ohanapecosh and Stevens Ridge formations) make up the foundations of Mount Rainier National Park. The volcanoes we see today are only the newest instalments of this 40-million-year arc.",
+   "at_your_spot": "The nearest Cascade volcano to {place} is {nearest_volcano}, {distance} away; its arc has been erupting on and off for 40 million years.",
+   "sources": [
+    {
+     "title": "WA DNR Washington Geological Survey: South Cascades geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/south-cascades"
+    },
+    {
+     "title": "Burke Museum (archived 2002 page): Geologic history of Washington - The Cascade Episode",
+     "url": "https://www.burkemuseum.org/geo_history_wa/Cascade%20Episode.htm"
+    },
+    {
+     "title": "USGS GIP-19 activity: Volcano timeline (Cascades)",
+     "url": "https://pubs.usgs.gov/gip/19/downloads/Chapter_1/Activities/Volcano_timeline.pdf"
+    },
+    {
+     "title": "USGS: Geology and history summary, Mount Rainier",
+     "url": "https://usgs.gov/volcanoes/mount-rainier/science/geology-and-history-summary-mount-rainier"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "columbia-river-basalt",
+   "title": "Columbia River Basalt floods bury a third of Washington",
+   "when": "about 16.7 to 6 million years ago (Miocene); more than 95% erupted 16.7-15.9 Ma",
+   "start_years_ago": 16700000,
+   "end_years_ago": 6000000,
+   "region": [
+    "Columbia Basin",
+    "Yakima Valley",
+    "Palouse and Blue Mountains",
+    "Northeast Washington",
+    "South Cascades",
+    "Southwest Washington"
+   ],
+   "lat": 46.8,
+   "lon": -119.5,
+   "spot_rule": "crbg",
+   "summary": "From fissures in southeast Washington and adjacent Oregon and Idaho, probably fed by the Yellowstone hotspot, more than 300 floods of basalt lava poured out, each filling the landscape like water in a basin; more than 95% of it erupted in well under a million years, between about 16.7 and 15.9 million years ago (Kasbohm & Schoene 2018). The flows cover over 80,000 square miles across three states and about 36% of Washington: everything from Spokane, Pullman, Walla Walla and the Tri-Cities to Yakima, Moses Lake, Wenatchee's east side and Goldendale, stacked up to two miles thick under the Pasco Basin. Some flows ran down the Columbia River Gorge to Vancouver and all the way to the Pacific. The Puget Lowland, Olympics, North Cascades and the northeast highlands were never buried. Later folding of the cooled basalt made the Yakima ridges.",
+   "at_your_spot": "{place} sits on {basalt_unit} of the Columbia River Basalt Group: stacked lava flows, each one spread across the countryside in days.",
+   "sources": [
+    {
+     "title": "WA DNR Washington Geological Survey: Columbia Basin geologic province",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/geologic-provinces-washington/columbia-basin"
+    },
+    {
+     "title": "WA100 (WA DNR): Columbia River flood basalt volcanism",
+     "url": "https://wa100.dnr.wa.gov/columbia-basin/flood-basalts"
+    },
+    {
+     "title": "USGS Cascades Volcano Observatory: Columbia River Basalt Group stretches from Oregon to Idaho",
+     "url": "https://www.usgs.gov/observatories/cvo/science/columbia-river-basalt-group-stretches-oregon-idaho"
+    },
+    {
+     "title": "USGS SIR 2017-5022-N: Field-trip guide to the vents, dikes, stratigraphy and structure of the Columbia River Basalt Group",
+     "url": "https://pubs.usgs.gov/sir/2017/5022/n/sir20175022n.pdf"
+    },
+    {
+     "title": "Kasbohm & Schoene 2018, Science Advances: Rapid eruption of the Columbia River flood basalt",
+     "url": "https://collaborate.princeton.edu/en/publications/rapid-eruption-of-the-columbia-river-flood-basalt-and-correlation/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "ginkgo-petrified-forest",
+   "title": "Ginkgo Petrified Forest at Vantage",
+   "when": "about 15.5 million years ago (middle Miocene)",
+   "start_years_ago": 15500000,
+   "end_years_ago": 15500000,
+   "region": [
+    "Yakima Valley",
+    "Columbia Basin"
+   ],
+   "lat": 46.95,
+   "lon": -119.99,
+   "summary": "Between basalt floods, a lake and swampy forest grew where the Columbia now cuts through at Vantage. When the next lava (the Ginkgo flow of the Wanapum Basalt) poured in, waterlogged logs (ginkgo, Douglas-fir, spruce, elm, sweetgum, walnut and more than 50 species in all) were sealed under lava and slowly turned to stone. George Beck of Ellensburg recognized the deposit in the 1930s; it is now Ginkgo Petrified Forest State Park, and petrified wood is Washington's state gem.",
+   "at_your_spot": "{place} is {distance} from Vantage, where a 15.5-million-year-old forest was buried by lava and turned to stone.",
+   "sources": [
+    {
+     "title": "Washington State Parks: Ginkgo Petrified Forest State Park",
+     "url": "https://parks.wa.gov/find-parks/state-parks/ginkgo-petrified-forest-state-park"
+    },
+    {
+     "title": "Ice Age Floods Institute: Ginkgo Petrified Forest",
+     "url": "https://iafi.org/27838-2/"
+    },
+    {
+     "title": "Wikipedia: Ginkgo Petrified Forest State Park",
+     "url": "https://en.wikipedia.org/wiki/Ginkgo_Petrified_Forest_State_Park"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "blue-lake-rhino",
+   "title": "The Blue Lake Rhino",
+   "when": "about 15 million years ago (middle Miocene); discovered July 1935",
+   "start_years_ago": 15000000,
+   "end_years_ago": 15000000,
+   "region": [
+    "Columbia Basin"
+   ],
+   "lat": 47.57,
+   "lon": -119.45,
+   "summary": "A rhinoceros (Diceratherium) lying dead in a shallow lake was engulfed by a basalt flow; the water chilled the lava into pillows around the carcass and left a rhino-shaped cavity in the rock. In July 1935 fossil hunters scrambling along the cliffs of Jasper Canyon at the east end of Blue Lake, in the lower Grand Coulee, found the cave with bone fragments and a jaw inside. A cast of the cavity is displayed at the Burke Museum; the cave itself is a strenuous, unmarked scramble in Sun Lakes-Dry Falls State Park.",
+   "at_your_spot": "{place} is {distance} from Blue Lake, where a 15-million-year-old rhinoceros left its shape in cooling lava.",
+   "sources": [
+    {
+     "title": "HistoryLink: Climbers find basalt mold and bones of a 15-million-year-old rhinoceros at Blue Lake, Grant County, in July 1935",
+     "url": "https://historylink.org/File/9409"
+    },
+    {
+     "title": "Wikipedia: Diceratherium",
+     "url": "https://en.wikipedia.org/wiki/Diceratherium"
+    },
+    {
+     "title": "HowStuffWorks: There's a rhino-shaped cave in Washington State",
+     "url": "https://science.howstuffworks.com/environmental/earth/geology/rhino-shaped-cave.htm"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "olympics-rise",
+   "title": "The Olympic Mountains rise from the sea",
+   "when": "wedge building since ~45 Ma; land emerges about 18-13 million years ago; still rising",
+   "start_years_ago": 18000000,
+   "end_years_ago": 0,
+   "region": [
+    "Olympic Peninsula",
+    "Puget Sound"
+   ],
+   "lat": 47.8,
+   "lon": -123.71,
+   "summary": "The Olympics are not volcanoes: they are deep-sea sandstones and shales scraped off the sinking Juan de Fuca plate and stuffed under the rim of Siletzia basalt, then squeezed upward. Sediment studies show the peninsula first broke the sea surface about 16.5-13 million years ago (DNR says the rise began around 18 Ma), and the range has been lifting, and eroding just as fast, ever since. The Hurricane Ridge fault is the seam between the core sandstones and the basalt rim; Mount Olympus (7,980 ft) is the high point.",
+   "at_your_spot": "{place} looks toward the Olympics, a pile of sea-floor sediment that has been shoved up out of the Pacific for the last 15 million years or so.",
+   "sources": [
+    {
+     "title": "WA100 (WA DNR): How the Olympic Mountains formed",
+     "url": "https://wa100.dnr.wa.gov/olympic-peninsula/how-olympics-formed"
+    },
+    {
+     "title": "NPS Olympic National Park: Mountains",
+     "url": "https://www.nps.gov/olym/learn/nature/mountains.htm"
+    },
+    {
+     "title": "Lithosphere 2020: Late Middle Miocene emergence of the Olympic Peninsula shown by sedimentary provenance",
+     "url": "https://pubs.geoscienceworld.org/gsw/lithosphere/article/2020/1/7040598/592367/Late-Middle-Miocene-Emergence-of-the-Olympic"
+    },
+    {
+     "title": "USGS Professional Paper 1033: The structure of the Olympic Mountains - analysis of a subduction zone",
+     "url": "https://pubs.usgs.gov/pp/1033/report.pdf"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "cascades-uplift",
+   "title": "The Cascade Range is lifted to its modern height",
+   "when": "roughly 12 to 4 million years ago (late Miocene-Pliocene)",
+   "start_years_ago": 12000000,
+   "end_years_ago": 4000000,
+   "region": [
+    "North Cascades",
+    "South Cascades",
+    "Puget Sound",
+    "Yakima Valley",
+    "Okanogan"
+   ],
+   "lat": 47.5,
+   "lon": -121,
+   "summary": "For most of their history the Cascades were a belt of volcanoes on low ground, with lavas and ash spilling east onto the basalt plateau. Then the whole range was pushed up as a block: rock-cooling studies show rapid uplift and erosion in Washington 12-8 million years ago, and the Burke Museum's (archived 2002) summary places the final rise of the modern range at 5-7 million years ago. The rain shadow that makes eastern Washington dry, and the river canyons that cut the range, date from this time.",
+   "at_your_spot": "The mountain wall near {place} rose to its present height only in the last 10 million years, creating the rain shadow that shapes its weather.",
+   "sources": [
+    {
+     "title": "Reiners et al. 2002, Geology: Late Miocene exhumation and uplift of the Washington Cascade Range",
+     "url": "https://www.proprights.org/PDFs/workshop_2011/References/Fluvial%20Geomorphology/reiners_2002.pdf"
+    },
+    {
+     "title": "Burke Museum (archived 2002 page): Geologic history of Washington - The Cascade Episode",
+     "url": "https://www.burkemuseum.org/geo_history_wa/Cascade%20Episode.htm"
+    },
+    {
+     "title": "USGS GIP-19 activity: Volcano timeline (Cascades)",
+     "url": "https://pubs.usgs.gov/gip/19/downloads/Chapter_1/Activities/Volcano_timeline.pdf"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "modern-volcanoes",
+   "title": "The modern volcanoes are born: Adams, Rainier, St. Helens, Baker",
+   "when": "about 520,000 to 140,000 years ago (and still active)",
+   "start_years_ago": 520000,
+   "end_years_ago": 0,
+   "region": [
+    "North Cascades",
+    "South Cascades",
+    "Puget Sound",
+    "Yakima Valley",
+    "Southwest Washington"
+   ],
+   "lat": 46.853,
+   "lon": -121.76,
+   "summary": "The peaks on today's skyline are young. Mount Adams (Pahto to the Yakama) began erupting about 520,000 years ago; the present Mount Rainier (Tahoma, T\u0259q\u02b7u\u0294m\u0259\u0294) started building about 500,000 years ago on the stump of an older volcano; Mount St. Helens' (Lawetlat'la, Loowit) first eruptions date to about 300,000 years ago, though its graceful pre-1980 cone was less than 3,000 years old; and Mount Baker (Kulshan) began around 140,000 years ago, with most of its cone built 40,000-12,000 years ago. Glacier Peak (Dakobed) is likewise older than the last ice age. All five are considered active.",
+   "at_your_spot": "From {place}, {nearest_volcano} ({distance} away) is geologically brand new: it has been building for only the last few hundred thousand years, and it is still active.",
+   "sources": [
+    {
+     "title": "USGS: The eruption history of Mount Rainier",
+     "url": "https://www.usgs.gov/volcanoes/mount-rainier/science/eruption-history-mount-rainier"
+    },
+    {
+     "title": "USGS: Pleistocene eruptive history of Mount St. Helens, 300,000 to 12,800 years before present",
+     "url": "https://www.usgs.gov/publications/pleistocene-eruptive-history-mount-st-helens-washington-300000-12800-years-present"
+    },
+    {
+     "title": "USGS: Mount Baker - 140,000 years ago to present",
+     "url": "https://www.usgs.gov/volcanoes/mount-baker/science/mount-baker-140000-years-ago-present"
+    },
+    {
+     "title": "USGS: Mount Adams eruption history",
+     "url": "https://www.usgs.gov/volcanoes/mount-adams/eruption-history"
+    },
+    {
+     "title": "USGS: Geology and history of Mount Adams",
+     "url": "https://www.usgs.gov/volcanoes/mount-adams/science/geology-and-history-mount-adams"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "earlier-glaciations",
+   "title": "Earlier ice ages: the Double Bluff and Possession glaciations",
+   "when": "about 190,000-125,000 and 80,000-60,000 years ago",
+   "start_years_ago": 190000,
+   "end_years_ago": 60000,
+   "region": [
+    "Puget Sound"
+   ],
+   "lat": 47.97,
+   "lon": -122.52,
+   "summary": "The Vashon ice was only the latest of several Cordilleran ice sheets to fill the Puget Lowland. Sea cliffs on Whidbey Island (Double Bluff, Possession Point) expose older glacial deposits from about 190,000-125,000 and 80,000-60,000 years ago, separated by warm-interval river, lake and peat beds (the Whidbey Formation and the Olympia beds, which are well exposed at the base of the Discovery Park bluffs in Seattle, below the Lawton Clay whose type section is there). Each ice sheet reshaped the lowland and buried the one before.",
+   "at_your_spot": "The layered bluffs near {place} record at least three ice sheets; the Vashon ice was only the most recent.",
+   "sources": [
+    {
+     "title": "USGS Professional Paper 1643: Pleistocene stratigraphy of the Puget Lowland",
+     "url": "https://pubs.usgs.gov/pp/p1643/strat.html"
+    },
+    {
+     "title": "USGS Geolex: Lawton Clay",
+     "url": "https://ngmdb.usgs.gov/Geolex/Units/Lawton_5876.html"
+    },
+    {
+     "title": "WA DNR RI-33: Late Pleistocene stratigraphy in the south-central Puget Lowland",
+     "url": "https://dnr.wa.gov/Publications/ger_ri33_late_pleistocene_stratig.pdf"
+    },
+    {
+     "title": "Booth et al., INQUA volume chapter: The Cordilleran Ice Sheet (UW)",
+     "url": "https://faculty.washington.edu/dbooth/Ch_02_INQUA_volume.pdf"
+    },
+    {
+     "title": "Ice Age Floods Institute: The advance and retreat of the Cordilleran Ice Sheet revealed in the bluffs at Discovery Park, Seattle",
+     "url": "https://iafi.org/the-advance-and-retreat-of-the-cordilleran-ice-sheet-revealed-in-the-bluffs-at-discovery-park-seattle/"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "okanogan-lobe",
+   "title": "The Okanogan Lobe dams the Columbia: Glacial Lake Columbia, Grand Coulee and Dry Falls",
+   "when": "about 19,000 to 14,000 years ago",
+   "start_years_ago": 19000,
+   "end_years_ago": 14000,
+   "region": [
+    "Okanogan",
+    "Columbia Basin",
+    "Northeast Washington",
+    "North Cascades"
+   ],
+   "lat": 47.61,
+   "lon": -119.36,
+   "summary": "East of the Cascades, tongues of the Cordilleran Ice Sheet filled the Okanogan, Methow, Sanpoil, Colville and Pend Oreille valleys. The Okanogan Lobe spread across the Waterville Plateau to the Withrow Moraine and plugged the Columbia River (19,000-17,000 years ago), backing up Glacial Lake Columbia, which lasted until about 14,000 years ago (a few centuries after the last Missoula flood). Missoula floods pouring into that lake were shunted south through Grand Coulee, cutting the 50-mile canyon and the 3.5-mile-wide, 400-foot Dry Falls between about 17,000 and 14,000 years ago. Spokane sat just beyond the ice, under the path of the floods.",
+   "at_your_spot": "{place} lies {distance} from the Withrow Moraine, the southern edge of the ice east of the Cascades; glacial erratics and coulees around it date from this time.",
+   "sources": [
+    {
+     "title": "Geology (GSA) 2024: The timing of Missoula floods - implications for the age of Grand Coulee",
+     "url": "https://pubs.geoscienceworld.org/gsa/geology/article/52/12/875/648331/The-timing-of-Missoula-floods-Implications-for-the"
+    },
+    {
+     "title": "NSF PAR copy of the 2024 Geology paper",
+     "url": "https://par.nsf.gov/biblio/10635229"
+    },
+    {
+     "title": "Waitt 2017 field guide: Pleistocene glaciers, lakes and floods in north-central Washington",
+     "url": "https://fop.cascadiageo.org/pacific_northwest_cell/2018/Essential_Literature_And_Guides/Waitt2017Guide.pdf"
+    },
+    {
+     "title": "Wikipedia: Withrow Moraine and Jameson Lake Drumlin Field",
+     "url": "https://en.wikipedia.org/wiki/Withrow_Moraine_and_Jameson_Lake_Drumlin_Field"
+    },
+    {
+     "title": "Wikipedia: Dry Falls",
+     "url": "https://en.wikipedia.org/wiki/Dry_Falls"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "missoula-floods",
+   "title": "The Missoula floods carve the Channeled Scablands",
+   "when": "about 20,000 to 14,000 years ago, mostly 18,000-15,000",
+   "start_years_ago": 20000,
+   "end_years_ago": 14000,
+   "region": [
+    "Columbia Basin",
+    "Yakima Valley",
+    "Palouse and Blue Mountains",
+    "Northeast Washington",
+    "South Cascades",
+    "Southwest Washington"
+   ],
+   "lat": 46.05,
+   "lon": -118.93,
+   "spot_rule": "flood-deposits",
+   "summary": "Again and again, at least 75 times before a Mount St. Helens ash fall 16,000 years ago and 30 or more times after, an ice dam in Idaho broke and Glacial Lake Missoula emptied across eastern Washington in days. The floods stripped the Palouse soil off the Cheney-Palouse tract south of Spokane, scoured the Grand Coulee, Moses Coulee and Quincy Basin, and then jammed at Wallula Gap, pooling as temporary Lake Lewis up to about 1,200-1,250 feet above sea level: the Pasco Basin, the Tri-Cities (under some 800 feet of water), the Yakima Valley to near Yakima, the Walla Walla and Touchet valleys, and the Snake valley past Lewiston were all drowned for days to weeks. West of the gorge the water spread across the Portland Basin, putting Vancouver, Camas and Washougal under hundreds of feet of water before it ran on to the sea; the Puget Lowland and the outer coast were untouched.",
+   "at_your_spot": "{place} was under {flood_depth} of muddy, iceberg-laden floodwater during the biggest Missoula floods; the gravel bars, giant ripples and erratic boulders nearby are their leftovers.",
+   "sources": [
+    {
+     "title": "USGS (2020): The Missoula and Bonneville floods - a review of ice-age megafloods in the Columbia River basin",
+     "url": "https://www.usgs.gov/publications/missoula-and-bonneville-floods-a-review-ice-age-megafloods-columbia-river-basin"
+    },
+    {
+     "title": "Waitt 1985 (USGS): Many monstrous Missoula floods down channeled scabland and Columbia valley, Washington",
+     "url": "https://www.usgs.gov/publications/many-monstrous-missoula-floods-down-channeled-scabland-and-columbia-valley-washington"
+    },
+    {
+     "title": "HistoryLink: Ice Age Floods in Washington",
+     "url": "https://www.historylink.org/file/8449"
+    },
+    {
+     "title": "WA100 (WA DNR): Wallula Gap",
+     "url": "https://wa100.dnr.wa.gov/columbia-basin/wallula-gap"
+    },
+    {
+     "title": "Ice Age Floods National Geologic Trail: Wallula Gap",
+     "url": "https://iceagefloodstrail.org/sites/wallula-gap/"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "vashon-ice-sheet",
+   "title": "The Puget Lobe: the Vashon ice sheet buries Seattle, Tacoma and Olympia",
+   "when": "about 19,000 to 16,000 years ago; maximum about 17,000 years ago",
+   "start_years_ago": 19000,
+   "end_years_ago": 16000,
+   "region": [
+    "Puget Sound",
+    "Olympic Peninsula"
+   ],
+   "lat": 47.61,
+   "lon": -122.33,
+   "spot_rule": "vashon-ice",
+   "summary": "A lobe of the Cordilleran Ice Sheet flowed south out of British Columbia, filled the Puget Lowland and reached its limit near Tenino, south of Olympia, about 17,000 years ago. The ice was roughly 5,000 feet thick at Bellingham, about 3,000 feet over Seattle, about 2,000 feet over Tacoma and about 1,000 feet near Olympia. Seattle was under ice for less than 2,000 years, yet the ice left almost everything we see: the north-south ridges of Capitol Hill, Queen Anne and Beacon Hill are glacially streamlined drumlins; the Lawton Clay, Esperance Sand and Vashon till in the Discovery Park bluffs are its deposits; and meltwater under the ice gouged the deep troughs of Puget Sound, Lake Washington and Hood Canal. By about 16,000 years ago the ice front had melted back north of Seattle.",
+   "at_your_spot": "{place} was under about {ice_thickness} of ice; the hill it stands on was shaped by that ice, and the gravelly, clay-rich ground underfoot is what the glacier left behind.",
+   "sources": [
+    {
+     "title": "WA DNR Washington Geological Survey: Washington's glacial geology",
+     "url": "https://dnr.wa.gov/washington-geological-survey/explore-popular-geology/washingtons-glacial-geology"
+    },
+    {
+     "title": "WA100 (WA DNR): How did the Puget Lowland form?",
+     "url": "https://wa100.dnr.wa.gov/puget-lowland/how-did-the-puget-lowland-form"
+    },
+    {
+     "title": "Burke Museum Waterlines (archived page): Glaciation of the Seattle area",
+     "url": "https://www.burkemuseum.org/static/waterlines/glaciation.html"
+    },
+    {
+     "title": "HistoryLink: Vashon glacier begins to melt and recede from Puget Sound region around 16,900 years ago",
+     "url": "https://www.historylink.org/file/5087"
+    },
+    {
+     "title": "Thorson 1980 (USGS): Ice-sheet glaciation of the Puget Lowland during the Vashon Stade",
+     "url": "https://pubs.usgs.gov/publication/70012219"
+    },
+    {
+     "title": "Ice Age Floods Institute: The advance and retreat of the Cordilleran Ice Sheet revealed in the bluffs at Discovery Park, Seattle",
+     "url": "https://iafi.org/the-advance-and-retreat-of-the-cordilleran-ice-sheet-revealed-in-the-bluffs-at-discovery-park-seattle/"
+    },
+    {
+     "title": "Booth & Goldstein 1994: Patterns and processes of landscape development by the Puget Lobe ice sheet",
+     "url": "http://faculty.washington.edu/dbooth/Booth%20and%20Goldstein%201994.pdf"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "glacial-lakes-russell-bretz",
+   "title": "Glacial Lakes Russell and Bretz: the lowland becomes a lake",
+   "when": "about 17,000 to 15,500 years ago",
+   "start_years_ago": 17000,
+   "end_years_ago": 15500,
+   "region": [
+    "Puget Sound",
+    "Olympic Peninsula",
+    "Southwest Washington"
+   ],
+   "lat": 47,
+   "lon": -123,
+   "summary": "With the ice plugging the Strait of Juan de Fuca, meltwater could not escape north, so as the glacier advanced and again as it retreated a vast lake filled the lowland south of the ice front. Glacial Lake Russell stretched from the Seattle area to the Black Hills and spilled over the Black Lake divide near Olympia into the Chehalis River and out to Grays Harbor, which is why the Chehalis valley is far too wide for its river. When the ice uncovered Admiralty Inlet, a lower lake, Glacial Lake Bretz, drained north through the Chimacum Valley to Discovery Bay. The lakes' old shorelines and deltas now tilt upward to the north by about a metre per kilometre because the land has rebounded since the ice left.",
+   "at_your_spot": "After the ice melted off {place}, it lay beneath or beside a cold grey meltwater lake that drained south to the Chehalis River; silt and sand from that lake underlie much of the lowland.",
+   "sources": [
+    {
+     "title": "USGS SIM 3277: Lidar-revised geologic map of the Olalla quadrangle (pamphlet)",
+     "url": "https://pubs.usgs.gov/sim/3277/pdf/sim3277_pamphlet.pdf"
+    },
+    {
+     "title": "USGS SIM 3317: Lidar-revised geologic map of the Poverty Bay quadrangle (pamphlet)",
+     "url": "https://pubs.usgs.gov/sim/3317/downloads/sim3317_Pamphlet.pdf"
+    },
+    {
+     "title": "GSA Field Guide: Deglaciation of the Puget Lowland, Washington",
+     "url": "https://pubs.geoscienceworld.org/gsa/books/edited-volume/2278/chapter/128498668/Deglaciation-of-the-Puget-Lowland-Washington"
+    },
+    {
+     "title": "Washington State Parks: Miller Peninsula State Park history (Lake Bretz outlet)",
+     "url": "https://parks.wa.gov/about/news-center/field-guide-blog/miller-peninsula-state-park-history"
+    },
+    {
+     "title": "Bretz 1913, Journal of Geology: Glacial lakes of Puget Sound",
+     "url": "https://www.journals.uchicago.edu/doi/pdfplus/10.1086/621758"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "puget-sound-born",
+   "title": "Puget Sound is born: the sea floods in and the land rebounds",
+   "when": "about 16,000 to 13,000 years ago",
+   "start_years_ago": 16000,
+   "end_years_ago": 13000,
+   "region": [
+    "Puget Sound",
+    "Olympic Peninsula"
+   ],
+   "lat": 47.8,
+   "lon": -122.5,
+   "summary": "Once the retreating ice opened the Strait, seawater poured into the lowland, floated the remaining ice and dropped shell-bearing glacial-marine mud (the Everson drift of Bellingham, Whidbey and Everett) over the northern and central lowland. The crust had sunk only part way under the ice, about 35-70 percent of the way to full equilibrium under the load (Thorson 1981), and once the ice left it rose quickly; maximum postglacial uplift reached about 140 m in the northern lowland, and the lowland had lifted out of the sea by roughly 13,000 years ago. Puget Sound, Lake Washington and the islands took their modern outlines over the following millennia as sea level rose worldwide.",
+   "at_your_spot": "Not long after the ice left, salt water reached far inland past {place}; the land has since risen tens of metres, leaving old beaches high above today's shore.",
+   "sources": [
+    {
+     "title": "Thorson 1981 (USGS OFR 81-370): Isostatic effects of the last glaciation in the Puget Lowland",
+     "url": "https://pubs.usgs.gov/of/1981/0370/report.pdf"
+    },
+    {
+     "title": "GSA 2002 abstract: Everson glaciomarine drift and marine incursion in the Puget Lowland",
+     "url": "https://gsa.confex.com/gsa/2002CD/webprogram/Paper35232.html"
+    },
+    {
+     "title": "WA100 (WA DNR): How did the Puget Lowland form?",
+     "url": "https://wa100.dnr.wa.gov/puget-lowland/how-did-the-puget-lowland-form"
+    },
+    {
+     "title": "Wikipedia: Puget Sound (geology)",
+     "url": "https://en.wikipedia.org/wiki/Puget_Sound"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "ice-age-megafauna",
+   "title": "Ice-age giants and the earliest known people: mammoths, mastodons, bison and sloths",
+   "when": "about 17,500 to 11,000 years ago",
+   "start_years_ago": 17500,
+   "end_years_ago": 11000,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47.45,
+   "lon": -122.31,
+   "summary": "As the ice and floods receded, Washington was grassland and parkland roamed by Columbian mammoths (the state fossil; one at Coyote Canyon near Kennewick died about 17,000 years ago in Missoula-flood sediments), American mastodons, giant Bison antiquus and Jefferson's ground sloths. Workers digging a light-tower footing at Sea-Tac Airport in 1961 found a ground sloth, radiocarbon-dated to about 12,500-12,700 years (roughly 15,000 calendar years) ago, now mounted at the Burke Museum. On Orcas Island a bison butchered by people about 13,700 years ago (Ayer Pond) and the Manis mastodon at Sequim show that people, ancestors of today's tribes, were hunting here within a thousand years of the ice leaving. Most of these giants were extinct by about 11,000 years ago. The tribes of Washington have lived here since time immemorial; archaeological dates are minimum ages, not arrival dates.",
+   "at_your_spot": "Mammoths, mastodons, giant bison and ground sloths grazed the young tundra and meadows around {place} as the ice retreated; the nearest documented find is {distance} away.",
+   "sources": [
+    {
+     "title": "HistoryLink: Construction at Sea-Tac Airport unearths an extinct giant sloth on February 14, 1961",
+     "url": "https://www.historylink.org/File/9408"
+    },
+    {
+     "title": "Burke Museum blog: The Sea-Tac sloth",
+     "url": "http://burkemuseum.blogspot.com/2011/04/seatac-sloth.html"
+    },
+    {
+     "title": "Kenady et al., Quaternary International: Late Pleistocene butchered Bison antiquus from Ayer Pond, Orcas Island",
+     "url": "https://www.researchgate.net/publication/222574581_Late_Pleistocene_butchered_Bison_antiquus_from_Ayer_Pond_Orcas_Island_Pacific_Northwest_Age_confirmation_and_taphonomy"
+    },
+    {
+     "title": "Salish Magazine: Washington megafauna",
+     "url": "https://salishmagazine.org/wa-megafauna/"
+    },
+    {
+     "title": "MCBONES Research Center: Coyote Canyon Mammoth Site, Kennewick",
+     "url": "https://www.mcbones.org/"
+    },
+    {
+     "title": "Wikipedia: Columbian mammoth",
+     "url": "https://en.wikipedia.org/wiki/Columbian_mammoth"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "manis-mastodon",
+   "title": "The Manis mastodon: people hunting at Sequim",
+   "when": "about 13,800 years ago (refined to about 13,900 in 2023); discovered August 8, 1977",
+   "start_years_ago": 13800,
+   "end_years_ago": 13800,
+   "region": [
+    "Olympic Peninsula"
+   ],
+   "lat": 48.07,
+   "lon": -123.08,
+   "summary": "Digging a pond with a backhoe on his Happy Valley farm near Sequim in 1977, in the traditional territory of the Jamestown S'Klallam Tribe, Emanuel Manis turned up mastodon tusks. Washington State University's Carl Gustafson found a rib with a sharpened bone point embedded in it, a spear tip made from another mastodon's bone. Redating and CT scanning in 2011 (Waters et al., Science) put the kill at about 13,800 years ago, refined to about 13,900 in 2023, several centuries before the Clovis culture, making it among the oldest evidence of people anywhere in the Americas and the oldest known trace of people in Washington. The tusks and main bones are displayed at the Sequim Museum & Arts Center; the rib with the point was transferred to the Washington State Historical Society in Tacoma in 2019.",
+   "at_your_spot": "{place} is {distance} from the Manis site at Sequim, where people speared a mastodon about 13,800 years ago, the oldest known trace of people in Washington.",
+   "sources": [
+    {
+     "title": "HistoryLink: Emanuel Manis finds mastodon tusks in Sequim on August 8, 1977",
+     "url": "https://www.historylink.org/File/8511"
+    },
+    {
+     "title": "Waters et al. 2011, Science: Pre-Clovis mastodon hunting 13,800 years ago at the Manis site, Washington",
+     "url": "https://www.science.org/doi/10.1126/science.1207663"
+    },
+    {
+     "title": "Peninsula Daily News: Manis mastodon remnants donated to Washington State Historical Society",
+     "url": "https://peninsuladailynews.com/news/manis-mastodon-remnants-donated-to-washington-state-historical-society"
+    },
+    {
+     "title": "Washington State Magazine: The Manis Mastodon site - an adventure in prehistory",
+     "url": "https://magazine.wsu.edu/web-extra/the-manis-mastodon-site-an-adventure-in-prehistory/"
+    },
+    {
+     "title": "Jamestown S'Klallam Tribe",
+     "url": "https://jamestowntribe.org/"
+    },
+    {
+     "title": "Wikipedia: Manis Mastodon site",
+     "url": "https://en.wikipedia.org/wiki/Manis_Mastodon_site"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "glacier-peak-ash",
+   "title": "Glacier Peak's great ash eruptions",
+   "when": "about 13,700-13,400 years ago (13,100 radiocarbon years)",
+   "start_years_ago": 13700,
+   "end_years_ago": 13400,
+   "region": [
+    "North Cascades",
+    "Puget Sound",
+    "Okanogan",
+    "Columbia Basin",
+    "Northeast Washington"
+   ],
+   "lat": 48.112,
+   "lon": -121.113,
+   "summary": "Washington's most remote volcano produced a burst of six to nine explosive eruptions within a few centuries (USGS counts differ by how the layers are split), the largest throwing out more than five times the tephra of Mount St. Helens in 1980, among the biggest Cascade eruptions since the ice age. Ash drifted east over the whole of eastern Washington and on to Montana and beyond; near Chelan the deposit is more than a foot thick, and the layer lies on top of all the Missoula-flood deposits, which is how geologists know the floods had ended. Glacier Peak has erupted several more times since, most recently about 300 years ago.",
+   "at_your_spot": "A layer of Glacier Peak ash from about 13,500 years ago lies in the soil profile near {place}, {distance} downwind of the volcano.",
+   "sources": [
+    {
+     "title": "USGS: Glacier Peak eruption history",
+     "url": "https://www.usgs.gov/volcanoes/glacier-peak/eruption-history"
+    },
+    {
+     "title": "USGS Fact Sheet 058-00: Glacier Peak - history and hazards of a Cascade volcano",
+     "url": "https://pubs.usgs.gov/fs/2000/fs058-00/fs058-00.pdf"
+    },
+    {
+     "title": "Quaternary Science Reviews 2016: Impact of tephra deposition on a Holocene forest environment in the North Cascades (Glacier Peak tephra ages)",
+     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277379316300452"
+    },
+    {
+     "title": "USGS (2020): The Missoula and Bonneville floods - a review (tephra bracketing)",
+     "url": "https://www.usgs.gov/publications/missoula-and-bonneville-floods-a-review-ice-age-megafloods-columbia-river-basin"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "mazama-ash",
+   "title": "Mazama ash falls across Washington",
+   "when": "about 7,700 years ago (7,682-7,584 calendar years BP)",
+   "start_years_ago": 7700,
+   "end_years_ago": 7700,
+   "region": [
+    "statewide"
+   ],
+   "lat": 42.94,
+   "lon": -122.11,
+   "summary": "When Mount Mazama in Oregon blew itself apart to create Crater Lake, the biggest eruption in the Cascades in the last 10,000 years, its ash blanketed Washington: an orange-tan layer centimetres thick in eastern-Washington road cuts and thicker toward the Oregon line, and traceable in lake and bog muds even in the Puget Lowland. The layer is a time marker geologists use everywhere in the state: anything beneath it is older than 7,700 years. Klamath oral tradition (southern Oregon) recalls the eruption.",
+   "at_your_spot": "Dig deep enough in an undisturbed bog or lake bed near {place} and you would hit the thin orange Mazama ash layer from 7,700 years ago.",
+   "sources": [
+    {
+     "title": "Egan, Staff & Blackford 2015, The Holocene: A high-precision age estimate of the Holocene Plinian eruption of Mount Mazama",
+     "url": "https://journals.sagepub.com/doi/10.1177/0959683615576230"
+    },
+    {
+     "title": "USGS Cascades Volcano Observatory: Tephra fall is a widespread volcanic hazard",
+     "url": "https://www.usgs.gov/observatories/cvo/science/tephra-fall-a-widespread-volcanic-hazard"
+    },
+    {
+     "title": "USGS: Volcanic ash from Mount Mazama (Crater Lake) and from Glacier Peak",
+     "url": "https://pubs.usgs.gov/publication/70010763"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "osceola-mudflow",
+   "title": "The Osceola Mudflow: Mount Rainier's summit collapses into the lowland",
+   "when": "about 5,600 years ago",
+   "start_years_ago": 5600,
+   "end_years_ago": 5600,
+   "region": [
+    "King County",
+    "Pierce County"
+   ],
+   "lat": 47.2,
+   "lon": -121.99,
+   "spot_rule": "osceola-lahar",
+   "summary": "An eruption triggered the collapse of Mount Rainier's weakened, clay-rich summit and northeast flank. About 3.8 cubic kilometres of rock turned into a wall of mud that ran more than 70 miles down the White River, buried the Enumclaw plateau and spread across 212 square miles of lowland, reaching Kent, Auburn, Sumner and an arm of Puget Sound at what is now the Port of Tacoma. It is the largest lahar known from Rainier and lopped some 1,000-2,000 feet off the mountain. Kent, Auburn, Enumclaw, Buckley and much of the Kent valley, homeland of the Muckleshoot and Puyallup peoples, stand on its deposits.",
+   "at_your_spot": "{place} is built on the Osceola Mudflow: the valley floor here was laid down in a single day about 5,600 years ago when Mount Rainier's summit fell into the lowland.",
+   "sources": [
+    {
+     "title": "USGS: Significant lahars at Mount Rainier",
+     "url": "https://www.usgs.gov/volcanoes/mount-rainier/science/significant-lahars-mount-rainier"
+    },
+    {
+     "title": "HistoryLink: Osceola Mudflow from Mount Rainier inundates the White River Valley approximately 5,600 years ago",
+     "url": "https://www.historylink.org/file/5095"
+    },
+    {
+     "title": "Vallance & Scott 1997, GSA Bulletin: The Osceola Mudflow from Mount Rainier",
+     "url": "https://pubs.geoscienceworld.org/gsa/gsabulletin/article/109/2/143/183195/The-Osceola-Mudflow-from-Mount-Rainier"
+    },
+    {
+     "title": "NPS Mount Rainier: Volcanic features",
+     "url": "https://www.nps.gov/mora/learn/nature/volcanic-features.htm"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-fault-923",
+   "title": "The Seattle Fault earthquake of 923-924 CE",
+   "when": "winter of 923-924 CE (about 1,100 years ago)",
+   "start_years_ago": 1077,
+   "end_years_ago": 1076,
+   "region": [
+    "Seattle",
+    "King County",
+    "Kitsap County",
+    "Puget Sound"
+   ],
+   "lat": 47.58,
+   "lon": -122.48,
+   "spot_rule": "seattle-fault-near",
+   "summary": "A magnitude 7-7.5 earthquake on the Seattle Fault, the east-west fault under the stadiums, I-90 and Bainbridge Island, lifted Restoration Point on Bainbridge Island about 7 metres (23 feet) and Alki Point about 4 metres (13 feet) out of Puget Sound in an instant, while the ground north of the fault at West Point dropped 1-1.5 metres. A tsunami swept sand across West Point and Cultus Bay; hillsides slid into Lake Washington off Mercer Island and near Saint Edward State Park, carrying whole forests that still stand upright under water; and landslides fell into Lake Sammamish. Tree rings, anchored by a cosmic-ray spike of 774-775 CE recorded in the wood, pin the quake to between the growing seasons of 923 and 924 CE (Black et al. 2023); Coast Salish oral traditions (Suquamish, Duwamish and neighbouring peoples) of a'yahos, the shaking serpent-spirit, are tied to places along the fault (Ludwin et al. 2005). The 2023 study found the Saddle Mountain fault near Hood Canal ruptured at the same time, so the combined event could have reached magnitude 7.8. It is the only time in at least 7,500 years that the Seattle Fault lifted the shoreline by metres; trenches on Bainbridge Island record three or four smaller (about magnitude 7) Seattle Fault quakes between roughly 2,500 and 1,000 years ago.",
+   "at_your_spot": "{place} is {distance} from the Seattle Fault; in the winter of 923-924 the ground here shook violently for perhaps a minute, and the shoreline nearby rose or sank by metres.",
+   "sources": [
+    {
+     "title": "WA DNR Washington Geological Survey: Earthquakes and faults",
+     "url": "https://www.dnr.wa.gov/programs-and-services/geology/geologic-hazards/earthquakes-and-faults"
+    },
+    {
+     "title": "City of Seattle: Best Available Science for the 2008 ECA update (Seattle Fault uplift figures)",
+     "url": "https://seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/ECABASSupplementalBestAvailableScience2008ECAAmendment.pdf"
+    },
+    {
+     "title": "USGS image: Restoration Point on Bainbridge Island, uplifted 7 metres by the Seattle fault",
+     "url": "https://www.usgs.gov/media/images/restoration-point-bainbridge-island-greater-seattle-area"
+    },
+    {
+     "title": "Black et al. 2023 (USGS publication record): tree-ring dating of the Seattle and Saddle Mountain fault ruptures",
+     "url": "https://pubs.usgs.gov/publication/70263924"
+    },
+    {
+     "title": "Nelson et al. 2003 (USGS): Late Holocene earthquakes on the Toe Jam Hill fault, Seattle fault zone",
+     "url": "https://pubs.usgs.gov/publication/70025332"
+    },
+    {
+     "title": "University of Washington Magazine: 1,100 years ago, double earthquake hit Seattle region, researchers prove",
+     "url": "https://magazine.washington.edu/1100-years-ago-double-earthquake-hit-seattle-region-researchers-prove"
+    },
+    {
+     "title": "HistoryLink: Seattle Fault Zone is first described in Science on December 4, 1992",
+     "url": "https://www.historylink.org/File/9388"
+    },
+    {
+     "title": "Wikipedia: Lake Washington sunken forests",
+     "url": "https://en.wikipedia.org/wiki/Lake_Washington_sunken_forests"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "electron-mudflow",
+   "title": "The Electron Mudflow buries the Puyallup valley",
+   "when": "about 1507 CE (roughly 500 years ago)",
+   "start_years_ago": 493,
+   "end_years_ago": 493,
+   "region": [
+    "Pierce County"
+   ],
+   "lat": 47.098,
+   "lon": -122.204,
+   "spot_rule": "electron-lahar",
+   "summary": "Without any eruption, a slab of rotten, hydrothermally altered rock on Mount Rainier's west face (Sunset Amphitheater) let go and became a clay-rich lahar of about 0.26 cubic kilometres. It was 30 metres deep where it left the mountains at Electron and flowed down the Puyallup valley, the Puyallup Tribe's homeland, at least as far as Sumner, burying the forest and leaving the flat valley floor that Orting now sits on. Tree-ring and radiocarbon work dates it to about 1507 CE, and Indigenous narratives describe it. Because it needed no eruption warning, it is the scenario behind the Puyallup valley's lahar sirens and Orting's evacuation drills.",
+   "at_your_spot": "{place} stands on the Electron Mudflow; about 500 years ago this valley floor was buried under metres of mud from Mount Rainier with no warning, and the sirens here exist because it could happen again.",
+   "sources": [
+    {
+     "title": "USGS: Significant lahars at Mount Rainier",
+     "url": "https://www.usgs.gov/volcanoes/mount-rainier/science/significant-lahars-mount-rainier"
+    },
+    {
+     "title": "USGS: Lahars and debris flows at Mount Rainier",
+     "url": "https://www.usgs.gov/volcanoes/mount-rainier/science/lahars-and-debris-flows-mount-rainier"
+    },
+    {
+     "title": "USGS data release: Radiocarbon and tree-ring data for dating Mount Rainier's Electron Mudflow",
+     "url": "https://catalog.data.gov/dataset/radiocarbon-and-tree-ring-data-for-dating-mount-rainiers-electron-mudflow"
+    },
+    {
+     "title": "Puyallup Tribe of Indians",
+     "url": "https://www.puyalluptribe-nsn.gov/"
+    },
+    {
+     "title": "Wikipedia: Electron Lahar",
+     "url": "https://en.wikipedia.org/wiki/Electron_Lahar"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "cascadia-1700",
+   "title": "The great Cascadia earthquake of January 26, 1700",
+   "when": "about 9 pm, January 26, 1700",
+   "start_years_ago": 300,
+   "end_years_ago": 300,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47.13,
+   "lon": -124.17,
+   "summary": "The whole Cascadia subduction zone, some 1,000 km from Vancouver Island to northern California, ruptured in a magnitude ~9 earthquake. The outer coast dropped 1-2 metres in moments, drowning forests in salt water (the ghost cedars of the Copalis River and Willapa Bay died in the winter of 1699-1700 by tree-ring count) and a tsunami tens of feet high swept the coast and, about ten hours later, Japan, where villagers recorded an 'orphan' tsunami with no felt quake. Oral histories of coastal nations, including the Makah, Quileute, Hoh and Quinault, recall the shaking and the waves (Ludwin et al. 2005). Willapa Bay marshes record seven such quakes in 3,500 years and deep-sea turbidites 19 in 10,000 years, averaging about 500 years apart.",
+   "at_your_spot": "On the night of January 26, 1700, {place} shook for several minutes; on the outer coast the land sank and a tsunami followed within half an hour. The next one is a matter of when, not if (see mil.wa.gov for how to prepare).",
+   "sources": [
+    {
+     "title": "USGS event page: M 9.0 - The 1700 Cascadia earthquake",
+     "url": "https://earthquake.usgs.gov/earthquakes/eventpage/official17000127050000000/impact"
+    },
+    {
+     "title": "Pacific Northwest Seismic Network: 1700 Cascadia subduction zone earthquake",
+     "url": "https://pnsn.org/education/pnw-earthquakes/notable/1700-cascadia"
+    },
+    {
+     "title": "PNSN: Native American stories expand history",
+     "url": "https://pnsn.org/blog/native-american-stories-expand-history"
+    },
+    {
+     "title": "WA100 (WA DNR): Copalis Ghost Forest",
+     "url": "https://wa100.dnr.wa.gov/willapa-hills/copalis-ghost-forest"
+    },
+    {
+     "title": "Atwater et al., USGS Professional Paper 1707: The Orphan Tsunami of 1700",
+     "url": "https://pubs.usgs.gov/pp/pp1707/"
+    },
+    {
+     "title": "Satake et al. 1996, Nature: Time and size of a giant earthquake in Cascadia inferred from Japanese tsunami records of January 1700",
+     "url": "https://www.nature.com/articles/379246a0"
+    },
+    {
+     "title": "Atwater & Hemphill-Haley 1997, USGS Professional Paper 1576: Recurrence intervals for great earthquakes of the past 3,500 years at northeastern Willapa Bay",
+     "url": "https://pubs.usgs.gov/publication/pp1576"
+    },
+    {
+     "title": "Goldfinger et al. 2012, USGS Professional Paper 1661-F: Turbidite event history - Holocene paleoseismicity of the Cascadia subduction zone",
+     "url": "https://pubs.usgs.gov/publication/pp1661F"
+    },
+    {
+     "title": "Washington Emergency Management Division: earthquake preparedness",
+     "url": "https://mil.wa.gov/earthquake"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "north-cascades-quake-1872",
+   "title": "The 1872 North Cascades (Chelan-Entiat) earthquake",
+   "when": "night of December 14, 1872",
+   "start_years_ago": 128,
+   "end_years_ago": 128,
+   "region": [
+    "North Cascades",
+    "Okanogan",
+    "Columbia Basin",
+    "Northeast Washington"
+   ],
+   "lat": 47.68,
+   "lon": -120.21,
+   "summary": "The largest crustal earthquake in Washington's written history, magnitude about 6.5-7.0 (best estimate 6.8), struck near Entiat and the south end of Lake Chelan and was felt from British Columbia to Oregon and Montana. A landslide at Ribbon Cliff dammed the Columbia River for hours, hot springs changed, and settlers and Indigenous residents at Lake Chelan and along the Columbia (ancestors of today's Confederated Tribes of the Colville Reservation) reported ground cracks and geysering sand. Lidar has since revealed a fresh 1-2 metre scarp on the Spencer Canyon fault southwest of Entiat, the likely source, and the Entiat earthquake cluster still active today may be its aftershocks.",
+   "at_your_spot": "{place} is {distance} from the 1872 epicenter near Entiat, the strongest shallow quake ever recorded in Washington.",
+   "sources": [
+    {
+     "title": "Pacific Northwest Seismic Network: 1872 North Cascades earthquake",
+     "url": "https://pnsn.org/education/pnw-earthquakes/notable/north-cascades"
+    },
+    {
+     "title": "Brocher et al. 2017, BSSA: Aftershocks, earthquake effects, and the location of the large 14 December 1872 earthquake near Entiat",
+     "url": "https://www.researchgate.net/publication/321924072_Aftershocks_Earthquake_Effects_and_the_Location_of_the_Large_14_December_1872_Earthquake_near_Entiat_Central_Washington"
+    },
+    {
+     "title": "Wikipedia: 1872 North Cascades earthquake",
+     "url": "https://en.wikipedia.org/wiki/1872_North_Cascades_earthquake"
+    },
+    {
+     "title": "HeraldNet: Entiat fault may have set off big 1872 quake (USGS Sherrod fieldwork)",
+     "url": "https://www.heraldnet.com/news/entiat-fault-may-have-set-off-big-1872-quake/"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "olympia-quake-1949",
+   "title": "The 1949 Olympia earthquake",
+   "when": "11:55 am, April 13, 1949",
+   "start_years_ago": 51,
+   "end_years_ago": 51,
+   "region": [
+    "Puget Sound",
+    "Southwest Washington"
+   ],
+   "lat": 47.1,
+   "lon": -122.7,
+   "summary": "A deep (about 50 km) earthquake inside the sinking Juan de Fuca plate, centered between Olympia and Tacoma, shook western Washington at magnitude 7.1 (some modern recalculations give 6.7), the strongest in the region's recorded history. Eight people died, including schoolchildren struck by falling masonry, and dozens were seriously hurt; the Capitol dome in Olympia, downtown Seattle and Tacoma buildings and dozens of schools were damaged. It was the first of three deep 'Benioff' quakes (1949, 1965, 2001) that define the Puget Sound region's most frequent big-earthquake type.",
+   "at_your_spot": "At midday on April 13, 1949, {place} shook hard for about half a minute; brick parapets and chimneys fell across Puget Sound cities.",
+   "sources": [
+    {
+     "title": "HistoryLink: Earthquake hits Puget Sound area on April 13, 1949",
+     "url": "https://www.historylink.org/file/2063"
+    },
+    {
+     "title": "Wikipedia: 1949 Olympia earthquake",
+     "url": "https://en.wikipedia.org/wiki/1949_Olympia_earthquake"
+    },
+    {
+     "title": "Washington Emergency Management Division: Significant earthquakes experienced in Washington since 1872",
+     "url": "https://mil.wa.gov/asset/5ba41f67ab6be"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "seattle-tacoma-quake-1965",
+   "title": "The 1965 Seattle-Tacoma earthquake",
+   "when": "8:29 am, April 29, 1965",
+   "start_years_ago": 35,
+   "end_years_ago": 35,
+   "region": [
+    "Puget Sound"
+   ],
+   "lat": 47.4,
+   "lon": -122.3,
+   "summary": "Another deep intraslab quake, magnitude 6.7 (USGS 6.5), struck about 60 km beneath the Des Moines area between Seattle and Tacoma and shook for about 45 seconds. Seven people died (three from falling debris in Pioneer Square and at the Fisher Flouring Mills on Harbor Island, four from heart attacks) and damage reached about $12.5 million in 1965 dollars, with the worst in Seattle's older brick districts and on filled ground.",
+   "at_your_spot": "On the morning of April 29, 1965, {place} rocked for 45 seconds; older brick buildings and chimneys nearby were the casualties.",
+   "sources": [
+    {
+     "title": "HistoryLink: Earthquake rattles Western Washington on April 29, 1965",
+     "url": "https://www.historylink.org/File/1986"
+    },
+    {
+     "title": "Wikipedia: 1965 Puget Sound earthquake",
+     "url": "https://en.wikipedia.org/wiki/1965_Puget_Sound_earthquake"
+    },
+    {
+     "title": "Washington Emergency Management Division: Big 1965 earthquake happened 50 years ago",
+     "url": "https://mil.wa.gov/news/big-1965-earthquake-happened-50-years-ago"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "st-helens-1980",
+   "title": "Mount St. Helens erupts",
+   "when": "8:32 am, May 18, 1980",
+   "start_years_ago": 20,
+   "end_years_ago": 20,
+   "region": [
+    "statewide"
+   ],
+   "lat": 46.2,
+   "lon": -122.19,
+   "summary": "A magnitude 5.1 earthquake set off the largest landslide in recorded history, uncorking a sideways blast that flattened 230 square miles of forest, followed by a nine-hour ash column 15 miles high and lahars that choked the Toutle and Cowlitz rivers and the Columbia shipping channel. Fifty-seven people died. The ash cloud blacked out Yakima within an hour and Spokane by afternoon, closed I-90 under inches of grit at Ritzville and dusted eleven states; the mountain, sacred to the Cowlitz Tribe and the Yakama Nation as Lawetlat'la, lost 1,300 feet of its summit. Washington's volcanoes went from scenery to hazard overnight, and the Cascades Volcano Observatory was founded to watch them.",
+   "at_your_spot": "On May 18, 1980, Mount St. Helens, {distance} from {place}, blew out its north side; Yakima went dark by mid-morning and Ritzville was buried under inches of ash.",
+   "sources": [
+    {
+     "title": "USGS: Mount St. Helens 1980 eruption - impact and aftermath",
+     "url": "https://pubs.usgs.gov/gip/msh/impact.html"
+    },
+    {
+     "title": "HistoryLink: Mount St. Helens erupts on May 18, 1980",
+     "url": "https://www.historylink.org/file/5457"
+    },
+    {
+     "title": "USGS Fact Sheet 2005-3045: Mount St. Helens - from the 1980 eruption to 2000",
+     "url": "https://pubs.usgs.gov/fs/2005/3045/fs2005-3045.pdf"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "nisqually-quake-2001",
+   "title": "The 2001 Nisqually earthquake",
+   "when": "10:54 am, February 28, 2001",
+   "start_years_ago": -1,
+   "end_years_ago": -1,
+   "region": [
+    "Puget Sound",
+    "Southwest Washington"
+   ],
+   "lat": 47.15,
+   "lon": -122.73,
+   "summary": "A magnitude 6.8 quake 52 km beneath the Nisqually delta near Anderson Island shook the Puget Sound region for about 40 seconds. One person died of a heart attack and about 400 were injured; damage of $1-4 billion hit Pioneer Square's brick buildings, the Capitol dome, Sea-Tac's control tower and the Alaskan Way Viaduct, whose cracking led to its replacement by the SR 99 tunnel in 2019. Because it was deep, like 1949 and 1965, shaking was strong but brief; a shallow Seattle Fault quake of the same size would be far worse.",
+   "at_your_spot": "On February 28, 2001, {place} swayed for 40 seconds; many older buildings nearby were retrofitted afterward.",
+   "sources": [
+    {
+     "title": "HistoryLink: Earthquake registering 6.8 on Richter Scale jolts Seattle and Puget Sound on February 28, 2001",
+     "url": "https://historylink.org/File/3039"
+    },
+    {
+     "title": "Pacific Northwest Seismic Network: 2001 Nisqually earthquake",
+     "url": "https://pnsn.org/education/pnw-earthquakes/notable/nisqually"
+    },
+    {
+     "title": "USGS OFR 03-211: Nisqually, Washington, earthquake",
+     "url": "https://pubs.usgs.gov/of/2003/ofr-03-211/NisquallyFinal.html"
+    },
+    {
+     "title": "Wikipedia: 2001 Nisqually earthquake",
+     "url": "https://en.wikipedia.org/wiki/2001_Nisqually_earthquake"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "subduction-today",
+   "title": "Today: Washington rides the leading edge of a subduction zone",
+   "when": "the last ~30 million years, and now",
+   "start_years_ago": 30000000,
+   "end_years_ago": 0,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47,
+   "lon": -125.5,
+   "summary": "Offshore, the small Juan de Fuca plate, the last fragment of the ancient Farallon plate, is sliding northeast under Washington at 3-4 cm per year, about half its speed of 7 million years ago. That sinking slab feeds the Cascade volcanoes, flexes the coast, generates slow 'tremor' episodes under Puget Sound every 14 months or so, and stores the strain for magnitude-9 Cascadia earthquakes (last one 1700; average spacing about 500 years). At the same time the Oregon coast block rotates clockwise and squeezes western Washington northward against Canada, loading the shallow Seattle, Tacoma and other crustal faults.",
+   "at_your_spot": "Every year {place} is pushed a few millimetres northeast and squeezed by the plate sinking offshore; the next great Cascadia quake will shake it for minutes.",
+   "sources": [
+    {
+     "title": "ScienceDirect topic overview: Juan de Fuca plate",
+     "url": "https://www.sciencedirect.com/topics/earth-and-planetary-sciences/juan-de-fuca-plate"
+    },
+    {
+     "title": "Walton et al. 2021 (USGS): Toward an integrative geological and geophysical view of Cascadia subduction zone earthquakes",
+     "url": "https://pubs.usgs.gov/publication/70217592"
+    },
+    {
+     "title": "USGS Pacific Coastal and Marine Science Center: Cascadia subduction zone marine geohazards",
+     "url": "https://www.usgs.gov/centers/pcmsc/science/cascadia-subduction-zone-marine-geohazards"
+    },
+    {
+     "title": "NPS: Convergent plate boundaries - subduction zones",
+     "url": "https://www.nps.gov/subjects/geology/plate-tectonics-subduction-zones.htm"
+    },
+    {
+     "title": "WA DNR Washington Geological Survey: Earthquakes and faults",
+     "url": "https://www.dnr.wa.gov/programs-and-services/geology/geologic-hazards/earthquakes-and-faults"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "future-50ma",
+   "title": "Fifty million years from now (a qualitative projection)",
+   "when": "about 50 million years in the future",
+   "start_years_ago": -50000000,
+   "end_years_ago": -50000000,
+   "region": [
+    "statewide"
+   ],
+   "lat": 47.61,
+   "lon": -122.33,
+   "summary": "Nobody can map this precisely, but the trends are clear. The Juan de Fuca plate is shrinking and breaking into pieces; most geologists expect subduction here to die out within tens of millions of years, as it already has off California, leaving a San Andreas-style sliding boundary and quieting the Cascade volcanoes. North America will keep drifting west-southwest at a couple of centimetres a year, roughly 1,000 km over 50 million years, carrying Seattle with it, while Baja California and Los Angeles slide north past the coast toward Alaska. Puget Sound, the Olympics and even Mount Rainier are fleeting: in 50 million years they will have been eroded, filled or rebuilt many times over, as the whole 40-million-year life of the Cascade arc has been shorter than this span.",
+   "at_your_spot": "In 50 million years {place} will still be part of North America, but roughly a thousand kilometres to the west-southwest of where it is now, with no Cascade volcanoes left to see from it.",
+   "sources": [
+    {
+     "title": "ScienceDirect topic overview: Juan de Fuca plate (shrinking Farallon remnant)",
+     "url": "https://www.sciencedirect.com/topics/earth-and-planetary-sciences/juan-de-fuca-plate"
+    },
+    {
+     "title": "National Geographic: A tectonic plate is dying under Oregon - here's why that matters",
+     "url": "https://www.nationalgeographic.com/science/article/tectonic-plate-dying-oregon-why-matters"
+    },
+    {
+     "title": "Wikipedia: Pangaea Proxima (Scotese future-plate reconstruction)",
+     "url": "https://en.wikipedia.org/wiki/Pangaea_Proxima"
+    },
+    {
+     "title": "Wikipedia: Geology of the Pacific Northwest",
+     "url": "https://en.wikipedia.org/wiki/Geology_of_the_Pacific_Northwest"
+    }
+   ],
+   "confidence": "low"
+  }
+ ]
+}
