@@ -1,0 +1,50 @@
+{
+  "Washington (state)": {
+    "title": "Washington (state)",
+    "extract": "Washington is a state in the Pacific Northwest region of the United States. It is often referred to as Washington state to distinguish it from the national capital; both are named after George Washington, a U.S. Founding Father and the first U.S. president. Washington borders the Pacific Ocean to the west, Oregon to the south, and Idaho to the east; it shares an international border with the Canadian province of British Columbia to the north. Olympia is the state capital, and the state's most populous city is Seattle.",
+    "url": "https://en.wikipedia.org/wiki/Washington_(state)",
+    "thumbnail": {
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/330px-Flag_of_Washington.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "width": 330,
+      "height": 206
+    },
+    "description": "U.S. state",
+    "fetchedAt": "2026-10-02T11:42:49Z"
+  },
+  "King County, Washington": {
+    "title": "King County, Washington",
+    "extract": "King County is a county located in the U.S. state of Washington. The population was 2,269,675 in the 2020 census, making it the most populous county in Washington, and the 13th-most populous in the United States. The county seat is Seattle, also the state's most populous city.",
+    "url": "https://en.wikipedia.org/wiki/King_County%2C_Washington",
+    "thumbnail": {
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg/330px-Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "width": 330,
+      "height": 219
+    },
+    "description": "County in Washington, United States",
+    "fetchedAt": "2026-09-18T03:15:19Z"
+  },
+  "Seattle": {
+    "title": "Seattle",
+    "extract": "Seattle is the most populous city in the U.S. state of Washington and the Pacific Northwest region of North America. It is the 18th-most populous city in the United States with a population of 784,777 in 2025, while the Seattle metropolitan area at over 4.15 million residents is the 15th-most populous metropolitan area in the nation. The city is the county seat of King County, the most populous county in Washington. Seattle's growth rate of 21.1% between 2010 and 2020 made it one of the country's fastest-growing large cities.",
+    "url": "https://en.wikipedia.org/wiki/Seattle",
+    "thumbnail": {
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Seattle_Center_as_night_falls.jpg/330px-Seattle_Center_as_night_falls.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "width": 330,
+      "height": 206
+    },
+    "description": "City in Washington, United States",
+    "fetchedAt": "2026-10-06T00:30:56Z"
+  },
+  "Walla Walla, Washington": {
+    "title": "Walla Walla, Washington",
+    "extract": "Walla Walla is a city in and the county seat of Walla Walla County, Washington, United States. It is one of the largest cities in Southeastern Washington with a population of 34,060 at the 2020 census, estimated to have decreased to 33,339 as of 2023. The combined population of the city and its two suburbs, the town of College Place and unincorporated Walla Walla East, is about 45,500. Walla Walla is located near the Palouse and Blue Mountains, approximately 6 miles (9.7 km) from the Oregon border to the south.",
+    "url": "https://en.wikipedia.org/wiki/Walla_Walla%2C_Washington",
+    "thumbnail": {
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Second_and_Main_in_Walla_Walla.jpg/330px-Second_and_Main_in_Walla_Walla.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "width": 330,
+      "height": 172
+    },
+    "description": "City in Washington, United States",
+    "fetchedAt": "2026-09-18T02:31:01Z"
+  }
+}

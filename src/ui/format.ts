@@ -9,6 +9,7 @@
  *   formatYear      a calendar year as the time engine would print it
  *   excerpt         shorten a paragraph at a sentence end, not mid-word
  *   heroSentence    the one-line summary at the top of a story
+ *   summariseOutcome the status line once every source has answered
  *   distanceWords   metres -> "90 feet" / "0.3 miles"
  *   ringLabel       the short heading for a ring level ("House", "County")
  *   ringTagline     a few words explaining what each ring is
@@ -243,6 +244,39 @@ export function heroSentence(place: Place, rings: Ring[], geology?: GeologyUnit 
   const tail = rock ? `, on ${rock}` : '';
 
   return `${subject} sits ${clauses.join(', ')}${tail}.`;
+}
+
+// ---------------------------------------------------------------------------
+// The status line once every source has answered
+// ---------------------------------------------------------------------------
+
+/** What the status line says for a loader that failed in a way nobody named. */
+const UNNAMED_FAILURE = 'an unexpected error';
+
+/**
+ * The final status line for a story, from the settled results of every
+ * loader. Each loader resolves with the names of the sources that did not
+ * answer (an empty list when all went well); a loader that rejected
+ * outright counts as "an unexpected error". With no failures the line is
+ * "Story ready: <hero sentence>" (or just "Story ready." when there is no
+ * hero); otherwise it names each failed source once, in the order they
+ * were reported, and says the rest of the story is on the page. Pure, so
+ * the wording and the de-duplication can be unit-tested.
+ */
+export function summariseOutcome(results: readonly PromiseSettledResult<readonly string[]>[], hero: string): string {
+  const failed: string[] = [];
+  for (const result of results) {
+    const names = result.status === 'fulfilled' ? result.value : [UNNAMED_FAILURE];
+    for (const name of names) {
+      const t = name.trim();
+      if (t && !failed.includes(t)) failed.push(t);
+    }
+  }
+  if (failed.length === 0) {
+    const h = hero.trim();
+    return h ? `Story ready: ${h}` : 'Story ready.';
+  }
+  return `Story ready, but some sources did not answer (${failed.join(', ')}); the rest of the story is here.`;
 }
 
 // ---------------------------------------------------------------------------

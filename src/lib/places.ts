@@ -8,7 +8,9 @@
  *    The opening paragraph of an article as plain text. We keep the first
  *    sentence or two as a QUOTED excerpt with a link to the article. The
  *    text is CC BY-SA 4.0, so it is shown as a quotation with attribution
- *    and never rewritten in our own words.
+ *    and never rewritten in our own words. The openings the site needs
+ *    most are pre-baked in public/data/wiki-summaries.json (see
+ *    wiki-summaries.ts); Wikipedia is only asked for titles that file lacks.
  *  - Wikipedia action API     en.wikipedia.org/w/api.php?action=query&prop=pageprops
  *    Tells us the Wikidata id behind an article title (Seattle -> Q5083).
  *  - Wikidata SPARQL          query.wikidata.org/sparql
@@ -28,6 +30,7 @@ import { HttpError, fetchJson } from './http';
 import { limiterFor } from './queue';
 import { cached } from './cache';
 import { cityName, ringName } from './rings';
+import { findWikiSummary, loadWikiSummaries, type WikiSummaryEntry } from './wiki-summaries';
 
 // ---------------------------------------------------------------------------
 // Endpoints, licences and limits
@@ -286,21 +289,44 @@ export function summaryFact(page: WikipediaPage): Fact {
 }
 
 /**
- * Fetch and normalise the Wikipedia summary for a title, following
- * redirects ("Seattle, Washington" resolves to the "Seattle" article).
- * Resolves to null when there is no such article (HTTP 404) or when the
- * title is a disambiguation page; both answers are cached for a week along
- * with real hits. Any other failure (network, 5xx, 429 after the retry) is
+ * A WikipediaPage from a pre-baked entry (public/data/wiki-summaries.json).
+ * The baked file carries no Wikidata id, so `wikidata` is left out; the
+ * page gets a city's id from public/data/wa-places.json instead.
+ */
+export function pageFromEntry(entry: WikiSummaryEntry): WikipediaPage {
+  return {
+    title: entry.title,
+    url: entry.url,
+    extract: entry.extract,
+    ...(entry.description ? { description: entry.description } : {}),
+    ...(entry.thumbnail ? { thumbnail: { url: entry.thumbnail.source, width: entry.thumbnail.width, height: entry.thumbnail.height } } : {}),
+  };
+}
+
+/**
+ * The Wikipedia summary for a title, normalised. The pre-baked file
+ * (public/data/wiki-summaries.json) is consulted first, by exact title and
+ * then ignoring letter case, and answers without any request to Wikipedia.
+ * Only a title the file lacks is fetched, following redirects ("Seattle,
+ * Washington" resolves to the "Seattle" article). Resolves to null when
+ * there is no such article (HTTP 404) or when the title is a disambiguation
+ * page; both answers are cached for a week along with real hits. Any other
+ * failure (network, 5xx, a 429 that is still a 429 after one retry) is
  * thrown so the caller can show the ring as thin rather than wrong.
  */
 export async function wikipediaPage(title: string): Promise<WikipediaPage | null> {
   const key = normaliseTitle(title);
   if (!key) return null;
+  const baked = findWikiSummary(await loadWikiSummaries(), title);
+  if (baked) return pageFromEntry(baked);
   return cached<WikipediaPage | null>(`wikipedia:summary:${key}`, { ttlMs: SUMMARY_TTL_MS }, async () => {
     const url = wikipediaSummaryUrl(key);
     try {
-      // Wikimedia extends its cool-down when a 429 is retried, so never retry one.
-      const raw = await limiterFor(WIKIPEDIA_HOST).run(() => fetchJson<WikipediaSummaryResponse>(url, { retryOn429: false }));
+      // A 429 is retried exactly once, after the pause the server's
+      // Retry-After asks for (http.ts caps it at 15 s). The retry happens
+      // inside the limiter's turn, so no other Wikimedia request goes out
+      // during the cool-down.
+      const raw = await limiterFor(WIKIPEDIA_HOST).run(() => fetchJson<WikipediaSummaryResponse>(url, { retries: 1 }));
       return pageFromSummary(raw);
     } catch (err) {
       if (err instanceof HttpError && err.status === 404) return null;
@@ -314,7 +340,8 @@ export async function wikipediaPage(title: string): Promise<WikipediaPage | null
  * no usable article (missing page, disambiguation page). The body is the
  * first sentence or two of the article's opening paragraph, at most 320
  * characters, ending on a sentence boundary; the source is the article URL
- * under CC BY-SA 4.0. Results are cached for 7 days.
+ * under CC BY-SA 4.0. A title in the pre-baked file costs no request (see
+ * wikipediaPage); fetched results are cached for 7 days.
  */
 export async function wikipediaSummary(title: string): Promise<Fact | null> {
   const page = await wikipediaPage(title);

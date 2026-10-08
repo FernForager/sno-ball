@@ -5,9 +5,12 @@ import { expect, test, type Page } from '@playwright/test';
  * The whole story pipeline in a real browser, with every outside service
  * answered from the fixture files captured on 2026-10-07. Nothing here
  * reaches the network: the geocoder, Wikipedia, the geology server, the
- * plate model and Seattle's open data are all stubbed, and the map tiles
- * are blocked. So this runs in CI like the smoke test and still proves
- * that main.ts wires the modules together correctly.
+ * plate model and Seattle's open data are all stubbed; the map gets the
+ * captured positron style and a stand-in TileJSON (which carries the
+ * credit line) while the tiles themselves are blocked. So this runs in CI
+ * like the smoke test and still proves that main.ts wires the modules
+ * together correctly. The site's own files (public/data/*.json, the
+ * pre-baked excerpts among them) are served by the preview server as is.
  */
 
 const fixture = (path: string): string => readFileSync(new URL(`../fixtures/${path}`, import.meta.url), 'utf8');
@@ -37,10 +40,20 @@ async function stubServices(page: Page, opts: { geologyDown?: boolean } = {}): P
     if (hostname === 'gws.gplates.org') return route.fulfill(json('geology/gplates-space-needle-times.json'));
     if (hostname === 'query.wikidata.org') return route.fulfill(json('places/wikidata-seattle-population.json'));
     if (hostname === 'en.wikipedia.org') {
+      // The state, county and city excerpts are pre-baked in
+      // public/data/wiki-summaries.json, so these three answer only if the
+      // page asks anyway (the test below checks that it does not).
       if (pathname.endsWith('/Washington_(state)')) return route.fulfill(json('places/wikipedia-summary-washington.json'));
       if (pathname.endsWith('/King_County,_Washington')) return route.fulfill(json('places/wikipedia-summary-king-county.json'));
-      if (pathname.endsWith('/Seattle,_Washington')) return route.fulfill(json('places/wikipedia-summary-seattle.json'));
+      if (pathname.endsWith('/Seattle')) return route.fulfill(json('places/wikipedia-summary-seattle.json'));
       return route.fulfill({ status: 404, contentType: 'application/json', body: '{"type":"not_found"}' });
+    }
+    if (hostname === 'tiles.openfreemap.org') {
+      // The real style (captured) and a synthetic TileJSON that carries the
+      // same credit line the live one does; tiles, sprites and fonts are blocked.
+      if (pathname === '/styles/positron') return route.fulfill(json('live/openfreemap-positron-style.json'));
+      if (pathname === '/planet') return route.fulfill(json('map/openfreemap-planet-tilejson.json'));
+      return route.abort();
     }
     if (hostname === 'services.arcgis.com') {
       if (pathname.includes('/nma_nhoods_sub/')) return route.fulfill(json('rings/seattle-nhood-space-needle.json'));
@@ -132,7 +145,8 @@ test('a search fills every ring from the stubbed services', async ({ page }) => 
   }
   await page.evaluate(() => window.scrollTo(0, 0));
 
-  // When the browser could draw the map, the OpenStreetMap credit is visible
+  // When the browser could draw the map, the credit in the corner is the
+  // style's own (OpenFreeMap / OpenMapTiles / OpenStreetMap), printed once
   // and not covered by the caption, and the tile worker is real JavaScript.
   if ((await page.locator('.postcard__note').count()) === 0) {
     const attrib = page.locator('.maplibregl-ctrl-attrib');
@@ -143,20 +157,44 @@ test('a search fills every ring from the stubbed services', async ({ page }) => 
       return hit !== null && !node.contains(hit);
     });
     expect(covered).toBe(false);
+    const inner = attrib.locator('.maplibregl-ctrl-attrib-inner');
+    await expect(inner).toContainText('OpenStreetMap', { timeout: 10_000 });
+    const credit = (await inner.textContent()) ?? '';
+    expect(credit).toContain('OpenFreeMap');
+    // Once, not twice: no " | " joining a second copy, and the old custom wording is gone.
+    expect(credit).not.toContain('|');
+    expect(credit).not.toContain('OpenStreetMap contributors');
+    expect(credit.match(/OpenMapTiles/g)?.length ?? 0).toBe(1);
     if (viewport && viewport.width >= 640) {
-      await expect(attrib).toContainText('OpenStreetMap contributors');
+      // Desktop: the credit is written out, kept open, readable without a click.
+      await expect(inner).toBeVisible();
+      await expect(attrib).not.toHaveClass(/maplibregl-compact/);
+    } else {
+      // Phone: MapLibre folds it into the (i) button (open at first, closed on the first drag).
+      await expect(attrib).toHaveClass(/maplibregl-compact/);
+      await expect(attrib.locator('.maplibregl-ctrl-attrib-button')).toBeVisible();
     }
     // The tile worker is a real file of the build, served as JavaScript (not index.html).
     await expect.poll(() => served.find((r) => r.url.includes('maplibre-gl-worker'))?.contentType ?? '', { timeout: 10_000 }).toContain('javascript');
   }
 
-  // Wikimedia requests go one at a time, at least 300 ms apart (the limiter
-  // spaces their starts by 350 ms; the route sees each a few ms later, so a
-  // little slack is allowed for timing jitter).
+  // The state, county and city excerpts came from the pre-baked file, so
+  // Wikipedia was at most asked for the neighborhood (the four-entry
+  // placeholder lacks it; the full bake has it and asks for nothing); the
+  // city's population came from Wikidata by the id in wa-places.json.
+  const wikipedia = log.filter((r) => r.url.includes('en.wikipedia.org')).map((r) => decodeURIComponent(new URL(r.url).pathname));
+  for (const path of wikipedia) expect(path).toBe('/api/rest_v1/page/summary/Lower_Queen_Anne,_Seattle');
+  expect(wikipedia.length).toBeLessThanOrEqual(1);
+  expect(served.some((r) => r.url.endsWith('/sno-ball/data/wiki-summaries.json'))).toBe(true);
+  expect(served.some((r) => r.url.endsWith('/sno-ball/data/wa-places.json'))).toBe(true);
+  // Wikimedia requests go one at a time, at least a second apart (the
+  // limiter spaces their starts by 1000 ms; the route sees each a few ms
+  // later, so a little slack is allowed for timing jitter).
   const wikimedia = log.filter((r) => /wikipedia\.org|wikidata\.org/.test(r.url));
-  expect(wikimedia.length).toBeGreaterThanOrEqual(4);
+  expect(wikimedia.length).toBeGreaterThanOrEqual(1);
+  expect(wikimedia.length).toBeLessThanOrEqual(2);
   for (let i = 1; i < wikimedia.length; i += 1) {
-    expect(wikimedia[i]!.at - wikimedia[i - 1]!.at).toBeGreaterThanOrEqual(250);
+    expect(wikimedia[i]!.at - wikimedia[i - 1]!.at).toBeGreaterThanOrEqual(900);
   }
   // Population history is asked for last.
   expect(wikimedia[wikimedia.length - 1]!.url).toContain('query.wikidata.org');

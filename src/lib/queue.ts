@@ -120,8 +120,11 @@ const HOST_POLICIES: Readonly<Record<string, LimiterOptions>> = {
   // Wikimedia (Wikipedia, Wikidata, Commons) rate-limits a site as a whole,
   // and answered 429 for minutes when five requests went out at once. So
   // every Wikimedia host shares ONE queue (see HOST_GROUPS): strictly one
-  // request at a time, at least 350 ms apart.
-  wikimedia: { minIntervalMs: 350, concurrency: 1 },
+  // request at a time, at least a second apart. (350 ms was still enough to
+  // draw 429s on six of twenty summary requests in a live check, so the
+  // common excerpts are now pre-baked in public/data/wiki-summaries.json
+  // and the few live requests left are spaced like Nominatim's.)
+  wikimedia: { minIntervalMs: 1000, concurrency: 1 },
 };
 
 /**

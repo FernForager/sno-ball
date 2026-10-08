@@ -158,7 +158,6 @@ vi.mock('maplibre-gl/dist/maplibre-gl.css', () => ({}));
 vi.mock('maplibre-gl/dist/maplibre-gl-worker.mjs?url', () => ({ default: '/sno-ball/assets/maplibre-gl-worker.mjs' }));
 
 import {
-  MAP_ATTRIBUTION,
   MAX_EASE_MS,
   MapUnavailableError,
   POSITRON_STYLE_URL,
@@ -171,6 +170,9 @@ import {
   prefersReducedMotion,
   webglSupported,
   zoomForLevel,
+  WIDE_VIEWPORT_PX,
+  attributionOptions,
+  isWideViewport,
 } from '../../src/lib/map';
 
 // ---------------------------------------------------------------------------
@@ -187,6 +189,8 @@ interface BrowserStub {
   touchPoints?: number;
   /** Can a canvas give us a WebGL context? */
   webgl?: boolean;
+  /** window.innerWidth in CSS pixels. Default 1024 (a laptop). */
+  viewportWidth?: number;
 }
 
 function stubBrowser(stub: BrowserStub = {}): void {
@@ -195,7 +199,7 @@ function stubBrowser(stub: BrowserStub = {}): void {
       (query.includes('prefers-reduced-motion') && stub.reducedMotion === true) ||
       (query.includes('pointer: coarse') && stub.coarsePointer === true),
   }));
-  vi.stubGlobal('window', { matchMedia });
+  vi.stubGlobal('window', { matchMedia, innerWidth: stub.viewportWidth ?? 1024 });
   vi.stubGlobal('navigator', { maxTouchPoints: stub.touchPoints ?? 0 });
   const loseContext = vi.fn();
   const gl = { getExtension: vi.fn(() => ({ loseContext })) };
@@ -275,6 +279,25 @@ describe('browser helpers', () => {
     expect(prefersReducedMotion()).toBe(false);
     expect(isTouchDevice()).toBe(false);
     expect(webglSupported()).toBe(false);
+    expect(isWideViewport()).toBe(false);
+  });
+
+  it('call a window of 640 px or more wide, and keep the map credit open only there', () => {
+    expect(WIDE_VIEWPORT_PX).toBe(640);
+    stubBrowser({ viewportWidth: 1280 });
+    expect(isWideViewport()).toBe(true);
+    stubBrowser({ viewportWidth: 640 });
+    expect(isWideViewport()).toBe(true);
+    stubBrowser({ viewportWidth: 412 }); // a Pixel 7
+    expect(isWideViewport()).toBe(false);
+    // Wide: the one-line credit is forced open. Narrow: MapLibre's default,
+    // which folds it into an (i) button. Never a customAttribution of ours.
+    expect(attributionOptions(true)).toEqual({ compact: false });
+    expect(attributionOptions(false)).toEqual({});
+    expect(buildMapOptions(container, false, false).attributionControl).toEqual({});
+    expect(buildMapOptions(container, false).attributionControl).toEqual({});
+    stubBrowser({ viewportWidth: 1280 });
+    expect(buildMapOptions(container, false).attributionControl).toEqual({ compact: false });
   });
 
   it('read prefers-reduced-motion from matchMedia', () => {
@@ -341,18 +364,20 @@ describe('createStoryMap', () => {
     expect((err as Error).cause).toBe(inner);
   });
 
-  it('uses the positron style, a written-out attribution with credits, and starts on Washington', async () => {
+  it('uses the positron style, leaves the credit to the style, and starts on Washington', async () => {
     const story = await createStoryMap(container);
     const opts = fake.FakeMap.instances[0]!.options;
     expect(story.map).toBe(fake.FakeMap.instances[0]);
     expect(opts['container']).toBe(container);
     expect(opts['style']).toBe(POSITRON_STYLE_URL);
     expect(opts['style']).toBe('https://tiles.openfreemap.org/styles/positron');
-    // Not compact: the credit must be readable without a click wherever it fits.
-    expect(opts['attributionControl']).toEqual({ customAttribution: MAP_ATTRIBUTION });
-    expect(MAP_ATTRIBUTION).toContain('OpenFreeMap');
-    expect(MAP_ATTRIBUTION).toContain('&copy; <a href="https://www.openstreetmap.org/copyright"');
-    expect(MAP_ATTRIBUTION).toContain('OpenStreetMap contributors');
+    // The style's tile source carries the OpenFreeMap / OpenMapTiles /
+    // OpenStreetMap credit, so no customAttribution (it was printed twice).
+    // The stubbed window is 1024 px wide: the credit is kept open. An
+    // explicit object is always passed: leaving the option out would give
+    // MapLibre's own default of compact: true plus a "MapLibre" link.
+    expect(opts['attributionControl']).toEqual({ compact: false });
+    expect('customAttribution' in (opts['attributionControl'] as object)).toBe(false);
     // MapLibre is told where the bundled tile worker lives before any map is made.
     expect(fake.state.workerUrl).toBe('/sno-ball/assets/maplibre-gl-worker.mjs');
     expect(opts['center']).toEqual([WASHINGTON_VIEW.center.lng, WASHINGTON_VIEW.center.lat]);

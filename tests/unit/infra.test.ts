@@ -226,6 +226,45 @@ describe('fetchJson', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
+  it('honours a Retry-After of up to 15 s on a 429, in seconds or as an HTTP date', async () => {
+    vi.useFakeTimers();
+    expect(MAX_RETRY_AFTER_MS).toBe(15_000);
+
+    // "Retry-After: 10" (seconds): the retry waits the full ten seconds.
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(fakeResponse(429, 'slow down', { 'Retry-After': '10' }))
+      .mockResolvedValueOnce(fakeResponse(200, { ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+    const promise = fetchJson<{ ok: boolean }>(URL_OK, { retries: 1 });
+    await vi.advanceTimersByTimeAsync(9_999);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await expect(promise).resolves.toEqual({ ok: true });
+
+    // An HTTP date 4 s ahead: the retry waits until that moment.
+    vi.setSystemTime(Date.parse('Wed, 07 Oct 2026 22:00:00 GMT'));
+    fetchMock.mockReset();
+    fetchMock
+      .mockResolvedValueOnce(fakeResponse(429, 'slow down', { 'Retry-After': 'Wed, 07 Oct 2026 22:00:04 GMT' }))
+      .mockResolvedValueOnce(fakeResponse(200, { ok: true }));
+    const dated = fetchJson<{ ok: boolean }>(URL_OK, { retries: 1 });
+    await vi.advanceTimersByTimeAsync(3_999);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await expect(dated).resolves.toEqual({ ok: true });
+
+    // Just over the cap: no retry, the server is cooling us down for real.
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async () => fakeResponse(429, 'cooling down', { 'Retry-After': '16' }));
+    const outcome = expect(fetchJson(URL_OK, { retries: 1 })).rejects.toMatchObject({ status: 429, retryAfterMs: 16_000 });
+    await vi.advanceTimersByTimeAsync(MAX_RETRY_AFTER_MS * 2);
+    await outcome;
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
   it('parseRetryAfter reads seconds and HTTP dates', () => {
     expect(parseRetryAfter('120')).toBe(120_000);
     expect(parseRetryAfter(' 2 ')).toBe(2_000);
@@ -508,9 +547,10 @@ describe('limiterFor / hostOf', () => {
     expect(limiterFor('https://NOMINATIM.openstreetmap.org/search?q=x')).toBe(limiterFor('nominatim.openstreetmap.org'));
   });
 
-  it('puts every Wikimedia host in one strictly sequential queue', () => {
+  it('puts every Wikimedia host in one strictly sequential queue, a second apart', () => {
     const wiki = limiterFor('en.wikipedia.org');
-    expect(wiki.minIntervalMs).toBeGreaterThanOrEqual(300);
+    // 350 ms still drew 429s in a live check; a full second is the spacing now.
+    expect(wiki.minIntervalMs).toBe(1000);
     expect(wiki.concurrency).toBe(1);
     expect(limiterFor('query.wikidata.org')).toBe(wiki);
     expect(limiterFor('www.wikidata.org')).toBe(wiki);

@@ -35,12 +35,13 @@ import { addRingFacts, buildRings, cityName, ringByLevel, setRingFacts, setRingN
 import { REGION_BLURB, regionOf } from './data/wa-regions';
 import { iceAgeFactFor } from './data/ice-age';
 import { countyByName, countyFacts, loadCounties } from './lib/counties';
-import { populationHistory, summaryFact, wikipediaPage, wikipediaTitleFor } from './lib/places';
+import { loadPlaces, placeByName, type PlaceRecord } from './lib/places-data';
+import { populationHistory, summaryFact, wikidataIdForTitle, wikipediaPage, wikipediaTitleFor } from './lib/places';
 import { describeAge, geologyAt } from './lib/geology';
 import { describePaleo, paleoPositions } from './lib/paleo';
 import { isSeattle, seattleAnnexation, seattleLandmarksNear, seattleNeighborhood, seattleParcel } from './lib/seattle';
 import { MapUnavailableError, RING_ZOOM, createStoryMap, type StoryMap } from './lib/map';
-import { heroSentence } from './ui/format';
+import { heroSentence, summariseOutcome } from './ui/format';
 import { el } from './ui/ring-card';
 import { mountSearch } from './ui/search';
 import { RING_EVENT, mountStory } from './ui/story';
@@ -81,7 +82,7 @@ const NOT_FOUND_MESSAGE = "I couldn't find that in Washington. Try adding the ci
 /** What a ring says when a share link could not be looked up and only the coordinates are known. */
 const SHARE_LINK_NOTE = 'This link carries only the spot, not its address, so this ring was not looked up. Search the address to fill it in.';
 
-/** How long "Story ready" stays in the status line before it is cleared. */
+/** How long a clean "Story ready" stays in the status line before it is cleared. */
 const READY_STATUS_MS = 6_000;
 
 /**
@@ -254,8 +255,6 @@ interface Session {
   geology: GeologyUnit | null | undefined;
   /** How many loaders still owe each ring an answer. */
   pending: Map<RingLevel, number>;
-  /** Names of sources that failed, for the status line. */
-  failures: string[];
 }
 
 let current: Session | null = null;
@@ -303,18 +302,25 @@ function settleRing(session: Session, level: RingLevel): void {
 
 /**
  * Run one loader and tie its outcome to the rings it feeds. The loader's
- * own `apply` step runs only while the story is still current; when the
- * loader fails, the failure is noted (never shown as an error) and the
- * rings it fed are settled with whatever they have.
+ * own `apply` step runs only while the story is still current. The promise
+ * never rejects: it resolves, once the rings the loader fed have been
+ * settled with whatever they have, with the names of the sources that did
+ * not answer (the loader's own name when it threw, or the list a loader
+ * that asks several sources returns; empty when all went well). The status
+ * line is built from these lists, so it can only be written after every
+ * ring has settled.
  */
-function track(session: Session, name: string, levels: readonly RingLevel[], work: () => Promise<void>): Promise<void> {
+function track(session: Session, name: string, levels: readonly RingLevel[], work: () => Promise<void | string[]>): Promise<string[]> {
   for (const level of levels) session.pending.set(level, (session.pending.get(level) ?? 0) + 1);
   return work()
-    .catch((err: unknown) => {
-      if (!live(session) || isAbortError(err)) return;
-      console.warn(`[story] ${name} did not answer:`, err);
-      session.failures.push(name);
-    })
+    .then(
+      (failed) => failed ?? [],
+      (err: unknown) => {
+        if (!live(session) || isAbortError(err)) return [];
+        console.warn(`[story] ${name} did not answer:`, err);
+        return [name];
+      },
+    )
     .finally(() => {
       if (!live(session)) return;
       for (const level of levels) {
@@ -337,7 +343,6 @@ async function tellStory(place: Place): Promise<void> {
     rings: [],
     geology: undefined,
     pending: new Map(),
-    failures: [],
   };
   current = session;
 
@@ -384,7 +389,7 @@ async function tellStory(place: Place): Promise<void> {
   const inSeattle = isSeattle(place);
   const neighborhoodLookup = inSeattle ? seattleNeighborhood(place.point) : Promise.resolve(null);
 
-  const tasks: Promise<void>[] = [
+  const tasks: Promise<string[]>[] = [
     // The county file is part of the site, so this is quick.
     track(session, 'county records', ['county'], async () => {
       const name = place.address.county;
@@ -402,31 +407,64 @@ async function tellStory(place: Place): Promise<void> {
       addFacts(session, 'county', countyFacts(record));
     }),
 
-    // Wikipedia, one article after another (Wikimedia asks us not to burst),
-    // then the city's population history last, because it is the least
-    // essential and the most likely to be rate-limited.
+    // Wikipedia, one article after another (Wikimedia asks us not to burst;
+    // titles in the pre-baked file cost no request at all), then the city's
+    // population history last, because it is the least essential and the
+    // most likely to be rate-limited. Each article that fails is named in
+    // the list this loader resolves with; the others still land.
     track(session, 'Wikipedia', ['state', 'county', 'city', 'neighborhood'], async () => {
-      let cityQid: string | undefined;
+      const failed: string[] = [];
+      // The city's Wikidata id and article title come from the site's own
+      // place file first, so the population facts never depend on a
+      // Wikipedia lookup that may be rate-limited, and the city's excerpt
+      // is asked for under its real article title ("Seattle", not
+      // "Seattle, Washington"), which is how the pre-baked file keys it.
+      const cityRecord = await cityFromFile(place);
+      let cityQid = cityRecord?.qid;
+      if (!live(session)) return failed;
+      if (cityRecord) {
+        setRings(
+          session,
+          updateRing(session.rings, 'city', (r) => ({
+            ...r,
+            wikidata: cityRecord.qid,
+            ...(cityRecord.wikipedia ? { wikipedia: cityRecord.wikipedia } : {}),
+          })),
+        );
+      }
       for (const level of ['state', 'county', 'city', 'neighborhood'] as const) {
         if (level === 'neighborhood') {
           // In Seattle the city's own atlas may have renamed this ring; wait for it.
           await neighborhoodLookup.catch(() => null);
         }
-        if (!live(session)) return;
+        if (!live(session)) return failed;
         const ring = ringByLevel(session.rings, level);
         const title = ring ? wikipediaTitleFor(level, ring, place) : undefined;
         if (!title) continue;
         try {
           const page = await wikipediaPage(title);
-          if (!live(session)) return;
+          if (!live(session)) return failed;
           if (!page) continue;
-          if (level === 'city') cityQid = page.wikidata;
+          if (level === 'city' && !cityQid) cityQid = page.wikidata;
           setRings(session, updateRing(session.rings, level, (r) => ({ ...r, wikipedia: page.title, ...(page.wikidata ? { wikidata: page.wikidata } : {}) })));
           addFacts(session, level, [summaryFact(page)]);
         } catch (err) {
-          if (isAbortError(err)) return;
+          if (isAbortError(err)) return failed;
           console.warn(`[story] Wikipedia summary for "${title}" did not answer:`, err);
-          session.failures.push(`Wikipedia (${title})`);
+          failed.push(`Wikipedia (${title})`);
+        }
+      }
+      // Population history runs whether or not the city's excerpt arrived.
+      // Only a city the place file does not know, whose summary gave no id
+      // either, costs one more Wikipedia request to find its id.
+      const cityRing = ringByLevel(session.rings, 'city');
+      const cityTitle = cityRing ? wikipediaTitleFor('city', cityRing, place) : undefined;
+      if (!cityQid && cityTitle && live(session)) {
+        try {
+          cityQid = await wikidataIdForTitle(cityTitle);
+        } catch (err) {
+          if (isAbortError(err)) return failed;
+          console.warn(`[story] Wikidata id for "${cityTitle}" did not answer:`, err);
         }
       }
       if (cityQid && live(session)) {
@@ -434,9 +472,10 @@ async function tellStory(place: Place): Promise<void> {
           addFacts(session, 'city', await populationHistory(cityQid));
         } catch (err) {
           // Population history is a bonus: a failure here is quietly noted.
-          console.warn('[story] population history did not answer:', err);
+          if (!isAbortError(err)) console.warn('[story] population history did not answer:', err);
         }
       }
+      return failed;
     }),
 
     // The rock under the spot. The card feeds no ring, so a failure must be
@@ -523,17 +562,39 @@ async function tellStory(place: Place): Promise<void> {
     if (!session.pending.has(level)) settleRing(session, level);
   }
 
-  await Promise.allSettled(tasks);
+  // The final status is written exactly once, after EVERY loader has
+  // settled its rings (track() settles them before resolving), so it can
+  // never say "Gathering" over a finished story or "ready" over a card that
+  // is still loading. The live region tells screen readers what the story
+  // says; a clean finish is cleared again after a few seconds, a partial
+  // one stays as a note. The clearing timer can only run after this line
+  // and only while this story is still on screen.
+  const results = await Promise.allSettled(tasks);
   if (!live(session)) return;
-  // Tell screen readers the story is ready and what it says; a clean finish
-  // is cleared after a few seconds, a partial one stays as a note.
-  if (session.failures.length === 0) {
-    story.setStatus(`Story ready: ${heroSentence(place, session.rings, session.geology)}`);
+  const status = summariseOutcome(results, heroSentence(place, session.rings, session.geology));
+  story.setStatus(status);
+  if (status.startsWith('Story ready:')) {
     setTimeout(() => {
       if (live(session)) story.setStatus(null);
     }, READY_STATUS_MS);
-  } else {
-    story.setStatus(`Story ready, but some sources did not answer (${session.failures.join(', ')}); the rest of the story is here.`);
+  }
+}
+
+/**
+ * The place's city as public/data/wa-places.json records it (matched by
+ * name, ignoring case, preferring the entry in the same county), or
+ * undefined when the address names no city, the file does not list it, or
+ * the file could not be loaded (a warning, never a failure: the Wikipedia
+ * summary may still carry the id).
+ */
+async function cityFromFile(place: Place): Promise<PlaceRecord | undefined> {
+  const name = cityName(place.address);
+  if (!name) return undefined;
+  try {
+    return placeByName(await loadPlaces(), name, place.address.county);
+  } catch (err) {
+    if (!isAbortError(err)) console.warn('[story] the place file did not load:', err);
+    return undefined;
   }
 }
 

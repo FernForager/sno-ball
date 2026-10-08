@@ -8,9 +8,9 @@
  *  - a timeout, so a slow server cannot hang the page forever;
  *  - one polite retry when a server says "too busy" (429 or 503), when the
  *    network blips, or when an attempt times out, with a short pause first.
- *    A Retry-After header is honoured: we wait that long, or give up at once
- *    when it asks for more than a few seconds (hammering a throttled server
- *    only lengthens the cool-down);
+ *    A Retry-After header (seconds or an HTTP date) is honoured: we wait
+ *    that long, or give up at once when it asks for more than 15 seconds
+ *    (hammering a throttled server only lengthens the cool-down);
  *  - a clear HttpError (status + url) when the server answers with an error;
  *  - cancellation, so typing a new address can abandon the old requests.
  *
@@ -28,8 +28,10 @@ export const RETRY_BACKOFF_MS = 1_500;
 /**
  * The longest Retry-After we are willing to wait. A server asking for more
  * than this is cooling us down for real, and the right answer is to stop.
+ * Wikipedia's 429s ask for a few seconds, so the cap is 15 s: long enough
+ * to honour them, short enough that a card never shimmers for a minute.
  */
-export const MAX_RETRY_AFTER_MS = 5_000;
+export const MAX_RETRY_AFTER_MS = 15_000;
 
 /** Statuses that mean "try again in a moment" rather than "you did something wrong". */
 const RETRYABLE_STATUSES: ReadonlySet<number> = new Set([429, 503]);
@@ -64,9 +66,9 @@ export interface FetchJsonOptions {
   /** Extra request headers. Never a User-Agent (browsers forbid it). */
   headers?: Record<string, string>;
   /**
-   * Retry a 429 "too many requests"? Default true. Shared services that
-   * punish repeat offenders (Wikimedia, Nominatim) pass false, so a 429 is
-   * given up at once while 503s, network blips and timeouts keep one retry.
+   * Retry a 429 "too many requests"? Default true. A shared service that
+   * punishes repeat offenders (Nominatim) passes false, so a 429 is given
+   * up at once while 503s, network blips and timeouts keep one retry.
    */
   retryOn429?: boolean;
   /** Default 'GET'. */

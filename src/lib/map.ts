@@ -16,8 +16,10 @@
  *
  *  - The map tiles come from OpenFreeMap (free, no API key). The style we use
  *    is "positron", a quiet grey basemap that lets our marker and rings stand
- *    out. OpenFreeMap and OpenStreetMap must stay credited, so we add the
- *    credit line ourselves (the style file does not carry one).
+ *    out. OpenFreeMap and OpenStreetMap must stay credited; the style's tile
+ *    source carries that credit line ("OpenFreeMap © OpenMapTiles Data from
+ *    OpenStreetMap") and MapLibre shows it in the corner, so we add nothing
+ *    of our own (we used to, and the credit was printed twice).
  *  - MapLibre is big (hundreds of kilobytes). We load it only when
  *    createStoryMap is called, with a dynamic import, so the search box and
  *    the story text never wait for it. Nothing in this file runs MapLibre
@@ -35,7 +37,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // asked for the worker's URL here (the `?url` suffix makes Vite copy the
 // file into the build and hand back its address) and MapLibre is told it.
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
-import type { Map as MapLibreMap, Marker, MapOptions, Subscription } from 'maplibre-gl';
+import type { AttributionControlOptions, Map as MapLibreMap, Marker, MapOptions, Subscription } from 'maplibre-gl';
 import type { LngLat, RingLevel } from './types';
 
 // ---------------------------------------------------------------------------
@@ -45,16 +47,32 @@ import type { LngLat, RingLevel } from './types';
 /** OpenFreeMap's "positron" style: light grey basemap, no key needed. */
 export const POSITRON_STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
 
+/** A viewport at least this wide gets the map credit written out in full. */
+export const WIDE_VIEWPORT_PX = 640;
+
 /**
- * Credit line shown in the map's corner. The positron style JSON carries no
- * attribution of its own, so without this the map would be silent about
- * where its data comes from. OpenFreeMap asks for these three links, and the
- * OpenStreetMap one uses the wording the OSM Foundation asks for.
+ * How the map's credit corner is set up. No `customAttribution`: the
+ * positron style's tile source carries the OpenFreeMap / OpenMapTiles /
+ * OpenStreetMap credit itself, and adding our own printed it twice (a
+ * three-line white box over a phone-sized map). On a wide viewport the
+ * credit is kept open (`compact: false`): it is one short line that fits
+ * comfortably, which the attribution rules say must not be collapsed. (Left
+ * to MapLibre, whose rule looks at the MAP's width, our 640 px column
+ * minus its borders would count as narrow and fold the credit away on the
+ * first drag.) On a phone `compact` is left undefined, MapLibre's default,
+ * which folds the credit into an (i) button: open at first, closed once the
+ * visitor moves the map. (The Map option's own default would force
+ * `compact: true` everywhere and add a "MapLibre" link, so an explicit
+ * object is always passed.)
  */
-export const MAP_ATTRIBUTION =
-  '<a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> ' +
-  '<a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">&copy; OpenMapTiles</a> ' +
-  '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>';
+export function attributionOptions(wideViewport: boolean): AttributionControlOptions {
+  return wideViewport ? { compact: false } : {};
+}
+
+/** True when the browser window is at least WIDE_VIEWPORT_PX wide; false outside a browser. */
+export function isWideViewport(): boolean {
+  return typeof window !== 'undefined' && typeof window.innerWidth === 'number' && window.innerWidth >= WIDE_VIEWPORT_PX;
+}
 
 /**
  * How far in to zoom for each ring. Smaller rings need a closer view:
@@ -198,19 +216,17 @@ export function webglSupported(): boolean {
   }
 }
 
-/** The MapLibre options we always use, given the container and the device. */
-export function buildMapOptions(container: HTMLElement, touch: boolean): MapOptions {
+/** The MapLibre options we always use, given the container, the device and the viewport. */
+export function buildMapOptions(container: HTMLElement, touch: boolean, wideViewport: boolean = isWideViewport()): MapOptions {
   return {
     container,
     style: POSITRON_STYLE_URL,
     center: [WASHINGTON_VIEW.center.lng, WASHINGTON_VIEW.center.lat],
     zoom: WASHINGTON_VIEW.zoom,
     minZoom: 1,
-    // The credit line stays written out wherever it fits (MapLibre folds it
-    // into an (i) button only on maps narrower than 640 px), which is what
-    // the OpenStreetMap and OpenFreeMap attribution rules ask for. The page's
-    // own CSS keeps the caption away from this corner.
-    attributionControl: { customAttribution: MAP_ATTRIBUTION },
+    // The credit comes from the style's tile source; see attributionOptions.
+    // The page's own CSS keeps the caption away from this corner.
+    attributionControl: attributionOptions(wideViewport),
     cooperativeGestures: touch,
   };
 }

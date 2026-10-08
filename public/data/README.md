@@ -1,6 +1,6 @@
 # Pre-baked Washington reference data
 
-Both files were built from the Wikidata Query Service (https://query.wikidata.org/sparql) on 2026-10-07. Wikidata content is released under CC0 1.0 (public domain dedication), so these files carry no attribution requirement, but the site should still name "Wikidata" as the source next to any fact drawn from them. Re-run the queries below to refresh; values such as population change over time.
+`wa-counties.json` and `wa-places.json` were built from the Wikidata Query Service (https://query.wikidata.org/sparql) on 2026-10-07; `wiki-summaries.json` holds Wikipedia text and is described at the end of this file. Wikidata content is released under CC0 1.0 (public domain dedication), so these files carry no attribution requirement, but the site should still name "Wikidata" as the source next to any fact drawn from them. Re-run the queries below to refresh; values such as population change over time.
 
 Dates are ISO `YYYY-MM-DD` strings taken from Wikidata's dateTime values (a `-01-01` date usually means Wikidata only records the year). `null` means Wikidata has no value. Coordinates are WGS 84 decimal degrees.
 
@@ -64,3 +64,11 @@ SELECT ?p ?pop ?time WHERE {
 ```
 
 Queries were sent with the user agent `sno-ball-dev/0.1 (github.com/FernForager/sno-ball)` and, because the query service was rate-limiting to one request per minute at capture time, at least 65 s apart.
+
+## wiki-summaries.json
+
+Opening paragraphs of the English Wikipedia articles the site asks for most, so the page can show them without a request to Wikipedia (which rate-limited six of twenty summary requests in a live check and left the Seattle card empty). An object keyed by the title the site REQUESTS (`"Seattle"`, `"King County, Washington"`, `"Washington (state)"`, `"Lower Queen Anne, Seattle"`); each value has `title` (the article's real title after any redirect), `extract` (the opening paragraph as plain text), `url` (the desktop article URL), `thumbnail` (`{ source, width, height }` or `null`), `description` (Wikidata's short description or `null`) and `fetchedAt` (ISO date-time of the capture). The lookup in `src/lib/wiki-summaries.ts` matches the key exactly first, then ignoring letter case; a title the file lacks is fetched live.
+
+**Licence: this text is Wikipedia prose under CC BY-SA 4.0**, not CC0 like the two Wikidata files. The site shows it only as a quoted excerpt with "Wikipedia" named and the article linked, and never rewrites it as its own words.
+
+**Placeholder.** The file checked in here holds just four entries (Washington (state), King County, Seattle and Walla Walla), copied from the real REST summary responses captured on 2026-10-07 in `tests/fixtures/places/wikipedia-summary-*.json`. A helper session is building the full file (the state, every county, every city and town in `wa-places.json`, and the Seattle neighborhoods) from `https://en.wikipedia.org/api/rest_v1/page/summary/<title>`, one request per second; it replaces this placeholder on merge. Refresh it the same way when the excerpts go stale (a year is fine; article openings change slowly).

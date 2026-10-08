@@ -13,6 +13,7 @@ import {
   heroSentence,
   ringLabel,
   ringTagline,
+  summariseOutcome,
 } from '../../src/ui/format';
 
 // ---------------------------------------------------------------------------
@@ -295,5 +296,39 @@ describe('ringLabel and ringTagline', () => {
     expect(ringLabel('plate')).toBe('Plate');
     expect(ringTagline('state')).toBe('Washington');
     expect(ringTagline('county')).toMatch(/thirty-nine/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The final status line
+// ---------------------------------------------------------------------------
+
+describe('summariseOutcome', () => {
+  const hero = '400 Broad Street sits in Seattle, King County, on Pleistocene glacial till.';
+  const ok = (names: string[] = []): PromiseSettledResult<string[]> => ({ status: 'fulfilled', value: names });
+  const crashed = (reason: unknown): PromiseSettledResult<string[]> => ({ status: 'rejected', reason });
+
+  it('says the story is ready, with the hero sentence, when every loader answered', () => {
+    expect(summariseOutcome([ok(), ok(), ok()], hero)).toBe(`Story ready: ${hero}`);
+    expect(summariseOutcome([], hero)).toBe(`Story ready: ${hero}`);
+  });
+
+  it('names each source that did not answer, once, in the order reported', () => {
+    const line = summariseOutcome([ok(), ok(['Wikipedia (Seattle, Washington)', 'Wikipedia (Lower Queen Anne, Seattle)']), ok(['geology']), ok(['geology'])], hero);
+    expect(line).toBe(
+      'Story ready, but some sources did not answer (Wikipedia (Seattle, Washington), Wikipedia (Lower Queen Anne, Seattle), geology); the rest of the story is here.',
+    );
+    expect(line.startsWith('Story ready:')).toBe(false);
+  });
+
+  it('counts a loader that rejected outright as an unexpected error', () => {
+    expect(summariseOutcome([ok(), crashed(new Error('boom'))], hero)).toBe(
+      'Story ready, but some sources did not answer (an unexpected error); the rest of the story is here.',
+    );
+  });
+
+  it('ignores blank names and copes with no hero sentence', () => {
+    expect(summariseOutcome([ok(['', '  '])], hero)).toBe(`Story ready: ${hero}`);
+    expect(summariseOutcome([ok()], '  ')).toBe('Story ready.');
   });
 });

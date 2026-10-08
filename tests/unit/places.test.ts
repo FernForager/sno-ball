@@ -29,6 +29,7 @@ import populationSeattle from '../fixtures/places/wikidata-seattle-population.js
 import populationDecades from '../fixtures/places/wikidata-population-decades.json';
 import countiesOddRows from '../fixtures/places/wa-counties-odd-rows.json';
 import waCounties from '../../public/data/wa-counties.json';
+import wikiSummaries from '../fixtures/places/wiki-summaries-four.json';
 
 // ---------------------------------------------------------------------------
 // Mocks for the shared infrastructure (same pattern as the sibling tests):
@@ -114,6 +115,7 @@ import {
   resetCounties,
   type County,
 } from '../../src/lib/counties';
+import { WIKI_SUMMARIES_FILE, resetWikiSummaries } from '../../src/lib/wiki-summaries';
 
 // ---------------------------------------------------------------------------
 // Test places and rings, shaped like geocode.ts and rings.ts produce them
@@ -171,10 +173,14 @@ function ring(level: RingLevel, name: string, extra: Partial<Ring> = {}): Ring {
   return { level, name, facts: [], status: 'loading', ...extra };
 }
 
-/** Route fetchJson by a substring of the URL; anything unmatched rejects loudly. */
+/**
+ * Route fetchJson by a substring of the URL; anything unmatched rejects
+ * loudly. The pre-baked summaries file answers empty unless a test routes
+ * it itself (routes are tried in order, so list it first to override).
+ */
 function routeFetch(routes: Array<[string, unknown]>): void {
   mocks.fetchJson.mockImplementation(async (url: string) => {
-    for (const [needle, answer] of routes) {
+    for (const [needle, answer] of [...routes, [WIKI_SUMMARIES_FILE, {}] as [string, unknown]]) {
       if (url.includes(needle)) {
         if (answer instanceof Error) throw answer;
         return answer;
@@ -190,7 +196,13 @@ beforeEach(() => {
   mocks.limiterFor.mockClear();
   mocks.store.clear();
   resetCounties();
+  resetWikiSummaries();
 });
+
+/** The URLs fetchJson was asked for on Wikimedia hosts (the baked file is served by the site itself). */
+function wikimediaCalls(): string[] {
+  return mocks.fetchJson.mock.calls.map((c) => c[0] as string).filter((u) => /wikipedia\.org|wikidata\.org/.test(u));
+}
 
 // ---------------------------------------------------------------------------
 // Excerpts
@@ -272,9 +284,67 @@ describe('wikipediaSummary', () => {
       source: { name: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Seattle', license: 'CC BY-SA 4.0' },
       confidence: 'high',
     });
-    // A 429 from Wikimedia must never be retried (it lengthens the cool-down).
-    expect(mocks.fetchJson).toHaveBeenCalledWith('https://en.wikipedia.org/api/rest_v1/page/summary/Seattle', { retryOn429: false });
+    // A 429 is retried exactly once (after the Retry-After pause), inside the limiter's turn.
+    expect(mocks.fetchJson).toHaveBeenCalledWith('https://en.wikipedia.org/api/rest_v1/page/summary/Seattle', { retries: 1 });
     expect(mocks.limiterFor).toHaveBeenCalledWith('en.wikipedia.org');
+  });
+
+  it('answers from the pre-baked file without any Wikipedia request', async () => {
+    routeFetch([[WIKI_SUMMARIES_FILE, wikiSummaries]]);
+    const fact = await wikipediaSummary('Seattle');
+    expect(fact).toEqual<Fact>({
+      kind: 'summary',
+      title: 'Seattle',
+      body: 'Seattle is the most populous city in the U.S. state of Washington and the Pacific Northwest region of North America.',
+      source: { name: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Seattle', license: 'CC BY-SA 4.0' },
+      confidence: 'high',
+    });
+    expect(wikimediaCalls()).toEqual([]);
+    expect(mocks.limiterFor).not.toHaveBeenCalled();
+    expect(mocks.cached).not.toHaveBeenCalled();
+    // The baked file is fetched once, then shared by every title.
+    await wikipediaSummary('King County, Washington');
+    await wikipediaSummary('Washington (state)');
+    expect(mocks.fetchJson).toHaveBeenCalledTimes(1);
+    expect(mocks.fetchJson.mock.calls[0]?.[0]).toMatch(/\/data\/wiki-summaries\.json$/);
+  });
+
+  it('matches a pre-baked title ignoring letter case, and keeps the description and thumbnail', async () => {
+    routeFetch([[WIKI_SUMMARIES_FILE, wikiSummaries]]);
+    const page = await wikipediaPage('king county, washington');
+    expect(page?.title).toBe('King County, Washington');
+    expect(page?.url).toBe('https://en.wikipedia.org/wiki/King_County%2C_Washington');
+    expect(page?.description).toBe('County in Washington, United States');
+    expect(page?.thumbnail?.width).toBe(330);
+    // The baked file carries no Wikidata id; main.ts gets a city's id from wa-places.json.
+    expect(page?.wikidata).toBeUndefined();
+    expect(wikimediaCalls()).toEqual([]);
+  });
+
+  it('falls through to Wikipedia for a title the pre-baked file lacks', async () => {
+    routeFetch([
+      [WIKI_SUMMARIES_FILE, wikiSummaries],
+      ['/page/summary/Spokane', { ...summarySeattle, title: 'Spokane, Washington', content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Spokane,_Washington' } } }],
+    ]);
+    const fact = await wikipediaSummary('Spokane, Washington');
+    expect(fact?.title).toBe('Spokane, Washington');
+    expect(wikimediaCalls()).toEqual(['https://en.wikipedia.org/api/rest_v1/page/summary/Spokane%2C_Washington']);
+    expect(mocks.cached).toHaveBeenCalledWith('wikipedia:summary:Spokane,_Washington', { ttlMs: SUMMARY_TTL_MS }, expect.any(Function));
+  });
+
+  it('still asks Wikipedia when the pre-baked file is missing (404)', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    routeFetch([
+      [WIKI_SUMMARIES_FILE, new HttpError(404, '/sno-ball/data/wiki-summaries.json')],
+      ['/page/summary/Seattle', summarySeattle],
+    ]);
+    expect((await wikipediaSummary('Seattle'))?.title).toBe('Seattle');
+    expect((await wikipediaSummary('Seattle'))?.title).toBe('Seattle');
+    expect(wikimediaCalls()).toEqual(['https://en.wikipedia.org/api/rest_v1/page/summary/Seattle']);
+    // The missing file is noticed once, not once per title.
+    expect(mocks.fetchJson.mock.calls.filter((c) => (c[0] as string).includes(WIKI_SUMMARIES_FILE)).length).toBe(1);
+    expect(warn).toHaveBeenCalledTimes(1);
+    warn.mockRestore();
   });
 
   it('encodes titles with spaces, commas and parentheses the way Wikipedia expects', () => {
@@ -300,7 +370,7 @@ describe('wikipediaSummary', () => {
     const a = await wikipediaSummary('Washington (state)');
     const b = await wikipediaSummary('Washington  (state)');
     expect(a).toEqual(b);
-    expect(mocks.fetchJson).toHaveBeenCalledTimes(1);
+    expect(wikimediaCalls()).toHaveLength(1);
     expect(mocks.cached).toHaveBeenCalledWith('wikipedia:summary:Washington_(state)', { ttlMs: SUMMARY_TTL_MS }, expect.any(Function));
     expect(SUMMARY_TTL_MS).toBe(7 * 24 * 60 * 60 * 1000);
   });
@@ -310,7 +380,7 @@ describe('wikipediaSummary', () => {
     routeFetch([['Nowhere', new HttpError(404, url)]]);
     expect(await wikipediaSummary('Nowhere, Washington')).toBeNull();
     expect(await wikipediaSummary('Nowhere, Washington')).toBeNull();
-    expect(mocks.fetchJson).toHaveBeenCalledTimes(1);
+    expect(wikimediaCalls()).toHaveLength(1);
   });
 
   it('throws other HTTP errors so the caller can tell "no article" from "service down"', async () => {
