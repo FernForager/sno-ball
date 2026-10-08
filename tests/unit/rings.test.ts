@@ -80,6 +80,9 @@ import {
   addRingFacts,
   buildRings,
   cityName,
+  isRingBusy,
+  markRingBusy,
+  missingNumberNote,
   ringByLevel,
   ringName,
   setRingFacts,
@@ -292,7 +295,7 @@ describe('buildRings', () => {
     const rings = buildRings(spaceNeedlePlace);
     expect(rings.map((r) => r.name)).toEqual([
       '400 Broad Street',
-      'the block of Broad Street',
+      'The block of Broad Street',
       'Broad Street',
       'Belltown', // neighbourhood wins over suburb ("Uptown")
       'Seattle',
@@ -316,7 +319,7 @@ describe('buildRings', () => {
     expect(house.note).toBe('This search matched a general area, not a specific lot.');
 
     // Everything else is still named from the address.
-    expect(ring(rings, 'block').name).toBe('the block of West Spokane Falls Boulevard');
+    expect(ring(rings, 'block').name).toBe('The block of West Spokane Falls Boulevard');
     expect(ring(rings, 'street').name).toBe('West Spokane Falls Boulevard');
     expect(ring(rings, 'neighborhood').name).toBe('Riverside');
     expect(ring(rings, 'city').name).toBe('Spokane');
@@ -335,15 +338,46 @@ describe('buildRings', () => {
   it('marks neighborhood and city empty for a rural address, but still finds the region', () => {
     const rings = buildRings(ruralPlace);
     expect(ring(rings, 'house')).toMatchObject({ name: '1234 Old Milton Highway', status: 'loading' });
+    // A plain heading, not "This neighborhood", so the headings outline reads cleanly.
     expect(ring(rings, 'neighborhood')).toMatchObject({
-      name: 'This neighborhood',
+      name: 'Neighborhood',
       status: 'empty',
-      note: 'The map has no named neighborhood for this spot.',
+      note: 'No named neighborhood here in OpenStreetMap.',
     });
     expect(ring(rings, 'city')).toMatchObject({ name: 'Unincorporated area', status: 'empty' });
     expect(ring(rings, 'city').note).toMatch(/not inside a city or town/);
     expect(ring(rings, 'county')).toMatchObject({ name: 'Walla Walla County', status: 'loading' });
     expect(ring(rings, 'region')).toMatchObject({ name: 'Palouse and Blue Mountains', status: 'loading' });
+  });
+
+  it('tells the visitor when the number they typed is not on the map and the street was used instead', () => {
+    // "2 N Main St, Omak, WA": Nominatim knew the street but not number 2.
+    const omak: Place = {
+      query: '2 N Main St, Omak, WA',
+      point: { lng: -119.52851, lat: 48.40696 },
+      displayName: 'Main Street South, Omak, Okanogan County, Washington, 98841, United States',
+      address: { road: 'Main Street South', city: 'Omak', county: 'Okanogan County', state: 'Washington', postcode: '98841', country: 'United States' },
+      precise: false,
+      source: OSM_SOURCE,
+    };
+    expect(missingNumberNote(omak)).toBe("Number 2 isn't on the map yet, so this is the street.");
+    const house = ring(buildRings(omak), 'house');
+    expect(house).toMatchObject({ name: 'This spot', status: 'empty', note: "Number 2 isn't on the map yet, so this is the street." });
+    expect(house.facts).toEqual([]);
+    // The rest of the rings are unaffected.
+    expect(ring(buildRings(omak), 'street')).toMatchObject({ name: 'Main Street South', status: 'loading' });
+
+    // A query without a number keeps the general note; so does a result that does carry the number.
+    expect(missingNumberNote(spokaneStreetPlace)).toBeUndefined();
+    expect(ring(buildRings(spokaneStreetPlace), 'house').note).toBe('This search matched a general area, not a specific lot.');
+    expect(missingNumberNote({ ...omak, address: { ...omak.address, houseNumber: '2' } })).toBeUndefined();
+    // A number typed, but the match has no street at all (a town): "this is the street" would be false.
+    expect(missingNumberNote({ ...omak, address: { city: 'Omak', county: 'Okanogan County' } })).toBeUndefined();
+    expect(ring(buildRings({ ...omak, address: { city: 'Omak', county: 'Okanogan County' } }), 'house').note).toBe(
+      'This search matched a general area, not a specific lot.',
+    );
+    // A ZIP code is not a street number.
+    expect(missingNumberNote({ ...omak, query: '98841' })).toBeUndefined();
   });
 
   it('says "This lot" for a precise match without a house number or road', () => {
@@ -390,6 +424,36 @@ describe('ringName and cityName', () => {
   it('is undefined for the house when the match is not precise', () => {
     expect(ringName('house', spokaneStreetPlace)).toBeUndefined();
     expect(ringName('house', spaceNeedlePlace)).toBe('400 Broad Street');
+  });
+});
+
+describe('isRingBusy and markRingBusy', () => {
+  it('is busy while loading, or while facts are shown but a source is still pending', () => {
+    expect(isRingBusy('loading', 0)).toBe(true);
+    expect(isRingBusy('loading', 2)).toBe(true);
+    // The Ballard case from the QA sweep: one loader landed, another is still out.
+    expect(isRingBusy('thin', 1)).toBe(true);
+    expect(isRingBusy('rich', 1)).toBe(true);
+    expect(isRingBusy('thin', 0)).toBe(false);
+    expect(isRingBusy('rich', 0)).toBe(false);
+    // An empty ring's note is final; a loader that will name it sets 'loading' first.
+    expect(isRingBusy('empty', 1)).toBe(false);
+    expect(isRingBusy('empty', 0)).toBe(false);
+  });
+
+  it('sets or clears the flag, returning the same object when nothing changes', () => {
+    const base = ring(buildRings(spaceNeedlePlace), 'city');
+    expect(base.busy).toBeUndefined();
+    expect(markRingBusy(base, false)).toBe(base);
+    const busy = markRingBusy(base, true);
+    expect(busy).not.toBe(base);
+    expect(busy).toMatchObject({ level: 'city', name: 'Seattle', busy: true });
+    expect(base.busy).toBeUndefined(); // the original is untouched
+    expect(markRingBusy(busy, true)).toBe(busy);
+    const cleared = markRingBusy(busy, false);
+    expect(cleared).not.toBe(busy);
+    expect('busy' in cleared).toBe(false); // removed, never an explicit undefined
+    expect(cleared).toEqual(base);
   });
 });
 

@@ -323,7 +323,7 @@ export async function wikipediaPage(title: string): Promise<WikipediaPage | null
     const url = wikipediaSummaryUrl(key);
     try {
       // A 429 is retried exactly once, after the pause the server's
-      // Retry-After asks for (http.ts caps it at 15 s). The retry happens
+      // Retry-After asks for (http.ts caps it at 30 s). The retry happens
       // inside the limiter's turn, so no other Wikimedia request goes out
       // during the cool-down.
       const raw = await limiterFor(WIKIPEDIA_HOST).run(() => fetchJson<WikipediaSummaryResponse>(url, { retries: 1 }));
@@ -408,7 +408,13 @@ export async function wikidataIdForTitle(title: string): Promise<string | undefi
   // null (not undefined) is stored for "no item", so the miss is cached too.
   const qid = await cached<string | null>(`wikipedia:qid:${key}`, { ttlMs: WIKIDATA_TTL_MS }, async () => {
     const url = pagepropsUrl(key);
-    const res = await limiterFor(WIKIPEDIA_HOST).run(() => fetchJson<PagepropsResponse>(url, { retryOn429: false }));
+    // Like the summary call, a 429 is retried exactly once after the pause
+    // the server's Retry-After asks for, inside the limiter's turn. No
+    // Api-User-Agent (or any other custom header) is sent, although
+    // Wikimedia suggests one: a custom header turns this plain GET into a
+    // request the browser must preflight with CORS (an extra OPTIONS round
+    // trip per lookup), so the site stays identified by its Referer only.
+    const res = await limiterFor(WIKIPEDIA_HOST).run(() => fetchJson<PagepropsResponse>(url, { retries: 1 }));
     return qidFromPageprops(res) ?? null;
   });
   return qid ?? undefined;

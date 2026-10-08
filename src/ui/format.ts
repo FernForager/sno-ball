@@ -166,11 +166,12 @@ export function ringTagline(level: RingLevel): string {
 
 /**
  * The names the ring model uses when it has nothing better ("This spot",
- * "This county", "Unincorporated area"). They are fine as card headings but
- * would read badly in a sentence, so the hero skips them.
+ * "This county", "Unincorporated area", and the bare "Neighborhood" of an
+ * unnamed neighborhood ring). They are fine as card headings but would read
+ * badly in a sentence, so the hero skips them.
  */
 function isPlaceholderName(name: string): boolean {
-  return /^(this\b|unincorporated\b)/i.test(name.trim());
+  return /^(this\b|unincorporated\b|neighborhood$)/i.test(name.trim());
 }
 
 /** A ring's real name, or undefined when it has none worth printing. */
@@ -191,18 +192,33 @@ function sameName(a: string | undefined, b: string | undefined): boolean {
 }
 
 /**
- * The phrase for the rock, from a geology unit: the unit's name when it
- * already carries its age ("Pleistocene continental glacial till"),
- * otherwise the age and the name together ("Miocene Columbia River
- * Basalt"). Undefined when the unit has no name to speak of.
+ * Geology map units that are not rock at all but what covers it. The DNR
+ * map names them by the bare material ("ice" on Mount Rainier's summit,
+ * "water" on a lake), which would read as a glitch ("sits ... on ice"),
+ * so each gets its own phrase.
  */
-function rockPhrase(unit: GeologyUnit): string | undefined {
+const COVER_PHRASES: Readonly<Record<string, string>> = {
+  ice: 'under glacier ice',
+  water: 'under open water',
+};
+
+/**
+ * The closing clause for the rock, from a geology unit: "on" plus the
+ * unit's name when it already carries its age ("on Pleistocene continental
+ * glacial till"), otherwise the age and the name together ("on Miocene
+ * Columbia River Basalt"); for a bare material such as "ice" or "water", a
+ * phrase of its own ("under glacier ice"). Undefined when the unit has no
+ * name to speak of.
+ */
+function rockClause(unit: GeologyUnit): string | undefined {
   const name = part(unit.name);
   if (!name) return undefined;
+  const cover = COVER_PHRASES[name.toLowerCase()];
+  if (cover) return cover;
   const age = part(unit.age);
-  if (!age) return name;
+  if (!age) return `on ${name}`;
   const firstAgeWord = age.split(/[\s,;/]+/)[0] ?? age;
-  return name.toLowerCase().includes(firstAgeWord.toLowerCase()) ? name : `${age} ${name}`;
+  return name.toLowerCase().includes(firstAgeWord.toLowerCase()) ? `on ${name}` : `on ${age} ${name}`;
 }
 
 /**
@@ -213,9 +229,10 @@ function rockPhrase(unit: GeologyUnit): string | undefined {
  * the neighborhood, city and county come from the rings when they have real
  * names (placeholder names such as "This county" are skipped) and from the
  * geocoded address otherwise; with no named container at all the spot
- * "sits in Washington"; and the rock clause appears only when a geology
- * unit is given. A neighborhood that merely repeats the city name is
- * dropped so the sentence never says "in Seattle, in Seattle".
+ * "sits in Washington"; and the rock clause ("on Pleistocene glacial till",
+ * or "under glacier ice" for a unit that is a bare material) appears only
+ * when a geology unit is given. A neighborhood that merely repeats the city
+ * name is dropped so the sentence never says "in Seattle, in Seattle".
  */
 export function heroSentence(place: Place, rings: Ring[], geology?: GeologyUnit | null): string {
   const a = place.address;
@@ -240,8 +257,8 @@ export function heroSentence(place: Place, rings: Ring[], geology?: GeologyUnit 
   else if (county) clauses.push(`in ${county}`);
   if (clauses.length === 0) clauses.push('in Washington');
 
-  const rock = geology ? rockPhrase(geology) : undefined;
-  const tail = rock ? `, on ${rock}` : '';
+  const rock = geology ? rockClause(geology) : undefined;
+  const tail = rock ? `, ${rock}` : '';
 
   return `${subject} sits ${clauses.join(', ')}${tail}.`;
 }

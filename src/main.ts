@@ -31,7 +31,7 @@ import { maToAgo } from './lib/time';
 import { isAbortError } from './lib/http';
 import { cacheClear } from './lib/cache';
 import { formatLngLat, geocodeWithFallback, parseLngLat } from './lib/geocode';
-import { addRingFacts, buildRings, cityName, ringByLevel, setRingFacts, setRingNote, updateRing } from './lib/rings';
+import { addRingFacts, buildRings, cityName, isRingBusy, markRingBusy, ringByLevel, setRingFacts, setRingNote, updateRing } from './lib/rings';
 import { REGION_BLURB, regionOf } from './data/wa-regions';
 import { iceAgeFactFor } from './data/ice-age';
 import { countyByName, countyFacts, loadCounties } from './lib/counties';
@@ -266,13 +266,16 @@ function live(session: Session): boolean {
 }
 
 /**
- * Replace the rings, re-render, and refresh the hero sentence. The rings
- * that did not change must stay the same objects (the ring helpers see to
- * that), because the page only rebuilds the cards of rings it has not seen.
+ * Replace the rings, re-render, and refresh the hero sentence. Each ring's
+ * `busy` flag is set here from how many loaders still owe it an answer, so
+ * a card with facts stays aria-busy until its last source has spoken. The
+ * rings that did not change must stay the same objects (the ring helpers
+ * and markRingBusy see to that), because the page only rebuilds the cards
+ * of rings it has not seen.
  */
 function setRings(session: Session, rings: Ring[]): void {
   if (!live(session)) return;
-  session.rings = rings;
+  session.rings = rings.map((ring) => markRingBusy(ring, isRingBusy(ring.status, session.pending.get(ring.level) ?? 0)));
   story.setRings(session.rings);
   story.setHero(heroSentence(session.place, session.rings, session.geology));
 }
@@ -289,14 +292,19 @@ function addFacts(session: Session, level: RingLevel, facts: Fact[]): void {
 
 /**
  * A ring is finished when every loader that promised it something has
- * answered: its status then comes from its facts, and a ring left with
- * nothing gets a short note so the card never shows a skeleton forever.
+ * answered: its status then comes from its facts (final from here on), a
+ * ring left with nothing gets a short note so the card never shows a
+ * skeleton forever, and the re-render clears its busy flag now that no
+ * loader is pending for it.
  */
 function settleRing(session: Session, level: RingLevel): void {
   const ring = ringByLevel(session.rings, level);
-  if (!ring || ring.status !== 'loading') return;
-  let rings = setRingFacts(session.rings, level, ring.facts);
-  if (ring.facts.length === 0) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
+  if (!ring) return;
+  let rings = session.rings;
+  if (ring.status === 'loading') {
+    rings = setRingFacts(rings, level, ring.facts);
+    if (ring.facts.length === 0) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
+  }
   setRings(session, rings);
 }
 
@@ -561,6 +569,10 @@ async function tellStory(place: Place): Promise<void> {
   for (const level of RING_ORDER) {
     if (!session.pending.has(level)) settleRing(session, level);
   }
+  // Every loader is now registered, so the busy flags can be set right:
+  // the state ring, for example, got its statehood fact before the
+  // Wikipedia loader (which still owes it an excerpt) was counted.
+  setRings(session, session.rings);
 
   // The final status is written exactly once, after EVERY loader has
   // settled its rings (track() settles them before resolving), so it can
