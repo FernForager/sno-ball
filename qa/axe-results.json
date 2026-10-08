@@ -1,0 +1,160 @@
+[
+  {
+    "viewport": "phone",
+    "page": "home",
+    "byImpact": {
+      "critical": [],
+      "serious": [],
+      "moderate": [],
+      "minor": []
+    },
+    "passes": 34,
+    "incomplete": [],
+    "outline": {
+      "headings": [
+        "h1: Snowball"
+      ],
+      "h1Count": 1,
+      "statusLine": {
+        "ariaLive": "polite",
+        "role": "status",
+        "text": ""
+      }
+    },
+    "consoleErrors": []
+  },
+  {
+    "viewport": "phone",
+    "page": "story",
+    "settleMs": 1675,
+    "settleError": null,
+    "byImpact": {
+      "critical": [],
+      "serious": [],
+      "moderate": [],
+      "minor": []
+    },
+    "passes": 43,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 1,
+        "targets": [
+          ".postcard__name"
+        ],
+        "reason": "Element's background color could not be determined because element contains an image node"
+      },
+      {
+        "id": "heading-order",
+        "nodes": 1,
+        "targets": [
+          "#ring-city-name"
+        ],
+        "reason": "Unable to determine previous heading"
+      }
+    ],
+    "outline": {
+      "headings": [
+        "h1: Snowball",
+        "h2: 400 Broad Street",
+        "h2: the block of Broad Street",
+        "h2: Broad Street",
+        "h2: Lower Queen Anne",
+        "h2: Seattle",
+        "h2: King County",
+        "h2: Puget Sound",
+        "h2: Washington",
+        "h2: North American Plate",
+        "h2: Deep time",
+        "h3: The rock under this spot",
+        "h3: Under 3,000 feet of ice",
+        "h3: Where this spot has been",
+        "h2: Sources"
+      ],
+      "h1Count": 1,
+      "statusLine": {
+        "ariaLive": "polite",
+        "role": "status",
+        "text": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till."
+      }
+    },
+    "consoleErrors": []
+  },
+  {
+    "viewport": "desktop",
+    "page": "home",
+    "byImpact": {
+      "critical": [],
+      "serious": [],
+      "moderate": [],
+      "minor": []
+    },
+    "passes": 34,
+    "incomplete": [],
+    "outline": {
+      "headings": [
+        "h1: Snowball"
+      ],
+      "h1Count": 1,
+      "statusLine": {
+        "ariaLive": "polite",
+        "role": "status",
+        "text": ""
+      }
+    },
+    "consoleErrors": []
+  },
+  {
+    "viewport": "desktop",
+    "page": "story",
+    "settleMs": 2328,
+    "settleError": null,
+    "byImpact": {
+      "critical": [],
+      "serious": [],
+      "moderate": [],
+      "minor": []
+    },
+    "passes": 42,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 5,
+        "targets": [
+          ".maplibregl-ctrl-attrib-inner",
+          "a[href$=\"openfreemap.org\"]",
+          "a[href$=\"openmaptiles.org/\"]",
+          ".maplibregl-ctrl-attrib-inner > a:nth-child(3)",
+          ".postcard__name"
+        ],
+        "reason": "Element's background color could not be determined because element contains an image node"
+      }
+    ],
+    "outline": {
+      "headings": [
+        "h1: Snowball",
+        "h2: 400 Broad Street",
+        "h2: the block of Broad Street",
+        "h2: Broad Street",
+        "h2: Lower Queen Anne",
+        "h2: Seattle",
+        "h2: King County",
+        "h2: Puget Sound",
+        "h2: Washington",
+        "h2: North American Plate",
+        "h2: Deep time",
+        "h3: The rock under this spot",
+        "h3: Under 3,000 feet of ice",
+        "h3: Where this spot has been",
+        "h2: Sources"
+      ],
+      "h1Count": 1,
+      "statusLine": {
+        "ariaLive": "polite",
+        "role": "status",
+        "text": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till."
+      }
+    },
+    "consoleErrors": []
+  }
+]

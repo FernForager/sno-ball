@@ -1,0 +1,31 @@
+[1/30] story          3674ms  400 Broad St, Seattle, WA  -> 400 Broad Street, Seattle
+[2/30] story          3157ms  5400 Ballard Ave NW, Seattle, WA  -> 5400 Ballard Avenue Northwest, Seattle
+[3/30] story          3793ms  4727 California Ave SW, Seattle, WA  -> 4727 California Avenue Southwest, Seattle
+[4/30] story          3679ms  9200 Rainier Ave S, Seattle, WA  -> 9200 Rainier Avenue South, Seattle
+[5/30] story          5763ms  747 Market St, Tacoma, WA  -> 747 Market Street, Tacoma
+[6/30] story          3162ms  2930 Wetmore Ave, Everett, WA  -> 2930 Wetmore Avenue, Everett
+[7/30] story          2897ms  210 Lottie St, Bellingham, WA  -> 210 Lottie Street, Bellingham
+[8/30] story          3136ms  416 Sid Snyder Ave SW, Olympia, WA  -> 416 Sid Snyder Avenue Southwest, Olympia
+[9/30] story          2998ms  415 W 6th St, Vancouver, WA  -> 415 West 6th Street, Vancouver
+[10/30] story          3238ms  129 N 2nd St, Yakima, WA  -> 129 North 2nd Street, Yakima
+[11/30] story          3207ms  301 Yakima St, Wenatchee, WA  -> 301 Yakima Street, Wenatchee
+[12/30] story          3272ms  325 SE Paradise St, Pullman, WA  -> 325 Southeast Paradise Street, Pullman
+[13/30] story          3155ms  206 W Main Ave, Ritzville, WA  -> 206 West Main Avenue, Ritzville
+[14/30] story          2771ms  15 N Clark Ave, Republic, WA  -> 15 North Clark Avenue, Republic
+[15/30] story          2776ms  500 E Division St, Forks, WA  -> 500 East Division Street, Forks
+[16/30] story          3082ms  350 Court St, Friday Harbor, WA  -> 350 Court Street, Friday Harbor
+[17/30] story          3714ms  115 Bolstad Ave W, Long Beach, WA  -> 115 Bolstad Avenue East, Long Beach
+[18/30] story          3244ms  2 N Main St, Omak, WA  -> Main Street South, Omak
+[19/30] story          3194ms  170 S Oak St, Colville, WA  -> 170 South Oak Street, Colville
+[20/30] story          2684ms  21 W 1st Ave, Toppenish, WA  -> West 1st Avenue, Toppenish
+[21/30] story          3147ms  Neah Bay, WA  -> Neah Bay
+[22/30] story          2952ms  1 Tyee Dr, Point Roberts, WA  -> Tyee Drive, Point Roberts
+[23/30] story          3234ms  7121 E Loop Rd, Stevenson, WA  -> Loop Road, Stevenson
+[24/30] story          3214ms  501 N Anderson St, Ellensburg, WA  -> 501 North Anderson Street, Ellensburg
+[25/30] story          4207ms  Paradise, Mount Rainier National Park, WA  -> 450 Roosevelt Avenue East, Enumclaw
+[26/30] story          2630ms  Mount Rainier  -> Pierce County
+[27/30] story          3923ms  Seatle Space Nedle  -> 400 Broad Street, Seattle
+[28/30] not-found      3757ms  1600 Pennsylvania Ave, Washington, DC  -> I couldn't find that in Washington. Try adding the city.
+[29/30] story          3429ms  PO Box 1, Spokane, WA  -> Spokane
+[30/30] story          2986ms  98101  -> Seattle
+exit 0

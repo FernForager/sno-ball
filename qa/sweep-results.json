@@ -1,0 +1,3916 @@
+[
+  {
+    "n": 1,
+    "query": "400 Broad St, Seattle, WA",
+    "outcome": "story",
+    "settleMs": 3674,
+    "hash": "#/story?ll=47.62051,-122.34930&q=400+Broad+St%2C+Seattle%2C+WA",
+    "lat": 47.62051,
+    "lng": -122.3493,
+    "displayName": "Space Needle, 400, Broad Street, South Lake Union, Cascade, Belltown, Seattle, King County, Washington, 98109, United States",
+    "caption": "400 Broad Street, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "400 Broad Street",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of Broad Street",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Broad Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Lower Queen Anne",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-01-400-broad-st-seattle-wa.png"
+  },
+  {
+    "n": 2,
+    "query": "5400 Ballard Ave NW, Seattle, WA",
+    "outcome": "story",
+    "settleMs": 3157,
+    "hash": "#/story?ll=47.66789,-122.38452&q=5400+Ballard+Ave+NW%2C+Seattle%2C+WA",
+    "lat": 47.66789,
+    "lng": -122.38452,
+    "displayName": "5400, Ballard Avenue Northwest, Ballard, Seattle, King County, Washington, 98107, United States",
+    "caption": "5400 Ballard Avenue Northwest, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "5400 Ballard Avenue Northwest sits in Ballard, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "5400 Ballard Avenue Northwest",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of Ballard Avenue Northwest",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Ballard Avenue Northwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Ballard",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Seattle",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-02-5400-ballard-ave-nw-seattle-wa.png"
+  },
+  {
+    "n": 3,
+    "query": "4727 California Ave SW, Seattle, WA",
+    "outcome": "story",
+    "settleMs": 3793,
+    "hash": "#/story?ll=47.56033,-122.38700&q=4727+California+Ave+SW%2C+Seattle%2C+WA",
+    "lat": 47.56033,
+    "lng": -122.387,
+    "displayName": "Puerto Vallarta, 4727, California Avenue Southwest, Alaska Junction, West Seattle, Seattle, King County, Washington, 98116, United States",
+    "caption": "4727 California Avenue Southwest, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "4727 California Avenue Southwest sits in Genesee, in Seattle, King County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 4727 California Avenue Southwest sits in Genesee, in Seattle, King County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "4727 California Avenue Southwest",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of California Avenue Southwest",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "California Avenue Southwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Genesee",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQga\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nOutwash ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-03-4727-california-ave-sw-seattle-wa.png"
+  },
+  {
+    "n": 4,
+    "query": "9200 Rainier Ave S, Seattle, WA",
+    "outcome": "story",
+    "settleMs": 3679,
+    "hash": "#/story?ll=47.52088,-122.26939&q=9200+Rainier+Ave+S%2C+Seattle%2C+WA",
+    "lat": 47.52088,
+    "lng": -122.26939,
+    "displayName": "9200, Rainier Avenue South, Rainier Beach, Seattle, King County, Washington, 98118, United States",
+    "caption": "9200 Rainier Avenue South, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "9200 Rainier Avenue South sits in Dunlap, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 9200 Rainier Avenue South sits in Dunlap, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "9200 Rainier Avenue South",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Rainier Avenue South",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Rainier Avenue South",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Dunlap",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-04-9200-rainier-ave-s-seattle-wa.png"
+  },
+  {
+    "n": 5,
+    "query": "747 Market St, Tacoma, WA",
+    "outcome": "story",
+    "settleMs": 5763,
+    "hash": "#/story?ll=47.25581,-122.44173&q=747+Market+St%2C+Tacoma%2C+WA",
+    "lat": 47.25581,
+    "lng": -122.44173,
+    "displayName": "Tacoma Municipal Building, 747, Market Street, New Tacoma, Tacoma, Pierce County, Washington, 98402, United States",
+    "caption": "747 Market Street, Tacoma",
+    "precise": true,
+    "hint": null,
+    "hero": "747 Market Street sits in New Tacoma, in Tacoma, Pierce County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 747 Market Street sits in New Tacoma, in Tacoma, Pierce County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "747 Market Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Market Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Market Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "New Tacoma",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Tacoma",
+        "facts": 8,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Pierce County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgo(i)\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nModer",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-05-747-market-st-tacoma-wa.png"
+  },
+  {
+    "n": 6,
+    "query": "2930 Wetmore Ave, Everett, WA",
+    "outcome": "story",
+    "settleMs": 3162,
+    "hash": "#/story?ll=47.97815,-122.20763&q=2930+Wetmore+Ave%2C+Everett%2C+WA",
+    "lat": 47.97815,
+    "lng": -122.20763,
+    "displayName": "Everett Municipal Building, 2930, Wetmore Avenue, Port Gardner, Everett, Snohomish County, Washington, 98120, United States",
+    "caption": "2930 Wetmore Avenue, Everett",
+    "precise": true,
+    "hint": null,
+    "hero": "2930 Wetmore Avenue sits in Port Gardner, in Everett, Snohomish County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 2930 Wetmore Avenue sits in Port Gardner, in Everett, Snohomish County, on Pleistocene continental glacial till.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "2930 Wetmore Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Wetmore Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Wetmore Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "Port Gardner",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Everett",
+        "facts": 9,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Snohomish County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-06-2930-wetmore-ave-everett-wa.png"
+  },
+  {
+    "n": 7,
+    "query": "210 Lottie St, Bellingham, WA",
+    "outcome": "story",
+    "settleMs": 2897,
+    "hash": "#/story?ll=48.75525,-122.47894&q=210+Lottie+St%2C+Bellingham%2C+WA",
+    "lat": 48.75525,
+    "lng": -122.47894,
+    "displayName": "Bellingham City Hall, 210, Lottie Street, City Center, Bellingham, Whatcom County, Washington, 98225, United States",
+    "caption": "210 Lottie Street, Bellingham",
+    "precise": true,
+    "hint": null,
+    "hero": "210 Lottie Street sits in City Center, in Bellingham, Whatcom County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 210 Lottie Street sits in City Center, in Bellingham, Whatcom County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "210 Lottie Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Lottie Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Lottie Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "City Center",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Bellingham",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Whatcom County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgdm(e)\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nPoor",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-07-210-lottie-st-bellingham-wa.png"
+  },
+  {
+    "n": 8,
+    "query": "416 Sid Snyder Ave SW, Olympia, WA",
+    "outcome": "story",
+    "settleMs": 3136,
+    "hash": "#/story?ll=47.03577,-122.90485&q=416+Sid+Snyder+Ave+SW%2C+Olympia%2C+WA",
+    "lat": 47.03577,
+    "lng": -122.90485,
+    "displayName": "Washington State Capitol, 416, Sid Snyder Avenue Southwest, Olympia, Thurston County, Washington, 98501, United States",
+    "caption": "416 Sid Snyder Avenue Southwest, Olympia",
+    "precise": true,
+    "hint": null,
+    "hero": "416 Sid Snyder Avenue Southwest sits in Olympia, Thurston County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 416 Sid Snyder Avenue Southwest sits in Olympia, Thurston County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "416 Sid Snyder Avenue Southwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Sid Snyder Avenue Southwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Sid Snyder Avenue Southwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Olympia",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Thurston County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgos\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nRecessi",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-08-416-sid-snyder-ave-sw-olympia-wa.png"
+  },
+  {
+    "n": 9,
+    "query": "415 W 6th St, Vancouver, WA",
+    "outcome": "story",
+    "settleMs": 2998,
+    "hash": "#/story?ll=45.62538,-122.67551&q=415+W+6th+St%2C+Vancouver%2C+WA",
+    "lat": 45.62538,
+    "lng": -122.67551,
+    "displayName": "Vancouver City Hall, 415, West 6th Street, Esther Short, Vancouver, Clark County, Washington, 98660, United States",
+    "caption": "415 West 6th Street, Vancouver",
+    "precise": true,
+    "hint": null,
+    "hero": "415 West 6th Street sits in Esther Short, in Vancouver, Clark County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 415 West 6th Street sits in Esther Short, in Vancouver, Clark County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "415 West 6th Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of West 6th Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "West 6th Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "Esther Short",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Vancouver",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Clark County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Southwest Washington",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQa\n\nFormed within the last 2.6 million years, in the Quaternary.\n\nUnconsolidated clay, silt, sand, and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-09-415-w-6th-st-vancouver-wa.png"
+  },
+  {
+    "n": 10,
+    "query": "129 N 2nd St, Yakima, WA",
+    "outcome": "story",
+    "settleMs": 3238,
+    "hash": "#/story?ll=46.60493,-120.50524&q=129+N+2nd+St%2C+Yakima%2C+WA",
+    "lat": 46.60493,
+    "lng": -120.50524,
+    "displayName": "Yakima City Hall, 129, North 2nd Street, Yakima, Yakima County, Washington, 98901, United States",
+    "caption": "129 North 2nd Street, Yakima",
+    "precise": true,
+    "hint": null,
+    "hero": "129 North 2nd Street sits in Yakima, Yakima County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 129 North 2nd Street sits in Yakima, Yakima County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "129 North 2nd Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of North 2nd Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "North 2nd Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Yakima",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Yakima County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Yakima Valley",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQt\n\nFormed within the last 2.6 million years, in the Quaternary.\n\nModerately sorted to laminated with c",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-10-129-n-2nd-st-yakima-wa.png"
+  },
+  {
+    "n": 11,
+    "query": "301 Yakima St, Wenatchee, WA",
+    "outcome": "story",
+    "settleMs": 3207,
+    "hash": "#/story?ll=47.42064,-120.31207&q=301+Yakima+St%2C+Wenatchee%2C+WA",
+    "lat": 47.42064,
+    "lng": -120.31207,
+    "displayName": "301, Yakima Street, Wenatchee, Chelan County, Washington, 98801, United States",
+    "caption": "301 Yakima Street, Wenatchee",
+    "precise": true,
+    "hint": null,
+    "hero": "301 Yakima Street sits in Wenatchee, Chelan County, on Pleistocene outburst flood deposits.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "301 Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Wenatchee",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Chelan County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "North Cascades",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene outburst flood deposits\nQfg\n\nLaid down between about 18,000 and 15,000 years ago by the Ice Age floods that swe",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-11-301-yakima-st-wenatchee-wa.png"
+  },
+  {
+    "n": 12,
+    "query": "325 SE Paradise St, Pullman, WA",
+    "outcome": "story",
+    "settleMs": 3272,
+    "hash": "#/story?ll=46.72880,-117.17964&q=325+SE+Paradise+St%2C+Pullman%2C+WA",
+    "lat": 46.7288,
+    "lng": -117.17964,
+    "displayName": "325, Southeast Paradise Street, Downtown, Ward 3, Pullman, Whitman County, Washington, 99163, United States",
+    "caption": "325 Southeast Paradise Street, Pullman",
+    "precise": true,
+    "hint": null,
+    "hero": "325 Southeast Paradise Street sits in Downtown, in Pullman, Whitman County, on Miocene Columbia River Basalt Group, Wanapum Basalt.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 325 Southeast Paradise Street sits in Downtown, in Pullman, Whitman County, on Miocene Columbia River Basalt Group, Wanapum Basalt.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "325 Southeast Paradise Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Southeast Paradise Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Southeast Paradise Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "Downtown",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Pullman",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Whitman County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Palouse and Blue Mountains",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nMiocene Columbia River Basalt Group, Wanapum Basalt\nMv(wpr)\n\nFormed between 23 and 5.3 million years ago, in the Miocene, m",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-12-325-se-paradise-st-pullman-wa.png"
+  },
+  {
+    "n": 13,
+    "query": "206 W Main Ave, Ritzville, WA",
+    "outcome": "story",
+    "settleMs": 3155,
+    "hash": "#/story?ll=47.12682,-118.38102&q=206+W+Main+Ave%2C+Ritzville%2C+WA",
+    "lat": 47.12682,
+    "lng": -118.38102,
+    "displayName": "206, West Main Avenue, Ritzville, Adams County, Washington, 99169, United States",
+    "caption": "206 West Main Avenue, Ritzville",
+    "precise": true,
+    "hint": null,
+    "hero": "206 West Main Avenue sits in Ritzville, Adams County, on Pleistocene outburst flood deposits.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 206 West Main Avenue sits in Ritzville, Adams County, on Pleistocene outburst flood deposits.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "206 West Main Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of West Main Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "West Main Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Ritzville",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Adams County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Columbia Basin",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene outburst flood deposits\nQfg\n\nLaid down between about 18,000 and 15,000 years ago by the Ice Age floods that swe",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-13-206-w-main-ave-ritzville-wa.png"
+  },
+  {
+    "n": 14,
+    "query": "15 N Clark Ave, Republic, WA",
+    "outcome": "story",
+    "settleMs": 2771,
+    "hash": "#/story?ll=48.64792,-118.73818&q=15+N+Clark+Ave%2C+Republic%2C+WA",
+    "lat": 48.64792,
+    "lng": -118.73818,
+    "displayName": "15, North Clark Avenue, Republic, Ferry County, Washington, 99166, United States",
+    "caption": "15 North Clark Avenue, Republic",
+    "precise": true,
+    "hint": null,
+    "hero": "15 North Clark Avenue sits in Republic, Ferry County, on Eocene Tertiary sedimentary rocks and deposits.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 15 North Clark Avenue sits in Republic, Ferry County, on Eocene Tertiary sedimentary rocks and deposits.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "15 North Clark Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of North Clark Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "North Clark Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Republic",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Ferry County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Northeast Washington",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nTertiary sedimentary rocks and deposits\nEc(k)\n\nFormed between 56 and 33.9 million years ago, in the Eocene.\n\nA basal unit o",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-14-15-n-clark-ave-republic-wa.png"
+  },
+  {
+    "n": 15,
+    "query": "500 E Division St, Forks, WA",
+    "outcome": "story",
+    "settleMs": 2776,
+    "hash": "#/story?ll=47.95031,-124.37880&q=500+E+Division+St%2C+Forks%2C+WA",
+    "lat": 47.95031,
+    "lng": -124.3788,
+    "displayName": "500, East Division Street, Forks, Clallam County, Washington, 98331, United States",
+    "caption": "500 East Division Street, Forks",
+    "precise": true,
+    "hint": null,
+    "hero": "500 East Division Street sits in Forks, Clallam County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 500 East Division Street sits in Forks, Clallam County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "500 East Division Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of East Division Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "East Division Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Forks",
+        "facts": 8,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Clallam County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Olympic Peninsula",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgo\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nOutwash ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-15-500-e-division-st-forks-wa.png"
+  },
+  {
+    "n": 16,
+    "query": "350 Court St, Friday Harbor, WA",
+    "outcome": "story",
+    "settleMs": 3082,
+    "hash": "#/story?ll=48.53579,-123.01864&q=350+Court+St%2C+Friday+Harbor%2C+WA",
+    "lat": 48.53579,
+    "lng": -123.01864,
+    "displayName": "San Juan County Courthouse, 350, Court Street, Friday Harbor, San Juan County, Washington, 98250, United States",
+    "caption": "350 Court Street, Friday Harbor",
+    "precise": true,
+    "hint": null,
+    "hero": "350 Court Street sits in Friday Harbor, San Juan County, on Cretaceous-Jurassic Mesozoic metasedimentary rocks.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "350 Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Friday Harbor",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "San Juan County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nMesozoic metasedimentary rocks\nKJmm\n\nFormed between 201.4 and 66 million years ago, in the Cretaceous-Jurassic.\n\nMetamorpho",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-16-350-court-st-friday-harbor-wa.png"
+  },
+  {
+    "n": 17,
+    "query": "115 Bolstad Ave W, Long Beach, WA",
+    "outcome": "story",
+    "settleMs": 3714,
+    "hash": "#/story?ll=46.35113,-124.05535&q=115+Bolstad+Ave+W%2C+Long+Beach%2C+WA",
+    "lat": 46.35113,
+    "lng": -124.05535,
+    "displayName": "Long Beach City Hall, 115 Bolstad Avenue East, Long Beach, Pacific, Washington, 98631, United States",
+    "caption": "115 Bolstad Avenue East, Long Beach",
+    "precise": true,
+    "hint": null,
+    "hero": "115 Bolstad Avenue East sits in Long Beach, Pacific County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 115 Bolstad Avenue East sits in Long Beach, Pacific County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "115 Bolstad Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Bolstad Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Bolstad Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Long Beach",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Pacific County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Southwest Washington",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQb\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nModerately to well-sorted c",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-17-115-bolstad-ave-w-long-beach-wa.png"
+  },
+  {
+    "n": 18,
+    "query": "2 N Main St, Omak, WA",
+    "outcome": "story",
+    "settleMs": 3244,
+    "hash": "#/story?ll=48.40696,-119.52851&q=2+N+Main+St%2C+Omak%2C+WA",
+    "lat": 48.40696,
+    "lng": -119.52851,
+    "displayName": "Main Street South, Omak, Okanogan County, Washington, 98841, United States",
+    "caption": "Main Street South, Omak",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "Main Street South sits in Omak, Okanogan County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: Main Street South sits in Omak, Okanogan County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Main Street South",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Main Street South",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Omak",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Okanogan County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Okanogan",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQa\n\nFormed within the last 2.6 million years, in the Quaternary.\n\nUnconsolidated clay, silt, sand, and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-18-2-n-main-st-omak-wa.png"
+  },
+  {
+    "n": 19,
+    "query": "170 S Oak St, Colville, WA",
+    "outcome": "story",
+    "settleMs": 3194,
+    "hash": "#/story?ll=48.54374,-117.90445&q=170+S+Oak+St%2C+Colville%2C+WA",
+    "lat": 48.54374,
+    "lng": -117.90445,
+    "displayName": "170, South Oak Street, Colville, Stevens County, Washington, 99114, United States",
+    "caption": "170 South Oak Street, Colville",
+    "precise": true,
+    "hint": null,
+    "hero": "170 South Oak Street sits in Colville, Stevens County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 170 South Oak Street sits in Colville, Stevens County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "170 South Oak Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of South Oak Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "South Oak Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Colville",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Stevens County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Northeast Washington",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgd\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-19-170-s-oak-st-colville-wa.png"
+  },
+  {
+    "n": 20,
+    "query": "21 W 1st Ave, Toppenish, WA",
+    "outcome": "story",
+    "settleMs": 2684,
+    "hash": "#/story?ll=46.37508,-120.31556&q=21+W+1st+Ave%2C+Toppenish%2C+WA",
+    "lat": 46.37508,
+    "lng": -120.31556,
+    "displayName": "West 1st Avenue, Toppenish, Yakima County, Washington, 98948, United States",
+    "caption": "West 1st Avenue, Toppenish",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "West 1st Avenue sits in Toppenish, Yakima County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: West 1st Avenue sits in Toppenish, Yakima County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of West 1st Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "West 1st Avenue",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Toppenish",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Yakima County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Yakima Valley",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQa\n\nFormed within the last 2.6 million years, in the Quaternary.\n\nUnconsolidated clay, silt, sand, and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-20-21-w-1st-ave-toppenish-wa.png"
+  },
+  {
+    "n": 21,
+    "query": "Neah Bay, WA",
+    "outcome": "story",
+    "settleMs": 3147,
+    "hash": "#/story?ll=48.35917,-124.61081&q=Neah+Bay%2C+WA",
+    "lat": 48.35917,
+    "lng": -124.61081,
+    "displayName": "Neah Bay, Clallam County, Washington, 98357, United States",
+    "caption": "Neah Bay",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "This spot sits in Neah Bay, Clallam County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready, but some sources did not answer (Wikipedia (Neah Bay, Washington)); the rest of the story is here.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "This block",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on, so there is no block to describe."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "This street",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "empty",
+        "name": "Neah Bay",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Clallam County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Olympic Peninsula",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgd\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 ()",
+      "Failed to load resource: the server responded with a status of 429 ()"
+    ],
+    "pageErrors": [],
+    "badResponses": [
+      {
+        "host": "en.wikipedia.org",
+        "status": 429,
+        "path": "/api/rest_v1/page/summary/Neah_Bay%2C_Washington"
+      },
+      {
+        "host": "en.wikipedia.org",
+        "status": 429,
+        "path": "/w/api.php"
+      }
+    ],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-21-neah-bay-wa.png"
+  },
+  {
+    "n": 22,
+    "query": "1 Tyee Dr, Point Roberts, WA",
+    "outcome": "story",
+    "settleMs": 2952,
+    "hash": "#/story?ll=48.99979,-123.06786&q=1+Tyee+Dr%2C+Point+Roberts%2C+WA",
+    "lat": 48.99979,
+    "lng": -123.06786,
+    "displayName": "Tyee Drive, Point Roberts, Whatcom County, Washington, 98281, United States",
+    "caption": "Tyee Drive, Point Roberts",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "Tyee Drive sits in Point Roberts, Whatcom County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Tyee Drive",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Tyee Drive",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Point Roberts",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Whatcom County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgog\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nRecessi",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-22-1-tyee-dr-point-roberts-wa.png"
+  },
+  {
+    "n": 23,
+    "query": "7121 E Loop Rd, Stevenson, WA",
+    "outcome": "story",
+    "settleMs": 3234,
+    "hash": "#/story?ll=45.70065,-121.89325&q=7121+E+Loop+Rd%2C+Stevenson%2C+WA",
+    "lat": 45.70065,
+    "lng": -121.89325,
+    "displayName": "Loop Road, Stevenson, Skamania County, Washington, 98648, United States",
+    "caption": "Loop Road, Stevenson",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "Loop Road sits in Stevenson, Skamania County, on Miocene, lower Tertiary sedimentary rocks and deposits.",
+    "errorMessage": null,
+    "statusLine": "Story ready: Loop Road sits in Stevenson, Skamania County, on Miocene, lower Tertiary sedimentary rocks and deposits.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Loop Road",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Loop Road",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Stevenson",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Skamania County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "South Cascades",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nTertiary sedimentary rocks and deposits\nMcg(ec)\n\nFormed between 23 and 5.3 million years ago, in the Miocene, lower.\n\nInter",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-23-7121-e-loop-rd-stevenson-wa.png"
+  },
+  {
+    "n": 24,
+    "query": "501 N Anderson St, Ellensburg, WA",
+    "outcome": "story",
+    "settleMs": 3214,
+    "hash": "#/story?ll=46.99679,-120.54200&q=501+N+Anderson+St%2C+Ellensburg%2C+WA",
+    "lat": 46.99679,
+    "lng": -120.542,
+    "displayName": "501, North Anderson Street, Ellensburg, Kittitas County, Washington, 98926, United States",
+    "caption": "501 North Anderson Street, Ellensburg",
+    "precise": true,
+    "hint": null,
+    "hero": "501 North Anderson Street sits in Ellensburg, Kittitas County, on Quaternary alluvium.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 501 North Anderson Street sits in Ellensburg, Kittitas County, on Quaternary alluvium.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "501 North Anderson Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of North Anderson Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "North Anderson Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Ellensburg",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Kittitas County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Yakima Valley",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary alluvium\nQt\n\nFormed within the last 2.6 million years, in the Quaternary.\n\nModerately sorted to laminated with c",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-24-501-n-anderson-st-ellensburg-wa.png"
+  },
+  {
+    "n": 25,
+    "query": "Paradise, Mount Rainier National Park, WA",
+    "outcome": "story",
+    "settleMs": 4207,
+    "hash": "#/story?ll=47.19891,-121.97422&q=Paradise%2C+Mount+Rainier+National+Park%2C+WA",
+    "lat": 47.19891,
+    "lng": -121.97422,
+    "displayName": "National Forest Service - Mount Rainier National Park, 450 Roosevelt Avenue East, Enumclaw, King, Washington, 98022, United States",
+    "caption": "450 Roosevelt Avenue East, Enumclaw",
+    "precise": true,
+    "hint": null,
+    "hero": "450 Roosevelt Avenue East sits in Enumclaw, King County, on Holocene Quaternary fragmental volcanic rocks and deposits (includes lahars).",
+    "errorMessage": null,
+    "statusLine": "Story ready: 450 Roosevelt Avenue East sits in Enumclaw, King County, on Holocene Quaternary fragmental volcanic rocks and deposits (includes lahars).",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "450 Roosevelt Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Roosevelt Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Roosevelt Avenue East",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Enumclaw",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nQuaternary fragmental volcanic rocks and deposits (includes lahars)\nQvl(o)\n\nLaid down within the last 11,700 years, since t",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-25-paradise-mount-rainier-national-park-wa.png"
+  },
+  {
+    "n": 26,
+    "query": "Mount Rainier",
+    "outcome": "story",
+    "settleMs": 2630,
+    "hash": "#/story?ll=46.85220,-121.75752&q=Mount+Rainier",
+    "lat": 46.8522,
+    "lng": -121.75752,
+    "displayName": "Mount Rainier, Pierce County, Washington, United States",
+    "caption": "Pierce County",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "This spot sits in Pierce County, on ice.",
+    "errorMessage": null,
+    "statusLine": "Story ready: This spot sits in Pierce County, on ice.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "This block",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on, so there is no block to describe."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "This street",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "empty",
+        "name": "Unincorporated area",
+        "facts": 0,
+        "note": "This spot is not inside a city or town, as far as the map knows."
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Pierce County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nice\n\nThe survey gives no age for this unit.\n\nfrozen water\n\nFrom Washington Geological Survey (WA DNR), 1:100,000 surface ge",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-26-mount-rainier.png"
+  },
+  {
+    "n": 27,
+    "query": "Seatle Space Nedle",
+    "outcome": "story",
+    "settleMs": 3923,
+    "hash": "#/story?ll=47.62051,-122.34930&q=Seatle+Space+Nedle",
+    "lat": 47.62051,
+    "lng": -122.3493,
+    "displayName": "Space Needle, 400 Broad Street, Belltown, Seattle, King, Washington, 98109, United States",
+    "caption": "400 Broad Street, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "400 Broad Street",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of Broad Street",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Broad Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Lower Queen Anne",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Seattle",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-27-seatle-space-nedle.png"
+  },
+  {
+    "n": 28,
+    "query": "1600 Pennsylvania Ave, Washington, DC",
+    "outcome": "not-found",
+    "settleMs": 3757,
+    "hash": "",
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "caption": null,
+    "precise": null,
+    "hint": null,
+    "hero": null,
+    "errorMessage": "I couldn't find that in Washington. Try adding the city.",
+    "statusLine": "",
+    "rings": [
+      {
+        "level": "house",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "block",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "street",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "neighborhood",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "city",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "county",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "region",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "state",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      },
+      {
+        "level": "plate",
+        "status": "missing",
+        "name": "",
+        "facts": 0
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UnderfootThe rock under this spot",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-28-1600-pennsylvania-ave-washington-dc.png"
+  },
+  {
+    "n": 29,
+    "query": "PO Box 1, Spokane, WA",
+    "outcome": "story",
+    "settleMs": 3429,
+    "hash": "#/story?ll=47.65719,-117.42351&q=PO+Box+1%2C+Spokane%2C+WA",
+    "lat": 47.65719,
+    "lng": -117.42351,
+    "displayName": "Spokane, Spokane County, Washington, United States",
+    "caption": "Spokane",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "This spot sits in Spokane, Spokane County, on Pleistocene outburst flood deposits.",
+    "errorMessage": null,
+    "statusLine": "Story ready: This spot sits in Spokane, Spokane County, on Pleistocene outburst flood deposits.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "This block",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on, so there is no block to describe."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "This street",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Spokane",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Spokane County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Northeast Washington",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene outburst flood deposits\nQfg\n\nLaid down between about 18,000 and 15,000 years ago by the Ice Age floods that swe",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-29-po-box-1-spokane-wa.png"
+  },
+  {
+    "n": 30,
+    "query": "98101",
+    "outcome": "story",
+    "settleMs": 2986,
+    "hash": "#/story?ll=47.61072,-122.33617&q=98101",
+    "lat": 47.61072,
+    "lng": -122.33617,
+    "displayName": "98101, Seattle, King County, Washington, United States",
+    "caption": "Seattle",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "This spot sits in Central Business District, in Seattle, King County, on Holocene artificial fill and modified land.",
+    "errorMessage": null,
+    "statusLine": "Gathering the story…",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "This block",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "This street",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on."
+      },
+      {
+        "level": "neighborhood",
+        "status": "thin",
+        "name": "Central Business District",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "thin",
+        "name": "Seattle",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nHolocene artificial fill and modified land\nQf\n\nLaid down within the last 11,700 years, since the ice age ended; in places i",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-30-98101.png"
+  }
+]

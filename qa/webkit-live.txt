@@ -1,0 +1,19 @@
+
+Running 14 tests using 2 workers
+
+  ✓   2 [webkit-phone] › tests/e2e/smoke.spec.ts:5:1 › home page renders the search box and example chips (668ms)
+  ✓   3 [webkit-phone] › tests/e2e/smoke.spec.ts:31:1 › an empty search shows a hint and makes no request (559ms)
+  ✓   1 [webkit-phone] › tests/e2e/live.spec.ts:15:3 › live story for the Space Needle › tells the story of 400 Broad St, Seattle (3.5s)
+  ✓   4 [webkit-phone] › tests/e2e/story.spec.ts:70:1 › a search fills every ring from the stubbed services (3.2s)
+  ✓   5 [webkit-phone] › tests/e2e/story.spec.ts:205:1 › a share link looks the address up once and rebuilds the full story (1.5s)
+  ✓   6 [webkit-desktop] › tests/e2e/live.spec.ts:15:3 › live story for the Space Needle › tells the story of 400 Broad St, Seattle (2.7s)
+  ✓   7 [webkit-phone] › tests/e2e/story.spec.ts:229:1 › the rock card settles honestly when both geology services are down (2.2s)
+  ✓   8 [webkit-desktop] › tests/e2e/smoke.spec.ts:5:1 › home page renders the search box and example chips (658ms)
+  ✓   9 [webkit-phone] › tests/e2e/story.spec.ts:247:1 › the home page has no empty postcard and offers to forget searches (586ms)
+  ✓  10 [webkit-desktop] › tests/e2e/smoke.spec.ts:31:1 › an empty search shows a hint and makes no request (684ms)
+  ✓  11 [webkit-desktop] › tests/e2e/story.spec.ts:70:1 › a search fills every ring from the stubbed services (2.3s)
+  ✓  12 [webkit-desktop] › tests/e2e/story.spec.ts:205:1 › a share link looks the address up once and rebuilds the full story (1.3s)
+  ✓  13 [webkit-desktop] › tests/e2e/story.spec.ts:229:1 › the rock card settles honestly when both geology services are down (1.6s)
+  ✓  14 [webkit-desktop] › tests/e2e/story.spec.ts:247:1 › the home page has no empty postcard and offers to forget searches (505ms)
+
+  14 passed (16.4s)

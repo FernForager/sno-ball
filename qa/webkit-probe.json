@@ -1,0 +1,44 @@
+[
+  {
+    "name": "phone",
+    "webgl": true,
+    "mapNote": null,
+    "canvas": true,
+    "attribution": "OpenFreeMap © OpenMapTiles Data from OpenStreetMap",
+    "hero": "400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      "house:rich:4",
+      "block:rich:5",
+      "street:empty:0",
+      "neighborhood:rich:2",
+      "city:rich:3",
+      "county:rich:5",
+      "region:thin:1",
+      "state:rich:2",
+      "plate:thin:1"
+    ],
+    "status": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errors": []
+  },
+  {
+    "name": "desktop",
+    "webgl": true,
+    "mapNote": null,
+    "canvas": true,
+    "attribution": "OpenFreeMap © OpenMapTiles Data from OpenStreetMap",
+    "hero": "400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      "house:rich:4",
+      "block:rich:5",
+      "street:empty:0",
+      "neighborhood:rich:2",
+      "city:rich:3",
+      "county:rich:5",
+      "region:thin:1",
+      "state:rich:2",
+      "plate:thin:1"
+    ],
+    "status": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errors": []
+  }
+]

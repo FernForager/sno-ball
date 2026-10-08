@@ -1,0 +1,6 @@
+[1/6] story          2933ms  5400 Ballard Ave NW, Seattle, WA  -> 5400 Ballard Avenue Northwest, Seattle
+[2/6] story          2696ms  301 Yakima St, Wenatchee, WA  -> 301 Yakima Street, Wenatchee
+[3/6] story          3241ms  350 Court St, Friday Harbor, WA  -> 350 Court Street, Friday Harbor
+[4/6] story          3863ms  1 Tyee Dr, Point Roberts, WA  -> Tyee Drive, Point Roberts
+[5/6] story          4726ms  Seatle Space Nedle  -> 400 Broad Street, Seattle
+[6/6] story          4717ms  98101  -> Seattle

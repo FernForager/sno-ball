@@ -1,0 +1,604 @@
+[
+  {
+    "n": 1,
+    "query": "5400 Ballard Ave NW, Seattle, WA",
+    "outcome": "story",
+    "settleMs": 2933,
+    "hash": "#/story?ll=47.66789,-122.38452&q=5400+Ballard+Ave+NW%2C+Seattle%2C+WA",
+    "lat": 47.66789,
+    "lng": -122.38452,
+    "displayName": "5400, Ballard Avenue Northwest, Ballard, Seattle, King County, Washington, 98107, United States",
+    "caption": "5400 Ballard Avenue Northwest, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "5400 Ballard Avenue Northwest sits in Ballard, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 5400 Ballard Avenue Northwest sits in Ballard, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "5400 Ballard Avenue Northwest",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of Ballard Avenue Northwest",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Ballard Avenue Northwest",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Ballard",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-01-5400-ballard-ave-nw-seattle-wa.png"
+  },
+  {
+    "n": 2,
+    "query": "301 Yakima St, Wenatchee, WA",
+    "outcome": "story",
+    "settleMs": 2696,
+    "hash": "#/story?ll=47.42064,-120.31207&q=301+Yakima+St%2C+Wenatchee%2C+WA",
+    "lat": 47.42064,
+    "lng": -120.31207,
+    "displayName": "301, Yakima Street, Wenatchee, Chelan County, Washington, 98801, United States",
+    "caption": "301 Yakima Street, Wenatchee",
+    "precise": true,
+    "hint": null,
+    "hero": "301 Yakima Street sits in Wenatchee, Chelan County, on Pleistocene outburst flood deposits.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 301 Yakima Street sits in Wenatchee, Chelan County, on Pleistocene outburst flood deposits.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "301 Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Yakima Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Wenatchee",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Chelan County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "North Cascades",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene outburst flood deposits\nQfg\n\nLaid down between about 18,000 and 15,000 years ago by the Ice Age floods that swe",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-02-301-yakima-st-wenatchee-wa.png"
+  },
+  {
+    "n": 3,
+    "query": "350 Court St, Friday Harbor, WA",
+    "outcome": "story",
+    "settleMs": 3241,
+    "hash": "#/story?ll=48.53579,-123.01864&q=350+Court+St%2C+Friday+Harbor%2C+WA",
+    "lat": 48.53579,
+    "lng": -123.01864,
+    "displayName": "San Juan County Courthouse, 350, Court Street, Friday Harbor, San Juan County, Washington, 98250, United States",
+    "caption": "350 Court Street, Friday Harbor",
+    "precise": true,
+    "hint": null,
+    "hero": "350 Court Street sits in Friday Harbor, San Juan County, on Cretaceous-Jurassic Mesozoic metasedimentary rocks.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 350 Court Street sits in Friday Harbor, San Juan County, on Cretaceous-Jurassic Mesozoic metasedimentary rocks.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "350 Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Court Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Friday Harbor",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "San Juan County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nMesozoic metasedimentary rocks\nKJmm\n\nFormed between 201.4 and 66 million years ago, in the Cretaceous-Jurassic.\n\nMetamorpho",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-03-350-court-st-friday-harbor-wa.png"
+  },
+  {
+    "n": 4,
+    "query": "1 Tyee Dr, Point Roberts, WA",
+    "outcome": "story",
+    "settleMs": 3863,
+    "hash": "#/story?ll=48.99979,-123.06786&q=1+Tyee+Dr%2C+Point+Roberts%2C+WA",
+    "lat": 48.99979,
+    "lng": -123.06786,
+    "displayName": "Tyee Drive, Point Roberts, Whatcom County, Washington, 98281, United States",
+    "caption": "Tyee Drive, Point Roberts",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "Tyee Drive sits in Point Roberts, Whatcom County, on Pleistocene continental glacial drift.",
+    "errorMessage": null,
+    "statusLine": "Story ready: Tyee Drive sits in Point Roberts, Whatcom County, on Pleistocene continental glacial drift.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "empty",
+        "name": "the block of Tyee Drive",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Tyee Drive",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "empty",
+        "name": "This neighborhood",
+        "facts": 0,
+        "note": "The map has no named neighborhood for this spot."
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Point Roberts",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "Whatcom County",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial drift\nQgog\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nRecessi",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-04-1-tyee-dr-point-roberts-wa.png"
+  },
+  {
+    "n": 5,
+    "query": "Seatle Space Nedle",
+    "outcome": "story",
+    "settleMs": 4726,
+    "hash": "#/story?ll=47.62051,-122.34930&q=Seatle+Space+Nedle",
+    "lat": 47.62051,
+    "lng": -122.3493,
+    "displayName": "Space Needle, 400 Broad Street, Belltown, Seattle, King, Washington, 98109, United States",
+    "caption": "400 Broad Street, Seattle",
+    "precise": true,
+    "hint": null,
+    "hero": "400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "errorMessage": null,
+    "statusLine": "Story ready: 400 Broad Street sits in Lower Queen Anne, in Seattle, King County, on Pleistocene continental glacial till.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "rich",
+        "name": "400 Broad Street",
+        "facts": 4,
+        "note": null
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "the block of Broad Street",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "Broad Street",
+        "facts": 0,
+        "note": "Nothing on record for this yet."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Lower Queen Anne",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nPleistocene continental glacial till\nQgt\n\nLaid down about 16,000 years ago by the ice sheet of the last ice age.\n\nTill and ",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-05-seatle-space-nedle.png"
+  },
+  {
+    "n": 6,
+    "query": "98101",
+    "outcome": "story",
+    "settleMs": 4717,
+    "hash": "#/story?ll=47.61076,-122.33611&q=98101",
+    "lat": 47.61076,
+    "lng": -122.33611,
+    "displayName": "98101, Seattle, King County, Washington, United States",
+    "caption": "Seattle",
+    "precise": false,
+    "hint": "· a general area, not one building",
+    "hero": "This spot sits in Central Business District, in Seattle, King County, on Holocene artificial fill and modified land.",
+    "errorMessage": null,
+    "statusLine": "Story ready: This spot sits in Central Business District, in Seattle, King County, on Holocene artificial fill and modified land.",
+    "rings": [
+      {
+        "level": "house",
+        "status": "empty",
+        "name": "This spot",
+        "facts": 0,
+        "note": "This search matched a general area, not a specific lot."
+      },
+      {
+        "level": "block",
+        "status": "rich",
+        "name": "This block",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "street",
+        "status": "empty",
+        "name": "This street",
+        "facts": 0,
+        "note": "We could not tell which street this spot is on."
+      },
+      {
+        "level": "neighborhood",
+        "status": "rich",
+        "name": "Central Business District",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "city",
+        "status": "rich",
+        "name": "Seattle",
+        "facts": 3,
+        "note": null
+      },
+      {
+        "level": "county",
+        "status": "rich",
+        "name": "King County",
+        "facts": 5,
+        "note": null
+      },
+      {
+        "level": "region",
+        "status": "thin",
+        "name": "Puget Sound",
+        "facts": 1,
+        "note": null
+      },
+      {
+        "level": "state",
+        "status": "rich",
+        "name": "Washington",
+        "facts": 2,
+        "note": null
+      },
+      {
+        "level": "plate",
+        "status": "thin",
+        "name": "North American Plate",
+        "facts": 1,
+        "note": null
+      }
+    ],
+    "busyCount": 0,
+    "mapNote": null,
+    "rock": "UNDERFOOT\n\nThe rock under this spot\n\nHolocene artificial fill and modified land\nQf\n\nLaid down within the last 11,700 years, since the ice age ended; in places i",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "badResponses": [],
+    "failedRequests": [
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "tiles.openfreemap.org",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "blank": false,
+    "screenshot": "qa/screens/sweep-06-98101.png"
+  }
+]
