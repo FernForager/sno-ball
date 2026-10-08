@@ -1,0 +1,18 @@
+[phone] warning: [GroupMarkerNotSet(crbug.com/242999)!:A0702000DC1B0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+[phone] error: Failed to load resource: the server responded with a status of 429 ()
+[phone] warning: [story] Wikipedia summary for "Pike-Market, Seattle" did not answer: HttpError: HTTP 429 from https://en.wikipedia.org/api/rest_v1/page/summary/Pike-Market%2C_Seattle: You are making too many requests to the API. Please follow the best practices at <https://www.mediawiki.org/wiki/Wikimedia_APIs/Rate_limits>. If you are unsure how to get the access you need, contact 
+    at f (http://127.0.0.1:4173/sno-ball/assets/index-bWcHlzcO.js:1:2375)
+    at async u (http://127.0.0.1:4173/sno-ball/assets/index-bWcHlzcO.js:1:1872)
+    at async pe.run (http://127.0.0.1:4173/sno-ball/assets/index-bWcHlzcO.js:1:6216)
+    at async http://127.0.0.1:4173/sno-ball/assets/index-bWcHlzcO.js:1:33194
+    at async http://127.0.0.1:4173/sno-ball/assets/index-bWcHlzcO.js:1:5221
+[phone] warning: layers[boundary_3].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[highway-shield-non-us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[highway-shield-us-interstate].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[road_shield_us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: [GroupMarkerNotSet(crbug.com/242999)!:A0702000DC1B0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+[desktop] warning: layers[boundary_3].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] error: Failed to load resource: the server responded with a status of 404 ()
+[desktop] warning: layers[highway-shield-non-us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: layers[highway-shield-us-interstate].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: layers[road_shield_us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.

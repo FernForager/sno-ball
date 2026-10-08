@@ -1,0 +1,10 @@
+[phone] warning: [GroupMarkerNotSet(crbug.com/242999)!:A0702000DC1B0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+[phone] warning: layers[boundary_3].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[highway-shield-non-us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[highway-shield-us-interstate].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[phone] warning: layers[road_shield_us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: [GroupMarkerNotSet(crbug.com/242999)!:A0A02000DC1B0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+[desktop] warning: layers[boundary_3].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: layers[highway-shield-non-us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: layers[highway-shield-us-interstate].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
+[desktop] warning: layers[road_shield_us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false.
