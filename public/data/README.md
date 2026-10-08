@@ -1,6 +1,6 @@
 # Pre-baked Washington reference data
 
-`wa-counties.json` and `wa-places.json` were built from the Wikidata Query Service (https://query.wikidata.org/sparql) on 2026-10-07; `wiki-summaries.json` holds Wikipedia text and is described at the end of this file. Wikidata content is released under CC0 1.0 (public domain dedication), so these files carry no attribution requirement, but the site should still name "Wikidata" as the source next to any fact drawn from them. Re-run the queries below to refresh; values such as population change over time.
+Both files were built from the Wikidata Query Service (https://query.wikidata.org/sparql) on 2026-10-07. Wikidata content is released under CC0 1.0 (public domain dedication), so these files carry no attribution requirement, but the site should still name "Wikidata" as the source next to any fact drawn from them. Re-run the queries below to refresh; values such as population change over time.
 
 Dates are ISO `YYYY-MM-DD` strings taken from Wikidata's dateTime values (a `-01-01` date usually means Wikidata only records the year). `null` means Wikidata has no value. Coordinates are WGS 84 decimal degrees.
 
@@ -65,10 +65,33 @@ SELECT ?p ?pop ?time WHERE {
 
 Queries were sent with the user agent `sno-ball-dev/0.1 (github.com/FernForager/sno-ball)` and, because the query service was rate-limiting to one request per minute at capture time, at least 65 s apart.
 
-## wiki-summaries.json
+## wiki-summaries.json and wiki-summaries-missing.json
 
-Opening paragraphs of the English Wikipedia articles the site asks for most, so the page can show them without a request to Wikipedia (which rate-limited six of twenty summary requests in a live check and left the Seattle card empty). An object keyed by the title the site REQUESTS (`"Seattle"`, `"King County, Washington"`, `"Washington (state)"`, `"Lower Queen Anne, Seattle"`); each value has `title` (the article's real title after any redirect), `extract` (the opening paragraph as plain text), `url` (the desktop article URL), `thumbnail` (`{ source, width, height }` or `null`), `description` (Wikidata's short description or `null`) and `fetchedAt` (ISO date-time of the capture). The lookup in `src/lib/wiki-summaries.ts` matches the key exactly first, then ignoring letter case; a title the file lacks is fetched live.
+Pre-baked opening sentences from English Wikipedia for the state, every county, every city/town in `wa-places.json` that has a `wikipedia` title, and about 120 Seattle neighborhood article titles. The site reads this file first and only calls Wikipedia live for a title that is not in it, because live calls to en.wikipedia.org get rate-limited (HTTP 429) when several happen close together.
 
-**Licence: this text is Wikipedia prose under CC BY-SA 4.0**, not CC0 like the two Wikidata files. The site shows it only as a quoted excerpt with "Wikipedia" named and the article linked, and never rewrites it as its own words.
+`wiki-summaries.json` is an object keyed by the **requested** title (exactly the `wikipedia` value in the other data files, or the neighborhood title we asked for). Each value:
 
-**Placeholder.** The file checked in here holds just four entries (Washington (state), King County, Seattle and Walla Walla), copied from the real REST summary responses captured on 2026-10-07 in `tests/fixtures/places/wikipedia-summary-*.json`. A helper session is building the full file (the state, every county, every city and town in `wa-places.json`, and the Seattle neighborhoods) from `https://en.wikipedia.org/api/rest_v1/page/summary/<title>`, one request per second; it replaces this placeholder on merge. Refresh it the same way when the excerpts go stale (a year is fine; article openings change slowly).
+| field | meaning |
+| --- | --- |
+| `title` | the article Wikipedia actually served (differs from the key when the request redirected, e.g. `Wedgewood, Seattle` -> `Wedgwood, Seattle`) |
+| `extract` | the first one or two sentences of the article's intro, at most 320 characters, cut only at a sentence boundary (an ellipsis marks the rare single sentence that was longer than 320 characters) |
+| `url` | the article's desktop URL, for the "source" link |
+| `thumbnail` | `{ source, width, height }` of the article's lead image at 320 px wide, or `null` |
+| `description` | Wikipedia's short description (e.g. "City in Washington, United States"), or `null` |
+| `fetchedAt` | ISO timestamp of the fetch |
+
+`wiki-summaries-missing.json` is an array of requested titles that have no article (HTTP 404 / `missing`), are disambiguation pages, or redirect to a "List of ..." page. The site should treat these as "no Wikipedia excerpt" rather than retrying them live.
+
+**License.** The `extract` text is Wikipedia prose, licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). It must always be shown as a quotation with attribution to Wikipedia and a link to the article (`url`), never rewritten as our own words; the site's excerpt component does this. Thumbnails are hosted by Wikimedia and each has its own license on the Commons file page.
+
+**How it was built.** Fetched on 2026-10-07 (UTC) with the user agent `sno-ball-build/0.1 (github.com/FernForager/sno-ball; morgan.ritchie@gmail.com)`. The per-page REST summary endpoint (`/api/rest_v1/page/summary/<title>`) answered 429 on roughly every other request even at one request per 1.2 s (Wikimedia's edge rate-limits per IP), so the data was instead pulled from the MediaWiki Action API in batches of 20 titles per request:
+
+```
+https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&redirects=1
+  &prop=extracts|pageimages|description|info|pageprops&exintro=1&explaintext=1&exlimit=20
+  &piprop=thumbnail&pithumbsize=320&pilimit=20&inprop=url&ppprop=disambiguation&titles=<20 titles>
+```
+
+Requests were sent one at a time, 1.2 s apart, honouring `Retry-After` on 429 (it happened 2 times, each asking for about 45 s). Each entry was then trimmed to its first two sentences with an abbreviation-aware splitter (so "U.S." and "Mt." do not end a sentence).
+
+Counts: 435 unique titles requested, 418 fetched, 17 missing (all missing titles are Seattle neighborhood names that have no article of their own). To refresh, rerun the same query and rewrite both files; keys must stay the requested titles.
