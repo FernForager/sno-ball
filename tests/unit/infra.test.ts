@@ -226,18 +226,19 @@ describe('fetchJson', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('honours a Retry-After of up to 15 s on a 429, in seconds or as an HTTP date', async () => {
+  it('honours a Retry-After of up to 30 s on a 429, in seconds or as an HTTP date', async () => {
     vi.useFakeTimers();
-    expect(MAX_RETRY_AFTER_MS).toBe(15_000);
+    expect(MAX_RETRY_AFTER_MS).toBe(30_000);
 
-    // "Retry-After: 10" (seconds): the retry waits the full ten seconds.
+    // "Retry-After: 20" (seconds, what Wikipedia asked for on Neah Bay):
+    // the retry waits the full twenty seconds.
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(fakeResponse(429, 'slow down', { 'Retry-After': '10' }))
+      .mockResolvedValueOnce(fakeResponse(429, 'slow down', { 'Retry-After': '20' }))
       .mockResolvedValueOnce(fakeResponse(200, { ok: true }));
     vi.stubGlobal('fetch', fetchMock);
     const promise = fetchJson<{ ok: boolean }>(URL_OK, { retries: 1 });
-    await vi.advanceTimersByTimeAsync(9_999);
+    await vi.advanceTimersByTimeAsync(19_999);
     expect(fetchMock).toHaveBeenCalledTimes(1);
     await vi.advanceTimersByTimeAsync(1);
     expect(fetchMock).toHaveBeenCalledTimes(2);
@@ -258,8 +259,8 @@ describe('fetchJson', () => {
 
     // Just over the cap: no retry, the server is cooling us down for real.
     fetchMock.mockReset();
-    fetchMock.mockImplementation(async () => fakeResponse(429, 'cooling down', { 'Retry-After': '16' }));
-    const outcome = expect(fetchJson(URL_OK, { retries: 1 })).rejects.toMatchObject({ status: 429, retryAfterMs: 16_000 });
+    fetchMock.mockImplementation(async () => fakeResponse(429, 'cooling down', { 'Retry-After': '31' }));
+    const outcome = expect(fetchJson(URL_OK, { retries: 1 })).rejects.toMatchObject({ status: 429, retryAfterMs: 31_000 });
     await vi.advanceTimersByTimeAsync(MAX_RETRY_AFTER_MS * 2);
     await outcome;
     expect(fetchMock).toHaveBeenCalledTimes(1);

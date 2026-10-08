@@ -229,12 +229,19 @@ export function mountStory(root: HTMLElement): StoryHandle {
     announceRing(level);
   };
 
+  /**
+   * The name a chip shows under its label: the ring's name, or nothing
+   * when that would only repeat the label (an unnamed neighborhood ring is
+   * headed "Neighborhood", and "Neighborhood / Neighborhood" reads twice).
+   */
+  const chipName = (ring: Ring): string => (ring.name.trim().toLowerCase() === ringLabel(ring.level).toLowerCase() ? '' : ring.name);
+
   /** One chip for a ring; the name span is updated in place later. */
   const makeChip = (ring: Ring): HTMLButtonElement => {
     const chip = el('button', { type: 'button', class: 'ring-chip', 'data-level': ring.level, 'aria-controls': cardId(ring.level) }, [
       ringGlyph(ring.level),
       el('span', { class: 'ring-chip__label' }, [ringLabel(ring.level)]),
-      el('span', { class: 'ring-chip__name' }, [ring.name]),
+      el('span', { class: 'ring-chip__name' }, [chipName(ring)]),
     ]);
     if (ring.level === activeLevel) chip.setAttribute('aria-current', 'true');
     chip.addEventListener('click', () => goToRing(ring.level));
@@ -257,7 +264,8 @@ export function mountStory(root: HTMLElement): StoryHandle {
     } else {
       for (const ring of rings) {
         const name = chipByLevel.get(ring.level)?.querySelector('.ring-chip__name');
-        if (name && name.textContent !== ring.name) name.textContent = ring.name;
+        const wanted = chipName(ring);
+        if (name && name.textContent !== wanted) name.textContent = wanted;
       }
     }
     strip.hidden = rings.length === 0;

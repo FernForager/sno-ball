@@ -4,7 +4,10 @@
  * ring's status calls for:
  *
  *   loading     a shimmering skeleton while the data sources answer
- *   rich/thin   the list of facts (title, year badge, body, source link)
+ *   rich/thin   the list of facts (title, year badge, body, source link);
+ *               while the ring is still `busy` (another source owes it an
+ *               answer) the card keeps aria-busy and adds a small "still
+ *               gathering" line under the facts instead of the skeleton
  *   empty       one muted line saying why there is nothing to show
  *
  * Everything is built with DOM nodes and textContent, never innerHTML, so a
@@ -195,25 +198,35 @@ export function renderSkeleton(lines = 3, label = 'Looking this up…'): HTMLEle
 // The card
 // ---------------------------------------------------------------------------
 
+/** The small line under a card's facts while another source is still being asked. */
+export function renderGathering(label = 'Still gathering…'): HTMLElement {
+  return el('p', { class: 'ring-card__gathering muted' }, [el('span', { class: 'ring-card__pulse', 'aria-hidden': 'true' }), label]);
+}
+
 /**
  * Build the card for one ring. The card is an <article> with the id
  * `ring-<level>` and tabindex -1 so the ring strip can scroll to it and
  * move focus there; its heading is the ring's name. The body follows the
  * ring's status: a skeleton while loading, the facts when there are any,
  * and the ring's note (or a generic line) when it is empty. A note on a
- * ring that does have facts is shown under them. An empty ring gets a
- * compact card (class `ring-card--compact`): outside Seattle the house,
- * block and street have no data source yet, and three tall empty cards
- * would push the real story off the screen.
+ * ring that does have facts is shown under them. The card is aria-busy
+ * while loading and, for a ring that already shows facts, while its
+ * `busy` flag says another source still owes it an answer (then a
+ * "still gathering" line follows the facts). An empty ring gets a compact
+ * card (class `ring-card--compact`): outside Seattle the house, block and
+ * street have no data source yet, and three tall empty cards would push
+ * the real story off the screen.
  */
 export function renderRingCard(ring: Ring): HTMLElement {
   const nameId = `${cardId(ring.level)}-name`;
+  const busy = ring.status === 'loading' || ring.busy === true;
   const card = el('article', {
-    class: `ring-card is-${ring.status}${ring.status === 'empty' ? ' ring-card--compact' : ''}`,
+    class: `ring-card is-${ring.status}${ring.status === 'empty' ? ' ring-card--compact' : ''}${busy ? ' is-busy' : ''}`,
     id: cardId(ring.level),
     'data-level': ring.level,
     tabindex: '-1',
     'aria-labelledby': nameId,
+    ...(busy ? { 'aria-busy': 'true' } : {}),
   });
 
   const eyebrow = el('p', { class: 'eyebrow' }, [
@@ -226,7 +239,6 @@ export function renderRingCard(ring: Ring): HTMLElement {
   const body = el('div', { class: 'ring-card__body' });
   switch (ring.status) {
     case 'loading':
-      card.setAttribute('aria-busy', 'true');
       body.append(renderSkeleton());
       break;
     case 'rich':
@@ -235,6 +247,7 @@ export function renderRingCard(ring: Ring): HTMLElement {
       for (const fact of ring.facts) list.append(renderFact(fact));
       body.append(list);
       if (ring.note) body.append(el('p', { class: 'ring-card__note muted' }, [ring.note]));
+      if (busy) body.append(renderGathering());
       break;
     }
     case 'empty':
