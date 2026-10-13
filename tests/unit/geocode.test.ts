@@ -7,6 +7,7 @@ import emptyAnswer from '../fixtures/geocode/nominatim-empty.json';
 import reverseAnswer from '../fixtures/geocode/nominatim-reverse.json';
 import reverseError from '../fixtures/geocode/nominatim-reverse-error.json';
 import photonSpaceNeedle from '../fixtures/geocode/photon-space-needle.json';
+import paradise from '../fixtures/geocode/nominatim-paradise.json';
 
 // ---------------------------------------------------------------------------
 // Mocks for the shared infrastructure. No network ever runs in these tests:
@@ -65,14 +66,20 @@ import {
   geocode,
   geocodePhoton,
   geocodeWithFallback,
+  hasStreetNumber,
   isInWashington,
+  isPreciseForQuery,
   isPreciseNominatim,
+  mentionsQueryHead,
   nominatimSearchUrl,
   normaliseAddress,
   normaliseQuery,
   parseLngLat,
   placeFromNominatim,
+  queryHead,
+  rankNominatimResults,
   reverseGeocode,
+  streetNumberIn,
 } from '../../src/lib/geocode';
 
 const SEATTLE: LngLat = { lng: -122.3493, lat: 47.6205 };
@@ -301,6 +308,109 @@ describe('isPreciseNominatim', () => {
     ['a city', { category: 'boundary', type: 'administrative', addresstype: 'city', place_rank: 16 }, false],
   ])('%s', (_label, result, expected) => {
     expect(isPreciseNominatim(result)).toBe(expected);
+  });
+});
+
+describe('ranking and precision for the query that was typed', () => {
+  const PARADISE_QUERY = 'Paradise, Mount Rainier National Park, WA';
+
+  it('reads a street number only from the start of the query', () => {
+    expect(streetNumberIn('400 Broad St, Seattle, WA')).toBe('400');
+    expect(streetNumberIn('  2a Main St')).toBe('2a');
+    expect(hasStreetNumber('400 Broad St, Seattle, WA')).toBe(true);
+    expect(hasStreetNumber('Space Needle')).toBe(false);
+    expect(hasStreetNumber(PARADISE_QUERY)).toBe(false);
+    expect(hasStreetNumber('98101')).toBe(false); // a ZIP code, not a number and a street
+    expect(hasStreetNumber('47.6205, -122.3493')).toBe(false);
+  });
+
+  it('takes the first comma-separated part as the name the visitor meant', () => {
+    expect(queryHead(PARADISE_QUERY)).toBe('paradise');
+    expect(queryHead('  Space   Needle ')).toBe('space   needle');
+    expect(mentionsQueryHead('Space Needle', spaceNeedle[0]!)).toBe(true);
+    expect(mentionsQueryHead(PARADISE_QUERY, paradise[0]!)).toBe(false); // the Enumclaw office
+    expect(mentionsQueryHead(PARADISE_QUERY, paradise[1]!)).toBe(true); // the locality
+    expect(mentionsQueryHead('', spaceNeedle[0]!)).toBe(false);
+    // Typed without commas, the whole line is the first part; the result's own name inside it still counts.
+    expect(mentionsQueryHead('Space Needle Seattle WA', spaceNeedle[0]!)).toBe(true);
+    expect(mentionsQueryHead('the space needle', spaceNeedle[0]!)).toBe(true);
+    expect(mentionsQueryHead('Paradise Mount Rainier National Park WA', paradise[0]!)).toBe(false);
+    expect(mentionsQueryHead('Paradise Mount Rainier National Park WA', paradise[1]!)).toBe(true);
+    // A result with a tiny name cannot match every query that happens to contain those letters.
+    expect(mentionsQueryHead('Paradise', { ...paradise[1]!, name: 'Pa', display_name: 'Pa' })).toBe(false);
+  });
+
+  it('calls a building precise only when the query had a street number or names it', () => {
+    // The Enumclaw office is a rank-30 result with a house number, so by
+    // itself it looks like one building...
+    expect(isPreciseNominatim(paradise[0]!)).toBe(true);
+    // ...but the visitor asked for Paradise, which it merely mentions.
+    expect(isPreciseForQuery(PARADISE_QUERY, paradise[0]!)).toBe(false);
+    expect(isPreciseForQuery(PARADISE_QUERY, paradise[1]!)).toBe(false); // a locality is never precise
+    expect(isPreciseForQuery('Space Needle', spaceNeedle[0]!)).toBe(true);
+    expect(isPreciseForQuery('Space Needle Seattle WA', spaceNeedle[0]!)).toBe(true);
+    expect(isPreciseForQuery('400 Broad St, Seattle, WA', spaceNeedle[0]!)).toBe(true);
+    // A street number makes any building-level match count, named or not.
+    expect(isPreciseForQuery('450 Roosevelt Ave E, Enumclaw, WA', paradise[0]!)).toBe(true);
+  });
+
+  it('ranks a place ahead of an office named after it, and keeps the order otherwise', () => {
+    expect(rankNominatimResults(PARADISE_QUERY, paradise).map((r) => r.type)).toEqual(['locality', 'government']);
+    // With a street number the order is Nominatim's own.
+    expect(rankNominatimResults('450 Roosevelt Ave E, Enumclaw, WA', paradise).map((r) => r.type)).toEqual(['government', 'locality']);
+    // Nominatim's order is kept within a group, and the input is not changed.
+    const reversed = [paradise[1]!, paradise[0]!];
+    expect(rankNominatimResults(PARADISE_QUERY, reversed).map((r) => r.type)).toEqual(['locality', 'government']);
+    expect(paradise.map((r) => r.type)).toEqual(['government', 'locality']);
+    // A result called by the query's first part moves up even as a POI.
+    const needleFirst = [paradise[0]!, spaceNeedle[0]!];
+    expect(rankNominatimResults('Space Needle', needleFirst).map((r) => r.name)).toEqual(['Space Needle', paradise[0]!.name]);
+  });
+
+  it('geocodes "Paradise, Mount Rainier National Park, WA" to the locality, not the Enumclaw office', async () => {
+    mocks.fetchJson.mockResolvedValueOnce(paradise);
+    const places = await geocode(PARADISE_QUERY);
+    expect(places).toHaveLength(2);
+    const [best, office] = places;
+    expect(best?.displayName).toBe('Paradise, Pierce County, Washington, United States');
+    expect(best?.point.lat).toBeCloseTo(46.78602, 4);
+    expect(best?.point.lng).toBeCloseTo(-121.73525, 4);
+    expect(best?.precise).toBe(false);
+    expect(best?.address.county).toBe('Pierce County');
+    // The office is still offered, second, and no longer passes for one building.
+    expect(office?.address.city).toBe('Enumclaw');
+    expect(office?.precise).toBe(false);
+    // So the page's "first precise result, else the first" rule picks Paradise.
+    expect(places.find((p) => p.precise) ?? places[0]).toBe(best);
+  });
+
+  it('keeps the Space Needle precise by name, and a numbered address unchanged', async () => {
+    mocks.fetchJson.mockResolvedValueOnce(spaceNeedle);
+    expect(first(await geocode('Space Needle')).precise).toBe(true);
+    mocks.fetchJson.mockResolvedValueOnce(spaceNeedle);
+    expect(first(await geocode('Space Needle Seattle WA')).precise).toBe(true);
+    // Named places and a ZIP code are never precise and keep Nominatim's order.
+    mocks.fetchJson.mockResolvedValueOnce([paradise[1]!]);
+    expect(first(await geocode('Mount Rainier')).precise).toBe(false);
+    mocks.fetchJson.mockResolvedValueOnce([paradise[1]!]);
+    expect(first(await geocode('PO Box 1, Spokane, WA')).precise).toBe(false);
+    mocks.fetchJson.mockResolvedValueOnce([paradise[1]!]);
+    expect(first(await geocode('98101')).precise).toBe(false);
+    mocks.fetchJson.mockResolvedValueOnce(spaceNeedle);
+    const numbered = first(await geocode('400 Broad St, Seattle, WA'));
+    expect(numbered.precise).toBe(true);
+    expect(numbered.displayName).toMatch(/^Space Needle, 400, Broad Street/);
+    expect(numbered.address.houseNumber).toBe('400');
+    // The Spokane answer (house point first, city second) keeps Nominatim's order.
+    mocks.fetchJson.mockResolvedValueOnce(spokaneAddress);
+    const spokane = await geocode('808 W Spokane Falls Blvd, Spokane');
+    expect(spokane.map((p) => p.precise)).toEqual([true, false]);
+  });
+
+  it('leaves reverse geocoding on the plain building rule (the "query" is only coordinates)', async () => {
+    mocks.fetchJson.mockResolvedValueOnce(reverseAnswer);
+    const place = await reverseGeocode(SEATTLE);
+    expect(place?.precise).toBe(isPreciseNominatim(reverseAnswer));
   });
 });
 

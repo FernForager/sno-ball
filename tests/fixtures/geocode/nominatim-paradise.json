@@ -1,0 +1,65 @@
+[
+  {
+    "place_id": 318204911,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 4876234509,
+    "lat": "47.19891",
+    "lon": "-121.97422",
+    "category": "office",
+    "type": "government",
+    "place_rank": 30,
+    "importance": 0.21,
+    "addresstype": "office",
+    "name": "National Forest Service - Mount Rainier National Park",
+    "display_name": "National Forest Service - Mount Rainier National Park, 450, Roosevelt Avenue East, Enumclaw, King County, Washington, 98022, United States",
+    "address": {
+      "office": "National Forest Service - Mount Rainier National Park",
+      "house_number": "450",
+      "road": "Roosevelt Avenue East",
+      "city": "Enumclaw",
+      "county": "King County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "postcode": "98022",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {},
+    "namedetails": {
+      "name": "National Forest Service - Mount Rainier National Park"
+    },
+    "boundingbox": ["47.19886", "47.19896", "-121.97427", "-121.97417"]
+  },
+  {
+    "place_id": 299731544,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 150949121,
+    "lat": "46.78602",
+    "lon": "-121.73525",
+    "category": "place",
+    "type": "locality",
+    "place_rank": 20,
+    "importance": 0.18,
+    "addresstype": "locality",
+    "name": "Paradise",
+    "display_name": "Paradise, Pierce County, Washington, United States",
+    "address": {
+      "locality": "Paradise",
+      "county": "Pierce County",
+      "state": "Washington",
+      "ISO3166-2-lvl4": "US-WA",
+      "country": "United States",
+      "country_code": "us"
+    },
+    "extratags": {
+      "wikidata": "Q7134205",
+      "wikipedia": "en:Paradise, Washington"
+    },
+    "namedetails": {
+      "name": "Paradise"
+    },
+    "boundingbox": ["46.76602", "46.80602", "-121.75525", "-121.71525"]
+  }
+]

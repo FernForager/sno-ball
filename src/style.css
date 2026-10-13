@@ -490,8 +490,25 @@ img, svg { max-width: 100%; }
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
+/* A card that already shows facts but is still waiting on another source. */
+.ring-card__gathering {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.6rem 0 0;
+  font-size: 0.8125rem;
+}
+.ring-card__pulse {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--skeleton) 0%, var(--skeleton-shine) 50%, var(--skeleton) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .skeleton__line { animation: none; }
+  .skeleton__line, .ring-card__pulse { animation: none; }
   html { scroll-behavior: auto; }
 }
 

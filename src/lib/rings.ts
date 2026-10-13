@@ -15,11 +15,15 @@
  *   'rich'     two or more facts
  *   'thin'     exactly one fact
  *   'empty'    no facts, or no name to look up (then `note` says why)
+ *
+ * A ring's `busy` flag is separate from its status: a 'thin' or 'rich' ring
+ * is still busy while another source owes it an answer (isRingBusy).
  */
 
 import type { AddressParts, Fact, Place, Ring, RingLevel, RingStatus } from './types';
 import { RING_ORDER } from './types';
 import { regionOf } from '../data/wa-regions';
+import { streetNumberIn } from './geocode';
 
 /** Short headings for each ring level, for the page. */
 export const RING_LABELS: Readonly<Record<RingLevel, string>> = {
@@ -39,7 +43,9 @@ const PLACEHOLDER_NAME: Readonly<Record<RingLevel, string>> = {
   house: 'This spot',
   block: 'This block',
   street: 'This street',
-  neighborhood: 'This neighborhood',
+  // A plain heading, not "This neighborhood": it is read out as an h2 between
+  // a real street and a real city (format.ts knows to skip it in the hero).
+  neighborhood: 'Neighborhood',
   city: 'Unincorporated area',
   county: 'This county',
   region: 'This region',
@@ -52,7 +58,7 @@ const EMPTY_NOTE: Readonly<Record<RingLevel, string>> = {
   house: 'This search matched a general area, not a specific lot.',
   block: 'We could not tell which street this spot is on, so there is no block to describe.',
   street: 'We could not tell which street this spot is on.',
-  neighborhood: 'The map has no named neighborhood for this spot.',
+  neighborhood: 'No named neighborhood here in OpenStreetMap.',
   city: 'This spot is not inside a city or town, as far as the map knows.',
   county: "We couldn't tell which county this spot is in.",
   region: "We couldn't tell which corner of Washington this spot is in.",
@@ -76,7 +82,7 @@ export function cityName(address: AddressParts): string | undefined {
  * parts, or undefined when there is nothing to call it. The rules:
  *   house         "<number> <road>" when the match is precise (or "This lot"
  *                 when precise but the parts are missing); nothing otherwise
- *   block         "the block of <road>"
+ *   block         "The block of <road>"
  *   street        the road
  *   neighborhood  neighbourhood, else suburb
  *   city          city, else town, else village
@@ -95,7 +101,7 @@ export function ringName(level: RingLevel, place: Place): string | undefined {
       return number && road ? `${number} ${road}` : 'This lot';
     }
     case 'block':
-      return road ? `the block of ${road}` : undefined;
+      return road ? `The block of ${road}` : undefined;
     case 'street':
       return road;
     case 'neighborhood':
@@ -116,11 +122,27 @@ export function ringName(level: RingLevel, place: Place): string | undefined {
 }
 
 /**
+ * The note for the house ring when the visitor typed a street number the
+ * geocoder could not find, so it fell back to the street ("2 N Main St,
+ * Omak" -> Main Street South). The ring keeps its placeholder name; this
+ * line says that the number itself is missing rather than letting the
+ * street pass for what was asked. Undefined when the query had no number,
+ * the result does carry a house number, or there is no street to speak of.
+ */
+export function missingNumberNote(place: Place): string | undefined {
+  const typed = streetNumberIn(place.query);
+  if (!typed || text(place.address.houseNumber) || !text(place.address.road)) return undefined;
+  return `Number ${typed} isn't on the map yet, so this is the street.`;
+}
+
+/**
  * One Ring per level in RING_ORDER for a geocoded place. Rings with a name
  * start as 'loading' with no facts; rings the address cannot name start as
  * 'empty' with a placeholder name and a note saying why (for example the
- * house ring when the geocoder matched a whole street rather than one lot).
- * The result is a fresh array of fresh objects, safe to hand to the UI.
+ * house ring when the geocoder matched a whole street rather than one lot;
+ * when the visitor had typed a number, the note names it, see
+ * missingNumberNote). The result is a fresh array of fresh objects, safe
+ * to hand to the UI.
  */
 export function buildRings(place: Place): Ring[] {
   return RING_ORDER.map((level): Ring => {
@@ -128,8 +150,33 @@ export function buildRings(place: Place): Ring[] {
     if (name !== undefined) {
       return { level, name, facts: [], status: 'loading' };
     }
-    return { level, name: PLACEHOLDER_NAME[level], facts: [], status: 'empty', note: EMPTY_NOTE[level] };
+    const note = (level === 'house' ? missingNumberNote(place) : undefined) ?? EMPTY_NOTE[level];
+    return { level, name: PLACEHOLDER_NAME[level], facts: [], status: 'empty', note };
   });
+}
+
+/**
+ * Should a ring's card be marked busy (aria-busy, with a "still gathering"
+ * hint)? Yes while it is 'loading', and yes while it already shows facts
+ * ('thin' or 'rich') but `pending` sources still owe it an answer, so a
+ * card never looks settled while the status line says the story is still
+ * being gathered. An 'empty' ring is never busy: its note is final, and a
+ * source that later names it sets the ring 'loading' first.
+ */
+export function isRingBusy(status: RingStatus, pending: number): boolean {
+  if (status === 'loading') return true;
+  return status !== 'empty' && pending > 0;
+}
+
+/**
+ * The ring with its `busy` flag set or cleared. Returns the SAME object
+ * when the flag already matches, so the UI (which rebuilds only the cards
+ * whose ring object changed) leaves the card alone.
+ */
+export function markRingBusy(ring: Ring, busy: boolean): Ring {
+  if ((ring.busy ?? false) === busy) return ring;
+  const { busy: _old, ...rest } = ring;
+  return busy ? { ...rest, busy: true } : rest;
 }
 
 /** The status a ring deserves for a given number of facts: 2+ rich, 1 thin, 0 empty. */

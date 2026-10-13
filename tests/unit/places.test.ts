@@ -479,6 +479,10 @@ describe('wikidataIdForTitle', () => {
     expect(url).toContain('format=json');
     expect(url).toContain('origin=*');
     expect(url).toContain('redirects=1');
+    // Like the summary call, a 429 is retried once after Retry-After (Neah
+    // Bay lost its Wikidata id to a 429 that was given up at once), and no
+    // custom header is sent (one would force a CORS preflight).
+    expect(mocks.fetchJson).toHaveBeenCalledWith(url, { retries: 1 });
   });
 
   it('resolves to undefined for a missing page, and caches the miss for 30 days', async () => {

@@ -304,12 +304,101 @@ export function isPreciseNominatim(r: NominatimResult): boolean {
   return false;
 }
 
+// ---------------------------------------------------------------------------
+// Matching results to what was typed
+// ---------------------------------------------------------------------------
+
+/**
+ * The street number the visitor typed, when the query starts with one
+ * ("400 Broad St" -> "400", "2a Main St" -> "2a"), or undefined for a named
+ * place ("Space Needle", "Paradise, Mount Rainier National Park, WA").
+ */
+export function streetNumberIn(query: string): string | undefined {
+  return /^\s*(\d+[a-z]?)\s/i.exec(query)?.[1];
+}
+
+/** True when the query starts with a street number. */
+export function hasStreetNumber(query: string): boolean {
+  return streetNumberIn(query) !== undefined;
+}
+
+/**
+ * The first comma-separated part of a query, trimmed and lower-cased: the
+ * name the visitor most likely meant ("paradise" from "Paradise, Mount
+ * Rainier National Park, WA").
+ */
+export function queryHead(query: string): string {
+  return (query.split(',')[0] ?? '').trim().toLowerCase();
+}
+
+/**
+ * Is the result called by the query's first part? True when the display
+ * name contains that part (ignoring case): "Space Needle" is found in
+ * "Space Needle, 400, Broad Street, ...". A query typed without commas
+ * ("Space Needle Seattle WA") has the whole line as its first part, so the
+ * other direction counts too: the result's own name (three letters or
+ * more, so a one-letter name cannot match everything) found in the query.
+ * Neither direction connects "Paradise" with the Enumclaw office.
+ */
+export function mentionsQueryHead(query: string, r: NominatimResult): boolean {
+  const head = queryHead(query);
+  if (head === '') return false;
+  if ((r.display_name ?? '').toLowerCase().includes(head)) return true;
+  const name = (r.name ?? '').trim().toLowerCase();
+  return name.length >= 3 && head.includes(name);
+}
+
+/** OSM classes that are points of interest: an office named after a park is not the park. */
+const POI_CLASSES: ReadonlySet<string> = new Set(['amenity', 'office', 'shop', 'tourism', 'leisure', 'craft']);
+/** OSM classes that are places in their own right: towns, localities, peaks, boundaries. */
+const PLACE_CLASSES: ReadonlySet<string> = new Set(['place', 'natural', 'boundary']);
+
+/** The OSM class of a result, whichever field Nominatim put it in. */
+function nominatimClass(r: NominatimResult): string {
+  return (r.category ?? r.class ?? '').toLowerCase();
+}
+
+/**
+ * Is this result precise FOR THIS QUERY? isPreciseNominatim says whether
+ * the result is one building; this also asks whether it is the building
+ * the visitor meant. A typed street number ("400 Broad St") asks for one
+ * address, so any building-level match counts. A name alone counts only
+ * when the result is called by it: "Space Needle" stays precise, but
+ * "Paradise, Mount Rainier National Park, WA" must not become a confident
+ * story about the "National Forest Service - Mount Rainier National Park"
+ * office in Enumclaw just because that office has a street number.
+ */
+export function isPreciseForQuery(query: string, r: NominatimResult): boolean {
+  if (!isPreciseNominatim(r)) return false;
+  return hasStreetNumber(query) || mentionsQueryHead(query, r);
+}
+
+/**
+ * Nominatim's results in the order the site should consider them. With a
+ * street number in the query the order is Nominatim's own. Without one the
+ * visitor named a place, so results that are places (class place, natural
+ * or boundary) or are called by the query's first part move ahead of
+ * points of interest (amenity, office, shop, tourism, leisure, craft) and
+ * anything else; within each group Nominatim's order is kept. Pure, so it
+ * can be tested with a saved answer.
+ */
+export function rankNominatimResults(query: string, results: readonly NominatimResult[]): NominatimResult[] {
+  if (hasStreetNumber(query)) return [...results];
+  const isPlace = (r: NominatimResult): boolean => PLACE_CLASSES.has(nominatimClass(r)) || mentionsQueryHead(query, r);
+  const isPoi = (r: NominatimResult): boolean => POI_CLASSES.has(nominatimClass(r));
+  const rank = (r: NominatimResult): number => (isPlace(r) ? 0 : isPoi(r) ? 2 : 1);
+  // Array.prototype.sort is stable, so ties keep Nominatim's order.
+  return [...results].sort((a, b) => rank(a) - rank(b));
+}
+
 /**
  * Convert one Nominatim result into a Place. Returns null when the result has
  * no usable coordinates or lies outside Washington (outside WA_BBOX, or with
- * an address in another state).
+ * an address in another state). `precise` defaults to isPreciseNominatim(r);
+ * a search passes isPreciseForQuery so a building is only called precise
+ * when it is the one the visitor asked for.
  */
-export function placeFromNominatim(query: string, r: NominatimResult): Place | null {
+export function placeFromNominatim(query: string, r: NominatimResult, precise: boolean = isPreciseNominatim(r)): Place | null {
   const point: LngLat = { lng: Number(r.lon), lat: Number(r.lat) };
   if (!isInWashington(point)) return null;
   const address = normaliseAddress(r.address);
@@ -320,7 +409,7 @@ export function placeFromNominatim(query: string, r: NominatimResult): Place | n
     displayName: r.display_name?.trim() || r.name?.trim() || formatLngLat(point),
     address,
     ...osmRef(r.osm_type, r.osm_id),
-    precise: isPreciseNominatim(r),
+    precise,
     source: NOMINATIM_SOURCE,
   };
 }
@@ -428,8 +517,10 @@ export function photonSearchUrl(query: string): string {
 
 /**
  * Search Nominatim for a Washington address or place name. Returns up to five
- * Places inside Washington, best match first, or an empty array when nothing
- * matched. Blank input returns [] without a request. Throws HttpError (from
+ * Places inside Washington, best match first (Nominatim's order, except that
+ * for a query without a street number real places are ranked ahead of
+ * points of interest; see rankNominatimResults), or an empty array when
+ * nothing matched. Blank input returns [] without a request. Throws HttpError (from
  * ./http) when Nominatim answers with an error status, so callers can fall
  * back; geocodeWithFallback does that for you. Answers are cached for 30 days
  * and requests are paced at one per 1.1 s (see POLICY at the top).
@@ -443,8 +534,8 @@ export async function geocode(query: string): Promise<Place[]> {
     limiterFor(NOMINATIM_HOST).run(() => fetchJson<NominatimResult[]>(url, { retryOn429: false })),
   );
   if (!Array.isArray(raw)) return [];
-  return raw
-    .map((r) => placeFromNominatim(query, r))
+  return rankNominatimResults(query, raw)
+    .map((r) => placeFromNominatim(query, r, isPreciseForQuery(query, r)))
     .filter((place): place is Place => place !== null);
 }
 

@@ -73,6 +73,13 @@ export interface Ring {
   status: RingStatus;
   /** One line explaining an empty or thin ring, e.g. "No records for this lot in open data yet." */
   note?: string;
+  /**
+   * True while a data source still owes this ring an answer after some
+   * facts have already landed: the card shows them but stays aria-busy.
+   * Absent (or false) once every source has answered. The page sets it
+   * (see isRingBusy in rings.ts); the ring helpers leave it alone.
+   */
+  busy?: boolean;
 }
 
 /** The address parts a geocoder gives back, normalised. */

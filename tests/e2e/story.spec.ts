@@ -128,8 +128,13 @@ test('a search fills every ring from the stubbed services', async ({ page }) => 
   // The caption is a short label at the top of the postcard, not the geocoder's long comma list.
   await expect(page.locator('.postcard__name')).toHaveText('400 Broad Street, Seattle');
 
-  // Screen readers are told the story is ready.
+  // Screen readers are told the story is ready, and by then no card is
+  // still marked busy or says it is gathering: a card drops aria-busy only
+  // when its LAST source has answered, not its first.
   await expect(page.locator('.story__status')).toContainText('Story ready', { timeout: 15_000 });
+  await expect(page.locator('.ring-card[aria-busy="true"]')).toHaveCount(0);
+  await expect(page.locator('.ring-card__gathering')).toHaveCount(0);
+  await expect(page.locator('.ring-card.is-busy')).toHaveCount(0);
 
   // The postcard has a real map area (MapLibre's own CSS must not collapse it).
   const mapBox = await page.locator('.postcard__map').boundingBox();

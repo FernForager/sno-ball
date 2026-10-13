@@ -54,7 +54,7 @@ const ring = (level: Ring['level'], name: string, status: Ring['status'] = 'load
 
 const fullRings: Ring[] = [
   ring('house', '400 Broad Street'),
-  ring('block', 'the block of Broad Street'),
+  ring('block', 'The block of Broad Street'),
   ring('street', 'Broad Street'),
   ring('neighborhood', 'Lower Queen Anne'),
   ring('city', 'Seattle'),
@@ -213,7 +213,7 @@ describe('heroSentence', () => {
     const rings: Ring[] = [
       { ...ring('house', 'This spot', 'empty'), note: 'general area' },
       ring('street', 'Mountain Loop Highway'),
-      ring('neighborhood', 'This neighborhood', 'empty'),
+      ring('neighborhood', 'Neighborhood', 'empty'),
       ring('city', 'Unincorporated area', 'empty'),
       ring('county', 'Snohomish County'),
     ];
@@ -246,6 +246,30 @@ describe('heroSentence', () => {
     expect(heroSentence(noRoad, [])).toBe('This spot sits in Seattle.');
     const imprecise: Place = { ...spaceNeedle, precise: false };
     expect(heroSentence(imprecise, [])).toBe('Broad Street sits in South Lake Union, in Seattle, King County.');
+  });
+
+  it('says "under glacier ice" or "under open water" for a unit that is a bare material', () => {
+    // "Mount Rainier": the summit, no city, the DNR unit is literally "ice".
+    const summit: Place = {
+      ...spaceNeedle,
+      query: 'Mount Rainier',
+      displayName: 'Mount Rainier, Pierce County, Washington, United States',
+      precise: false,
+      address: { county: 'Pierce County', state: 'Washington', country: 'United States' },
+    };
+    const rings: Ring[] = [
+      { ...ring('house', 'This spot', 'empty'), note: 'general area' },
+      ring('city', 'Unincorporated area', 'empty'),
+      ring('county', 'Pierce County'),
+    ];
+    const ice: GeologyUnit = { symbol: 'ice', name: 'ice', age: '', source: DNR };
+    expect(heroSentence(summit, rings, ice)).toBe('This spot sits in Pierce County, under glacier ice.');
+    const water: GeologyUnit = { symbol: 'water', name: 'Water', age: '', source: DNR };
+    expect(heroSentence(summit, rings, water)).toBe('This spot sits in Pierce County, under open water.');
+    // An age on such a unit is ignored too: "under glacier ice", not "on Holocene ice".
+    expect(heroSentence(summit, rings, { ...ice, age: 'Holocene' })).toBe('This spot sits in Pierce County, under glacier ice.');
+    // A real rock unit still gets "on".
+    expect(heroSentence(summit, rings, till)).toBe('This spot sits in Pierce County, on Pleistocene continental glacial till.');
   });
 
   it('adds the age in front of a rock name that does not already carry it', () => {
