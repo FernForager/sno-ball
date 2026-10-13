@@ -23,9 +23,15 @@ const json = (path: string) => ({ status: 200, contentType: 'application/json', 
  * that the rock card settles honestly instead of shimmering forever. With
  * `cityFoundedIn`, the site's own place file is served with Seattle's
  * founding moved to that year, so the dial's "not yet" state can be seen
- * at a stop the real city already existed at.
+ * at a stop the real city already existed at. With `ohmDelayMs`, the
+ * OpenHistoricalMap TileJSON takes that long to answer, which keeps the
+ * map "not fully loaded" in MapLibre's eyes for as long: the window in
+ * which a dial move must still be drawn.
  */
-async function stubServices(page: Page, opts: { geologyDown?: boolean; cityFoundedIn?: number } = {}): Promise<{ url: string; at: number }[]> {
+async function stubServices(
+  page: Page,
+  opts: { geologyDown?: boolean; cityFoundedIn?: number; ohmDelayMs?: number } = {},
+): Promise<{ url: string; at: number }[]> {
   const log: { url: string; at: number }[] = [];
   if (opts.cityFoundedIn !== undefined) {
     const year = opts.cityFoundedIn;
@@ -70,7 +76,10 @@ async function stubServices(page: Page, opts: { geologyDown?: boolean; cityFound
     // stand-in OpenHistoricalMap TileJSON; the sheet images and the vector
     // tiles themselves are blocked like every other tile.
     if (hostname === 'historical1.arcgis.com' && pathname.endsWith('/query')) return route.fulfill(json('map/usgs-topo-catalog.json'));
-    if (hostname === 'vtiles.openhistoricalmap.org' && pathname === '/maps/ohm.json') return route.fulfill(json('map/ohm-tilejson.json'));
+    if (hostname === 'vtiles.openhistoricalmap.org' && pathname === '/maps/ohm.json') {
+      if (opts.ohmDelayMs) await new Promise((resolve) => setTimeout(resolve, opts.ohmDelayMs));
+      return route.fulfill(json('map/ohm-tilejson.json'));
+    }
     if (hostname === 'services.arcgis.com') {
       if (pathname.includes('/nma_nhoods_sub/')) return route.fulfill(json('rings/seattle-nhood-space-needle.json'));
       if (pathname.includes('/Annexation/')) return route.fulfill(json('rings/seattle-annexation-space-needle.json'));
@@ -396,6 +405,61 @@ test('the time dial re-tells the story at every stop without asking the services
   // Nothing but map layers and the plate model was asked for while turning the dial.
   const asked = log.slice(outsideBefore).map((r) => new URL(r.url).hostname);
   expect(asked.filter((h) => !DIAL_HOSTS.includes(h))).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
+test('the map follows the dial while tiles are still loading, and the dial speaks once it rests', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  // The OHM TileJSON takes fifteen seconds (nothing else waits on it), so
+  // from the first historical stop the map counts as "still loading" in
+  // MapLibre's eyes for the rest of the test.
+  const log = await stubServices(page, { ohmDelayMs: 15_000 });
+
+  await page.goto('/sno-ball/');
+  await page.getByRole('search').locator('.chip', { hasText: 'Space Needle' }).click();
+  await expect(page.locator('.story__status')).toContainText('Story ready', { timeout: 15_000 });
+
+  const dial = page.locator('.dial');
+  const readout = dial.locator('.dial__readout');
+  const announcer = dial.locator('.dial__announcer');
+  const note = page.locator('.postcard__era');
+  // The visible readout is not a live region; the hidden announcer is, and
+  // it says nothing at mount.
+  await expect(readout).not.toHaveAttribute('aria-live', /.*/);
+  await expect(announcer).toHaveAttribute('aria-live', 'polite');
+  await expect(announcer).toHaveText('');
+
+  // Four quick steps back: the announcer and the status line report only
+  // where the dial came to rest, not every stop on the way.
+  const earlier = dial.getByRole('button', { name: 'Earlier chapter' });
+  await earlier.focus();
+  for (let i = 0; i < 4; i += 1) await page.keyboard.press('ArrowLeft');
+  await expect(readout).toContainText('Lake Washington drops nine feet');
+  await expect(announcer).toHaveText(/Lake Washington drops nine feet/);
+  await expect(page.locator('.story__status')).toContainText('As of 1916');
+  expect(await page.locator('.story__status').textContent()).not.toContain('1980');
+
+  if ((await page.locator('.postcard__note').count()) === 0) {
+    await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'historical');
+    // Only the stop the dial rested on had its USGS sheet fetched: at most
+    // one sheet's tiles (plus one for a zoom change) were asked for.
+    await expect(note).toContainText('USGS', { timeout: 10_000 });
+    const sheetIds = new Set(
+      log
+        .map((r) => /lockRasterIds%22%3A%5B(\d+)%5D/.exec(r.url)?.[1] ?? /lockRasterIds":\[(\d+)\]/.exec(decodeURIComponent(r.url))?.[1])
+        .filter((id): id is string => id !== undefined),
+    );
+    expect(sheetIds.size).toBeLessThanOrEqual(2);
+
+    // Straight back to Now while the OHM TileJSON is still on its way: the
+    // map must be today's again (the note gone), not stuck in 1916.
+    await dial.getByRole('button', { name: 'Back to now' }).click();
+    await expect(readout).toHaveText('Today');
+    await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'today');
+    await expect(note).toBeHidden();
+    await expect(announcer).toHaveText('Today');
+  }
   expect(errors).toEqual([]);
 });
 

@@ -2615,7 +2615,7 @@
    "title": "Kingdome opens and is imploded",
    "when": "March 27, 1976 - March 26, 2000",
    "start_years_ago": 24,
-   "end_years_ago": 0,
+   "end_years_ago": -0.23,
    "region": [
     "Seattle"
    ],

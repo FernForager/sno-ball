@@ -21,7 +21,10 @@
  *   Now (and Home)       back to the 'now' stop
  *   Escape               closes the sheet
  *
- * The readout is an aria-live region, so a screen reader hears each move.
+ * A visually hidden aria-live region beside the readout tells a screen
+ * reader where the dial has landed, 400 ms after the last move: a held ◀
+ * steps three times a second, and announcing every step would queue a
+ * dozen half-heard readouts. The visible readout itself is not live.
  * When a move crosses from one gear into another the phone buzzes for
  * 10 ms (where the browser allows), and the page's `--era-tint` variable
  * changes to the new gear's colour. Everything is built with DOM nodes
@@ -149,6 +152,8 @@ const GEAR_WORDS: Readonly<Record<Gear, string>> = {
 
 export const JUMP_ERROR = "I don't understand that time";
 const REPEAT_MS = 350;
+/** How long the dial must rest before the live region announces where it is. */
+export const ANNOUNCE_MS = 400;
 const EXPAND_LABEL = 'Show chapters';
 const COLLAPSE_LABEL = 'Hide chapters';
 
@@ -239,7 +244,17 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
 
   // --- The collapsed bar ---------------------------------------------------
   const readoutText = el('span', { class: 'dial__readout-text' });
-  const readout = el('div', { class: 'dial__readout', 'aria-live': 'polite', 'aria-atomic': 'true' }, [readoutText]);
+  const readout = el('div', { class: 'dial__readout' }, [readoutText]);
+  // Off screen, live: what a screen reader hears once the dial has rested.
+  const announcer = el('div', { class: 'dial__announcer', 'aria-live': 'polite', 'aria-atomic': 'true' });
+  let announceTimer: ReturnType<typeof setTimeout> | null = null;
+  const announce = (text: string): void => {
+    if (announceTimer !== null) clearTimeout(announceTimer);
+    announceTimer = setTimeout(() => {
+      announceTimer = null;
+      announcer.textContent = text;
+    }, ANNOUNCE_MS);
+  };
   const earlier = el('button', { type: 'button', class: 'dial__step dial__step--earlier', 'aria-label': 'Earlier chapter' }, ['◀']);
   const later = el('button', { type: 'button', class: 'dial__step dial__step--later', 'aria-label': 'Later chapter' }, ['▶']);
   const topRow = el('div', { class: 'dial__row dial__row--readout' }, [earlier, readout, later]);
@@ -249,7 +264,7 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
   const toggle = el('button', { type: 'button', class: 'dial__toggle', 'aria-expanded': 'false', 'aria-controls': panelId, 'aria-label': EXPAND_LABEL }, [chevron()]);
   const bottomRow = el('div', { class: 'dial__row dial__row--meta' }, [teaser, nowButton, toggle]);
 
-  const bar = el('div', { class: 'dial__bar' }, [topRow, bottomRow]);
+  const bar = el('div', { class: 'dial__bar' }, [topRow, bottomRow, announcer]);
 
   // --- The expanded panel --------------------------------------------------
   const chapterButtons = new Map<number, HTMLButtonElement>();
@@ -324,10 +339,12 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
     sheet.setAttribute('data-gear', gear);
   };
 
-  const render = (): void => {
+  /** Draw the current stop; with `moved`, also queue it for the live region. */
+  const render = (moved = false): void => {
     const named = namedByIndex.get(current.index);
     const text = readoutFor(current, named);
     readoutText.textContent = text;
+    if (moved) announce(text);
     // The line under the readout: the chapter's teaser, unless the readout
     // already says it, in which case the gear we are in.
     teaser.textContent = named?.teaser && !text.includes(named.teaser) ? named.teaser : GEAR_WORDS[current.gear];
@@ -359,7 +376,8 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
       applyTint(next.gear);
       if (moved && source !== 'init') buzz();
     }
-    render();
+    // A silent move restores a link; nobody turned the dial, so nothing is said.
+    render(moved && !silent);
     if (!silent) onChange(next, source);
   };
 
@@ -518,6 +536,8 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
     destroy() {
       for (const off of offs) off();
       offs.length = 0;
+      if (announceTimer !== null) clearTimeout(announceTimer);
+      announceTimer = null;
       sheet.remove();
       document.body.classList.remove('has-dial');
       const html = document.documentElement;

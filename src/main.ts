@@ -257,6 +257,15 @@ let storyMap: StoryMap | null = null;
 let mapStart: Promise<StoryMap | null> | null = null;
 /** The historical layers on the map (attached once the map exists). */
 let historyLayers: HistoryLayers | null = null;
+/**
+ * True once the map's style has loaded, from then on for good. MapLibre's
+ * own isStyleLoaded() also turns false whenever a tile is still on its way
+ * (every new source, every zoom), while its 'load' event fires only once,
+ * so waiting on those would leave a dial move made during a tile load
+ * never drawn. Layers may be added and changed as soon as 'style.load'
+ * has fired; that is all applyMap needs.
+ */
+let styleReady = false;
 
 /**
  * Start the map the first time a story is told. MapLibre is large, so it
@@ -269,6 +278,10 @@ function ensureMap(): Promise<StoryMap | null> {
       .then((map) => {
         storyMap = map;
         historyLayers = attachHistoryLayers(asHistoryMap(map.map));
+        if (map.map.isStyleLoaded()) styleReady = true;
+        map.map.once('style.load', () => {
+          styleReady = true;
+        });
         // The USGS sheet to show depends on the zoom (a city needs a
         // coarser sheet than a block), so the choice is made again after
         // every zoom while the historical layers are on.
@@ -353,11 +366,34 @@ function onStopChange(source: DialSource): void {
   if (!session) return;
   // A link's own stop is already in the URL; every later move is written
   // in place, so the Back button steps between stories, not between stops.
-  if (source !== 'init') {
-    history.replaceState(null, '', storyHash(session.place.point, session.place.query, currentStop));
-  }
+  if (source !== 'init') writeStopToLink(session);
   renderStop(session);
   applyMap(session);
+}
+
+/** How long the dial rests before its stop is written into the link. */
+const LINK_SETTLE_MS = 250;
+let linkTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Write the dial's stop into the address bar once it has rested a moment.
+ * A held ◀ (or a held arrow key, which repeats some thirty times a second)
+ * would otherwise call replaceState on every step, and Safari throws a
+ * SecurityError past a hundred calls in thirty seconds; thrown from inside
+ * the dial's handler that would leave the story untold for the stop. The
+ * write is coalesced and the throw, should it still come, only logged.
+ */
+function writeStopToLink(session: Session): void {
+  if (linkTimer !== null) clearTimeout(linkTimer);
+  linkTimer = setTimeout(() => {
+    linkTimer = null;
+    if (!live(session)) return;
+    try {
+      history.replaceState(null, '', storyHash(session.place.point, session.place.query, currentStop));
+    } catch (err) {
+      console.warn('[dial] the link could not be updated:', err);
+    }
+  }, LINK_SETTLE_MS);
 }
 
 /** Move the dial to a stop from a link (silently) and re-tell the story for it. */
@@ -430,12 +466,29 @@ function setStoryStatus(session: Session, text: string | null): void {
   renderStatus(session);
 }
 
+/** How long the dial rests before the live status line reports the stop. */
+const STATUS_SETTLE_MS = 400;
+let statusTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * At Now the status line is the loading story's own, at once. At any other
+ * stop it is "As of 1889: 5 events on the rings", written once the dial
+ * has rested: the status is a live region, and a held ◀ steps three
+ * times a second, which would have a screen reader queue a dozen of them.
+ * (The dial's own announcer says the readout the same way.)
+ */
 function renderStatus(session: Session): void {
+  if (statusTimer !== null) clearTimeout(statusTimer);
+  statusTimer = null;
   if (currentStop.index === NOW_INDEX) {
     story.setStatus(session.status);
-  } else {
-    story.setStatus(eraStatus(currentStop, countEvents(ringsForStop(session))));
+    return;
   }
+  statusTimer = setTimeout(() => {
+    statusTimer = null;
+    if (!live(session) || currentStop.index === NOW_INDEX) return;
+    story.setStatus(eraStatus(currentStop, countEvents(ringsForStop(session))));
+  }, STATUS_SETTLE_MS);
 }
 
 /**
@@ -863,7 +916,8 @@ let mapApplyCounter = 0;
  * that year and the nearest USGS sheet; water and land only for the
  * centuries, millennia and ice ages; the paleo globe for millions of years
  * ago and the future sketch. Safe to call before the map exists (nothing
- * happens) or before its style has loaded (it runs once it has).
+ * happens) or before its style has loaded (it runs once it has); a call
+ * made while tiles are still loading runs straight away, like any other.
  */
 function applyMap(session: Session): void {
   if (!live(session)) return;
@@ -889,8 +943,8 @@ function applyMap(session: Session): void {
       console.warn('[map] the historical layers could not be drawn:', err);
     }
   };
-  if (map.map.isStyleLoaded()) run();
-  else map.map.once('load', run);
+  if (styleReady) run();
+  else map.map.once('style.load', run);
 }
 
 /** The layer changes for a mode on a map whose style has loaded. */
@@ -941,18 +995,31 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
     if (!isAbortError(err)) console.warn('[map] the USGS sheet catalog did not answer:', err);
     return [];
   });
-  void session.topoSheets.then((sheets) => {
-    if (!fresh()) return;
-    const sheet = chooseTopoSheet(sheets, year, map.map.getZoom());
-    if (sheet) {
-      layers.showTopo(sheet);
-      story.setMapNote(topoCaption(sheet), toggle);
-    } else {
-      layers.hideTopo();
-      story.setMapNote(noSheetNote(year), toggle);
-    }
-  });
+  // The sheet is swapped only once the dial has rested: every sheet is a
+  // new raster source, and a held ◀ would otherwise ask the USGS/Esri
+  // image service for a fresh set of tiles three times a second, most of
+  // them for sheets nobody gets to see.
+  if (topoTimer !== null) clearTimeout(topoTimer);
+  const sheets = session.topoSheets;
+  topoTimer = setTimeout(() => {
+    topoTimer = null;
+    void sheets.then((list) => {
+      if (!fresh()) return;
+      const sheet = chooseTopoSheet(list, year, map.map.getZoom());
+      if (sheet) {
+        layers.showTopo(sheet);
+        story.setMapNote(topoCaption(sheet), toggle);
+      } else {
+        layers.hideTopo();
+        story.setMapNote(noSheetNote(year), toggle);
+      }
+    });
+  }, TOPO_SETTLE_MS);
 }
+
+/** How long the dial rests before the USGS sheet for its stop is fetched. */
+const TOPO_SETTLE_MS = 400;
+let topoTimer: ReturnType<typeof setTimeout> | null = null;
 
 /** The postcard button: swap the historical layers for today's map and back. */
 function toggleHistorical(): void {

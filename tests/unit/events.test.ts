@@ -377,6 +377,26 @@ describe('eventsAtWindow', () => {
     expect(ids(eventsAtWindow([d, c, b, a], { fromYearsAgo: 55, toYearsAgo: 52 }))).toEqual(['d']);
     expect(ids(eventsAtWindow([d, c, b, a], { fromYearsAgo: 70, toYearsAgo: 65 }))).toEqual([]);
   });
+
+  it('stops a continuing event at the present when told where the present is', () => {
+    const a = plainEvent({ id: 'a', startYearsAgo: 50, endYearsAgo: 0 }); // 1950, continuing
+    const f = plainEvent({ id: 'f', startYearsAgo: -50_000_000, endYearsAgo: -50_000_000 }); // +50 Ma
+    const future = { fromYearsAgo: -50_000_000, toYearsAgo: -50_000_000 };
+    // Open-ended by default: "continuing" reaches the future stop too.
+    expect(ids(eventsAtWindow([a, f], future))).toEqual(['f', 'a']);
+    // With the present at 2026 (-26), it reaches today and no further.
+    expect(ids(eventsAtWindow([a, f], future, -26))).toEqual(['f']);
+    expect(ids(eventsAtWindow([a, f], { fromYearsAgo: -25.5, toYearsAgo: -24.5 }, -26))).toEqual(['a']); // 2025
+    // The Now window is open toward the future on purpose, so the projection is inside it too.
+    expect(ids(eventsAtWindow([a, f], { fromYearsAgo: -Infinity, toYearsAgo: -25.5 }, -26))).toEqual(['f', 'a']);
+  });
+
+  it('the Kingdome ended in 2000 and is not continuing', () => {
+    const kingdome = allEvents.find((e) => e.id === 'kingdome')!;
+    expect(isContinuing(kingdome)).toBe(false);
+    expect(ids(eventsAtWindow([kingdome], { fromYearsAgo: -0.5, toYearsAgo: 0.5 }))).toEqual(['kingdome']); // 2000
+    expect(ids(eventsAtWindow([kingdome], { fromYearsAgo: -10.5, toYearsAgo: -9.5 }))).toEqual([]); // 2010
+  });
 });
 
 // ---------------------------------------------------------------------------

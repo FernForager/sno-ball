@@ -113,7 +113,11 @@ describe('small wordings', () => {
     expect(notYetLine('Seattle', 1869, 1700)).toBe('Not yet. Seattle will be founded in 1869, 169 years from now.');
     // No year 0: 1 BCE to 1 CE is one year, and large counts get separators.
     expect(notYetLine('Rome', 1, -1, 'be founded')).toBe('Not yet. Rome will be founded in 1 CE, 1 year from now.');
-    expect(notYetLine('Seattle', 1869, -1000)).toContain('2,868 years from now');
+    // From a thousand years on the count is rounded to two figures and marked "about".
+    expect(notYetLine('Seattle', 1869, -1000)).toContain('about 2,900 years from now');
+    expect(notYetLine('Seattle', 1869, 869)).toBe('Not yet. Seattle will be founded in 1869, 1,000 years from now.'.replace('1,000 years', 'about 1,000 years'));
+    expect(notYetLine('Seattle', 1869, 870)).toContain('999 years from now');
+    expect(notYetLine('King County', 1852, -15_000)).toContain('about 17,000 years from now');
   });
 
   it('gives each stop its calendar year, or none in deep time', () => {
@@ -135,7 +139,8 @@ describe('small wordings', () => {
   });
 
   it('words the map notes and globe captions', () => {
-    expect(noSheetNote(1850)).toBe("No historical map here for 1850: today's streets shown faded.");
+    // No sheet does not mean no historical map: OpenHistoricalMap's features still draw, and are named.
+    expect(noSheetNote(1850)).toBe("No USGS map here for 1850. OpenHistoricalMap's 1850 features (where mapped) over today's streets, faded.");
     expect(noSheetNote(-500)).toContain('500 BCE');
     expect(globeCaption(66, 'position')).toBe('Your spot was here, 66 million years ago (MERDITH2021).');
     expect(globeCaption(2.6, 'none')).toContain('no position for this spot 2.6 million years ago');
@@ -194,6 +199,15 @@ describe('events as facts', () => {
     expect(old.yearsAgo).toBe(30_000_000);
   });
 
+  it('dates the far-future projection in (negative) years ago, never as the year 50,002,000', () => {
+    const future = eventFact(deep('future', -50_000_000, -50_000_000, ['statewide'], { when: 'fifty million years from now' }), CTX);
+    expect(future.year).toBeUndefined();
+    expect(future.yearsAgo).toBe(-50_000_000);
+    expect(future.body).toMatch(/^Fifty million years from now\./);
+    // An event a few years after 2000 is still a plain calendar year.
+    expect(eventFact(human('recent', -9, -9, ['statewide']), CTX).year).toBe(2009);
+  });
+
   it('snaps an event to its nearest stop', () => {
     expect(stopForEvent(EVENTS.find((e) => e.id === 'fire')!).index).toBe(indexOfYear(1889));
     expect(stopForEvent(EVENTS.find((e) => e.id === 'ice')!).index).toBe(indexOfYear(-17_000));
@@ -240,6 +254,17 @@ describe('ringEventsForStop', () => {
     expect(late.inWindow.map((e) => e.id)).toEqual(['boom']); // continuing since 1994
     expect(late.later).toBeUndefined();
     expect(late.earlier?.id).toBe('fire');
+  });
+
+  it('lets a continuing event reach the present, not the future stop', () => {
+    const atFuture = ringEventsForStop(cityEvents, windowOf(stopAt(FUTURE_INDEX)));
+    expect(atFuture.inWindow).toEqual([]); // "boom" continues to today, not to +50 Ma
+    expect(atFuture.later).toBeUndefined();
+    expect(atFuture.earlier?.id).toBe('boom'); // the nearest thing before the future is the newest event
+    const projection = deep('projection', -50_000_000, -50_000_000, ['Seattle']);
+    expect(ringEventsForStop([...cityEvents, projection], windowOf(stopAt(FUTURE_INDEX))).inWindow).toEqual([projection]);
+    // The present itself still shows what continues.
+    expect(ringEventsForStop(cityEvents, windowOf(stopAt(NOW_INDEX))).inWindow.map((e) => e.id)).toEqual(['boom']);
   });
 
   it('keeps the dated present-day facts whose year is in the window', () => {
@@ -335,7 +360,7 @@ describe('ringsAtStop', () => {
     // keep their own states (here the county's countdown to 1852).
     const ice = ringsAtStop({ rings: seattleRings(), stop: stopAt(indexOfYear(-15_000)), events: EVENTS, ctx: CTX, founded: FOUNDED });
     expect(find(ice, 'county').era?.state).toBe('not-yet');
-    expect(find(ice, 'county').era?.text).toContain('16,851 years from now');
+    expect(find(ice, 'county').era?.text).toContain('about 17,000 years from now');
     expect(find(ice, 'region').facts.map((f) => f.title)).toEqual(['Event ice']);
     const unfounded = ringsAtStop({ rings: seattleRings(), stop: stopAt(indexOfYear(-15_000)), events: EVENTS, ctx: CTX, founded: {} });
     expect(find(unfounded, 'county').era?.state).toBe('quiet');
@@ -348,6 +373,19 @@ describe('ringsAtStop', () => {
     expect(state.facts).toHaveLength(MAX_EVENTS_PER_RING);
     // Nine events plus the dated statehood fact: four more than the six shown.
     expect(state.note).toBe('and 4 more in this window.');
+  });
+
+  it('at the future stop shows only the projection, not every continuing event', () => {
+    const projection = deep('future', -50_000_000, -50_000_000, ['statewide']);
+    const rings = ringsAtStop({ rings: seattleRings(), stop: stopAt(FUTURE_INDEX), events: [...EVENTS, projection], ctx: CTX, founded: FOUNDED });
+    expect(find(rings, 'state').facts.map((f) => f.title)).toEqual(['Event future']);
+    expect(find(rings, 'state').facts[0]?.year).toBeUndefined();
+    // "salish" and "boom" continue to today; at +50 Ma their rings are quiet,
+    // and the ◀ link points back to the newest thing on the ring.
+    expect(find(rings, 'county').era?.state).toBe('quiet');
+    expect(find(rings, 'county').era?.jumps).toEqual([{ label: '1875 · Event renton', index: indexOfYear(1875), direction: 'earlier' }]);
+    expect(find(rings, 'city').era?.jumps.map((j) => j.label)).toEqual(['1994 · Event boom']);
+    expect(countEvents(rings)).toBe(1);
   });
 
   it('puts the plate model answer first on the plate ring at a globe stop', () => {

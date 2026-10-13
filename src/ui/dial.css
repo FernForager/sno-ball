@@ -109,6 +109,16 @@ body.has-dial {
 @media (min-width: 48rem) {
   .dial__readout { font-size: 1.375rem; }
 }
+/* The live region a screen reader hears: present in the tree, never seen. */
+.dial__announcer {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .dial__teaser {
   flex: 1 1 auto;

@@ -364,9 +364,14 @@ export function isContinuing(event: HistoryEvent): boolean {
   return event.endYearsAgo === 0 && event.startYearsAgo !== 0;
 }
 
-/** The newest edge of an event: its end, or "forever after" when continuing. */
-function newestEdge(event: HistoryEvent): number {
-  if (isContinuing(event)) return Number.NEGATIVE_INFINITY;
+/**
+ * The newest edge of an event: its end, or, when it is continuing, the
+ * present (`presentYearsAgo`): "still true today" reaches today, not
+ * forever after. The default, -Infinity, lets a caller without a notion
+ * of today treat continuing events as open-ended.
+ */
+function newestEdge(event: HistoryEvent, presentYearsAgo = Number.NEGATIVE_INFINITY): number {
+  if (isContinuing(event)) return presentYearsAgo;
   return event.endYearsAgo ?? event.startYearsAgo;
 }
 
@@ -374,14 +379,21 @@ function newestEdge(event: HistoryEvent): number {
  * The events whose span overlaps the window (touching counts), newest
  * first: the most recently begun event leads; when two began together the
  * one that ran longer (ended more recently, or is continuing) goes first.
- * A continuing event overlaps every window after its start.
+ * A continuing event overlaps every window between its start and the
+ * present, `presentYearsAgo` (years before 2000 CE, so -26 for 2026); left
+ * out, it overlaps every window after its start, the future included.
  */
-export function eventsAtWindow(events: readonly HistoryEvent[], window: YearsAgoWindow): HistoryEvent[] {
+export function eventsAtWindow(
+  events: readonly HistoryEvent[],
+  window: YearsAgoWindow,
+  presentYearsAgo = Number.NEGATIVE_INFINITY,
+): HistoryEvent[] {
   const oldest = Math.max(window.fromYearsAgo, window.toYearsAgo);
   const newest = Math.min(window.fromYearsAgo, window.toYearsAgo);
+  const edge = (e: HistoryEvent): number => newestEdge(e, presentYearsAgo);
   return events
-    .filter((e) => e.startYearsAgo >= newest && newestEdge(e) <= oldest)
-    .sort((a, b) => a.startYearsAgo - b.startYearsAgo || newestEdge(a) - newestEdge(b) || a.id.localeCompare(b.id));
+    .filter((e) => e.startYearsAgo >= newest && edge(e) <= oldest)
+    .sort((a, b) => a.startYearsAgo - b.startYearsAgo || edge(a) - edge(b) || a.id.localeCompare(b.id));
 }
 
 // ---------------------------------------------------------------------------

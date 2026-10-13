@@ -32,9 +32,10 @@ having been here since time immemorial). Each record:
 | `sources` | `[{ title, url }]`, at least one, all `http(s)` |
 | `confidence` | `high`, `medium` or `low` |
 
-One known quirk of the `0 = continuing` convention: `kingdome` (1976 to
-March 2000) ends at `0` and so reads as continuing; everything else with
-`end_years_ago: 0` really is ongoing.
+One consequence of the `0 = continuing` convention: an event that ended in
+the year 2000 itself cannot end at `0`. `kingdome` (1976 to March 26, 2000)
+therefore ends at `-0.23` (0.23 years after January 1, 2000); everything
+with `end_years_ago: 0` really is ongoing.
 
 ## Licensing
 

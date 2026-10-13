@@ -28,7 +28,7 @@ import type { Fact, GeologyUnit, HistoryEvent, LngLat, PaleoPosition, Ring, Ring
 import { AGO_THRESHOLD, fromYearsAgo, maToAgo, year, yearsAgo } from './time';
 import { describePaleo } from './paleo';
 import { eventsAtWindow, ringForSpot, storyLine, type SpotContext, type YearsAgoWindow } from './events';
-import { NOW_INDEX, stopFor, stopYearsAgo, windowOf, type Stop } from './stops';
+import { NOW_INDEX, stopAt, stopFor, stopYearsAgo, windowOf, type Stop } from './stops';
 
 // ---------------------------------------------------------------------------
 // Constants and wording
@@ -36,6 +36,14 @@ import { NOW_INDEX, stopFor, stopYearsAgo, windowOf, type Stop } from './stops';
 
 /** How many events one ring shows at a stop before "and N more". */
 export const MAX_EVENTS_PER_RING = 6;
+
+/**
+ * Today, in years before 2000 CE (-26 for 2026): the newest edge of every
+ * "continuing" event. Without it a continuing event would overlap the
+ * future stop too, and the +50 Ma story would list Boeing and the Boldt
+ * decision as happening 50 million years from now.
+ */
+export const PRESENT_YEARS_AGO = stopYearsAgo(stopAt(NOW_INDEX));
 
 /** The source for a timeline event that (wrongly) cites none, so no fact is ever unattributed. */
 export const TIMELINE_SOURCE: Source = {
@@ -103,12 +111,22 @@ export function inceptionYear(value: string | undefined): number | undefined {
 
 /**
  * "Not yet. King County will be established in 1852, 37 years from now."
- * The count skips the missing year 0, so 1 BCE to 1 CE is one year.
+ * The count skips the missing year 0, so 1 BCE to 1 CE is one year. From
+ * a thousand years on it is rounded to two figures and marked "about"
+ * ("about 17,000 years from now" at 15,000 BCE, whose readout says "about
+ * 17,000 years ago"): a count to the year would be false precision there.
  */
 export function notYetLine(name: string, foundedYear: number, selectedYear: number, verb = 'be founded'): string {
   const gap = yearsAgo(year(selectedYear)) - yearsAgo(year(foundedYear));
   const n = Math.max(1, Math.round(gap));
-  return `Not yet. ${name} will ${verb} in ${printYear(foundedYear)}, ${fmt(n)} ${n === 1 ? 'year' : 'years'} from now.`;
+  const count = n >= 1000 ? `about ${fmt(roundToTwoFigures(n))} years` : `${fmt(n)} ${n === 1 ? 'year' : 'years'}`;
+  return `Not yet. ${name} will ${verb} in ${printYear(foundedYear)}, ${count} from now.`;
+}
+
+/** 16,851 to 17,000; 2,868 to 2,900; 1,234 to 1,200. */
+function roundToTwoFigures(n: number): number {
+  const unit = 10 ** (Math.floor(Math.log10(n)) - 1);
+  return Math.round(n / unit) * unit;
 }
 
 /** The status line at a stop other than Now. */
@@ -124,9 +142,14 @@ export function heroAtStop(stop: Stop, hero: string): string {
   return `As of ${stop.readout}: ${h}`;
 }
 
-/** The map note when no USGS sheet was surveyed within 25 years of the stop. */
+/**
+ * The map note when no USGS sheet was surveyed within 25 years of the
+ * stop. OpenHistoricalMap's features of the year are still drawn wherever
+ * someone has mapped them, so the note says so and names the source.
+ */
 export function noSheetNote(calendarYear: number): string {
-  return `No historical map here for ${printYear(calendarYear)}: today's streets shown faded.`;
+  const y = printYear(calendarYear);
+  return `No USGS map here for ${y}. OpenHistoricalMap's ${y} features (where mapped) over today's streets, faded.`;
 }
 
 /** The map note while the historical layers are switched off at a stop. */
@@ -180,7 +203,6 @@ function capitalise(s: string): string {
  * calendar year or years ago; every source it cites; its confidence.
  */
 export function eventFact(event: HistoryEvent, ctx: SpotContext): Fact {
-  const when = fromYearsAgo(event.startYearsAgo);
   const line = storyLine(event, ctx);
   const body = [`${capitalise(event.when.trim())}.`, event.summary.trim(), line ?? ''].filter((s) => s.length > 0).join(' ');
   const [source, ...more] = event.sources;
@@ -188,11 +210,25 @@ export function eventFact(event: HistoryEvent, ctx: SpotContext): Fact {
     kind: 'event',
     title: event.title,
     body,
-    ...(when.kind === 'year' ? { year: when.value } : { yearsAgo: when.value }),
+    ...eventDate(event),
     source: source ?? TIMELINE_SOURCE,
     ...(more.length > 0 ? { moreSources: more } : {}),
     confidence: event.confidence,
   };
+}
+
+/**
+ * The date field of an event's fact: a calendar year, or years ago in deep
+ * time. An event in the far future (the 50-million-year projection) gets
+ * its negative years-ago value, not a calendar year: fromYearsAgo would
+ * make it the year 50,002,000, and the card's date badge would print that.
+ * The badge skips a negative years-ago value, and the event's own `when`
+ * opens the body, so the reader still sees the date in words.
+ */
+function eventDate(event: HistoryEvent): Pick<Fact, 'year' | 'yearsAgo'> {
+  if (event.startYearsAgo <= -AGO_THRESHOLD) return { yearsAgo: event.startYearsAgo };
+  const when = fromYearsAgo(event.startYearsAgo);
+  return when.kind === 'year' ? { year: when.value } : { yearsAgo: when.value };
 }
 
 /** The dial stop an event belongs on: the one nearest its start. */
@@ -236,12 +272,13 @@ export interface RingEventsAtStop {
  * nearest neighbour on either side for the QUIET state's ◀ ▶ links. The
  * neighbours are measured from the event's start: the earlier one is the
  * event that began soonest before the window's older edge, the later one
- * the event that began soonest after its younger edge.
+ * the event that began soonest after its younger edge. A continuing event
+ * reaches the present (PRESENT_YEARS_AGO), not the future stop.
  */
 export function ringEventsForStop(ringEvents: readonly HistoryEvent[], window: YearsAgoWindow): RingEventsAtStop {
   const oldest = Math.max(window.fromYearsAgo, window.toYearsAgo);
   const newest = Math.min(window.fromYearsAgo, window.toYearsAgo);
-  const inWindow = eventsAtWindow(ringEvents, window);
+  const inWindow = eventsAtWindow(ringEvents, window, PRESENT_YEARS_AGO);
   let earlier: HistoryEvent | undefined;
   let later: HistoryEvent | undefined;
   for (const event of ringEvents) {
