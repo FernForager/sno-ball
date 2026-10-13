@@ -54,8 +54,31 @@ export interface Fact {
   /** Years before 2000 CE for deep-time facts */
   yearsAgo?: number;
   source: Source;
+  /** Further sources for the same fact (a timeline event may cite several); shown after `source`. */
+  moreSources?: Source[];
   /** 'high' when from an authoritative record, 'medium' when inferred, 'low' when a guess */
   confidence?: 'high' | 'medium' | 'low';
+}
+
+/** A button on a ring card that moves the time dial to a stop (by index into the dial's stops). */
+export interface RingJump {
+  label: string;
+  index: number;
+  /** 'earlier' and 'later' draw the ◀ ▶ arrows; 'jump' is a plain link such as "Jump to 1889". */
+  direction: 'earlier' | 'later' | 'jump';
+}
+
+/**
+ * How a ring reads at a stop of the time dial other than Now (see
+ * src/lib/dial-story.ts): a place not founded yet, a quiet window with
+ * links to the nearest events, a time before people, or a ring (house,
+ * block, street) with no record for the date.
+ */
+export interface RingEra {
+  state: 'not-yet' | 'quiet' | 'no-people' | 'no-record';
+  /** The line shown, e.g. "Not yet. King County will be established in 1852, 37 years from now." */
+  text: string;
+  jumps: RingJump[];
 }
 
 export type RingStatus = 'loading' | 'rich' | 'thin' | 'empty';
@@ -80,6 +103,8 @@ export interface Ring {
    * (see isRingBusy in rings.ts); the ring helpers leave it alone.
    */
   busy?: boolean;
+  /** Set by the page at dial stops other than Now; absent on the present-day story. */
+  era?: RingEra;
 }
 
 /** The address parts a geocoder gives back, normalised. */

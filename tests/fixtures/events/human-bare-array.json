@@ -1,0 +1,16 @@
+[
+  {
+    "id": "test-bare-event",
+    "title": "Test: a bare-array record with a region string",
+    "when": "1962",
+    "start_years_ago": 38,
+    "end_years_ago": 38,
+    "region": "Puget Sound",
+    "lat": 47.62,
+    "lon": -122.35,
+    "summary": "A test fair opened.",
+    "at_your_spot": "The fair was {distance} from {place}.",
+    "sources": [{ "title": "Test source", "url": "https://example.org/fair" }],
+    "confidence": "medium"
+  }
+]

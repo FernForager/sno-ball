@@ -1,0 +1,435 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "Download_GeoPDF",
+      "type": "esriFieldTypeString",
+      "alias": "Download GeoPDF",
+      "domain": null,
+      "length": 255
+    },
+    {
+      "name": "Year",
+      "type": "esriFieldTypeInteger",
+      "alias": "Year",
+      "domain": null
+    },
+    {
+      "name": "Map_Name",
+      "type": "esriFieldTypeString",
+      "alias": "Map Name",
+      "domain": null,
+      "length": 100
+    },
+    {
+      "name": "Date_On_Map",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Date on Map",
+      "domain": null
+    },
+    {
+      "name": "Map_Scale",
+      "type": "esriFieldTypeInteger",
+      "alias": "Map Scale",
+      "domain": null
+    },
+    {
+      "name": "Imprint_Year",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Imprint Year",
+      "domain": null
+    },
+    {
+      "name": "Citation",
+      "type": "esriFieldTypeString",
+      "alias": "Citation",
+      "domain": null,
+      "length": 255
+    }
+  ],
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 102100,
+    "latestWkid": 3857
+  },
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 163781,
+        "Map_Name": "Seattle South",
+        "Map_Scale": 24000,
+        "Date_On_Map": 1949,
+        "Imprint_Year": 1976,
+        "Year": 1949,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5407876",
+        "Citation": "U.S. Geological Survey, Seattle South [map], 1:24000, Topographic Quadrangle Map, Seattle South, WA, 1976."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 163782,
+        "Map_Name": "Seattle South",
+        "Map_Scale": 24000,
+        "Date_On_Map": 1949,
+        "Imprint_Year": 1969,
+        "Year": 1949,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5407874",
+        "Citation": "U.S. Geological Survey, Seattle South [map], 1:24000, Topographic Quadrangle Map, Seattle South, WA, 1969."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 164573,
+        "Map_Name": "Seattle South",
+        "Map_Scale": 25000,
+        "Date_On_Map": 1983,
+        "Imprint_Year": 1983,
+        "Year": 1983,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5409450",
+        "Citation": "U.S. Geological Survey, Seattle South [map], 1:25000, Topographic Quadrangle Map, Seattle South, WA, 1983."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 164574,
+        "Map_Name": "Seattle South",
+        "Map_Scale": 25000,
+        "Date_On_Map": 1983,
+        "Imprint_Year": 1983,
+        "Year": 1983,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5409452",
+        "Citation": "U.S. Geological Survey, Seattle South [map], 1:25000, Topographic Quadrangle Map, Seattle South, WA, 1983."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 164575,
+        "Map_Name": "Seattle South",
+        "Map_Scale": 25000,
+        "Date_On_Map": 1983,
+        "Imprint_Year": 1983,
+        "Year": 1983,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5409454",
+        "Citation": "U.S. Geological Survey, Seattle South [map], 1:25000, Topographic Quadrangle Map, Seattle South, WA, 1983."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165207,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1909,
+        "Imprint_Year": 1936,
+        "Year": 1909,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410648",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1936."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165208,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1909,
+        "Imprint_Year": 1922,
+        "Year": 1909,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410646",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1922."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165209,
+        "Map_Name": "Seattle Special",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1909,
+        "Imprint_Year": 1911,
+        "Year": 1909,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410636",
+        "Citation": "U.S. Geological Survey, Seattle Special [map], 1:62500, Topographic Quadrangle Map, Seattle Special, WA, 1911."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165210,
+        "Map_Name": "Seattle Special",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1909,
+        "Imprint_Year": 1909,
+        "Year": 1909,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410634",
+        "Citation": "U.S. Geological Survey, Seattle Special [map], 1:62500, Topographic Quadrangle Map, Seattle Special, WA, 1909."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165211,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1908,
+        "Imprint_Year": 1964,
+        "Year": 1908,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410644",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1964."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165212,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1908,
+        "Imprint_Year": 1955,
+        "Year": 1908,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410640",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1955."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165213,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1894,
+        "Imprint_Year": 1908,
+        "Year": 1894,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410642",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1908."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165214,
+        "Map_Name": "Seattle",
+        "Map_Scale": 62500,
+        "Date_On_Map": 1894,
+        "Imprint_Year": 1903,
+        "Year": 1894,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5410638",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:62500, Topographic Quadrangle Map, Seattle, WA, 1903."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165411,
+        "Map_Name": "Seattle",
+        "Map_Scale": 100000,
+        "Date_On_Map": 1992,
+        "Imprint_Year": 1993,
+        "Year": 1992,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411024",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:100000, Topographic Quadrangle Map, Seattle, WA, 1993."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165412,
+        "Map_Name": "Seattle",
+        "Map_Scale": 100000,
+        "Date_On_Map": 1992,
+        "Imprint_Year": 1993,
+        "Year": 1992,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411026",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:100000, Topographic Quadrangle Map, Seattle, WA, 1993."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165413,
+        "Map_Name": "Seattle",
+        "Map_Scale": 100000,
+        "Date_On_Map": 1975,
+        "Imprint_Year": 1977,
+        "Year": 1975,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411022",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:100000, Topographic Quadrangle Map, Seattle, WA, 1977."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165586,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1945,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411356",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1945."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165587,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1940,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411354",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1940."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165588,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1930,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411352",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1930."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165589,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1918,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411350",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1918."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165590,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1912,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411348",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1912."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165591,
+        "Map_Name": "Seattle",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1909,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411326",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:125000, Topographic Quadrangle Map, Seattle, WA, 1909."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165592,
+        "Map_Name": "Seattle",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1906,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411324",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:125000, Topographic Quadrangle Map, Seattle, WA, 1906."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165593,
+        "Map_Name": "Seattle",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1904,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411322",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:125000, Topographic Quadrangle Map, Seattle, WA, 1904."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165594,
+        "Map_Name": "Seattle",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1901,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411320",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:125000, Topographic Quadrangle Map, Seattle, WA, 1901."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165595,
+        "Map_Name": "Seattle",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1897,
+        "Imprint_Year": 1897,
+        "Year": 1897,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411318",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:125000, Topographic Quadrangle Map, Seattle, WA, 1897."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165596,
+        "Map_Name": "Snohomish",
+        "Map_Scale": 125000,
+        "Date_On_Map": 1895,
+        "Imprint_Year": 1954,
+        "Year": 1895,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411346",
+        "Citation": "U.S. Geological Survey, Snohomish [map], 1:125000, Topographic Quadrangle Map, Snohomish, WA, 1954."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165697,
+        "Map_Name": "Seattle",
+        "Map_Scale": 250000,
+        "Date_On_Map": 1962,
+        "Imprint_Year": 1962,
+        "Year": 1962,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411528",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:250000, Topographic Quadrangle Map, Seattle, WA, 1962."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165698,
+        "Map_Name": "Seattle",
+        "Map_Scale": 250000,
+        "Date_On_Map": 1958,
+        "Imprint_Year": 1975,
+        "Year": 1958,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411532",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:250000, Topographic Quadrangle Map, Seattle, WA, 1975."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165699,
+        "Map_Name": "Seattle",
+        "Map_Scale": 250000,
+        "Date_On_Map": 1958,
+        "Imprint_Year": 1975,
+        "Year": 1958,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411534",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:250000, Topographic Quadrangle Map, Seattle, WA, 1975."
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 165700,
+        "Map_Name": "Seattle",
+        "Map_Scale": 250000,
+        "Date_On_Map": 1958,
+        "Imprint_Year": 1966,
+        "Year": 1958,
+        "Download_GeoPDF": "http://ims.er.usgs.gov/gda_services/download?item_id=5411530",
+        "Citation": "U.S. Geological Survey, Seattle [map], 1:250000, Topographic Quadrangle Map, Seattle, WA, 1966."
+      }
+    }
+  ]
+}

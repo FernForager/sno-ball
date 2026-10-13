@@ -1,0 +1,53 @@
+{
+  "v": 1,
+  "kind": "deep",
+  "events": [
+    {
+      "id": "test-ice-sheet",
+      "kind": "deep",
+      "title": "Test: the ice sheet",
+      "when": "about 17,000 years ago",
+      "start_years_ago": 19000,
+      "end_years_ago": 16000,
+      "region": ["Puget Sound", "Olympic Peninsula"],
+      "lat": 47.6,
+      "lon": -122.3,
+      "summary": "A test glacier covered the lowland.",
+      "at_your_spot": "{place} was under {ice_thickness} of ice.",
+      "spot_rule": "vashon-ice",
+      "sources": [{ "title": "Test source", "url": "https://example.org/ice" }],
+      "confidence": "high"
+    },
+    {
+      "id": "test-basalt",
+      "kind": "deep",
+      "title": "Test: the basalt floods",
+      "when": "about 16 to 6 million years ago",
+      "start_years_ago": 16700000,
+      "end_years_ago": 6000000,
+      "region": ["Columbia Basin", "Palouse and Blue Mountains"],
+      "lat": 46.7,
+      "lon": -117.2,
+      "summary": "Test lava flows buried the basin.",
+      "at_your_spot": "{place} sits on {basalt_unit}.",
+      "spot_rule": "crbg",
+      "sources": [{ "title": "Test source", "url": "https://example.org/basalt" }],
+      "confidence": "high"
+    },
+    {
+      "id": "test-subduction",
+      "kind": "deep",
+      "title": "Test: subduction continues",
+      "when": "the last 30 million years, and now",
+      "start_years_ago": 30000000,
+      "end_years_ago": 0,
+      "region": ["statewide"],
+      "lat": null,
+      "lon": null,
+      "summary": "The test plate keeps sliding under the coast.",
+      "at_your_spot": "The nearest volcano to {place} is {nearest_volcano}.",
+      "sources": [{ "title": "Test source", "url": "https://example.org/plate" }],
+      "confidence": "medium"
+    }
+  ]
+}

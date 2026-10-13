@@ -170,7 +170,7 @@ export function ringTagline(level: RingLevel): string {
  * unnamed neighborhood ring). They are fine as card headings but would read
  * badly in a sentence, so the hero skips them.
  */
-function isPlaceholderName(name: string): boolean {
+export function isPlaceholderName(name: string): boolean {
   return /^(this\b|unincorporated\b|neighborhood$)/i.test(name.trim());
 }
 

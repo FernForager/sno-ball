@@ -1,0 +1,267 @@
+/*
+ * The time dial: a sheet fixed to the bottom of the screen.
+ *
+ * Collapsed it is 96 px tall (plus the phone's home-bar inset): a row with
+ * ◀, the readout and ▶, then a row with the teaser, "Now" and the chevron.
+ * Expanded it grows to at most 70% of the screen, with the chapters list
+ * and the jump box scrolling inside it. Colours come from the site's
+ * variables in style.css, so every pair here keeps the 4.5:1 contrast of
+ * the rest of the page in both themes.
+ *
+ * The era tint: dial.ts puts the current gear's colours on <html> as
+ * --era-tint-light and --era-tint-dark; this file folds them into one
+ * --era-tint that follows the colour scheme. The page may paint anything
+ * with it (`background: var(--era-tint)`); the dial itself shows it as a
+ * 4 px band along its top edge and a wash across its surface.
+ */
+
+:root {
+  --era-tint-light: transparent;
+  --era-tint-dark: transparent;
+  --era-tint: var(--era-tint-light);
+  --dial-collapsed: 96px;
+  --dial-transition: 400ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --era-tint: var(--era-tint-dark); }
+}
+
+/* Room at the foot of the page so the sheet never hides the last card. */
+body.has-dial {
+  padding-bottom: calc(var(--dial-collapsed) + 1rem + env(safe-area-inset-bottom, 0px));
+  transition: background-color var(--dial-transition) ease;
+}
+
+.dial {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  max-width: 42rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-height: min(70dvh, 560px);
+  color: var(--fg);
+  background: var(--card);
+  background: color-mix(in srgb, var(--card) 88%, var(--era-tint));
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: var(--shadow);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transition: background-color var(--dial-transition) ease;
+}
+/* The tint band along the top edge. */
+.dial::before {
+  content: "";
+  display: block;
+  height: 4px;
+  flex: 0 0 auto;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--era-tint);
+  transition: background-color var(--dial-transition) ease;
+}
+
+/* ---------------------------------------------------------------------------
+ * The collapsed bar: two rows that add up to 96 px with the band
+ * ------------------------------------------------------------------------ */
+.dial__bar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: calc(var(--dial-collapsed) - 4px);
+  padding: 4px var(--gutter) 2px;
+}
+.dial__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.dial__row--readout { min-height: 44px; }
+.dial__row--meta { min-height: 40px; }
+
+.dial__readout {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+/* A headline such as "1889 · Statehood and the great fires" may take two
+ * lines on a phone; anything longer is cut with an ellipsis. */
+.dial__readout-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 48rem) {
+  .dial__readout { font-size: 1.375rem; }
+}
+
+.dial__teaser {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* The round buttons: 44 px targets, the size a thumb needs. */
+.dial__step,
+.dial__now,
+.dial__toggle {
+  flex: 0 0 auto;
+  font: inherit;
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.85rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.dial__step { font-size: 0.875rem; padding: 0; }
+.dial__step.is-pressed,
+.dial__step:active { background: var(--accent-soft); }
+.dial__step:hover,
+.dial__now:hover,
+.dial__toggle:hover { border-color: var(--accent); }
+.dial__step[aria-disabled="true"],
+.dial__now[aria-disabled="true"] { opacity: 0.45; cursor: default; }
+.dial__step[aria-disabled="true"]:hover,
+.dial__now[aria-disabled="true"]:hover { border-color: var(--line); }
+.dial__now { font-weight: 600; font-size: 0.9375rem; min-height: 40px; }
+.dial__toggle { padding: 0; min-height: 40px; }
+.dial__chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform var(--dial-transition) ease;
+}
+.dial.is-expanded .dial__chevron { transform: rotate(180deg); }
+
+/* ---------------------------------------------------------------------------
+ * The expanded panel
+ * ------------------------------------------------------------------------ */
+.dial__panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.25rem var(--gutter) 1rem;
+  border-top: 1px solid var(--line);
+}
+.dial__panel[hidden] { display: none; }
+.dial__title {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 1.125rem;
+}
+.dial__chapters {
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+}
+.dial__chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.1rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  font: inherit;
+  text-align: left;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dial__chapter:hover { border-color: var(--accent); }
+.dial__chapter[aria-current="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.dial__chapter-label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.dial__chapter-readout {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+.dial__chapter-teaser {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.dial__chapter[aria-current="true"] .dial__chapter-teaser { color: var(--fg); }
+
+.dial__jump { margin: 1.25rem 0 0; }
+.dial__jump-label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+.dial__jump-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.dial__input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  min-height: 44px;
+  font: inherit;
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.dial__input::placeholder { color: var(--muted); opacity: 1; }
+.dial__input:focus { border-color: var(--accent); }
+.dial__input[aria-invalid="true"] { border-color: #b3261e; }
+.dial__go { flex: 0 0 auto; min-height: 44px; }
+.dial__error {
+  margin: 0.5rem 0 0;
+  color: #b3261e;        /* 5.9:1 on the light card */
+  font-size: 0.9375rem;
+}
+.dial__error[hidden] { display: none; }
+@media (prefers-color-scheme: dark) {
+  .dial__error { color: #ffb4ab; }  /* 9.6:1 on the dark card */
+  .dial__input[aria-invalid="true"] { border-color: #ffb4ab; }
+}
+
+/* On a short screen (a phone held sideways) the collapsed sheet is enough;
+ * the expanded panel is capped lower so some of the page stays visible. */
+@media (max-height: 560px) {
+  .dial { max-height: 85dvh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dial-transition: 0ms; }
+  .dial, .dial::before, .dial__chevron, body.has-dial { transition: none; }
+}

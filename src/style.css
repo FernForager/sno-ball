@@ -284,11 +284,16 @@ img, svg { max-width: 100%; }
   width: 100%;
   height: 100%;
 }
-/* The caption sits along the TOP edge, so it never covers the map's
- * attribution control in the bottom-right corner. */
-.postcard__caption {
+/* The caption and the map note sit along the TOP edge, so they never cover
+ * the map's attribution control in the bottom-right corner. The wrapper
+ * lets clicks through to the map; only the note's button takes them. */
+.postcard__top {
   position: absolute;
   left: 0; right: 0; top: 0;
+  pointer-events: none;
+}
+.postcard__caption,
+.postcard__era {
   margin: 0;
   padding: 0.4rem 0.85rem;
   font-size: 0.8125rem;
@@ -299,9 +304,71 @@ img, svg { max-width: 100%; }
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
-  pointer-events: none;
 }
 .postcard__caption:empty { display: none; }
+/* The map note: what the map is showing at this stop of the dial, and the
+ * "Map as it was" / "Today's map" button. A USGS caption is two lines. */
+.postcard__era {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-size: 0.75rem;
+}
+.postcard__era[hidden] { display: none; }
+.postcard__era-text { white-space: pre-line; min-width: 0; }
+.postcard__era-button {
+  flex: 0 0 auto;
+  pointer-events: auto;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  min-height: 32px;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+}
+.postcard__era-button:hover { border-color: var(--accent); }
+.postcard__era-button[hidden] { display: none; }
+/* At the deep-time stops the globe stands in for the map, which stays in
+ * the page (hidden, keeping its size) so it is ready when the dial returns. */
+.postcard > .postcard__map.postcard__map--hidden { visibility: hidden; }
+.postcard__globe {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 2.6rem 1rem 0.75rem;
+  background: var(--card);
+  color: var(--fg);
+}
+.postcard__globe[hidden] { display: none; }
+.globe {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+.globe-sphere { fill: var(--accent-soft); }
+.globe-caption {
+  flex: 0 0 auto;
+  margin: 0;
+  max-width: 100%;
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.globe-note { font-style: italic; }
 /* On a short screen (a phone held sideways) the postcard does not stick at all. */
 @media (max-height: 560px) {
   .postcard { position: static; height: 160px; }
@@ -437,6 +504,57 @@ img, svg { max-width: 100%; }
 .ring-card.is-empty .ring-card__name { color: var(--muted); }
 .ring-card__note { margin: 0; font-size: 0.9375rem; }
 
+/* A ring at a stop of the dial other than Now: the "not yet", "quiet",
+ * "no people yet" and "no record" states (src/lib/dial-story.ts). */
+.ring-card--era.is-quiet,
+.ring-card--era.is-no-people,
+.ring-card--era.is-no-record { padding: 0.75rem 1rem; }
+.ring-card--era.is-no-people .ring-card__head,
+.ring-card--era.is-no-record .ring-card__head { margin: 0 0 0.25rem; }
+.ring-card--era.is-no-people .eyebrow__tag,
+.ring-card--era.is-no-record .eyebrow__tag { display: none; }
+.ring-card--era.is-no-people .ring-card__name,
+.ring-card--era.is-no-record .ring-card__name { font-size: 1.0625rem; color: var(--muted); }
+.ring-card__era { margin: 0 0 0.5rem; }
+.ring-card__era-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+.is-not-yet .ring-card__era-text {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  color: var(--fg);
+}
+.is-not-yet .ring-card__era {
+  padding: 0.6rem 0.85rem;
+  border-left: 3px solid var(--quote-bar);
+  background: var(--badge-bg);
+  border-radius: 0 8px 8px 0;
+}
+.ring-card__jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  margin: 0.45rem 0 0;
+}
+.ring-card__jump {
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--accent);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  min-height: 36px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  max-width: 100%;
+}
+.ring-card__jump:hover { border-color: var(--accent); }
+.ring-card.is-empty.ring-card--era { background: var(--card); }
+.ring-card.is-empty.ring-card--era .ring-card__name { color: var(--fg); }
+
 /* Facts */
 .facts { list-style: none; }
 .fact {
@@ -510,11 +628,21 @@ img, svg { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .skeleton__line, .ring-card__pulse { animation: none; }
   html { scroll-behavior: auto; }
+  body.has-dial, .deep-card { transition: none; }
 }
 
 /* Deep time */
 .deep-time { margin: 0; }
 .deep-card { margin: 0 0 1rem; }
+/* A deep-time card whose story is happening at the dial's stop. */
+.deep-card.is-now { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.deep-card__now {
+  margin: 0 0 0.6rem;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  color: var(--accent);
+}
+.deep-card__now[hidden] { display: none; }
 .deep-card__title { margin: 0 0 0.6rem; }
 .deep-card__lead {
   display: flex;
@@ -533,6 +661,17 @@ img, svg { max-width: 100%; }
 }
 .paleo__item:first-child { border-top: 0; padding-top: 0; }
 .paleo__text { margin: 0 0 0.25rem; }
+
+/* The time dial (src/ui/dial.css) tints the whole page with the era's
+ * colour: a wash of the gear's tint over the paper. Browsers without
+ * color-mix() keep the plain paper. The dial's own stylesheet adds the
+ * bottom padding that keeps the sheet off the last card; the extra here
+ * keeps it off the sources footer too. */
+body.has-dial {
+  background: var(--bg);
+  background: color-mix(in srgb, var(--era-tint) 35%, var(--bg));
+}
+body.has-dial main { padding-bottom: 5rem; }
 
 /* Sources footer */
 .sources { margin: 0; padding-bottom: 1rem; }

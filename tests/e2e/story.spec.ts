@@ -20,10 +20,21 @@ const json = (path: string) => ({ status: 200, contentType: 'application/json', 
 /**
  * Stub every outside host. Returns the log of outside requests, in order.
  * With `geologyDown`, the two geology services answer HTTP 500, to check
- * that the rock card settles honestly instead of shimmering forever.
+ * that the rock card settles honestly instead of shimmering forever. With
+ * `cityFoundedIn`, the site's own place file is served with Seattle's
+ * founding moved to that year, so the dial's "not yet" state can be seen
+ * at a stop the real city already existed at.
  */
-async function stubServices(page: Page, opts: { geologyDown?: boolean } = {}): Promise<{ url: string; at: number }[]> {
+async function stubServices(page: Page, opts: { geologyDown?: boolean; cityFoundedIn?: number } = {}): Promise<{ url: string; at: number }[]> {
   const log: { url: string; at: number }[] = [];
+  if (opts.cityFoundedIn !== undefined) {
+    const year = opts.cityFoundedIn;
+    await page.route('**/sno-ball/data/wa-places.json', async (route) => {
+      const places = JSON.parse(readFileSync(new URL('../../public/data/wa-places.json', import.meta.url), 'utf8')) as { name: string; inception?: string }[];
+      for (const p of places) if (p.name === 'Seattle') p.inception = `${year}-01-01`;
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(places) });
+    });
+  }
   await page.route(/^https?:\/\/(?!127\.0\.0\.1)/, async (route) => {
     const url = route.request().url();
     log.push({ url, at: Date.now() });
@@ -55,6 +66,11 @@ async function stubServices(page: Page, opts: { geologyDown?: boolean } = {}): P
       if (pathname === '/planet') return route.fulfill(json('map/openfreemap-planet-tilejson.json'));
       return route.abort();
     }
+    // The dial's map layers: the USGS sheet catalog (captured) and a
+    // stand-in OpenHistoricalMap TileJSON; the sheet images and the vector
+    // tiles themselves are blocked like every other tile.
+    if (hostname === 'historical1.arcgis.com' && pathname.endsWith('/query')) return route.fulfill(json('map/usgs-topo-catalog.json'));
+    if (hostname === 'vtiles.openhistoricalmap.org' && pathname === '/maps/ohm.json') return route.fulfill(json('map/ohm-tilejson.json'));
     if (hostname === 'services.arcgis.com') {
       if (pathname.includes('/nma_nhoods_sub/')) return route.fulfill(json('rings/seattle-nhood-space-needle.json'));
       if (pathname.includes('/Annexation/')) return route.fulfill(json('rings/seattle-annexation-space-needle.json'));
@@ -148,11 +164,14 @@ test('a search fills every ring from the stubbed services', async ({ page }) => 
     const postcardTop = await page.locator('.postcard').evaluate((node) => Math.round(node.getBoundingClientRect().top));
     expect(postcardTop).toBe(8);
   }
-  await page.evaluate(() => window.scrollTo(0, 0));
 
   // When the browser could draw the map, the credit in the corner is the
   // style's own (OpenFreeMap / OpenMapTiles / OpenStreetMap), printed once
-  // and not covered by the caption, and the tile worker is real JavaScript.
+  // and not covered by the caption or the map note, and the tile worker is
+  // real JavaScript. Checked in this reading position: at the very top of
+  // a short window the time dial, fixed to the foot of the screen, can
+  // overlap the bottom of a map that has not yet scrolled up under the
+  // top edge.
   if ((await page.locator('.postcard__note').count()) === 0) {
     const attrib = page.locator('.maplibregl-ctrl-attrib');
     await expect(attrib).toBeVisible();
@@ -182,6 +201,7 @@ test('a search fills every ring from the stubbed services', async ({ page }) => 
     // The tile worker is a real file of the build, served as JavaScript (not index.html).
     await expect.poll(() => served.find((r) => r.url.includes('maplibre-gl-worker'))?.contentType ?? '', { timeout: 10_000 }).toContain('javascript');
   }
+  await page.evaluate(() => window.scrollTo(0, 0));
 
   // The state, county and city excerpts came from the pre-baked file, so
   // Wikipedia was at most asked for the neighborhood (the four-entry
@@ -254,4 +274,166 @@ test('the home page has no empty postcard and offers to forget searches', async 
   await expect(page.locator('.postcard')).toBeHidden();
   await expect(page.getByRole('search')).toContainText('OpenStreetMap contributors');
   await expect(page.getByRole('button', { name: 'Forget my searches' })).toBeVisible();
+});
+
+/** The hosts the dial may ask once a story is loaded: map layers and the plate model, nothing else. */
+const DIAL_HOSTS = ['historical1.arcgis.com', 'vtiles.openhistoricalmap.org', 'gws.gplates.org', 'tiles.openfreemap.org'];
+
+test('the time dial re-tells the story at every stop without asking the services again', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  // Seattle "founded" in 1900, so the 1889 stop can show the "not yet" state.
+  const log = await stubServices(page, { cityFoundedIn: 1900 });
+
+  await page.goto('/sno-ball/');
+  await page.getByRole('search').locator('.chip', { hasText: 'Space Needle' }).click();
+  await expect(page.locator('.story__status')).toContainText('Story ready', { timeout: 15_000 });
+  const outsideBefore = log.length;
+
+  // The dial is on the page once the story is, sitting on Today.
+  const dial = page.locator('.dial');
+  await expect(dial).toBeVisible();
+  const readout = dial.locator('.dial__readout');
+  await expect(readout).toHaveText('Today');
+  await expect(page.locator('body')).toHaveClass(/has-dial/);
+
+  // ◀ once: the 1980 chapter. The readout, the link, the hero and the state ring all follow.
+  await dial.getByRole('button', { name: 'Earlier chapter' }).click();
+  await expect(readout).toContainText('Mount St. Helens erupts');
+  await expect(page).toHaveURL(/&at=1980$/);
+  await expect(page.locator('.hero')).toContainText('As of 1980:');
+  await expect(page.locator('#ring-state')).toContainText('Mount St. Helens erupts');
+  await expect(page.locator('.story__status')).toContainText('As of 1980');
+  await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'historical');
+  // The house has no record for 1980; the card says so instead of showing today's facts.
+  await expect(page.locator('#ring-house')).toContainText('No record for this date');
+  await expect(page.locator('#ring-house')).not.toContainText('Built in 1961');
+
+  // Jump to 1889: statehood on the state ring, "not yet" on the city ring
+  // (founded 1900 in this test) with the fire still listed under it.
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('1889');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  await expect(readout).toContainText('Statehood');
+  await expect(page).toHaveURL(/&at=1889$/);
+  await expect(page.locator('#ring-state')).toContainText('Washington becomes the 42nd state');
+  const city = page.locator('#ring-city');
+  await expect(city).toHaveClass(/is-not-yet/);
+  await expect(city).toContainText('Not yet. Seattle will be founded in 1900, 11 years from now.');
+  await expect(city).toContainText('Great Seattle Fire');
+  await expect(city.getByRole('button', { name: 'Jump to 1900' })).toBeVisible();
+  // The county existed in 1889, so it shows events, not a countdown.
+  await expect(page.locator('#ring-county')).not.toHaveClass(/is-not-yet/);
+  // The map note names the USGS sheet chosen from the catalog (1894, within 25 years),
+  // and the button swaps it for today's map and back.
+  const note = page.locator('.postcard__era');
+  if ((await page.locator('.postcard__note').count()) === 0) {
+    await expect(note).toContainText('USGS Seattle sheet', { timeout: 10_000 });
+    await expect(note).toContainText('U.S. Geological Survey');
+    await note.getByRole('button', { name: "Today's map" }).click();
+    await expect(note).toContainText("Today's map.");
+    await note.getByRole('button', { name: 'Map as it was' }).click();
+    await expect(note).toContainText('USGS Seattle sheet', { timeout: 10_000 });
+  }
+
+  // 1880: still "not yet" for this test's Seattle; Renton's platting (scoped
+  // to Renton and King County) belongs on the county ring, not the city's.
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('1880');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  await expect(readout).toHaveText('1880');
+  await expect(city).toContainText('20 years from now');
+  await expect(city).not.toContainText('Renton');
+  await expect(page.locator('#ring-county')).toContainText('Renton platted');
+  // The card's own jump link turns the dial.
+  await city.getByRole('button', { name: 'Jump to 1900' }).click();
+  await expect(readout).toHaveText('1900');
+  await expect(city).not.toHaveClass(/is-not-yet/);
+
+  // 15,000 BCE: the ice-age chapter lights the ice card, the map keeps only water and land.
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('15,000 BCE');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  await expect(readout).toContainText('Ice age peak');
+  await expect(page.locator('.deep-card--ice')).toBeVisible();
+  await expect(page.locator('.deep-card--ice')).toHaveClass(/is-now/);
+  await expect(page.locator('.deep-card--rock')).toContainText('forming right now');
+  await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'nature');
+  await expect(note).toContainText("Coastlines are today's");
+  await expect(page.locator('#ring-region')).toContainText('Vashon ice sheet');
+  await expect(page.locator('#ring-region')).toContainText('of ice');
+
+  // 66 Ma: the globe stands in for the map.
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('66 Ma');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  await expect(readout).toHaveText('66 million years ago');
+  await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'globe');
+  await expect(page.locator('.postcard__globe .globe')).toBeVisible();
+  await expect(page.locator('.postcard__map')).toBeHidden();
+  await expect(page.locator('.globe-caption')).toContainText('66 million years ago');
+  await expect(page.locator('#ring-city')).toContainText('No people yet here');
+  await expect(page).toHaveURL(/&at=66Ma$/);
+
+  // 100 Ma is in the plate model's (stubbed) answer: the dot and the plate ring get it.
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('100 Ma');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  await expect(page.locator('.globe-caption')).toContainText('Your spot was here, 100 million years ago');
+  await expect(page.locator('#ring-plate')).toContainText('Where this spot sat 100 million years ago');
+
+  // Now: the map is back, the rings are today's, the link has no stop.
+  await dial.getByRole('button', { name: 'Back to now' }).click();
+  await expect(readout).toHaveText('Today');
+  await expect(page.locator('.postcard')).toHaveAttribute('data-map-mode', 'today');
+  await expect(page.locator('.postcard__globe')).toBeHidden();
+  await expect(page.locator('.postcard__map')).toBeVisible();
+  await expect(page).toHaveURL(/#\/story\?ll=47\.62051,-122\.34928&q=400\+Broad\+St%2C\+Seattle%2C\+WA$/);
+  await expect(page.locator('#ring-house')).toContainText('Built in 1961');
+  await expect(page.locator('#ring-plate .fact')).toHaveCount(1);
+  await expect(page.locator('.hero')).not.toContainText('As of');
+
+  // Nothing but map layers and the plate model was asked for while turning the dial.
+  const asked = log.slice(outsideBefore).map((r) => new URL(r.url).hostname);
+  expect(asked.filter((h) => !DIAL_HOSTS.includes(h))).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
+test('a share link with at=1889 opens the story on that stop', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await stubServices(page);
+
+  await page.goto('/sno-ball/#/story?ll=47.62051,-122.34928&q=Space%20Needle&at=1889');
+
+  await expect(page.locator('.dial__readout')).toContainText('Statehood');
+  await expect(page.locator('.hero')).toContainText('As of 1889:');
+  await expect(page.locator('#ring-state')).toContainText('Washington becomes the 42nd state');
+  await expect(page.locator('#ring-city')).toContainText('Great Seattle Fire');
+  await expect(page.locator('.ring-card.is-loading')).toHaveCount(0, { timeout: 15_000 });
+
+  // A quiet ring links to its nearest events: 1875 has nothing on the city
+  // ring, so it offers the 1866 and 1886 events, and ▶ turns the dial.
+  const dial = page.locator('.dial');
+  await dial.getByRole('button', { name: 'Show chapters' }).click();
+  await dial.getByLabel('Jump to a time').fill('1875');
+  await dial.getByRole('button', { name: 'Go', exact: true }).click();
+  const city = page.locator('#ring-city');
+  await expect(city).toHaveClass(/is-quiet/);
+  await expect(city).toContainText('Nothing recorded for 1875');
+  await expect(city.locator('.ring-card__jump--earlier')).toContainText('1866 · Chief Seattle dies');
+  const later = city.locator('.ring-card__jump--later');
+  await expect(later).toContainText('1886 · Seattle anti-Chinese riot');
+  await later.click();
+  await expect(page.locator('.dial__readout')).toHaveText('1886');
+  await expect(city).toContainText('Seattle anti-Chinese riot');
+  await expect(page).toHaveURL(/&at=1886$/);
+
+  // Moving the stop in the address bar moves the dial without reloading the story.
+  await page.evaluate(() => {
+    window.location.hash = '#/story?ll=47.62051,-122.34928&q=Space%20Needle&at=1980';
+  });
+  await expect(page.locator('.dial__readout')).toContainText('Mount St. Helens');
+  await expect(page.locator('#ring-state')).toContainText('Mount St. Helens erupts');
+  expect(errors).toEqual([]);
 });
