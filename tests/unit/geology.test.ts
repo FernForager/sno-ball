@@ -62,8 +62,10 @@ import {
   DNR_SOURCE,
   GEOLOGIC_INTERVALS,
   MACROSTRAT_SOURCE,
+  depositWindow,
   describeAge,
   describeSpan,
+  iceAgeDeposit,
   dnrDescriptionUrl,
   dnrUnitUrl,
   geologyAt,
@@ -393,6 +395,21 @@ describe('describeAge', () => {
   it('falls back to the survey wording when no range could be parsed', () => {
     expect(describeAge(base({ age: 'age uncertain' }))).toBe('The survey dates this unit as "age uncertain".');
     expect(describeAge(base({}))).toBe('The survey gives no age for this unit.');
+  });
+
+  it('narrows the forming window of the last ice age deposits to the years the sentence states', () => {
+    const till = base({ name: 'Pleistocene continental glacial till', age: 'Pleistocene', ageYearsAgo: { from: 2_580_000, to: 11_700 } });
+    expect(iceAgeDeposit(till)).toBe('glacial');
+    expect(depositWindow(till)).toEqual({ from: 18_000, to: 15_500 });
+    const flood = base({ name: 'outburst flood deposits', age: 'Pleistocene', ageYearsAgo: { from: 2_580_000, to: 11_700 } });
+    expect(iceAgeDeposit(flood)).toBe('flood');
+    expect(depositWindow(flood)).toEqual({ from: 18_000, to: 15_000 });
+    // Older drifts and every other unit keep the survey's range; no age, no window.
+    const older = base({ name: 'Double Bluff Drift', age: 'Pleistocene', ageYearsAgo: { from: 2_580_000, to: 11_700 } });
+    expect(iceAgeDeposit(older)).toBeUndefined();
+    expect(depositWindow(older)).toEqual({ from: 2_580_000, to: 11_700 });
+    expect(depositWindow(base({ age: 'Eocene', ageYearsAgo: { from: 56_000_000, to: 33_900_000 } }))).toEqual({ from: 56_000_000, to: 33_900_000 });
+    expect(depositWindow(base({ age: 'age uncertain' }))).toBeUndefined();
   });
 
   it('describeSpan formats the common shapes', () => {

@@ -85,6 +85,24 @@ const fake = vi.hoisted(() => {
     remove(): void {
       this.record('remove', []);
     }
+    readonly controls: unknown[] = [];
+    addControl(control: unknown): this {
+      this.controls.push(control);
+      return this.record('addControl', [control]);
+    }
+    removeControl(control: unknown): this {
+      this.controls.splice(this.controls.indexOf(control), 1);
+      return this.record('removeControl', [control]);
+    }
+    /** The credit box as the page would find it in the DOM; attributes and classes are recorded. */
+    readonly creditBox = { attrs: new Set<string>(['open']), classes: new Set<string>(['maplibregl-compact-show']) };
+    getContainer(): { querySelector: (selector: string) => unknown } {
+      const box = {
+        removeAttribute: (name: string) => this.creditBox.attrs.delete(name),
+        classList: { remove: (name: string) => this.creditBox.classes.delete(name) },
+      };
+      return { querySelector: (selector: string) => (selector === '.maplibregl-ctrl-attrib' ? box : null) };
+    }
     /** Test helper: pretend MapLibre raised an event. */
     fire(type: string, ev: { error?: { message: string } }): void {
       for (const l of this.listeners.get(type) ?? []) l(ev);
@@ -137,8 +155,15 @@ const fake = vi.hoisted(() => {
     }
   }
 
+  class FakeAttributionControl {
+    static instances: FakeAttributionControl[] = [];
+    constructor(readonly options: Record<string, unknown> = {}) {
+      FakeAttributionControl.instances.push(this);
+    }
+  }
+
   const state = { factoryCalls: 0, workerUrl: null as string | null };
-  return { FakeMap, FakeMarker, state };
+  return { FakeMap, FakeMarker, FakeAttributionControl, state };
 });
 
 vi.mock('maplibre-gl', () => {
@@ -146,6 +171,7 @@ vi.mock('maplibre-gl', () => {
   return {
     Map: fake.FakeMap,
     Marker: fake.FakeMarker,
+    AttributionControl: fake.FakeAttributionControl,
     setWorkerUrl: (url: string) => {
       fake.state.workerUrl = url;
     },
@@ -157,6 +183,7 @@ vi.mock('maplibre-gl/dist/maplibre-gl.css', () => ({}));
 // Vite would hand back the bundled worker's address; here it is a fixed string.
 vi.mock('maplibre-gl/dist/maplibre-gl-worker.mjs?url', () => ({ default: '/sno-ball/assets/maplibre-gl-worker.mjs' }));
 
+import { zoomForScale } from '../../src/lib/map-history';
 import {
   MAX_EASE_MS,
   MapUnavailableError,
@@ -217,6 +244,7 @@ const container = { id: 'map' } as unknown as HTMLElement;
 beforeEach(() => {
   fake.FakeMap.instances.length = 0;
   fake.FakeMarker.instances.length = 0;
+  fake.FakeAttributionControl.instances.length = 0;
   fake.FakeMap.failConstructWith = null;
   stubBrowser();
 });
@@ -251,6 +279,28 @@ describe('RING_ZOOM', () => {
     for (let i = 1; i < zooms.length; i++) {
       expect(zooms[i]!).toBeLessThan(zooms[i - 1]!);
     }
+  });
+});
+
+describe('zoomForScale', () => {
+  it('gives each USGS scale the zoom it was drawn for', () => {
+    expect(zoomForScale(24_000)).toBe(15);
+    expect(zoomForScale(25_000)).toBe(15);
+    expect(zoomForScale(31_680)).toBe(15);
+    expect(zoomForScale(62_500)).toBe(14);
+    expect(zoomForScale(125_000)).toBe(13);
+    expect(zoomForScale(250_000)).toBe(12);
+    expect(zoomForScale(500_000)).toBe(11);
+    expect(zoomForScale(1_000_000)).toBe(11);
+  });
+
+  it('never zooms in past a neighbourhood or out past a region, and copes with nonsense', () => {
+    for (const scale of [1, 10_000, 24_000, 62_500, 100_000, 250_000, 2_000_000]) {
+      expect(zoomForScale(scale)).toBeGreaterThanOrEqual(11);
+      expect(zoomForScale(scale)).toBeLessThanOrEqual(15);
+    }
+    expect(zoomForScale(Number.NaN)).toBe(14);
+    expect(zoomForScale(0)).toBe(14);
   });
 });
 
@@ -294,10 +344,10 @@ describe('browser helpers', () => {
     // which folds it into an (i) button. Never a customAttribution of ours.
     expect(attributionOptions(true)).toEqual({ compact: false });
     expect(attributionOptions(false)).toEqual({});
-    expect(buildMapOptions(container, false, false).attributionControl).toEqual({});
-    expect(buildMapOptions(container, false).attributionControl).toEqual({});
-    stubBrowser({ viewportWidth: 1280 });
-    expect(buildMapOptions(container, false).attributionControl).toEqual({ compact: false });
+    // The Map option itself is off: createStoryMap adds the control with
+    // these options (and swaps it for a compact one while a sheet is shown).
+    expect(buildMapOptions(container, false, false).attributionControl).toBe(false);
+    expect(buildMapOptions(container, false).attributionControl).toBe(false);
   });
 
   it('read prefers-reduced-motion from matchMedia', () => {
@@ -373,11 +423,17 @@ describe('createStoryMap', () => {
     expect(opts['style']).toBe('https://tiles.openfreemap.org/styles/positron');
     // The style's tile source carries the OpenFreeMap / OpenMapTiles /
     // OpenStreetMap credit, so no customAttribution (it was printed twice).
-    // The stubbed window is 1024 px wide: the credit is kept open. An
-    // explicit object is always passed: leaving the option out would give
-    // MapLibre's own default of compact: true plus a "MapLibre" link.
-    expect(opts['attributionControl']).toEqual({ compact: false });
-    expect('customAttribution' in (opts['attributionControl'] as object)).toBe(false);
+    // The control is added by hand (so it can be swapped for a compact
+    // one while a USGS sheet is shown) and the Map option is switched off,
+    // or MapLibre's own default (compact: true plus a "MapLibre" link)
+    // would add a second one. The stubbed window is 1024 px wide: the
+    // credit is kept open.
+    expect(opts['attributionControl']).toBe(false);
+    const map = fake.FakeMap.instances[0]!;
+    expect(fake.FakeAttributionControl.instances).toHaveLength(1);
+    expect(map.controls).toEqual([fake.FakeAttributionControl.instances[0]]);
+    expect(fake.FakeAttributionControl.instances[0]!.options).toEqual({ compact: false });
+    expect('customAttribution' in fake.FakeAttributionControl.instances[0]!.options).toBe(false);
     // MapLibre is told where the bundled tile worker lives before any map is made.
     expect(fake.state.workerUrl).toBe('/sno-ball/assets/maplibre-gl-worker.mjs');
     expect(opts['center']).toEqual([WASHINGTON_VIEW.center.lng, WASHINGTON_VIEW.center.lat]);
@@ -387,6 +443,15 @@ describe('createStoryMap', () => {
     expect(WASHINGTON_VIEW.center.lat).toBeLessThan(49);
     expect(WASHINGTON_VIEW.center.lng).toBeGreaterThan(-124.9);
     expect(WASHINGTON_VIEW.center.lng).toBeLessThan(-116.9);
+  });
+
+  it('folds the credit into its (i) button on a phone-sized window, by the viewport width', async () => {
+    stubBrowser({ viewportWidth: 412 }); // a Pixel 7
+    await createStoryMap(container);
+    expect(fake.FakeAttributionControl.instances.at(-1)!.options).toEqual({});
+    stubBrowser({ viewportWidth: 1280 });
+    await createStoryMap(container);
+    expect(fake.FakeAttributionControl.instances.at(-1)!.options).toEqual({ compact: false });
   });
 
   it('turns on cooperative gestures only on touch devices', async () => {
@@ -574,5 +639,73 @@ describe('destroy', () => {
 
     expect(map.calls).toHaveLength(mapCalls);
     expect(marker.calls).toHaveLength(markerCalls);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The zoom for a USGS sheet and the compact credit
+// ---------------------------------------------------------------------------
+
+describe('easeToZoom, ringZoom and setCompactCredit', () => {
+  it('eases to a sheet zoom around the place and remembers the ring zoom to return to', async () => {
+    const story = await createStoryMap(container);
+    const map = fake.FakeMap.instances[0]!;
+    // Before a place is shown nothing moves.
+    story.easeToZoom(14);
+    expect(map.cameraCalls()).toEqual([]);
+
+    story.showPlace(SPACE_NEEDLE);
+    expect(story.ringZoom()).toBe(17);
+    story.easeToZoom(14);
+    expect(map.calls.at(-1)!.method).toBe('easeTo');
+    expect(map.calls.at(-1)!.args[0]).toMatchObject({ center: [SPACE_NEEDLE.lng, SPACE_NEEDLE.lat], zoom: 14 });
+    // Already there: no move.
+    const before = map.calls.length;
+    story.easeToZoom(14.02);
+    expect(map.calls.length).toBe(before);
+    // The ring's own zoom is untouched by the sheet.
+    expect(story.ringZoom()).toBe(17);
+    story.easeToZoom(story.ringZoom());
+    expect(map.getZoom()).toBe(17);
+
+    // A ring change and a one-off override both set where to return to.
+    story.setRingHighlight('city');
+    expect(story.ringZoom()).toBe(11);
+    story.showPlace(SPOKANE, { zoom: 14 });
+    expect(story.ringZoom()).toBe(14);
+  });
+
+  it('jumps instead of easing under reduced motion', async () => {
+    stubBrowser({ reducedMotion: true });
+    const story = await createStoryMap(container);
+    const map = fake.FakeMap.instances[0]!;
+    story.showPlace(SPACE_NEEDLE);
+    story.easeToZoom(13);
+    expect(map.calls.at(-1)!.method).toBe('jumpTo');
+    expect(map.calls.at(-1)!.args[0]).toEqual({ center: [SPACE_NEEDLE.lng, SPACE_NEEDLE.lat], zoom: 13 });
+  });
+
+  it('swaps the credit for a folded compact one and back, once per change', async () => {
+    const story = await createStoryMap(container);
+    const map = fake.FakeMap.instances[0]!;
+    const first = fake.FakeAttributionControl.instances[0]!;
+    story.setCompactCredit(false); // already open: nothing happens
+    expect(map.controls).toEqual([first]);
+
+    story.setCompactCredit(true);
+    expect(fake.FakeAttributionControl.instances).toHaveLength(2);
+    const compact = fake.FakeAttributionControl.instances[1]!;
+    expect(compact.options).toEqual({ compact: true });
+    expect(map.controls).toEqual([compact]);
+    // Folded straight away, not left open until the first drag.
+    expect(map.creditBox.attrs.has('open')).toBe(false);
+    expect(map.creditBox.classes.has('maplibregl-compact-show')).toBe(false);
+    story.setCompactCredit(true); // no change, no churn
+    expect(fake.FakeAttributionControl.instances).toHaveLength(2);
+
+    story.setCompactCredit(false);
+    expect(fake.FakeAttributionControl.instances).toHaveLength(3);
+    expect(fake.FakeAttributionControl.instances[2]!.options).toEqual({ compact: false });
+    expect(map.controls).toEqual([fake.FakeAttributionControl.instances[2]]);
   });
 });

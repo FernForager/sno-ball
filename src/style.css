@@ -306,19 +306,38 @@ img, svg { max-width: 100%; }
   border-bottom: 1px solid var(--line);
 }
 .postcard__caption:empty { display: none; }
-/* The map note: what the map is showing at this stop of the dial, and the
- * "Map as it was" / "Today's map" button. A USGS caption is two lines. */
+/* The map note: one line on what the map is showing at this stop of the
+ * dial, the "Map as it was" / "Today's map" button beside it, and (for a
+ * USGS sheet) an "About this map" disclosure holding the scale, the
+ * printing and the credit line, so a phone-sized postcard is not covered. */
 .postcard__era {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem 0.75rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   font-size: 0.75rem;
 }
 .postcard__era[hidden] { display: none; }
+.postcard__era-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+}
 .postcard__era-text { white-space: pre-line; min-width: 0; }
+.postcard__era-details {
+  margin: 0.15rem 0 0;
+  pointer-events: auto;
+  color: var(--muted);
+}
+.postcard__era-details[hidden] { display: none; }
+.postcard__era-summary {
+  cursor: pointer;
+  color: var(--fg);
+  font-weight: 600;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+.postcard__era-details-text { margin: 0.15rem 0 0; }
 .postcard__era-button {
   flex: 0 0 auto;
   pointer-events: auto;

@@ -212,11 +212,14 @@ export const NAMED_STOPS: readonly NamedStop[] = Object.freeze([
     'Wartime: Hanford, Boeing, forced removal',
     ['hanford-1943', 'japanese-american-removal-1942'],
   ),
+  // The 1936 aerial survey is a later milestone (its imagery is not on the
+  // map yet); the sheets the dial can show for this stop were surveyed
+  // years away, and the teaser says so.
   named(
     indexOfYear(1936),
     '1936',
-    '1936 · The 1936 aerial survey; streetcars at their peak',
-    'The 1936 aerial survey; streetcars at their peak',
+    '1936 · Streetcars at their peak; nearest survey sheets',
+    'Streetcars at their peak; nearest survey sheets',
   ),
   named(
     indexOfYear(1916),
@@ -478,9 +481,10 @@ export function encodeAt(stop: Stop): string {
 
 /**
  * Read an `at=` value back into a stop, snapping to the nearest one. Accepts
- * everything `encodeAt` writes plus anything `parseTime` understands
- * ("1924", "800 BC", "20,000 years ago", "66 Ma", "4.5 Ga"). Null when the
- * text means nothing.
+ * everything `encodeAt` writes, the future in words ("+50 Ma", "50 Ma from
+ * now", "50 million years from now", "in 50 million years") and anything
+ * `parseTime` understands ("1924", "800 BC", "20,000 years ago", "66 Ma",
+ * "4.5 Ga"). Null when the text means nothing.
  */
 export function decodeAt(s: string): Stop | null {
   const text = s.trim();
@@ -489,8 +493,13 @@ export function decodeAt(s: string): Stop | null {
   if (lower === 'now' || lower === 'today' || lower === 'present') return mustStop(NOW_INDEX);
 
   let m: RegExpExecArray | null;
-  // "+50Ma", "+50 ma": the future, in millions of years after 2000 CE.
-  if ((m = /^\+\s*(\d+(?:\.\d+)?)\s*(?:ma|million\s+years?\s+from\s+now)$/.exec(lower))) {
+  // The future, in millions of years after 2000 CE: "+50Ma", "+50 ma",
+  // "50 Ma from now", "50 million years from now", "in 50 million years".
+  if (
+    (m = /^\+\s*(\d+(?:\.\d+)?)\s*(?:ma|mya|million\s+years?)(?:\s+from\s+now|\s+ahead)?$/.exec(lower)) ||
+    (m = /^(?:in\s+)?(\d+(?:\.\d+)?)\s*(?:ma|mya|million\s+years?)\s+(?:from\s+now|ahead|in\s+the\s+future)$/.exec(lower)) ||
+    (m = /^in\s+(\d+(?:\.\d+)?)\s*(?:ma|mya|million\s+years?)$/.exec(lower))
+  ) {
     return stopFor({ kind: 'ago', value: -Number(m[1]!) * 1_000_000 });
   }
   // "-8000": a BCE year.

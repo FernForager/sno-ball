@@ -269,13 +269,69 @@ export function topoTileUrl(sheet: TopoSheet): string {
   );
 }
 
-/** The map note for a sheet: what it is on the first line, the credit on the second. */
-export function topoCaption(sheet: TopoSheet): string {
+/** A sheet surveyed more than this many years from the dial's stop is called "nearest", not "the" sheet. */
+export const TOPO_NEAR_YEARS = 5;
+
+/**
+ * The one-line map note for a sheet at a stop: "USGS Seattle 1894 sheet"
+ * when the survey is within five years of the stop, otherwise honest about
+ * the gap ("Nearest USGS sheet: Seattle South, surveyed 1949" at the 1936
+ * stop). Without a year the sheet is simply named. The scale, the printing
+ * and the credit line go in topoDetails, behind "About this map".
+ */
+export function topoCaption(sheet: TopoSheet, year?: number): string {
+  if (year !== undefined && Math.abs(sheet.year - year) > TOPO_NEAR_YEARS) {
+    return `Nearest USGS sheet: ${sheet.name}, surveyed ${sheet.dateOnMap}`;
+  }
+  return `USGS ${sheet.name} ${sheet.dateOnMap} sheet`;
+}
+
+/** The full source line for a sheet: what it is, and the credit the collection asks for. */
+export function topoDetails(sheet: TopoSheet): string {
   const scale = `1:${sheet.scale.toLocaleString('en-US')}`;
-  return (
-    `USGS ${sheet.name} sheet (${scale}), surveyed ${sheet.dateOnMap}, printed ${sheet.imprintYear}\n` +
-    `Source: ${TOPO_ATTRIBUTION}`
-  );
+  return `USGS ${sheet.name} sheet (${scale}), surveyed ${sheet.dateOnMap}, printed ${sheet.imprintYear}. Source: ${TOPO_ATTRIBUTION}.`;
+}
+
+/** Whether OpenHistoricalMap drew anything for the stop: not known yet, nothing, or some features. */
+export type OhmPresence = 'unknown' | 'none' | 'some';
+
+/**
+ * The map note at a historical stop and the longer line behind "About
+ * this map": the sheet (or that there is none), and, once the tiles have
+ * loaded, whether OpenHistoricalMap has anything mapped here for the year.
+ * The OHM credit is given only when its features are on the map.
+ */
+export function historicalMapNote(year: number, sheet: TopoSheet | null, ohm: OhmPresence): { text: string; details?: string } {
+  const base = sheet ? topoCaption(sheet, year) : `No USGS map here for ${year}.`;
+  const ohmLine =
+    ohm === 'none'
+      ? ` OpenHistoricalMap has nothing mapped here for ${year} yet.`
+      : ohm === 'some'
+        ? ' Old streets from OpenHistoricalMap.'
+        : sheet
+          ? ''
+          : ` OpenHistoricalMap's ${year} features (where mapped) over today's streets, faded.`;
+  const credits = [...(sheet ? [topoDetails(sheet)] : []), ...(ohm === 'some' ? [`Old streets: ${OHM_ATTRIBUTION}.`] : [])];
+  const text = ohmLine ? `${base.replace(/\.$/, '')}.${ohmLine}` : base;
+  return { text, ...(credits.length > 0 ? { details: credits.join(' ') } : {}) };
+}
+
+/**
+ * The map zoom at which a sheet of a given scale reads as its makers
+ * meant it to: 1:24,000 and 1:25,000 at z15 (a neighbourhood), 1:62,500
+ * at z14, 1:125,000 at z13, 1:250,000 at z12 (a city and its surroundings).
+ * At the street zoom the story opens on (z17) a 1:62,500 sheet is a blur
+ * of enlarged ink, so the map eases to this zoom when a sheet goes on.
+ * Scales between the table's are rounded to the nearest band by their
+ * size, and anything coarser than 1:250,000 gets z11.
+ */
+export function zoomForScale(scale: number): number {
+  if (!Number.isFinite(scale) || scale <= 0) return 14;
+  if (scale <= 36_000) return 15;
+  if (scale <= 90_000) return 14;
+  if (scale <= 180_000) return 13;
+  if (scale <= 360_000) return 12;
+  return 11;
 }
 
 // ---------------------------------------------------------------------------
@@ -360,10 +416,46 @@ function typeIn(values: readonly string[]): FilterSpecification {
   return ['in', ['get', 'type'], ['literal', [...values]]] as unknown as FilterSpecification;
 }
 
+/** The cream of a USGS sheet's paper: the casing under OHM's lines, so they read over the scanned ink. */
+const OHM_CASING_COLOR = '#fdf6e3';
+/** How much wider than its line a casing is drawn (in total, both sides). */
+const OHM_CASING_EXTRA = 2.5;
+
+/** A line width that grows to about 3 px at z15 and a little past it beyond. */
+function ohmLineWidth(atZ8: number, atZ15: number, atZ18: number): unknown {
+  return ['interpolate', ['linear'], ['zoom'], 8, atZ8, 15, atZ15, 18, atZ18];
+}
+
+/** The same width plus the casing margin at every stop. */
+function ohmCasingWidth(atZ8: number, atZ15: number, atZ18: number): unknown {
+  return ohmLineWidth(atZ8 + OHM_CASING_EXTRA, atZ15 + OHM_CASING_EXTRA, atZ18 + OHM_CASING_EXTRA);
+}
+
+const MINOR_WIDTH = [0.6, 3, 4] as const;
+const MAJOR_WIDTH = [0.8, 3.5, 5] as const;
+const RAIL_WIDTH = [0.8, 3, 3.5] as const;
+
+/** A cream casing line under one of the road or railway layers. */
+function ohmCasing(id: string, filter: FilterSpecification, width: readonly [number, number, number], minzoom?: number): LayerSpecification {
+  return {
+    id,
+    type: 'line',
+    source: OHM_SOURCE_ID,
+    'source-layer': 'transport_lines',
+    ...(minzoom !== undefined ? { minzoom } : {}),
+    filter,
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': OHM_CASING_COLOR, 'line-opacity': 0.9, 'line-width': ohmCasingWidth(...width) as never },
+  };
+}
+
 /**
- * The OHM layers we draw, bottom first: water areas and lines, buildings,
- * minor and major roads, railways. Drawn in a warm sepia so they read as
- * "then" against the grey "now". Source-layer names follow OHM's vector
+ * The OHM layers we draw, bottom first: water areas (with an outline, so
+ * the pre-1907 Elliott Bay shoreline reads against a sheet) and lines,
+ * buildings, then a cream casing and the line itself for minor roads,
+ * major roads and railways. The lines are about 3 px wide from z15 on,
+ * in a warm sepia so they read as "then" against the grey "now" and over
+ * the scanned ink of a USGS sheet. Source-layer names follow OHM's vector
  * tileset (water_areas, water_lines, buildings, transport_lines) and the
  * `type` property carries the OSM-style highway/railway value. Labels are
  * left out on purpose: the glyphs would need OHM's font server.
@@ -375,6 +467,13 @@ export const OHM_LAYERS: readonly LayerSpecification[] = [
     source: OHM_SOURCE_ID,
     'source-layer': 'water_areas',
     paint: { 'fill-color': '#9fc0dc', 'fill-opacity': 0.55 },
+  },
+  {
+    id: 'sno-ohm-water-outline',
+    type: 'line',
+    source: OHM_SOURCE_ID,
+    'source-layer': 'water_areas',
+    paint: { 'line-color': '#4f7ea6', 'line-opacity': 0.85, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0.8, 15, 2, 18, 3] },
   },
   {
     id: 'sno-ohm-water-lines',
@@ -391,6 +490,9 @@ export const OHM_LAYERS: readonly LayerSpecification[] = [
     minzoom: 12,
     paint: { 'fill-color': '#b8946e', 'fill-opacity': 0.6, 'fill-outline-color': '#8f6a48' },
   },
+  ohmCasing('sno-ohm-roads-minor-casing', typeIn(OHM_MINOR_ROADS), MINOR_WIDTH, 11),
+  ohmCasing('sno-ohm-roads-major-casing', typeIn(OHM_MAJOR_ROADS), MAJOR_WIDTH),
+  ohmCasing('sno-ohm-railways-casing', typeIn(OHM_RAILWAYS), RAIL_WIDTH),
   {
     id: 'sno-ohm-roads-minor',
     type: 'line',
@@ -398,7 +500,8 @@ export const OHM_LAYERS: readonly LayerSpecification[] = [
     'source-layer': 'transport_lines',
     minzoom: 11,
     filter: typeIn(OHM_MINOR_ROADS),
-    paint: { 'line-color': '#a8865f', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 16, 2.5] },
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#a8865f', 'line-width': ohmLineWidth(...MINOR_WIDTH) as never },
   },
   {
     id: 'sno-ohm-roads-major',
@@ -406,7 +509,8 @@ export const OHM_LAYERS: readonly LayerSpecification[] = [
     source: OHM_SOURCE_ID,
     'source-layer': 'transport_lines',
     filter: typeIn(OHM_MAJOR_ROADS),
-    paint: { 'line-color': '#8c6239', 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 16, 4] },
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#8c6239', 'line-width': ohmLineWidth(...MAJOR_WIDTH) as never },
   },
   {
     id: 'sno-ohm-railways',
@@ -416,11 +520,14 @@ export const OHM_LAYERS: readonly LayerSpecification[] = [
     filter: typeIn(OHM_RAILWAYS),
     paint: {
       'line-color': '#5b4a3a',
-      'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 16, 2.2],
+      'line-width': ohmLineWidth(...RAIL_WIDTH) as never,
       'line-dasharray': [4, 2],
     },
   },
 ];
+
+/** The OHM layers that draw features (not casings): the ones to count when asking whether OHM has anything mapped here. */
+export const OHM_FEATURE_LAYER_IDS: readonly string[] = OHM_LAYERS.filter((l) => !l.id.endsWith('-casing') && l.id !== 'sno-ohm-water-outline').map((l) => l.id);
 
 /** The ids of the OHM layers, in drawing order. */
 export const OHM_LAYER_IDS: readonly string[] = OHM_LAYERS.map((l) => l.id);

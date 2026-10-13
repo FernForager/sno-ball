@@ -16,6 +16,10 @@
  * interfaces below describe the shapes this file needs from it, so it
  * typechecks on its own.
  *
+ * Picking a chapter or a successful jump folds the sheet away again (the
+ * expanded panel would otherwise cover the map and the story) and puts
+ * focus on the chevron; a failed jump keeps it open with the error line.
+ *
  *   ◀ / ▶ (and ← / →)   step to the previous or next chapter
  *   long press           keeps stepping every 350 ms
  *   Now (and Home)       back to the 'now' stop
@@ -281,8 +285,13 @@ export function mountDial(root: HTMLElement, opts: DialOptions): DialHandle {
       body !== named.label ? el('span', { class: 'dial__chapter-readout' }, [body]) : null,
       extra ? el('span', { class: 'dial__chapter-teaser muted' }, [extra]) : null,
     ]);
+    // Picking a chapter is a destination, not a browse: the sheet folds
+    // away so the story and the map are in view, and focus lands on the
+    // chevron so a keyboard user can open it again with one key.
     button.addEventListener('click', () => {
       moveTo(named.index, 'named');
+      setExpanded(false);
+      toggle.focus();
     });
     chapterButtons.set(named.index, button);
     chapterList.append(el('li', {}, [button]));

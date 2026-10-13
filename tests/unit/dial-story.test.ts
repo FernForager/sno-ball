@@ -24,7 +24,11 @@ import {
   isRockForming,
   noSheetNote,
   notYetLine,
+  notYetSpotLine,
   paleoFact,
+  plateStoryStartsLine,
+  GLOBE_MAP_NOTE,
+  PLATE_MODEL_SILENT_CAPTION,
   ringEventsForStop,
   ringsAtStop,
   stopForEvent,
@@ -118,6 +122,9 @@ describe('small wordings', () => {
     expect(notYetLine('Seattle', 1869, 869)).toBe('Not yet. Seattle will be founded in 1869, 1,000 years from now.'.replace('1,000 years', 'about 1,000 years'));
     expect(notYetLine('Seattle', 1869, 870)).toContain('999 years from now');
     expect(notYetLine('King County', 1852, -15_000)).toContain('about 17,000 years from now');
+    // The neighborhood ring speaks of the spot, not of a name that did not exist yet.
+    expect(notYetSpotLine('Seattle', 1869, 1849)).toBe('Not yet. This spot becomes part of Seattle in 1869, 20 years from now.');
+    expect(notYetSpotLine(undefined, 1869, 1868)).toBe('Not yet. This spot becomes part of the city in 1869, 1 year from now.');
   });
 
   it('gives each stop its calendar year, or none in deep time', () => {
@@ -143,21 +150,35 @@ describe('small wordings', () => {
     expect(noSheetNote(1850)).toBe("No USGS map here for 1850. OpenHistoricalMap's 1850 features (where mapped) over today's streets, faded.");
     expect(noSheetNote(-500)).toContain('500 BCE');
     expect(globeCaption(66, 'position')).toBe('Your spot was here, 66 million years ago (MERDITH2021).');
-    expect(globeCaption(2.6, 'none')).toContain('no position for this spot 2.6 million years ago');
+    expect(globeCaption(2.6, 'none')).toBe(PLATE_MODEL_SILENT_CAPTION);
+    expect(globeCaption(2.6, 'none')).toBe("The plate model did not answer; the globe shows today's position.");
     expect(globeCaption(100, 'pending')).toContain('Asking the plate model');
     expect(globeCaption(1470, 'position')).toContain('No plate model reaches back 1,470 million years ago');
+    expect(GLOBE_MAP_NOTE).toBe('At this scale the map gives way to the globe.');
+    expect(plateStoryStartsLine()).toBe('The plate story starts at 1 million years ago.');
   });
 });
 
 describe('deep-time highlights', () => {
   const till: GeologyUnit = { symbol: 'Qgt', name: 'glacial till', age: 'Pleistocene', ageYearsAgo: { from: 2_580_000, to: 11_700 }, source: SRC };
 
-  it('lights the rock card only inside the unit age range', () => {
-    expect(isRockForming(till, stopAt(indexOfYear(-15_000)))).toBe(true);
-    expect(isRockForming(till, stopAt(indexOfMa(1)))).toBe(true);
+  it('lights the rock card only while the unit was being laid down', () => {
+    // Vashon till: the survey files it under the whole Pleistocene, but it
+    // was laid down about 18,000 to 16,000 years ago, and the card says so.
+    expect(isRockForming(till, stopAt(indexOfYear(-15_000)))).toBe(true); // "about 17,000 years ago"
+    expect(isRockForming(till, stopAt(indexOfYear(-16_000)))).toBe(true); // "about 18,000 years ago"
+    expect(isRockForming(till, stopAt(indexOfYear(-14_000)))).toBe(true); // "about 16,000 years ago" (15,999)
+    expect(isRockForming(till, stopAt(indexOfYear(-17_000)))).toBe(false); // 19,000 years ago: the ice not here yet
+    expect(isRockForming(till, stopAt(indexOfYear(-12_000)))).toBe(false); // the ice had gone
+    expect(isRockForming(till, stopAt(indexOfMa(0.02)))).toBe(false);
+    expect(isRockForming(till, stopAt(indexOfMa(1)))).toBe(false);
     expect(isRockForming(till, stopAt(indexOfMa(16)))).toBe(false);
     expect(isRockForming(till, stopAt(indexOfYear(1889)))).toBe(false);
     expect(isRockForming(till, stopAt(FUTURE_INDEX))).toBe(false);
+    // A unit without an ice-age story uses the survey's own range.
+    const basalt: GeologyUnit = { symbol: 'Mv', name: 'Columbia River basalt', age: 'Miocene', ageYearsAgo: { from: 23_030_000, to: 5_333_000 }, source: SRC };
+    expect(isRockForming(basalt, stopAt(indexOfMa(16)))).toBe(true);
+    expect(isRockForming(basalt, stopAt(indexOfMa(1)))).toBe(false);
     const { ageYearsAgo: _range, ...undated } = till;
     expect(isRockForming(undated, stopAt(indexOfMa(1)))).toBe(false);
     expect(isRockForming(null, stopAt(indexOfMa(1)))).toBe(false);
@@ -306,7 +327,8 @@ describe('ringsAtStop', () => {
     const state = find(rings, 'state');
     expect(state.era?.text).toBe('Not yet. Washington will become a state in 1889, 34 years from now.');
     const hood = find(rings, 'neighborhood');
-    expect(hood.era?.text).toBe('Not yet. Lower Queen Anne will become part of the city in 1869, 14 years from now.');
+    // The neighborhood's name did not exist yet, so its line speaks of the spot and names the city.
+    expect(hood.era?.text).toBe('Not yet. This spot becomes part of Seattle in 1869, 14 years from now.');
     // At the founding year itself the dated fact shows and the countdown is gone.
     const founded = find(at(1869), 'neighborhood');
     expect(founded.era).toBeUndefined();
@@ -399,6 +421,25 @@ describe('ringsAtStop', () => {
     expect(find(rings, 'plate').era).toBeUndefined();
     const quiet = ringsAtStop({ rings: seattleRings(), stop: stopAt(indexOfMa(66)), events: EVENTS, ctx: CTX, founded: FOUNDED });
     expect(find(quiet, 'plate').era?.state).toBe('quiet');
+    expect(find(quiet, 'plate').era?.text).toBe('Nothing recorded for 66 million years ago.');
+  });
+
+  it('points the plate ring at the globe stops from any human-era or ice-age stop', () => {
+    for (const index of [indexOfYear(1980), indexOfYear(1889), indexOfYear(900), indexOfYear(-15_000), indexOfMa(0.02), indexOfMa(0.75)]) {
+      const plate = find(ringsAtStop({ rings: seattleRings(), stop: stopAt(index), events: EVENTS, ctx: CTX, founded: FOUNDED }), 'plate');
+      expect(plate.era).toEqual({
+        state: 'quiet',
+        text: 'The plate story starts at 1 million years ago.',
+        jumps: [{ label: 'Jump to 1 million years ago', index: indexOfMa(1), direction: 'jump' }],
+      });
+      expect(plate.facts).toEqual([]);
+    }
+    // At the first globe stop and beyond the ring is told from the model (or is quiet in the usual way).
+    const first = find(ringsAtStop({ rings: seattleRings(), stop: stopAt(indexOfMa(1)), events: EVENTS, ctx: CTX, founded: FOUNDED }), 'plate');
+    expect(first.era?.text).not.toContain('plate story starts');
+    // The future stop shows the globe too.
+    const future = find(ringsAtStop({ rings: seattleRings(), stop: stopAt(FUTURE_INDEX), events: EVENTS, ctx: CTX, founded: FOUNDED }), 'plate');
+    expect(future.era?.text).not.toContain('plate story starts');
   });
 
   it('never carries the loading story\'s busy flag or note into a stop', () => {

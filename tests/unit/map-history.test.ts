@@ -62,6 +62,8 @@ import {
   scalePreference,
   sheetsFromCatalog,
   topoCaption,
+  topoDetails,
+  historicalMapNote,
   topoCatalogUrl,
   topoCellKey,
   topoSheetsAt,
@@ -385,11 +387,33 @@ describe('topoTileUrl', () => {
     expect(JSON.parse(rule!)).toEqual({ mosaicMethod: 'esriMosaicLockRaster', lockRasterIds: [165595] });
   });
 
-  it('captions the sheet and credits the collection', () => {
-    const caption = topoCaption(sheet);
-    expect(caption).toContain('USGS Seattle sheet (1:125,000), surveyed 1897, printed 1897');
-    expect(caption).toContain('Historical Topographic Map Collection courtesy of the U.S. Geological Survey, Esri');
-    expect(topoCaption(sheets.find((s) => s.objectId === 165207)!)).toContain('surveyed 1909, printed 1936');
+  it('captions the sheet in one line, honest about a survey far from the stop, and credits the collection in the details', () => {
+    expect(topoCaption(sheet)).toBe('USGS Seattle 1897 sheet');
+    expect(topoCaption(sheet, 1897)).toBe('USGS Seattle 1897 sheet');
+    expect(topoCaption(sheet, 1892)).toBe('USGS Seattle 1897 sheet'); // five years: still "the" sheet
+    expect(topoCaption(sheet, 1889)).toBe('Nearest USGS sheet: Seattle, surveyed 1897');
+    const south1949 = sheets.find((s) => s.name === 'Seattle South' && s.year === 1949)!;
+    expect(topoCaption(south1949, 1936)).toBe('Nearest USGS sheet: Seattle South, surveyed 1949');
+    const details = topoDetails(sheet);
+    expect(details).toContain('USGS Seattle sheet (1:125,000), surveyed 1897, printed 1897');
+    expect(details).toContain('Historical Topographic Map Collection courtesy of the U.S. Geological Survey, Esri');
+    expect(topoDetails(sheets.find((s) => s.objectId === 165207)!)).toContain('surveyed 1909, printed 1936');
+  });
+
+  it('builds the map note with what OpenHistoricalMap drew, crediting it only when it drew something', () => {
+    const unknown = historicalMapNote(1897, sheet, 'unknown');
+    expect(unknown.text).toBe('USGS Seattle 1897 sheet');
+    expect(unknown.details).toBe(topoDetails(sheet));
+    const none = historicalMapNote(1889, sheet, 'none');
+    expect(none.text).toBe('Nearest USGS sheet: Seattle, surveyed 1897. OpenHistoricalMap has nothing mapped here for 1889 yet.');
+    expect(none.details).not.toContain('OpenHistoricalMap');
+    const some = historicalMapNote(1897, sheet, 'some');
+    expect(some.text).toBe('USGS Seattle 1897 sheet. Old streets from OpenHistoricalMap.');
+    expect(some.details).toContain(OHM_ATTRIBUTION);
+    // Without a sheet the note still names the OHM features (where mapped), or says there are none.
+    expect(historicalMapNote(1850, null, 'unknown')).toEqual({ text: "No USGS map here for 1850. OpenHistoricalMap's 1850 features (where mapped) over today's streets, faded." });
+    expect(historicalMapNote(1850, null, 'none')).toEqual({ text: 'No USGS map here for 1850. OpenHistoricalMap has nothing mapped here for 1850 yet.' });
+    expect(historicalMapNote(1850, null, 'some')).toEqual({ text: 'No USGS map here for 1850. Old streets from OpenHistoricalMap.', details: `Old streets: ${OHM_ATTRIBUTION}.` });
   });
 });
 

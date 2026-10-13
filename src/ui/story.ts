@@ -71,11 +71,13 @@ export interface StoryHandle {
   /** Mark the postcard with the dial's map mode (`data-map-mode`), for styling and tests. */
   setMapMode(mode: string): void;
   /**
-   * The note under the postcard caption ("USGS Seattle sheet, surveyed
-   * 1895…", "Coastlines are today's…"), with an optional button such as
-   * "Today's map"; null hides the note.
+   * The note under the postcard caption ("USGS Seattle 1894 sheet",
+   * "Coastlines are today's…"), with an optional button such as "Today's
+   * map" and, when given, a longer line (the sheet's scale, printing and
+   * credit) folded behind an "About this map" disclosure; null hides the
+   * note.
    */
-  setMapNote(text: string | null, button?: MapNoteButton): void;
+  setMapNote(text: string | null, button?: MapNoteButton, details?: string): void;
   /** Light up the deep-time cards whose story is happening at the dial's stop. */
   setDeepHighlights(now: { rock: boolean; ice: boolean }): void;
   /** Back to the empty state, keeping the map container in place. */
@@ -141,7 +143,15 @@ export function mountStory(root: HTMLElement): StoryHandle {
   const caption = el('p', { class: 'postcard__caption' });
   const noteText = el('span', { class: 'postcard__era-text' });
   const noteButton = el('button', { type: 'button', class: 'postcard__era-button', hidden: '' });
-  const note = el('div', { class: 'postcard__era', hidden: '' }, [noteText, noteButton]);
+  const noteDetailsText = el('p', { class: 'postcard__era-details-text' });
+  const noteDetails = el('details', { class: 'postcard__era-details', hidden: '' }, [
+    el('summary', { class: 'postcard__era-summary' }, ['About this map']),
+    noteDetailsText,
+  ]);
+  const note = el('div', { class: 'postcard__era', hidden: '' }, [
+    el('div', { class: 'postcard__era-row' }, [noteText, noteButton]),
+    noteDetails,
+  ]);
   // Hidden until there is a place to show: an empty white card under the
   // search box would only puzzle a visitor.
   const postcard = el('div', { class: 'postcard', hidden: '' }, [mapContainer, globeBox, el('div', { class: 'postcard__top' }, [caption, note])]);
@@ -488,10 +498,20 @@ export function mountStory(root: HTMLElement): StoryHandle {
   };
 
   let noteHandler: (() => void) | null = null;
-  const setMapNote: StoryHandle['setMapNote'] = (text, button) => {
+  const setMapNote: StoryHandle['setMapNote'] = (text, button, details) => {
     if (noteHandler) noteButton.removeEventListener('click', noteHandler);
     noteHandler = null;
     noteText.textContent = text ?? '';
+    // The disclosure keeps its open/closed state while the same kind of
+    // note is updated in place; it is folded again when the details go.
+    if (details) {
+      noteDetailsText.textContent = details;
+      noteDetails.hidden = false;
+    } else {
+      noteDetailsText.textContent = '';
+      noteDetails.hidden = true;
+      noteDetails.open = false;
+    }
     if (button) {
       noteButton.textContent = button.label;
       noteHandler = button.onClick;

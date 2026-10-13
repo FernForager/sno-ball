@@ -464,6 +464,54 @@ export function describeSpan(from: number, to: number): string {
 }
 
 /**
+ * The deposits of the last ice age that get their own sentence and their
+ * own, narrower, "when it formed" window: the till and drift the Vashon
+ * ice sheet left (from about 18,000 years ago, when the Puget lobe pushed
+ * south past Seattle, until about 16,000 years ago, give or take a few
+ * centuries, when it had melted back out of the lowland) and the Missoula
+ * flood deposits of eastern Washington (about 18,000 to 15,000 years ago).
+ * Undefined for every other unit.
+ */
+export function iceAgeDeposit(unit: GeologyUnit): 'glacial' | 'flood' | undefined {
+  const range = unit.ageYearsAgo;
+  if (!range) return undefined;
+  const text = `${unit.symbol} ${unit.name} ${unit.description ?? ''}`;
+  const lastIceAge = range.from <= PLEISTOCENE_START && range.from > HOLOCENE_START;
+  if (!lastIceAge) return undefined;
+  if (FLOOD_WORDS.test(text)) return 'flood';
+  if (GLACIAL_WORDS.test(text) && !OLDER_GLACIAL_WORDS.test(text)) return 'glacial';
+  return undefined;
+}
+
+/**
+ * The windows the two ice-age sentences state, in years before 2000 CE.
+ * The till window ends at 15,500 rather than a round 16,000 so the dial's
+ * "14,000 BCE (about 16,000 years ago)" stop, 15,999 years before 2000 CE,
+ * still counts as the ice's last years here.
+ */
+export const VASHON_TILL_WINDOW: Readonly<{ from: number; to: number }> = { from: 18_000, to: 15_500 };
+export const MISSOULA_FLOOD_WINDOW: Readonly<{ from: number; to: number }> = { from: 18_000, to: 15_000 };
+
+/**
+ * When the unit was actually being laid down, as the page tells it: the
+ * narrow ice-age window for Vashon till and flood deposits (the survey
+ * files them under the whole Pleistocene, 2.6 million years, but the
+ * sentence says 16,000), the survey's own range for everything else, and
+ * undefined when the survey gives no age. The dial lights the rock card
+ * only inside this window.
+ */
+export function depositWindow(unit: GeologyUnit): { from: number; to: number } | undefined {
+  switch (iceAgeDeposit(unit)) {
+    case 'glacial':
+      return { ...VASHON_TILL_WINDOW };
+    case 'flood':
+      return { ...MISSOULA_FLOOD_WINDOW };
+    default:
+      return unit.ageYearsAgo ? { ...unit.ageYearsAgo } : undefined;
+  }
+}
+
+/**
  * One visitor-friendly sentence about when a unit formed. Glacial deposits of
  * the last ice age get a specific line ("Laid down about 16,000 years ago by
  * the ice sheet..."), Ice Age flood deposits another; everything else reads
@@ -475,13 +523,11 @@ export function describeAge(unit: GeologyUnit): string {
     return unit.age ? `The survey dates this unit as "${unit.age}".` : 'The survey gives no age for this unit.';
   }
 
-  const text = `${unit.symbol} ${unit.name} ${unit.description ?? ''}`;
-  const lastIceAge = range.from <= PLEISTOCENE_START && range.from > HOLOCENE_START;
-
-  if (lastIceAge && FLOOD_WORDS.test(text)) {
+  const deposit = iceAgeDeposit(unit);
+  if (deposit === 'flood') {
     return 'Laid down between about 18,000 and 15,000 years ago by the Ice Age floods that swept across eastern Washington.';
   }
-  if (lastIceAge && GLACIAL_WORDS.test(text) && !OLDER_GLACIAL_WORDS.test(text)) {
+  if (deposit === 'glacial') {
     return 'Laid down about 16,000 years ago by the ice sheet of the last ice age.';
   }
   if (range.from <= HOLOCENE_START && range.to <= 0) {

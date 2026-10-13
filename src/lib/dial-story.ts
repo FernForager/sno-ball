@@ -13,9 +13,11 @@
  *    state instead: NOT YET when the county, city, state or neighborhood has
  *    not been founded at that date (with a jump to its founding year);
  *    "No people yet here" on the human rings before 20,000 years ago; "No
- *    record for this date" on the house, block and street; and otherwise
- *    the QUIET state, "Nothing recorded for <readout>", with ◀ ▶ jumps to
- *    the ring's nearest earlier and later events.
+ *    record for this date" on the house, block and street; "The plate
+ *    story starts at 1 million years ago" (with a jump there) on the plate
+ *    ring at any stop the globe is not shown for; and otherwise the QUIET
+ *    state, "Nothing recorded for <readout>", with ◀ ▶ jumps to the
+ *    ring's nearest earlier and later events.
  *  - eventFact: a timeline event as a Fact, with its second-person line when
  *    the ground agrees (events.ts) and every source it cites.
  *  - the small wordings the postcard and status line use at a stop.
@@ -27,8 +29,9 @@
 import type { Fact, GeologyUnit, HistoryEvent, LngLat, PaleoPosition, Ring, RingEra, RingJump, RingLevel, Source } from './types';
 import { AGO_THRESHOLD, fromYearsAgo, maToAgo, year, yearsAgo } from './time';
 import { describePaleo } from './paleo';
+import { depositWindow } from './geology';
 import { eventsAtWindow, ringForSpot, storyLine, type SpotContext, type YearsAgoWindow } from './events';
-import { NOW_INDEX, stopAt, stopFor, stopYearsAgo, windowOf, type Stop } from './stops';
+import { NOW_INDEX, indexOfMa, stopAt, stopFor, stopYearsAgo, windowOf, type Gear, type Stop } from './stops';
 
 // ---------------------------------------------------------------------------
 // Constants and wording
@@ -78,7 +81,16 @@ export const ICE_AGE_HIGHLIGHT: Readonly<YearsAgoWindow> = { fromYearsAgo: 13_00
 export const PALEO_MODEL_MAX_MA = 1000;
 
 export const NATURE_MAP_NOTE = "Coastlines are today's; sea level was lower.";
+/** The map note at the globe and future stops, where the postcard shows the globe instead of a map. */
+export const GLOBE_MAP_NOTE = 'At this scale the map gives way to the globe.';
 export const FUTURE_GLOBE_CAPTION = 'Where this spot may drift to, 50 million years from now.';
+/** The globe's caption when the plate model gave no position for the stop (it failed, or the spot was off every plate). */
+export const PLATE_MODEL_SILENT_CAPTION = "The plate model did not answer; the globe shows today's position.";
+
+/** The gears whose stops show the globe: the plate ring's own territory. */
+export const GLOBE_GEARS: readonly Gear[] = ['millions', 'eons', 'future'];
+/** Millions of years ago at the first globe stop, where the plate ring's story starts. */
+export const PLATE_STORY_START_MA = 1;
 
 const fmt = (n: number): string => n.toLocaleString('en-US');
 
@@ -121,6 +133,17 @@ export function notYetLine(name: string, foundedYear: number, selectedYear: numb
   const n = Math.max(1, Math.round(gap));
   const count = n >= 1000 ? `about ${fmt(roundToTwoFigures(n))} years` : `${fmt(n)} ${n === 1 ? 'year' : 'years'}`;
   return `Not yet. ${name} will ${verb} in ${printYear(foundedYear)}, ${count} from now.`;
+}
+
+/**
+ * The neighborhood ring's "not yet" line. The ring is named for the
+ * neighborhood as it is called today, which did not exist as a place
+ * before it joined the city, so the line speaks of the spot: "Not yet.
+ * This spot becomes part of Seattle in 1869, 20 years from now."
+ */
+export function notYetSpotLine(city: string | undefined, foundedYear: number, selectedYear: number): string {
+  const line = notYetLine('This spot', foundedYear, selectedYear, `become part of ${city?.trim() || 'the city'}`);
+  return line.replace('This spot will become', 'This spot becomes');
 }
 
 /** 16,851 to 17,000; 2,868 to 2,900; 1,234 to 1,200. */
@@ -167,16 +190,26 @@ export function globeCaption(ma: number, answer: 'position' | 'none' | 'pending'
   if (ma > PALEO_MODEL_MAX_MA) return `No plate model reaches back ${when}; the globe shows where the spot is today.`;
   if (answer === 'position') return `Your spot was here, ${when} (MERDITH2021).`;
   if (answer === 'pending') return `Asking the plate model where this spot was ${when}…`;
-  return `The plate model has no position for this spot ${when}; the hollow dot is where it is today.`;
+  return PLATE_MODEL_SILENT_CAPTION;
+}
+
+/** The plate ring's line at a stop before the globe takes over (anything after 1 million years ago, except Now). */
+export function plateStoryStartsLine(): string {
+  return `The plate story starts at ${PLATE_STORY_START_MA} million years ago.`;
 }
 
 // ---------------------------------------------------------------------------
 // Deep-time highlights
 // ---------------------------------------------------------------------------
 
-/** True when the stop falls inside the rock unit's age range: the rock is forming "now". */
+/**
+ * True when the stop falls inside the window in which the rock unit was
+ * being laid down (depositWindow: the survey's age range, or the narrow
+ * ice-age window for Vashon till and flood deposits): the rock is forming
+ * "now".
+ */
 export function isRockForming(unit: GeologyUnit | null | undefined, stop: Stop): boolean {
-  const range = unit?.ageYearsAgo;
+  const range = unit ? depositWindow(unit) : undefined;
   if (!range) return false;
   const n = stopYearsAgo(stop);
   return n >= Math.min(range.from, range.to) && n <= Math.max(range.from, range.to);
@@ -362,7 +395,10 @@ export function ringsAtStop(input: StopStoryInput): Ring[] {
     if (calendarYear !== undefined && foundedYear !== undefined && foundedYear > calendarYear) {
       era = {
         state: 'not-yet',
-        text: notYetLine(base.name, foundedYear, calendarYear, FOUNDED_VERB[level as FoundedLevel]),
+        text:
+          level === 'neighborhood'
+            ? notYetSpotLine(ctx.city, foundedYear, calendarYear)
+            : notYetLine(base.name, foundedYear, calendarYear, FOUNDED_VERB[level as FoundedLevel]),
         jumps: [{ label: `Jump to ${printYear(foundedYear)}`, index: stopFor(year(foundedYear)).index, direction: 'jump' }],
       };
     } else if (facts.length === 0) {
@@ -370,6 +406,15 @@ export function ringsAtStop(input: StopStoryInput): Ring[] {
         era = { state: 'no-record', text: 'No record for this date.', jumps: [] };
       } else if (beforePeople && HUMAN_RINGS.includes(level)) {
         era = { state: 'no-people', text: 'No people yet here.', jumps: [] };
+      } else if (level === 'plate' && !GLOBE_GEARS.includes(stop.gear)) {
+        // The plate's story is told on the globe, from 1 million years ago
+        // back; at a human-era stop the ring points there instead of
+        // saying "nothing recorded" about a plate that was always here.
+        era = {
+          state: 'quiet',
+          text: plateStoryStartsLine(),
+          jumps: [{ label: `Jump to ${PLATE_STORY_START_MA} million years ago`, index: indexOfMa(PLATE_STORY_START_MA), direction: 'jump' }],
+        };
       } else {
         era = {
           state: 'quiet',

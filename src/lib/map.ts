@@ -37,7 +37,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // asked for the worker's URL here (the `?url` suffix makes Vite copy the
 // file into the build and hand back its address) and MapLibre is told it.
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
-import type { AttributionControlOptions, Map as MapLibreMap, Marker, MapOptions, Subscription } from 'maplibre-gl';
+import type { AttributionControl, AttributionControlOptions, Map as MapLibreMap, Marker, MapOptions, Subscription } from 'maplibre-gl';
 import type { LngLat, RingLevel } from './types';
 
 // ---------------------------------------------------------------------------
@@ -51,7 +51,8 @@ export const POSITRON_STYLE_URL = 'https://tiles.openfreemap.org/styles/positron
 export const WIDE_VIEWPORT_PX = 640;
 
 /**
- * How the map's credit corner is set up. No `customAttribution`: the
+ * How the map's credit corner is set up (the control is added by
+ * createStoryMap with these options). No `customAttribution`: the
  * positron style's tile source carries the OpenFreeMap / OpenMapTiles /
  * OpenStreetMap credit itself, and adding our own printed it twice (a
  * three-line white box over a phone-sized map). On a wide viewport the
@@ -124,6 +125,22 @@ export interface StoryMap {
    * remembers the ring, so the first showPlace lands at the right zoom.
    */
   setRingHighlight(level: RingLevel): void;
+  /** The zoom the ring being read asks for (or the last showPlace override): where easeToZoom returns to. */
+  ringZoom(): number;
+  /**
+   * Ease the camera to a zoom, centred on the place (instantly under
+   * reduced motion), without forgetting the ring's own zoom. Used for an
+   * old USGS sheet, which reads best at the zoom its scale was drawn for.
+   * Nothing happens before a place is shown or when already at that zoom.
+   */
+  easeToZoom(zoom: number): void;
+  /**
+   * Fold the credit in the corner into its (i) button (true) or restore
+   * the viewport's usual setting (false). Used while a USGS sheet is on
+   * the map and its credit is already in the caption's details, so three
+   * lines of credit do not cover a phone-sized sheet.
+   */
+  setCompactCredit(compact: boolean): void;
   /** Remove the marker, the map and its listeners. Safe to call twice. */
   destroy(): void;
 }
@@ -225,8 +242,10 @@ export function buildMapOptions(container: HTMLElement, touch: boolean, wideView
     zoom: WASHINGTON_VIEW.zoom,
     minZoom: 1,
     // The credit comes from the style's tile source; see attributionOptions.
+    // The control itself is added by createStoryMap (so it can be swapped
+    // for a compact one while a USGS sheet is shown), not by this option.
     // The page's own CSS keeps the caption away from this corner.
-    attributionControl: attributionOptions(wideViewport),
+    attributionControl: false,
     cooperativeGestures: touch,
   };
 }
@@ -278,7 +297,13 @@ export async function createStoryMap(container: HTMLElement): Promise<StoryMap> 
 
   let place: LngLat | null = null;
   let level: RingLevel = 'house';
+  /** The zoom the page last asked for a ring (or a one-off override): easeToZoom returns here. */
+  let wantedZoom = zoomForLevel(level);
   let destroyed = false;
+  /** The credit control as the viewport wants it, and the compact stand-in while a sheet is shown. */
+  let credit: AttributionControl = new maplibre.AttributionControl(attributionOptions(isWideViewport()));
+  map.addControl(credit);
+  let creditCompact = false;
 
   /** Move the camera; instantly when the visitor prefers reduced motion. */
   const moveCamera = (how: 'fly' | 'ease', center: LngLat, zoom: number): void => {
@@ -301,13 +326,41 @@ export async function createStoryMap(container: HTMLElement): Promise<StoryMap> 
       markerOnMap = true;
     }
     labelMarker(marker, opts?.label);
-    moveCamera('fly', p, opts?.zoom ?? zoomForLevel(level));
+    wantedZoom = opts?.zoom ?? zoomForLevel(level);
+    moveCamera('fly', p, wantedZoom);
   };
 
   const setRingHighlight: StoryMap['setRingHighlight'] = (next) => {
     if (destroyed) return;
     level = next;
-    if (place) moveCamera('ease', place, zoomForLevel(next));
+    wantedZoom = zoomForLevel(next);
+    if (place) moveCamera('ease', place, wantedZoom);
+  };
+
+  const ringZoom: StoryMap['ringZoom'] = () => wantedZoom;
+
+  const easeToZoom: StoryMap['easeToZoom'] = (zoom) => {
+    if (destroyed || !place || !Number.isFinite(zoom)) return;
+    if (Math.abs(map.getZoom() - zoom) < 0.05) return;
+    moveCamera('ease', place, zoom);
+  };
+
+  const setCompactCredit: StoryMap['setCompactCredit'] = (compact) => {
+    if (destroyed || compact === creditCompact) return;
+    creditCompact = compact;
+    map.removeControl(credit);
+    credit = new maplibre.AttributionControl(compact ? { compact: true } : attributionOptions(isWideViewport()));
+    map.addControl(credit);
+    // A compact control starts unfolded until the first drag; fold it now,
+    // the way MapLibre's own (i) button does, since the credit is already
+    // written out in the caption's details.
+    if (compact) {
+      const box = map.getContainer().querySelector('.maplibregl-ctrl-attrib');
+      if (box) {
+        box.removeAttribute('open');
+        box.classList.remove('maplibregl-compact-show');
+      }
+    }
   };
 
   const destroy: StoryMap['destroy'] = () => {
@@ -318,7 +371,7 @@ export async function createStoryMap(container: HTMLElement): Promise<StoryMap> 
     map.remove();
   };
 
-  return { map, showPlace, setRingHighlight, destroy };
+  return { map, showPlace, setRingHighlight, ringZoom, easeToZoom, setCompactCredit, destroy };
 }
 
 /** Give the marker a tooltip and a screen-reader name, or clear both. */

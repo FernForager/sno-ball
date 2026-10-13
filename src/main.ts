@@ -43,6 +43,7 @@ import { eventsForSpot, loadEvents, type SpotContext } from './lib/events';
 import { FUTURE_MA, NAMED_STOPS, NOW_INDEX, STOPS, decodeAt, encodeAt, gearTint, stopAt, stopYearsAgo, type Stop } from './lib/stops';
 import {
   FUTURE_GLOBE_CAPTION,
+  GLOBE_MAP_NOTE,
   NATURE_MAP_NOTE,
   PALEO_MODEL_MAX_MA,
   calendarYearOf,
@@ -53,22 +54,24 @@ import {
   inceptionYear,
   isIceAgeStop,
   isRockForming,
-  noSheetNote,
   paleoFact,
   ringsAtStop,
   todaysMapNote,
   type FoundedYears,
 } from './lib/dial-story';
 import {
+  OHM_FEATURE_LAYER_IDS,
   asHistoryMap,
   attachHistoryLayers,
   baseOpacityFor,
   chooseTopoSheet,
+  historicalMapNote,
   mapModeFor,
-  topoCaption,
   topoSheetsAt,
+  zoomForScale,
   type HistoryLayers,
   type MapMode,
+  type OhmPresence,
   type TopoSheet,
 } from './lib/map-history';
 import { cacheClear } from './lib/cache';
@@ -130,6 +133,51 @@ const READY_STATUS_MS = 6_000;
 
 /** The year the state ring is "founded": statehood. */
 const STATEHOOD_YEAR = 1889;
+
+/**
+ * How long the page waits for the plate model before telling the story
+ * without it. The GPlates service can take minutes to fail across its
+ * retries (six stops, each with a 15-second timeout and one retry), and
+ * the status line cannot say "Story ready" while a loader is still out;
+ * so after this long the plate ring and the deep-time card settle with an
+ * honest note, and the answer, if it comes later, still lands.
+ */
+const PLATE_MODEL_WAIT_MS = 15_000;
+
+/** The plate ring's note when the model gave nothing. */
+const PLATE_MODEL_NOTE = 'The plate model did not answer. Try again in a moment.';
+
+/**
+ * Wait for `work` at most `ms`: resolves with its value when it arrives in
+ * time, with undefined when it does not (and then `late` is called with the
+ * value once it finally arrives). A failure inside the budget is passed on.
+ */
+function withinBudget<T>(work: Promise<T>, ms: number, late: (value: T) => void): Promise<T | undefined> {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const timer = setTimeout(() => {
+      settled = true;
+      resolve(undefined);
+    }, ms);
+    work.then(
+      (value) => {
+        if (settled) {
+          late(value);
+          return;
+        }
+        settled = true;
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err: unknown) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        reject(err instanceof Error ? err : new Error(String(err)));
+      },
+    );
+  });
+}
 
 /**
  * Facts arrive in whatever order the services answer, so each ring sorts
@@ -578,7 +626,8 @@ function settleRing(session: Session, level: RingLevel): void {
   let rings = session.rings;
   if (ring.status === 'loading') {
     rings = setRingFacts(rings, level, ring.facts);
-    if (ring.facts.length === 0) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
+    // A loader that explained itself (the plate model's note) keeps its line.
+    if (ring.facts.length === 0 && !ring.note) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
   }
   setRings(session, rings);
 }
@@ -635,8 +684,10 @@ async function tellStory(place: Place, atIndex = NOW_INDEX): Promise<void> {
     paleoPending: new Set(),
   };
   current = session;
-  // The historical layers start on for every new story.
+  // The historical layers start on for every new story, and the map's
+  // first flight (showPlace) sets the zoom, so no sheet zoom is remembered.
   historicalOn = true;
+  sheetZoomedFor = null;
 
   // --- The rings, named from the address --------------------------------
   let rings = buildRings(place);
@@ -808,21 +859,33 @@ async function tellStory(place: Place, atIndex = NOW_INDEX): Promise<void> {
     // goes in the deep-time card; the plate ring gets one summary so the
     // same six sentences are not printed twice.
     track(session, 'plate model', ['plate'], async () => {
-      const positions = await paleoPositions(place.point);
+      const apply = (positions: PaleoPosition[]): void => {
+        if (!live(session) || positions.length === 0) return;
+        story.setPaleo(positions.map((pos) => ({ text: describePaleo(pos, place.point), source: pos.source })));
+        const oldest = [...positions].sort((a, b) => b.ma - a.ma)[0];
+        if (!oldest) return;
+        setRings(session, setRingNote(session.rings, 'plate', undefined));
+        addFacts(session, 'plate', [
+          {
+            kind: 'paleo-position',
+            title: 'Carried here on the North American Plate',
+            body: `${describePaleo(oldest, place.point)} Every stop on the way is listed under "Where this spot has been" below.`,
+            yearsAgo: maToAgo(oldest.ma),
+            source: oldest.source,
+            confidence: 'medium',
+          },
+        ]);
+      };
+      // The model gets a time budget; an answer that comes after it still fills the card and the ring in.
+      const positions = await withinBudget(paleoPositions(place.point), PLATE_MODEL_WAIT_MS, apply);
       if (!live(session)) return;
-      story.setPaleo(positions.map((pos) => ({ text: describePaleo(pos, place.point), source: pos.source })));
-      const oldest = [...positions].sort((a, b) => b.ma - a.ma)[0];
-      if (!oldest) return;
-      addFacts(session, 'plate', [
-        {
-          kind: 'paleo-position',
-          title: 'Carried here on the North American Plate',
-          body: `${describePaleo(oldest, place.point)} Every stop on the way is listed under "Where this spot has been" below.`,
-          yearsAgo: maToAgo(oldest.ma),
-          source: oldest.source,
-          confidence: 'medium',
-        },
-      ]);
+      if (positions === undefined || positions.length === 0) {
+        story.setPaleo([]);
+        setRings(session, setRingNote(session.rings, 'plate', PLATE_MODEL_NOTE));
+        return ['plate model'];
+      }
+      apply(positions);
+      return;
     }),
   ];
 
@@ -927,7 +990,7 @@ function applyMap(session: Session): void {
   story.setMapMode(mode);
 
   if (mode === 'globe' || mode === 'future') {
-    showGlobe(session, stop, mine);
+    showGlobe(session, stop);
   } else {
     story.setGlobe(null);
   }
@@ -956,6 +1019,7 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
       layers.setBaseOpacity(1);
       layers.hideTopo();
       layers.setOhmDate(null);
+      leaveSheet(map);
       story.setMapNote(null);
       return;
     case 'nature':
@@ -963,6 +1027,7 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
       layers.hideTopo();
       layers.setBaseOpacity(1);
       layers.setGhost(true);
+      leaveSheet(map);
       story.setMapNote(NATURE_MAP_NOTE);
       return;
     case 'globe':
@@ -971,6 +1036,8 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
       // so nothing is fetched for a map nobody can see.
       layers.setOhmDate(null);
       layers.hideTopo();
+      leaveSheet(map);
+      story.setMapNote(GLOBE_MAP_NOTE);
       return;
     case 'historical':
       break;
@@ -984,6 +1051,7 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
     layers.setBaseOpacity(1);
     layers.hideTopo();
     layers.setOhmDate(null);
+    leaveSheet(map);
     story.setMapNote(todaysMapNote(year), toggle);
     return;
   }
@@ -1008,11 +1076,23 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
       const sheet = chooseTopoSheet(list, year, map.map.getZoom());
       if (sheet) {
         layers.showTopo(sheet);
-        story.setMapNote(topoCaption(sheet), toggle);
+        enterSheet(map, sheet);
       } else {
         layers.hideTopo();
-        story.setMapNote(noSheetNote(year), toggle);
+        leaveSheet(map);
       }
+      const setNote = (ohm: OhmPresence): void => {
+        const note = historicalMapNote(year, sheet, ohm);
+        story.setMapNote(note.text, toggle, note.details);
+      };
+      setNote('unknown');
+      // Once the tiles for this view have loaded, say whether OpenHistoricalMap
+      // has anything mapped here for the year (near the Space Needle its
+      // data is sparse before 1900), so an empty map is not a mystery.
+      whenRendered(map, () => {
+        if (!fresh()) return;
+        setNote(ohmFeatureCount(map) > 0 ? 'some' : 'none');
+      });
     });
   }, TOPO_SETTLE_MS);
 }
@@ -1020,6 +1100,53 @@ function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: Histor
 /** How long the dial rests before the USGS sheet for its stop is fetched. */
 const TOPO_SETTLE_MS = 400;
 let topoTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * The sheet (by catalog id) the map was last zoomed for. The zoom is set
+ * once per sheet, not on every re-apply, so the visitor's own zooming on
+ * the same sheet is never fought; null while no sheet is on the map.
+ */
+let sheetZoomedFor: number | null = null;
+
+/**
+ * A USGS sheet has gone on the map: ease to the zoom its scale was drawn
+ * for (a 1:62,500 sheet at the street zoom is a blur of enlarged ink), and
+ * fold the credit in the corner into its (i) button, since the sheet's
+ * credit is in the caption's "About this map" and three lines of credit
+ * would cover most of a phone-sized map.
+ */
+function enterSheet(map: StoryMap, sheet: TopoSheet): void {
+  map.setCompactCredit(true);
+  if (sheetZoomedFor === sheet.objectId) return;
+  sheetZoomedFor = sheet.objectId;
+  map.easeToZoom(zoomForScale(sheet.scale));
+}
+
+/** No sheet on the map any more: the credit opens out again and the camera returns to the ring's zoom. */
+function leaveSheet(map: StoryMap): void {
+  map.setCompactCredit(false);
+  if (sheetZoomedFor === null) return;
+  sheetZoomedFor = null;
+  map.easeToZoom(map.ringZoom());
+}
+
+/** Run `fn` once the map has drawn everything it asked for: now if it already has, else on its next 'idle'. */
+function whenRendered(map: StoryMap, fn: () => void): void {
+  if (map.map.loaded() && !map.map.isMoving()) fn();
+  else map.map.once('idle', fn);
+}
+
+/** How many OpenHistoricalMap features are drawn in the current view (0 when its layers are off or empty). */
+function ohmFeatureCount(map: StoryMap): number {
+  const present = OHM_FEATURE_LAYER_IDS.filter((id) => map.map.getLayer(id) !== undefined);
+  if (present.length === 0) return 0;
+  try {
+    return map.map.queryRenderedFeatures({ layers: present }).length;
+  } catch (err) {
+    console.warn('[map] could not count the OpenHistoricalMap features:', err);
+    return 0;
+  }
+}
 
 /** The postcard button: swap the historical layers for today's map and back. */
 function toggleHistorical(): void {
@@ -1033,9 +1160,12 @@ function toggleHistorical(): void {
  * (the plate ring gets the same answer as a fact). Beyond the model's
  * reach the caption says so and nothing is asked; the future stop is a
  * sketch of the trend, not a model. The model is asked once per stop and
- * story; its answer is also cached for 30 days by paleo.ts.
+ * story; its answer is also cached for 30 days by paleo.ts. The answer
+ * (or, within the time budget, the lack of one) is drawn whenever the dial
+ * is sitting on this stop by the time it arrives, however many times the
+ * dial moved away and back meanwhile; a late answer still fills it in.
  */
-function showGlobe(session: Session, stop: Stop, mine: number): void {
+function showGlobe(session: Session, stop: Stop): void {
   const todayPoint = session.place.point;
   const ma = globeMa(stop);
   if (ma === undefined) return;
@@ -1055,15 +1185,20 @@ function showGlobe(session: Session, stop: Stop, mine: number): void {
   story.setGlobe({ todayPoint, ma, caption: globeCaption(ma, 'pending') });
   if (session.paleoPending.has(ma)) return;
   session.paleoPending.add(ma);
-  void paleoPositions(todayPoint, [ma]).then((positions) => {
+  const settle = (pos: PaleoPosition | null): void => {
     if (!live(session)) return;
     session.paleoPending.delete(ma);
-    const pos = positions[0] ?? null;
     session.paleo.set(ma, pos);
-    if (pos) renderStop(session);
-    if (mine !== mapApplyCounter || currentStop !== stop) return;
+    if (globeMa(currentStop) !== ma) return;
+    renderStop(session);
     story.setGlobe({ todayPoint, ma, paleoPoint: pos?.point ?? null, caption: globeCaption(ma, pos ? 'position' : 'none') });
-  });
+  };
+  void withinBudget(paleoPositions(todayPoint, [ma]), PLATE_MODEL_WAIT_MS, (late) => settle(late[0] ?? null))
+    .then((positions) => settle(positions?.[0] ?? null))
+    .catch((err: unknown) => {
+      if (!isAbortError(err)) console.warn('[globe] the plate model did not answer:', err);
+      settle(null);
+    });
 }
 
 /**

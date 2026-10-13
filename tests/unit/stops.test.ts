@@ -261,6 +261,15 @@ describe('encodeAt / decodeAt', () => {
     expect(decodeAt('4.5 Ga')?.index).toBe(indexOfMa(4567));
     expect(decodeAt(' Today ')?.index).toBe(NOW_INDEX);
     expect(decodeAt('+50 ma')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('+50 Ma')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('50 Ma from now')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('50 million years from now')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('in 50 million years')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('+50 million years')?.index).toBe(FUTURE_INDEX);
+    // A future count snaps to the nearest stop, Now or the one future stop; "50 million years" alone is not a time.
+    expect(decodeAt('30 Ma from now')?.index).toBe(FUTURE_INDEX);
+    expect(decodeAt('10 Ma from now')?.index).toBe(NOW_INDEX);
+    expect(decodeAt('50 million years')).toBeNull();
     expect(decodeAt('1860s')?.index).toBe(indexOfYear(1860));
     expect(decodeAt('2040')?.index).toBe(NOW_INDEX);
   });
