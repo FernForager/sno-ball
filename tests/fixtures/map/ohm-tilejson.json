@@ -1,0 +1,17 @@
+{
+  "tilejson": "3.0.0",
+  "name": "OpenHistoricalMap vector tiles (synthetic stand-in for tests)",
+  "attribution": "© OpenHistoricalMap contributors, CC0",
+  "scheme": "xyz",
+  "tiles": ["https://vtiles.openhistoricalmap.org/maps/ohm/{z}/{x}/{y}.pbf"],
+  "minzoom": 0,
+  "maxzoom": 14,
+  "bounds": [-180, -85.0511, 180, 85.0511],
+  "center": [-122.33, 47.6, 10],
+  "vector_layers": [
+    { "id": "water_areas", "fields": { "start_decdate": "Number", "end_decdate": "Number" } },
+    { "id": "water_lines", "fields": { "start_decdate": "Number", "end_decdate": "Number" } },
+    { "id": "buildings", "fields": { "start_decdate": "Number", "end_decdate": "Number" } },
+    { "id": "transport_lines", "fields": { "type": "String", "start_decdate": "Number", "end_decdate": "Number" } }
+  ]
+}

@@ -17,7 +17,7 @@
  * deep-time cards and the sources footer.
  */
 
-import type { Fact, Ring, RingLevel, Source } from '../lib/types';
+import type { Fact, Ring, RingEra, RingLevel, Source } from '../lib/types';
 import { RING_ORDER } from '../lib/types';
 import { ago, formatReadout } from '../lib/time';
 import { formatYear, ringLabel, ringTagline } from './format';
@@ -53,6 +53,13 @@ export function el<K extends keyof HTMLElementTagNameMap>(
 export function cardId(level: RingLevel): string {
   return `ring-${level}`;
 }
+
+/**
+ * The name of the bubbling CustomEvent a card's jump button dispatches,
+ * with `detail: { index }`, the dial stop to move to. The page listens for
+ * it and turns the dial; the card itself knows nothing about the dial.
+ */
+export const JUMP_EVENT = 'sno-ball:jump';
 
 // ---------------------------------------------------------------------------
 // The rings glyph
@@ -179,8 +186,35 @@ export function renderFact(fact: Fact): HTMLElement {
         : el('p', { class: 'fact__body' }, [fact.body]),
     );
   }
-  item.append(el('p', { class: 'fact__source' }, ['From ', renderSourceLink(fact.source)]));
+  const sources: Child[] = ['From ', renderSourceLink(fact.source)];
+  for (const more of fact.moreSources ?? []) sources.push(' · ', renderSourceLink(more));
+  item.append(el('p', { class: 'fact__source' }, sources));
   return item;
+}
+
+/**
+ * The era line of a ring at a dial stop other than Now ("Not yet. ...",
+ * "Nothing recorded for 1889.") with its jump buttons. Each button
+ * dispatches JUMP_EVENT with the stop index; the arrows mark the direction.
+ */
+export function renderEra(era: RingEra): HTMLElement {
+  const box = el('div', { class: `ring-card__era ring-card__era--${era.state}` }, [el('p', { class: 'ring-card__era-text' }, [era.text])]);
+  if (era.jumps.length > 0) {
+    const row = el('div', { class: 'ring-card__jumps' });
+    for (const jump of era.jumps) {
+      const button = el('button', { type: 'button', class: `ring-card__jump ring-card__jump--${jump.direction}`, 'data-index': String(jump.index) }, [
+        jump.direction === 'earlier' ? el('span', { 'aria-hidden': 'true' }, ['◀ ']) : null,
+        jump.label,
+        jump.direction === 'later' ? el('span', { 'aria-hidden': 'true' }, [' ▶']) : null,
+      ]);
+      button.addEventListener('click', () => {
+        button.dispatchEvent(new CustomEvent(JUMP_EVENT, { detail: { index: jump.index }, bubbles: true }));
+      });
+      row.append(button);
+    }
+    box.append(row);
+  }
+  return box;
 }
 
 /**
@@ -215,13 +249,17 @@ export function renderGathering(label = 'Still gathering…'): HTMLElement {
  * "still gathering" line follows the facts). An empty ring gets a compact
  * card (class `ring-card--compact`): outside Seattle the house, block and
  * street have no data source yet, and three tall empty cards would push
- * the real story off the screen.
+ * the real story off the screen. At a dial stop other than Now a ring may
+ * carry an `era` (see src/lib/dial-story.ts): its line and jump buttons
+ * are shown above the facts, or alone when there are none, and the card
+ * gets the class `is-<state>` (is-not-yet, is-quiet, ...).
  */
 export function renderRingCard(ring: Ring): HTMLElement {
   const nameId = `${cardId(ring.level)}-name`;
   const busy = ring.status === 'loading' || ring.busy === true;
+  const era = ring.era;
   const card = el('article', {
-    class: `ring-card is-${ring.status}${ring.status === 'empty' ? ' ring-card--compact' : ''}${busy ? ' is-busy' : ''}`,
+    class: `ring-card is-${ring.status}${ring.status === 'empty' && !era ? ' ring-card--compact' : ''}${era ? ` ring-card--era is-${era.state}` : ''}${busy ? ' is-busy' : ''}`,
     id: cardId(ring.level),
     'data-level': ring.level,
     tabindex: '-1',
@@ -237,6 +275,7 @@ export function renderRingCard(ring: Ring): HTMLElement {
   card.append(el('header', { class: 'ring-card__head' }, [ringGlyph(ring.level), el('div', {}, [eyebrow, heading])]));
 
   const body = el('div', { class: 'ring-card__body' });
+  if (era) body.append(renderEra(era));
   switch (ring.status) {
     case 'loading':
       body.append(renderSkeleton());
@@ -251,7 +290,7 @@ export function renderRingCard(ring: Ring): HTMLElement {
       break;
     }
     case 'empty':
-      body.append(el('p', { class: 'ring-card__note muted' }, [ring.note ?? 'Nothing on record for this yet.']));
+      if (!era) body.append(el('p', { class: 'ring-card__note muted' }, [ring.note ?? 'Nothing on record for this yet.']));
       break;
   }
   card.append(body);

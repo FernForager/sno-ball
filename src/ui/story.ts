@@ -2,7 +2,9 @@
  * The story page: everything under the search box once an address is
  * chosen. From the top:
  *
- *   1. the "postcard": a sticky map area the page draws the map into
+ *   1. the "postcard": a sticky map area the page draws the map into, with
+ *      a caption and a map note on top and, at the deep-time stops of the
+ *      time dial, the paleo globe in place of the map
  *   2. the status line (aria-live, so screen readers hear progress)
  *   3. the hero sentence ("407 Broad St sits in Lower Queen Anne, ...")
  *   4. a horizontal strip of ring chips; tapping one scrolls to its card
@@ -30,6 +32,7 @@
 import type { GeologyUnit, Place, Ring, RingLevel, Source } from '../lib/types';
 import { RING_ORDER } from '../lib/types';
 import { ringLabel } from './format';
+import { renderGlobe, type GlobeOptions } from './globe';
 import { cardId, el, renderRingCard, renderSkeleton, renderSourceLink, ringGlyph } from './ring-card';
 
 export interface PaleoItem {
@@ -60,11 +63,36 @@ export interface StoryHandle {
   setHero(text: string): void;
   /** Progress or error text for the live status line; null clears it. */
   setStatus(text: string | null): void;
+  /**
+   * Draw the paleo globe over the map area (the map stays in the page,
+   * hidden, so it survives); null takes the globe away and shows the map.
+   */
+  setGlobe(opts: GlobeOptions | null): void;
+  /** Mark the postcard with the dial's map mode (`data-map-mode`), for styling and tests. */
+  setMapMode(mode: string): void;
+  /**
+   * The note under the postcard caption ("USGS Seattle 1894 sheet",
+   * "Coastlines are today's…"), with an optional button such as "Today's
+   * map" and, when given, a longer line (the sheet's scale, printing and
+   * credit) folded behind an "About this map" disclosure; null hides the
+   * note.
+   */
+  setMapNote(text: string | null, button?: MapNoteButton, details?: string): void;
+  /** Light up the deep-time cards whose story is happening at the dial's stop. */
+  setDeepHighlights(now: { rock: boolean; ice: boolean }): void;
   /** Back to the empty state, keeping the map container in place. */
   clear(): void;
   /** The element the map module draws into. Stable for the life of the page. */
   mapContainer: HTMLElement;
 }
+
+export interface MapNoteButton {
+  label: string;
+  onClick(): void;
+}
+
+/** The line the rock card shows while the dial sits inside the unit's age range. */
+export const ROCK_FORMING_LINE = 'The rock under this spot is forming right now.';
 
 /** The name of the event dispatched when the visitor's attention moves to a ring. */
 export const RING_EVENT = 'sno-ball:ring';
@@ -110,10 +138,23 @@ function reducedMotion(): boolean {
 export function mountStory(root: HTMLElement): StoryHandle {
   // --- 1. The postcard ----------------------------------------------------
   const mapContainer = el('div', { class: 'postcard__map', role: 'region', 'aria-label': 'Map of this place' });
+  // The globe takes the map's place at the deep-time stops of the dial.
+  const globeBox = el('div', { class: 'postcard__globe', hidden: '' });
   const caption = el('p', { class: 'postcard__caption' });
+  const noteText = el('span', { class: 'postcard__era-text' });
+  const noteButton = el('button', { type: 'button', class: 'postcard__era-button', hidden: '' });
+  const noteDetailsText = el('p', { class: 'postcard__era-details-text' });
+  const noteDetails = el('details', { class: 'postcard__era-details', hidden: '' }, [
+    el('summary', { class: 'postcard__era-summary' }, ['About this map']),
+    noteDetailsText,
+  ]);
+  const note = el('div', { class: 'postcard__era', hidden: '' }, [
+    el('div', { class: 'postcard__era-row' }, [noteText, noteButton]),
+    noteDetails,
+  ]);
   // Hidden until there is a place to show: an empty white card under the
   // search box would only puzzle a visitor.
-  const postcard = el('div', { class: 'postcard', hidden: '' }, [mapContainer, caption]);
+  const postcard = el('div', { class: 'postcard', hidden: '' }, [mapContainer, globeBox, el('div', { class: 'postcard__top' }, [caption, note])]);
 
   // --- 2 and 3. Status line and hero --------------------------------------
   const status = el('p', { class: 'story__status', role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' });
@@ -127,9 +168,11 @@ export function mountStory(root: HTMLElement): StoryHandle {
 
   // --- 6. Deep time -------------------------------------------------------
   const rockBody = el('div', { class: 'deep-card__body' });
+  const rockNow = el('p', { class: 'deep-card__now', hidden: '' }, [ROCK_FORMING_LINE]);
   const rockCard = el('article', { class: 'card deep-card deep-card--rock', 'aria-labelledby': 'deep-rock-title' }, [
     el('p', { class: 'eyebrow' }, [el('span', { class: 'eyebrow__level' }, ['Underfoot'])]),
     el('h3', { class: 'deep-card__title', id: 'deep-rock-title' }, ['The rock under this spot']),
+    rockNow,
     rockBody,
   ]);
   const iceBody = el('div', { class: 'deep-card__body' });
@@ -322,7 +365,12 @@ export function mountStory(root: HTMLElement): StoryHandle {
       if (!seen.has(key)) seen.set(key, s);
     };
     add(place?.source);
-    for (const ring of rings) for (const fact of ring.facts) add(fact.source);
+    for (const ring of rings) {
+      for (const fact of ring.facts) {
+        add(fact.source);
+        for (const more of fact.moreSources ?? []) add(more);
+      }
+    }
     add(geologySource);
     add(iceSource);
     for (const s of paleoSources) add(s);
@@ -431,6 +479,57 @@ export function mountStory(root: HTMLElement): StoryHandle {
     status.textContent = text ?? '';
   };
 
+  const setGlobe: StoryHandle['setGlobe'] = (opts) => {
+    if (opts) {
+      renderGlobe(globeBox, opts);
+      globeBox.hidden = false;
+      mapContainer.classList.add('postcard__map--hidden');
+      mapContainer.setAttribute('aria-hidden', 'true');
+    } else {
+      globeBox.hidden = true;
+      globeBox.replaceChildren();
+      mapContainer.classList.remove('postcard__map--hidden');
+      mapContainer.removeAttribute('aria-hidden');
+    }
+  };
+
+  const setMapMode: StoryHandle['setMapMode'] = (mode) => {
+    postcard.setAttribute('data-map-mode', mode);
+  };
+
+  let noteHandler: (() => void) | null = null;
+  const setMapNote: StoryHandle['setMapNote'] = (text, button, details) => {
+    if (noteHandler) noteButton.removeEventListener('click', noteHandler);
+    noteHandler = null;
+    noteText.textContent = text ?? '';
+    // The disclosure keeps its open/closed state while the same kind of
+    // note is updated in place; it is folded again when the details go.
+    if (details) {
+      noteDetailsText.textContent = details;
+      noteDetails.hidden = false;
+    } else {
+      noteDetailsText.textContent = '';
+      noteDetails.hidden = true;
+      noteDetails.open = false;
+    }
+    if (button) {
+      noteButton.textContent = button.label;
+      noteHandler = button.onClick;
+      noteButton.addEventListener('click', noteHandler);
+      noteButton.hidden = false;
+    } else {
+      noteButton.textContent = '';
+      noteButton.hidden = true;
+    }
+    note.hidden = text === null;
+  };
+
+  const setDeepHighlights: StoryHandle['setDeepHighlights'] = (now) => {
+    rockCard.classList.toggle('is-now', now.rock);
+    rockNow.hidden = !now.rock;
+    iceCard.classList.toggle('is-now', now.ice);
+  };
+
   const clear: StoryHandle['clear'] = () => {
     place = null;
     rings = [];
@@ -444,6 +543,10 @@ export function mountStory(root: HTMLElement): StoryHandle {
     chipByLevel.clear();
     caption.replaceChildren();
     postcard.hidden = true;
+    setGlobe(null);
+    setMapNote(null);
+    setMapMode('today');
+    setDeepHighlights({ rock: false, ice: false });
     setHero('');
     setStatus(null);
     stripList.replaceChildren();
@@ -460,5 +563,5 @@ export function mountStory(root: HTMLElement): StoryHandle {
     sources.hidden = true;
   };
 
-  return { setPlace, setRings, setGeology, setGeologyUnavailable, setPaleo, setIceAge, setHero, setStatus, clear, mapContainer };
+  return { setPlace, setRings, setGeology, setGeologyUnavailable, setPaleo, setIceAge, setHero, setStatus, setGlobe, setMapMode, setMapNote, setDeepHighlights, clear, mapContainer };
 }

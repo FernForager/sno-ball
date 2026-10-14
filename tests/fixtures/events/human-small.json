@@ -1,0 +1,71 @@
+{
+  "v": 1,
+  "kind": "human",
+  "events": [
+    {
+      "id": "test-seattle-fire",
+      "kind": "human",
+      "title": "Test: the Seattle fire",
+      "when": "June 6, 1889",
+      "start_years_ago": 111,
+      "end_years_ago": 111,
+      "region": ["Seattle", "King County"],
+      "lat": 47.603,
+      "lon": -122.334,
+      "summary": "A test fire burned the test waterfront.",
+      "at_your_spot": "The fire started {distance} from {place}.",
+      "sources": [{ "title": "Test source", "url": "https://example.org/fire" }],
+      "confidence": "high"
+    },
+    {
+      "id": "test-statehood",
+      "kind": "human",
+      "title": "Test: statehood",
+      "when": "November 11, 1889",
+      "start_years_ago": 111,
+      "end_years_ago": 111,
+      "region": ["statewide"],
+      "lat": null,
+      "lon": null,
+      "summary": "Washington became a test state.",
+      "at_your_spot": "Your spot has been in the state since this day.",
+      "sources": [{ "title": "Test source", "url": "https://example.org/state" }],
+      "confidence": "high"
+    },
+    {
+      "id": "test-annexations",
+      "kind": "human",
+      "title": "Test: Seattle annexes its neighbours",
+      "when": "1905 to 1910",
+      "start_years_ago": 95,
+      "end_years_ago": 90,
+      "region": ["Seattle"],
+      "lat": 47.62,
+      "lon": -122.35,
+      "summary": "Seattle annexed test towns.",
+      "at_your_spot": "Your spot joined Seattle in {annex_year}.",
+      "spot_rule": "annexed-in-range",
+      "sources": [{ "title": "Test source", "url": "https://example.org/annex" }],
+      "confidence": "medium"
+    },
+    {
+      "id": "test-county-railroad",
+      "kind": "human",
+      "title": "Test: the railroad reaches Adams County",
+      "when": "1881",
+      "start_years_ago": 119,
+      "region": ["Adams County", "Ritzville"],
+      "lat": null,
+      "lon": null,
+      "summary": "A test railroad crossed the county.",
+      "at_your_spot": null,
+      "sources": [{ "title": "Test source", "url": "https://example.org/rail" }],
+      "confidence": "low"
+    },
+    {
+      "id": "test-broken",
+      "title": "Test: a record missing its years and summary",
+      "region": ["statewide"]
+    }
+  ]
+}

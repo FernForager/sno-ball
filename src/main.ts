@@ -11,24 +11,69 @@
  *   3. With a spot in hand we build the nine rings (src/lib/rings.ts), show
  *      them as "loading" cards straight away, start the map, and then ask
  *      every data source AT THE SAME TIME: the county file, Wikipedia, the
- *      geology map, the plate model, and (in Seattle) the city's open data.
- *      Each answer fills in its ring the moment it arrives; a source that
- *      fails only leaves its ring thin, it never stops the others.
+ *      geology map, the plate model, the bundled timelines, and (in
+ *      Seattle) the city's open data. Each answer fills in its ring the
+ *      moment it arrives; a source that fails only leaves its ring thin, it
+ *      never stops the others.
  *   4. The address goes into the URL after a "#", so the story can be
  *      shared. Opening such a link (or reloading, or pressing Back) looks
  *      the typed address up again so every ring gets its real name; in the
  *      same browser that answer comes from the 30-day cache, so the geocoder
  *      is not asked twice. Only when the lookup fails is the story told
  *      from the coordinates alone.
+ *   5. The time dial (src/ui/dial.ts) appears at the foot of the page once
+ *      a story is on it. Every turn of the dial re-tells the story for that
+ *      stop WITHOUT asking any service again (src/lib/dial-story.ts picks
+ *      the events and the "not yet" and "quiet" states from what is already
+ *      loaded), changes the map to suit the era (src/lib/map-history.ts:
+ *      faded streets, old USGS sheets and OpenHistoricalMap features for
+ *      the 1800s and 1900s, water and land only for the centuries before,
+ *      the paleo globe for millions of years ago) and writes the stop into
+ *      the share link as "&at=1889", so a link opens on the same stop.
  *
  * Everything here is plain DOM code; the modules under src/lib never touch
  * the page and the modules under src/ui never touch the network.
  */
 
-import type { Fact, GeologyUnit, LngLat, Place, Ring, RingLevel, Source } from './lib/types';
+import type { Fact, GeologyUnit, HistoryEvent, LngLat, PaleoPosition, Place, Ring, RingLevel, Source } from './lib/types';
 import { RING_ORDER } from './lib/types';
 import { maToAgo } from './lib/time';
 import { isAbortError } from './lib/http';
+import { eventsForSpot, loadEvents, type SpotContext } from './lib/events';
+import { FUTURE_MA, NAMED_STOPS, NOW_INDEX, STOPS, decodeAt, encodeAt, gearTint, stopAt, stopYearsAgo, type Stop } from './lib/stops';
+import {
+  FUTURE_GLOBE_CAPTION,
+  GLOBE_MAP_NOTE,
+  NATURE_MAP_NOTE,
+  PALEO_MODEL_MAX_MA,
+  calendarYearOf,
+  countEvents,
+  eraStatus,
+  globeCaption,
+  heroAtStop,
+  inceptionYear,
+  isIceAgeStop,
+  isRockForming,
+  paleoFact,
+  ringsAtStop,
+  todaysMapNote,
+  type FoundedYears,
+} from './lib/dial-story';
+import {
+  OHM_FEATURE_LAYER_IDS,
+  asHistoryMap,
+  attachHistoryLayers,
+  baseOpacityFor,
+  chooseTopoSheet,
+  historicalMapNote,
+  mapModeFor,
+  topoSheetsAt,
+  zoomForScale,
+  type HistoryLayers,
+  type MapMode,
+  type OhmPresence,
+  type TopoSheet,
+} from './lib/map-history';
 import { cacheClear } from './lib/cache';
 import { formatLngLat, geocodeWithFallback, parseLngLat } from './lib/geocode';
 import { addRingFacts, buildRings, cityName, isRingBusy, markRingBusy, ringByLevel, setRingFacts, setRingNote, updateRing } from './lib/rings';
@@ -41,10 +86,11 @@ import { describeAge, geologyAt } from './lib/geology';
 import { describePaleo, paleoPositions } from './lib/paleo';
 import { isSeattle, seattleAnnexation, seattleLandmarksNear, seattleNeighborhood, seattleParcel } from './lib/seattle';
 import { MapUnavailableError, RING_ZOOM, createStoryMap, type StoryMap } from './lib/map';
-import { heroSentence, summariseOutcome } from './ui/format';
-import { el } from './ui/ring-card';
+import { heroSentence, isPlaceholderName, summariseOutcome } from './ui/format';
+import { JUMP_EVENT, el } from './ui/ring-card';
 import { mountSearch } from './ui/search';
 import { RING_EVENT, mountStory } from './ui/story';
+import { mountDial, type DialHandle, type DialSource } from './ui/dial';
 
 // ---------------------------------------------------------------------------
 // Fixed facts and sources that live in this file
@@ -85,6 +131,54 @@ const SHARE_LINK_NOTE = 'This link carries only the spot, not its address, so th
 /** How long a clean "Story ready" stays in the status line before it is cleared. */
 const READY_STATUS_MS = 6_000;
 
+/** The year the state ring is "founded": statehood. */
+const STATEHOOD_YEAR = 1889;
+
+/**
+ * How long the page waits for the plate model before telling the story
+ * without it. The GPlates service can take minutes to fail across its
+ * retries (six stops, each with a 15-second timeout and one retry), and
+ * the status line cannot say "Story ready" while a loader is still out;
+ * so after this long the plate ring and the deep-time card settle with an
+ * honest note, and the answer, if it comes later, still lands.
+ */
+const PLATE_MODEL_WAIT_MS = 15_000;
+
+/** The plate ring's note when the model gave nothing. */
+const PLATE_MODEL_NOTE = 'The plate model did not answer. Try again in a moment.';
+
+/**
+ * Wait for `work` at most `ms`: resolves with its value when it arrives in
+ * time, with undefined when it does not (and then `late` is called with the
+ * value once it finally arrives). A failure inside the budget is passed on.
+ */
+function withinBudget<T>(work: Promise<T>, ms: number, late: (value: T) => void): Promise<T | undefined> {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const timer = setTimeout(() => {
+      settled = true;
+      resolve(undefined);
+    }, ms);
+    work.then(
+      (value) => {
+        if (settled) {
+          late(value);
+          return;
+        }
+        settled = true;
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err: unknown) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        reject(err instanceof Error ? err : new Error(String(err)));
+      },
+    );
+  });
+}
+
 /**
  * Facts arrive in whatever order the services answer, so each ring sorts
  * them by kind for a steady reading order: the Wikipedia excerpt first,
@@ -115,22 +209,27 @@ function sortFacts(facts: readonly Fact[]): Fact[] {
 }
 
 // ---------------------------------------------------------------------------
-// The URL hash: #/story?ll=<lat>,<lng>&q=<what was typed>
+// The URL hash: #/story?ll=<lat>,<lng>&q=<what was typed>[&at=<dial stop>]
 // ---------------------------------------------------------------------------
 
 interface HashStory {
   point: LngLat;
   query: string;
+  /** The dial stop the link opens on; absent means Now. */
+  at?: Stop;
 }
 
 /**
  * The hash for a story, so the page can be shared or reloaded. Written by
  * hand rather than with URLSearchParams so the link stays readable
  * ("ll=47.62051,-122.34928&q=400+Broad+St"); readHash understands both.
+ * A dial stop other than Now is added as "&at=1889" (or "20ka", "66Ma",
+ * "%2B50Ma" for the future: a bare "+" would read back as a space).
  */
-function storyHash(point: LngLat, query: string): string {
+function storyHash(point: LngLat, query: string, stop?: Stop): string {
   const q = encodeURIComponent(query).replace(/%20/g, '+');
-  return `#/story?ll=${point.lat.toFixed(5)},${point.lng.toFixed(5)}&q=${q}`;
+  const at = stop && stop.index !== NOW_INDEX ? `&at=${encodeURIComponent(encodeAt(stop))}` : '';
+  return `#/story?ll=${point.lat.toFixed(5)},${point.lng.toFixed(5)}&q=${q}${at}`;
 }
 
 /** Read a story back out of the hash, or null when the hash is not a story link. */
@@ -140,7 +239,8 @@ function readHash(hash: string): HashStory | null {
   const params = new URLSearchParams(m[1] ?? '');
   const point = parseLngLat(params.get('ll') ?? '');
   if (!point) return null;
-  return { point, query: (params.get('q') ?? '').trim() };
+  const at = decodeAt(params.get('at') ?? '');
+  return { point, query: (params.get('q') ?? '').trim(), ...(at ? { at } : {}) };
 }
 
 /** True when two points round to the same five decimals (about a metre). */
@@ -203,6 +303,17 @@ const story = mountStory(storyRoot);
 
 let storyMap: StoryMap | null = null;
 let mapStart: Promise<StoryMap | null> | null = null;
+/** The historical layers on the map (attached once the map exists). */
+let historyLayers: HistoryLayers | null = null;
+/**
+ * True once the map's style has loaded, from then on for good. MapLibre's
+ * own isStyleLoaded() also turns false whenever a tile is still on its way
+ * (every new source, every zoom), while its 'load' event fires only once,
+ * so waiting on those would leave a dial move made during a tile load
+ * never drawn. Layers may be added and changed as soon as 'style.load'
+ * has fired; that is all applyMap needs.
+ */
+let styleReady = false;
 
 /**
  * Start the map the first time a story is told. MapLibre is large, so it
@@ -214,6 +325,17 @@ function ensureMap(): Promise<StoryMap | null> {
     mapStart = createStoryMap(story.mapContainer)
       .then((map) => {
         storyMap = map;
+        historyLayers = attachHistoryLayers(asHistoryMap(map.map));
+        if (map.map.isStyleLoaded()) styleReady = true;
+        map.map.once('style.load', () => {
+          styleReady = true;
+        });
+        // The USGS sheet to show depends on the zoom (a city needs a
+        // coarser sheet than a block), so the choice is made again after
+        // every zoom while the historical layers are on.
+        map.map.on('zoomend', () => {
+          if (current && mapModeFor(currentStop.gear) === 'historical') applyMap(current);
+        });
         return map;
       })
       .catch((err: unknown) => {
@@ -237,6 +359,100 @@ storyRoot.addEventListener(RING_EVENT, (event) => {
   if (level && RING_ORDER.includes(level)) storyMap?.setRingHighlight(level);
 });
 
+// A ring card's "jump to 1852" or ◀ ▶ button turns the dial.
+storyRoot.addEventListener(JUMP_EVENT, (event) => {
+  const index = (event as CustomEvent<{ index?: number }>).detail?.index;
+  if (typeof index === 'number' && Number.isInteger(index) && dial) dial.setIndex(index);
+});
+
+// ---------------------------------------------------------------------------
+// The time dial (mounted once, the first time a story is told)
+// ---------------------------------------------------------------------------
+
+let dial: DialHandle | null = null;
+
+/** The stop the dial sits on. Index 1 is Now; the page starts there. */
+let currentStop: Stop = stopAt(NOW_INDEX);
+
+/** Whether the historical map layers are on at the "years" and "decades" stops; the postcard button flips it. */
+let historicalOn = true;
+
+/**
+ * Mount the dial at the foot of the page, or move the existing one to
+ * `index` without telling the page (the caller re-tells the story itself).
+ * The first mount calls back once with source 'init', which re-tells the
+ * current story for that stop.
+ */
+function ensureDial(index: number): void {
+  if (dial) {
+    if (dial.getIndex() !== index) {
+      dial.setIndex(index, true);
+      currentStop = stopAt(index);
+    }
+    return;
+  }
+  const root = el('div', { class: 'dial-root' });
+  document.body.append(root);
+  dial = mountDial(root, {
+    stops: STOPS,
+    namedStops: NAMED_STOPS,
+    gearTint,
+    // "1889", "15,000 BCE", "17,000 years ago", "16 Ma": decodeAt reads
+    // everything encodeAt writes and everything parseTime understands.
+    parseAt: (text) => decodeAt(text),
+    initialIndex: index,
+    onChange: (stop, source) => {
+      currentStop = stopAt(stop.index);
+      onStopChange(source);
+    },
+  });
+}
+
+/** The dial moved: keep the link in step, re-tell the story and redraw the map. */
+function onStopChange(source: DialSource): void {
+  const session = current;
+  if (!session) return;
+  // A link's own stop is already in the URL; every later move is written
+  // in place, so the Back button steps between stories, not between stops.
+  if (source !== 'init') writeStopToLink(session);
+  renderStop(session);
+  applyMap(session);
+}
+
+/** How long the dial rests before its stop is written into the link. */
+const LINK_SETTLE_MS = 250;
+let linkTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Write the dial's stop into the address bar once it has rested a moment.
+ * A held ◀ (or a held arrow key, which repeats some thirty times a second)
+ * would otherwise call replaceState on every step, and Safari throws a
+ * SecurityError past a hundred calls in thirty seconds; thrown from inside
+ * the dial's handler that would leave the story untold for the stop. The
+ * write is coalesced and the throw, should it still come, only logged.
+ */
+function writeStopToLink(session: Session): void {
+  if (linkTimer !== null) clearTimeout(linkTimer);
+  linkTimer = setTimeout(() => {
+    linkTimer = null;
+    if (!live(session)) return;
+    try {
+      history.replaceState(null, '', storyHash(session.place.point, session.place.query, currentStop));
+    } catch (err) {
+      console.warn('[dial] the link could not be updated:', err);
+    }
+  }, LINK_SETTLE_MS);
+}
+
+/** Move the dial to a stop from a link (silently) and re-tell the story for it. */
+function syncDial(session: Session, index: number): void {
+  if (!dial || dial.getIndex() === index) return;
+  dial.setIndex(index, true);
+  currentStop = stopAt(index);
+  renderStop(session);
+  applyMap(session);
+}
+
 // ---------------------------------------------------------------------------
 // One story at a time
 // ---------------------------------------------------------------------------
@@ -255,6 +471,18 @@ interface Session {
   geology: GeologyUnit | null | undefined;
   /** How many loaders still owe each ring an answer. */
   pending: Map<RingLevel, number>;
+  /** The present-day status line (the dial shows its own at other stops). */
+  status: string | null;
+  /** The founding year of each ring the loaders have learned it for. */
+  founded: FoundedYears;
+  /** The timeline events that apply to this spot, once the bundled files are read. */
+  events: HistoryEvent[];
+  /** The USGS sheets covering the spot, asked for once per story. */
+  topoSheets: Promise<TopoSheet[]> | null;
+  /** Where the spot sat at each globe stop (keyed by Ma) once the plate model has answered; null when it had no answer. */
+  paleo: Map<number, PaleoPosition | null>;
+  /** The globe stops (Ma) whose answer is still on its way. */
+  paleoPending: Set<number>;
 }
 
 let current: Session | null = null;
@@ -276,8 +504,103 @@ function live(session: Session): boolean {
 function setRings(session: Session, rings: Ring[]): void {
   if (!live(session)) return;
   session.rings = rings.map((ring) => markRingBusy(ring, isRingBusy(ring.status, session.pending.get(ring.level) ?? 0)));
-  story.setRings(session.rings);
-  story.setHero(heroSentence(session.place, session.rings, session.geology));
+  renderStop(session);
+}
+
+/** The present-day status line; what the visitor sees depends on the dial's stop. */
+function setStoryStatus(session: Session, text: string | null): void {
+  if (!live(session)) return;
+  session.status = text;
+  renderStatus(session);
+}
+
+/** How long the dial rests before the live status line reports the stop. */
+const STATUS_SETTLE_MS = 400;
+let statusTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * At Now the status line is the loading story's own, at once. At any other
+ * stop it is "As of 1889: 5 events on the rings", written once the dial
+ * has rested: the status is a live region, and a held ◀ steps three
+ * times a second, which would have a screen reader queue a dozen of them.
+ * (The dial's own announcer says the readout the same way.)
+ */
+function renderStatus(session: Session): void {
+  if (statusTimer !== null) clearTimeout(statusTimer);
+  statusTimer = null;
+  if (currentStop.index === NOW_INDEX) {
+    story.setStatus(session.status);
+    return;
+  }
+  statusTimer = setTimeout(() => {
+    statusTimer = null;
+    if (!live(session) || currentStop.index === NOW_INDEX) return;
+    story.setStatus(eraStatus(currentStop, countEvents(ringsForStop(session))));
+  }, STATUS_SETTLE_MS);
+}
+
+/**
+ * What the page knows about the spot, for the timelines: the names from
+ * the rings (which may be better than the geocoder's), the region, the
+ * rock, and the years the city and the neighborhood were founded.
+ */
+function spotContext(session: Session): SpotContext {
+  const { place, rings } = session;
+  const name = (level: RingLevel): string | undefined => {
+    const n = ringByLevel(rings, level)?.name.trim();
+    return n && !isPlaceholderName(n) ? n : undefined;
+  };
+  const county = name('county') ?? place.address.county?.trim() ?? undefined;
+  const city = name('city') ?? cityName(place.address);
+  const neighborhood = name('neighborhood');
+  const region = county ? regionOf(county) : undefined;
+  return {
+    point: place.point,
+    placeName: name('house') ?? 'your spot',
+    ...(region ? { region } : {}),
+    ...(county ? { county } : {}),
+    ...(city ? { city } : {}),
+    ...(neighborhood ? { neighborhood } : {}),
+    ...(session.geology !== undefined ? { geology: session.geology } : {}),
+    ...(session.founded.neighborhood !== undefined ? { annexYear: session.founded.neighborhood } : {}),
+    ...(session.founded.city !== undefined ? { incYear: session.founded.city } : {}),
+  };
+}
+
+/** The rings as they read at the dial's stop (the loaded rings themselves at Now). */
+function ringsForStop(session: Session): Ring[] {
+  if (currentStop.index === NOW_INDEX) return session.rings;
+  const ma = globeMa(currentStop);
+  const pos = ma === undefined ? undefined : session.paleo.get(ma);
+  const plateFact = pos ? paleoFact(pos, session.place.point) : undefined;
+  return ringsAtStop({
+    rings: session.rings,
+    stop: currentStop,
+    events: session.events,
+    ctx: spotContext(session),
+    founded: session.founded,
+    ...(plateFact ? { plateFact } : {}),
+  });
+}
+
+/**
+ * Show the story for the dial's stop: the rings, the hero sentence (with
+ * the readout in front when not at Now), the status line, and the
+ * deep-time cards lit when their story is happening at that stop.
+ */
+function renderStop(session: Session): void {
+  if (!live(session)) return;
+  story.setRings(ringsForStop(session));
+  story.setHero(heroAtStop(currentStop, heroSentence(session.place, session.rings, session.geology)));
+  story.setDeepHighlights({ rock: isRockForming(session.geology, currentStop), ice: isIceAgeStop(currentStop) });
+  renderStatus(session);
+}
+
+/** A ring's founding year has been learned: remember it and re-tell. */
+function setFounded(session: Session, level: keyof FoundedYears, year: number | undefined): void {
+  if (!live(session) || year === undefined) return;
+  session.founded[level] = year;
+  renderStop(session);
 }
 
 /** Add facts to a ring (the common case as answers arrive), keeping its facts in reading order. */
@@ -303,7 +626,8 @@ function settleRing(session: Session, level: RingLevel): void {
   let rings = session.rings;
   if (ring.status === 'loading') {
     rings = setRingFacts(rings, level, ring.facts);
-    if (ring.facts.length === 0) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
+    // A loader that explained itself (the plate model's note) keeps its line.
+    if (ring.facts.length === 0 && !ring.note) rings = setRingNote(rings, level, 'Nothing on record for this yet.');
   }
   setRings(session, rings);
 }
@@ -343,16 +667,27 @@ function track(session: Session, name: string, levels: readonly RingLevel[], wor
  * Tell the story of a place. Builds the rings, shows them loading, starts
  * the map, and then asks every data source at once. Resolves when all of
  * them have answered (or failed). Only one story is current at a time.
+ * `atIndex` is the dial stop to open on (Now unless a link says otherwise).
  */
-async function tellStory(place: Place): Promise<void> {
+async function tellStory(place: Place, atIndex = NOW_INDEX): Promise<void> {
   const session: Session = {
     token: ++tokenCounter,
     place,
     rings: [],
     geology: undefined,
     pending: new Map(),
+    status: null,
+    founded: { state: STATEHOOD_YEAR },
+    events: [],
+    topoSheets: null,
+    paleo: new Map(),
+    paleoPending: new Set(),
   };
   current = session;
+  // The historical layers start on for every new story, and the map's
+  // first flight (showPlace) sets the zoom, so no sheet zoom is remembered.
+  historicalOn = true;
+  sheetZoomedFor = null;
 
   // --- The rings, named from the address --------------------------------
   let rings = buildRings(place);
@@ -372,7 +707,10 @@ async function tellStory(place: Place): Promise<void> {
   }
   story.clear();
   story.setPlace(place);
-  story.setStatus('Gathering the story…');
+  // The dial is mounted (or moved to the link's stop) before the first
+  // render, so the story is told for the right stop from the start.
+  ensureDial(atIndex);
+  setStoryStatus(session, 'Gathering the story…');
   setRings(session, rings);
 
   // --- Facts we already know, no request needed --------------------------
@@ -391,6 +729,7 @@ async function tellStory(place: Place): Promise<void> {
     if (!live(session) || !map) return;
     // A match on a whole street or town is shown from further out than one lot.
     map.showPlace(place.point, { label: place.displayName, ...(place.precise ? {} : { zoom: RING_ZOOM.neighborhood }) });
+    applyMap(session);
   });
 
   // --- Every data source, all at once --------------------------------------
@@ -413,6 +752,17 @@ async function tellStory(place: Place): Promise<void> {
         })),
       );
       addFacts(session, 'county', countyFacts(record));
+      setFounded(session, 'county', inceptionYear(record.inception));
+    }),
+
+    // The bundled timelines (part of the site, so this is quick): the
+    // events that apply to this spot, for the dial. They feed no ring at
+    // Now, so nothing waits on them; at any other stop they are the story.
+    track(session, 'timelines', [], async () => {
+      const all = await loadEvents();
+      if (!live(session)) return;
+      session.events = eventsForSpot(all, spotContext(session));
+      renderStop(session);
     }),
 
     // Wikipedia, one article after another (Wikimedia asks us not to burst;
@@ -439,6 +789,7 @@ async function tellStory(place: Place): Promise<void> {
             ...(cityRecord.wikipedia ? { wikipedia: cityRecord.wikipedia } : {}),
           })),
         );
+        setFounded(session, 'city', inceptionYear(cityRecord.inception));
       }
       for (const level of ['state', 'county', 'city', 'neighborhood'] as const) {
         if (level === 'neighborhood') {
@@ -501,28 +852,40 @@ async function tellStory(place: Place): Promise<void> {
       if (!live(session)) return;
       session.geology = unit;
       story.setGeology(unit, unit ? describeAge(unit) : undefined);
-      story.setHero(heroSentence(place, session.rings, unit));
+      renderStop(session);
     }),
 
     // Where the spot sat on the globe, millions of years ago. The full list
     // goes in the deep-time card; the plate ring gets one summary so the
     // same six sentences are not printed twice.
     track(session, 'plate model', ['plate'], async () => {
-      const positions = await paleoPositions(place.point);
+      const apply = (positions: PaleoPosition[]): void => {
+        if (!live(session) || positions.length === 0) return;
+        story.setPaleo(positions.map((pos) => ({ text: describePaleo(pos, place.point), source: pos.source })));
+        const oldest = [...positions].sort((a, b) => b.ma - a.ma)[0];
+        if (!oldest) return;
+        setRings(session, setRingNote(session.rings, 'plate', undefined));
+        addFacts(session, 'plate', [
+          {
+            kind: 'paleo-position',
+            title: 'Carried here on the North American Plate',
+            body: `${describePaleo(oldest, place.point)} Every stop on the way is listed under "Where this spot has been" below.`,
+            yearsAgo: maToAgo(oldest.ma),
+            source: oldest.source,
+            confidence: 'medium',
+          },
+        ]);
+      };
+      // The model gets a time budget; an answer that comes after it still fills the card and the ring in.
+      const positions = await withinBudget(paleoPositions(place.point), PLATE_MODEL_WAIT_MS, apply);
       if (!live(session)) return;
-      story.setPaleo(positions.map((pos) => ({ text: describePaleo(pos, place.point), source: pos.source })));
-      const oldest = [...positions].sort((a, b) => b.ma - a.ma)[0];
-      if (!oldest) return;
-      addFacts(session, 'plate', [
-        {
-          kind: 'paleo-position',
-          title: 'Carried here on the North American Plate',
-          body: `${describePaleo(oldest, place.point)} Every stop on the way is listed under "Where this spot has been" below.`,
-          yearsAgo: maToAgo(oldest.ma),
-          source: oldest.source,
-          confidence: 'medium',
-        },
-      ]);
+      if (positions === undefined || positions.length === 0) {
+        story.setPaleo([]);
+        setRings(session, setRingNote(session.rings, 'plate', PLATE_MODEL_NOTE));
+        return ['plate model'];
+      }
+      apply(positions);
+      return;
     }),
   ];
 
@@ -549,7 +912,9 @@ async function tellStory(place: Place): Promise<void> {
       }),
       track(session, 'Seattle annexation history', ['neighborhood'], async () => {
         const fact = await seattleAnnexation(place.point);
-        if (fact) addFacts(session, 'neighborhood', [fact]);
+        if (!fact) return;
+        addFacts(session, 'neighborhood', [fact]);
+        setFounded(session, 'neighborhood', fact.year);
       }),
       track(session, 'Seattle landmarks', ['block'], async () => {
         addFacts(session, 'block', await seattleLandmarksNear(place.point));
@@ -584,12 +949,256 @@ async function tellStory(place: Place): Promise<void> {
   const results = await Promise.allSettled(tasks);
   if (!live(session)) return;
   const status = summariseOutcome(results, heroSentence(place, session.rings, session.geology));
-  story.setStatus(status);
+  setStoryStatus(session, status);
   if (status.startsWith('Story ready:')) {
     setTimeout(() => {
-      if (live(session)) story.setStatus(null);
+      if (live(session)) setStoryStatus(session, null);
     }, READY_STATUS_MS);
   }
+}
+
+// ---------------------------------------------------------------------------
+// The map at each stop of the dial
+// ---------------------------------------------------------------------------
+
+/** Millions of years ago for a globe stop (the future stop counts as its own number); undefined elsewhere. */
+function globeMa(stop: Stop): number | undefined {
+  const mode = mapModeFor(stop.gear);
+  if (mode === 'future') return -FUTURE_MA;
+  if (mode !== 'globe') return undefined;
+  return stopYearsAgo(stop) / 1_000_000;
+}
+
+/** Counts map updates, so a slow answer (the sheet catalog, the plate model) never paints an older stop. */
+let mapApplyCounter = 0;
+
+/**
+ * Draw the map (or the globe) the dial's stop calls for, following the
+ * gear-to-mode table in map-history.ts: today's map as it is; for the
+ * 1800s and 1900s today's streets faded, OpenHistoricalMap's features of
+ * that year and the nearest USGS sheet; water and land only for the
+ * centuries, millennia and ice ages; the paleo globe for millions of years
+ * ago and the future sketch. Safe to call before the map exists (nothing
+ * happens) or before its style has loaded (it runs once it has); a call
+ * made while tiles are still loading runs straight away, like any other.
+ */
+function applyMap(session: Session): void {
+  if (!live(session)) return;
+  const mine = ++mapApplyCounter;
+  const stop = currentStop;
+  const mode: MapMode = mapModeFor(stop.gear);
+  story.setMapMode(mode);
+
+  if (mode === 'globe' || mode === 'future') {
+    showGlobe(session, stop);
+  } else {
+    story.setGlobe(null);
+  }
+
+  const map = storyMap;
+  const layers = historyLayers;
+  if (!map || !layers) return;
+  const run = (): void => {
+    if (mine !== mapApplyCounter || !live(session)) return;
+    try {
+      applyLayers(session, stop, mode, layers, map, mine);
+    } catch (err) {
+      console.warn('[map] the historical layers could not be drawn:', err);
+    }
+  };
+  if (styleReady) run();
+  else map.map.once('style.load', run);
+}
+
+/** The layer changes for a mode on a map whose style has loaded. */
+function applyLayers(session: Session, stop: Stop, mode: MapMode, layers: HistoryLayers, map: StoryMap, mine: number): void {
+  const fresh = (): boolean => mine === mapApplyCounter && live(session);
+  switch (mode) {
+    case 'today':
+      layers.setGhost(false);
+      layers.setBaseOpacity(1);
+      layers.hideTopo();
+      layers.setOhmDate(null);
+      leaveSheet(map);
+      story.setMapNote(null);
+      return;
+    case 'nature':
+      layers.setOhmDate(null);
+      layers.hideTopo();
+      layers.setBaseOpacity(1);
+      layers.setGhost(true);
+      leaveSheet(map);
+      story.setMapNote(NATURE_MAP_NOTE);
+      return;
+    case 'globe':
+    case 'future':
+      // The map is hidden under the globe; take its historical layers away
+      // so nothing is fetched for a map nobody can see.
+      layers.setOhmDate(null);
+      layers.hideTopo();
+      leaveSheet(map);
+      story.setMapNote(GLOBE_MAP_NOTE);
+      return;
+    case 'historical':
+      break;
+  }
+
+  const year = calendarYearOf(stop);
+  if (year === undefined) return;
+  layers.setGhost(false);
+  const toggle = { label: historicalOn ? "Today's map" : 'Map as it was', onClick: toggleHistorical };
+  if (!historicalOn) {
+    layers.setBaseOpacity(1);
+    layers.hideTopo();
+    layers.setOhmDate(null);
+    leaveSheet(map);
+    story.setMapNote(todaysMapNote(year), toggle);
+    return;
+  }
+  layers.setBaseOpacity(baseOpacityFor(year));
+  layers.setOhmDate(year);
+  story.setMapNote(`Looking for a map of ${year}…`, toggle);
+  // One catalog request per story (cached 30 days per 1 km cell inside).
+  session.topoSheets ??= topoSheetsAt(session.place.point).catch((err: unknown) => {
+    if (!isAbortError(err)) console.warn('[map] the USGS sheet catalog did not answer:', err);
+    return [];
+  });
+  // The sheet is swapped only once the dial has rested: every sheet is a
+  // new raster source, and a held ◀ would otherwise ask the USGS/Esri
+  // image service for a fresh set of tiles three times a second, most of
+  // them for sheets nobody gets to see.
+  if (topoTimer !== null) clearTimeout(topoTimer);
+  const sheets = session.topoSheets;
+  topoTimer = setTimeout(() => {
+    topoTimer = null;
+    void sheets.then((list) => {
+      if (!fresh()) return;
+      const sheet = chooseTopoSheet(list, year, map.map.getZoom());
+      if (sheet) {
+        layers.showTopo(sheet);
+        enterSheet(map, sheet);
+      } else {
+        layers.hideTopo();
+        leaveSheet(map);
+      }
+      const setNote = (ohm: OhmPresence): void => {
+        const note = historicalMapNote(year, sheet, ohm);
+        story.setMapNote(note.text, toggle, note.details);
+      };
+      setNote('unknown');
+      // Once the tiles for this view have loaded, say whether OpenHistoricalMap
+      // has anything mapped here for the year (near the Space Needle its
+      // data is sparse before 1900), so an empty map is not a mystery.
+      whenRendered(map, () => {
+        if (!fresh()) return;
+        setNote(ohmFeatureCount(map) > 0 ? 'some' : 'none');
+      });
+    });
+  }, TOPO_SETTLE_MS);
+}
+
+/** How long the dial rests before the USGS sheet for its stop is fetched. */
+const TOPO_SETTLE_MS = 400;
+let topoTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * The sheet (by catalog id) the map was last zoomed for. The zoom is set
+ * once per sheet, not on every re-apply, so the visitor's own zooming on
+ * the same sheet is never fought; null while no sheet is on the map.
+ */
+let sheetZoomedFor: number | null = null;
+
+/**
+ * A USGS sheet has gone on the map: ease to the zoom its scale was drawn
+ * for (a 1:62,500 sheet at the street zoom is a blur of enlarged ink), and
+ * fold the credit in the corner into its (i) button, since the sheet's
+ * credit is in the caption's "About this map" and three lines of credit
+ * would cover most of a phone-sized map.
+ */
+function enterSheet(map: StoryMap, sheet: TopoSheet): void {
+  map.setCompactCredit(true);
+  if (sheetZoomedFor === sheet.objectId) return;
+  sheetZoomedFor = sheet.objectId;
+  map.easeToZoom(zoomForScale(sheet.scale));
+}
+
+/** No sheet on the map any more: the credit opens out again and the camera returns to the ring's zoom. */
+function leaveSheet(map: StoryMap): void {
+  map.setCompactCredit(false);
+  if (sheetZoomedFor === null) return;
+  sheetZoomedFor = null;
+  map.easeToZoom(map.ringZoom());
+}
+
+/** Run `fn` once the map has drawn everything it asked for: now if it already has, else on its next 'idle'. */
+function whenRendered(map: StoryMap, fn: () => void): void {
+  if (map.map.loaded() && !map.map.isMoving()) fn();
+  else map.map.once('idle', fn);
+}
+
+/** How many OpenHistoricalMap features are drawn in the current view (0 when its layers are off or empty). */
+function ohmFeatureCount(map: StoryMap): number {
+  const present = OHM_FEATURE_LAYER_IDS.filter((id) => map.map.getLayer(id) !== undefined);
+  if (present.length === 0) return 0;
+  try {
+    return map.map.queryRenderedFeatures({ layers: present }).length;
+  } catch (err) {
+    console.warn('[map] could not count the OpenHistoricalMap features:', err);
+    return 0;
+  }
+}
+
+/** The postcard button: swap the historical layers for today's map and back. */
+function toggleHistorical(): void {
+  historicalOn = !historicalOn;
+  if (current) applyMap(current);
+}
+
+/**
+ * The globe for a deep-time stop: today's point and, once the plate model
+ * has answered for that many million years ago, the reconstructed one
+ * (the plate ring gets the same answer as a fact). Beyond the model's
+ * reach the caption says so and nothing is asked; the future stop is a
+ * sketch of the trend, not a model. The model is asked once per stop and
+ * story; its answer is also cached for 30 days by paleo.ts. The answer
+ * (or, within the time budget, the lack of one) is drawn whenever the dial
+ * is sitting on this stop by the time it arrives, however many times the
+ * dial moved away and back meanwhile; a late answer still fills it in.
+ */
+function showGlobe(session: Session, stop: Stop): void {
+  const todayPoint = session.place.point;
+  const ma = globeMa(stop);
+  if (ma === undefined) return;
+  if (ma < 0) {
+    story.setGlobe({ todayPoint, ma: -ma, caption: FUTURE_GLOBE_CAPTION, sketch: true });
+    return;
+  }
+  if (ma > PALEO_MODEL_MAX_MA) {
+    story.setGlobe({ todayPoint, ma, paleoPoint: null, caption: globeCaption(ma, 'none') });
+    return;
+  }
+  if (session.paleo.has(ma)) {
+    const point = session.paleo.get(ma)?.point ?? null;
+    story.setGlobe({ todayPoint, ma, paleoPoint: point, caption: globeCaption(ma, point ? 'position' : 'none') });
+    return;
+  }
+  story.setGlobe({ todayPoint, ma, caption: globeCaption(ma, 'pending') });
+  if (session.paleoPending.has(ma)) return;
+  session.paleoPending.add(ma);
+  const settle = (pos: PaleoPosition | null): void => {
+    if (!live(session)) return;
+    session.paleoPending.delete(ma);
+    session.paleo.set(ma, pos);
+    if (globeMa(currentStop) !== ma) return;
+    renderStop(session);
+    story.setGlobe({ todayPoint, ma, paleoPoint: pos?.point ?? null, caption: globeCaption(ma, pos ? 'position' : 'none') });
+  };
+  void withinBudget(paleoPositions(todayPoint, [ma]), PLATE_MODEL_WAIT_MS, (late) => settle(late[0] ?? null))
+    .then((positions) => settle(positions?.[0] ?? null))
+    .catch((err: unknown) => {
+      if (!isAbortError(err)) console.warn('[globe] the plate model did not answer:', err);
+      settle(null);
+    });
 }
 
 /**
@@ -638,6 +1247,7 @@ async function runSearch(query: string): Promise<void> {
     // A named building beats a street or a town; otherwise trust the first.
     const place = places.find((p) => p.precise) ?? places[0];
     if (!place) return;
+    // A new search starts at Now; the dial's stop is not carried over.
     const hash = storyHash(place.point, query);
     if (window.location.hash !== hash) window.location.hash = hash;
     void tellStory(place);
@@ -686,20 +1296,27 @@ let hashCounter = 0;
 
 /**
  * Open the story a share link points to (also what a reload and the Back
- * button do). Does nothing when the hash is not a story link or already
- * shows that spot.
+ * button do). Does nothing when the hash is not a story link; when it
+ * already shows that spot, only the dial is moved to the link's stop.
  */
 async function openFromHash(): Promise<void> {
   const fromHash = readHash(window.location.hash);
   if (!fromHash) return;
-  if (current && samePoint(current.place.point, fromHash.point)) return;
+  const atIndex = fromHash.at?.index ?? NOW_INDEX;
+  if (current && samePoint(current.place.point, fromHash.point)) {
+    syncDial(current, atIndex);
+    return;
+  }
   const mine = ++hashCounter;
   search.setQuery(fromHash.query);
   search.setError(null);
   const place = await placeForHash(fromHash);
   if (mine !== hashCounter) return; // the visitor moved on while we looked
-  if (current && samePoint(current.place.point, place.point)) return;
-  void tellStory(place);
+  if (current && samePoint(current.place.point, place.point)) {
+    syncDial(current, atIndex);
+    return;
+  }
+  void tellStory(place, atIndex);
 }
 
 window.addEventListener('hashchange', () => {
